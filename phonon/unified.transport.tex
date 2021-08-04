@@ -1,0 +1,124 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage[margin=0.8in]{geometry}
+\usepackage{verbatim}
+\usepackage{graphicx}
+
+\begin{document}
+
+\title{Unified Theory of Thermal Transport}
+\author{Wenhao}
+\date{\today}
+\maketitle
+\section{Transport equation}
+We consider that the system of phonons are governed by the equation:
+\begin{equation}
+    \frac{\partial \rho(t)}{\partial t} + \frac{i}{\hbar} \left[H_0, \rho(t)\right] = \left. \frac{\partial\rho(t) }{\partial t} \right|_{coll} \label{master}
+\end{equation}
+with the harmonic Hamiltonian:
+\begin{equation}
+    H_0 = \sum_{q,v} \hbar \omega_{qv} \left( a^{\dagger}_{qv}a_{qv} + \frac{1}{2} \right)
+\end{equation}
+The one body density matrix $\rho_1(q,q',t)$ is defined as:
+\begin{equation}
+    \rho_1(q,q',t)_{v,v'} = \text{Tr}[\rho(t)a^{\dagger}_{qv}a_{q'v'}]
+\end{equation}
+We insert $H_0$ into Eq.\ref{master} and multiply on both side $a^{\dagger}_{qv}a_{q'v'}$ and take the trace:
+\begin{align}
+    \text{Tr}\left[ \frac{\partial \rho(t) a^{\dagger}_{qv}a_{q'v'} }{\partial t}  \right] &= \frac{\partial \rho_1(q,q',t)_{v,v'} }{\partial t} \\
+    \text{Tr}\left[ \left( \frac{\partial\rho(t) a^{\dagger}_{qv}a_{q'v'} }{\partial t} \right) _{coll} \right] 
+        &= \left. \frac{\partial \rho_1(q,q',t)_{v,v'} }{\partial t} \right|_{coll}
+\end{align} 
+For the term $\frac{i}{\hbar} \left[H_0, \rho(t)\right]$, we can derive:
+\begin{equation}
+    \left[H_0, \rho(t)\right] = \hbar \omega_{q'v'} \rho_1(q,q',t)_{v,v'} - \hbar \omega_{qv} \rho_1(q,q',t)_{v,v'} 
+\end{equation}
+So that we obtain the equation:
+\begin{equation}
+    \frac{\partial \rho_1(q,q',t)_{v,v'} }{\partial t} + i \left(\omega_{q'v'} \rho_1(q,q',t)_{v,v'} - \omega_{qv} \rho_1(q,q',t)_{v,v'}\right) 
+     = \left. \frac{\partial \rho_1(q,q',t)_{v,v'} }{\partial t} \right|_{coll}  \label{derived1}
+\end{equation}
+We perform the Weyl transformation to $\partial \rho_1(q,q',t)_{v,v'}$:
+\begin{equation}
+    N(R,q,t)_{v,v'} = \sum_{q''} \rho_1(q+q'',q-q'',t)_{v,v'} e^{2iq''R}
+\end{equation}
+to Eq.\ref{derived1}, we will have:
+\begin{align}
+    \frac{\partial \rho_1(q+q'',q-q'',t)_{v,v'} }{\partial t} + & i \left(\omega_{q-q''v'} \rho_1(q+q'',q-q'',t)_{v,v'} - \omega_{q+q''v} \rho_1(q+q'',q-q'',t)_{v,v'}\right) 
+    \\ &= \left. \frac{\partial \rho_1(q+q'',q-q'',t)_{v,v'} }{\partial t} \right|_{coll}
+\end{align}
+Assume the one particle density $\rho_1(q+q'',q-q'',t)_{v,v'}$ is sharply peaked at $q$, $q''$ will be small,
+we can then replace frequency $\omega_{q+q''v}$ and $\omega_{q-q''v'}$ by:
+\begin{align}
+    \omega_{q+q''v} &= \omega_{qv} + \frac{\partial \omega_{qv}}{\partial q''} q'' \\
+    \omega_{q-q''v'} &= \omega_{qv'} - \frac{\partial \omega_{qv'}}{\partial q''} q'' 
+\end{align}
+Multiply both side with $e^{2iq''R}$ and integrate, we have:
+\begin{align}
+    \frac{\partial N(R,q,t)_{vv'}}{\partial t} + i \left(\omega_{qv'} N(R,q,t)_{vv'} - \omega_{qv} N(R,q,t)_{vv'}\right) + 
+        \frac{1}{2} \left( \nabla_q \omega_{qv'} \nabla_R N(R,q,t)_{vv'} + \nabla_q \omega_{qv} \nabla_R N(R,q,t)_{vv'}  \right) 
+        = \left. \frac{\partial N(R,q,t)_{vv'} }{\partial t} \right|_{coll} \label{derived2}
+\end{align}
+In the form of $ n_v \times n_v$ matrix, we can rewrite Eq.\ref{derived2} as:
+\begin{align}
+    \frac{\partial N(R,q,t)}{\partial t} + i \left[ N(R,q,t), \omega_{q} \right] + 
+        \frac{1}{2} \left\{ \nabla_R N(R,q,t), \nabla_q \omega_{q} \right\} 
+        = \left. \frac{\partial N(R,q,t) }{\partial t} \right|_{coll} \label{derived3}
+\end{align}
+% the difference in sequency in communicator come from the different definition of one partial density matrix $\rho_1(q,q',t)$
+\section{Solving the equation}
+
+
+\pagebreak
+\section*{Appendix A. Wigner function}
+%The expectation value of an operator $A$ of a quantum 
+%state $|\psi\rangle $ is given by:
+%\begin{equation}
+%    \langle A \rangle = \int \psi^*(x) A \psi(x) dx
+%\end{equation}
+%with $\psi(x) = \langle x | \psi \rangle$. 
+
+Define the transformation, called \emph{Weyl transformation} from an operator $A$ to a function $A(x,p)$:
+\begin{align}
+    \tilde{A}(x,p)  &= \int e^{-ipy/\hbar} \langle x + \frac{y}{2} | A | x - \frac{y}{2} \rangle dy \\
+                    &= \int e^{ ixu/\hbar} \langle p + \frac{u}{2} | A | p - \frac{u}{2} \rangle du
+\end{align}
+where $\langle x | A | x' \rangle$ and $\langle p | A | p' \rangle$ denotes the matrix element of $A$ 
+in position or momentum base, and both integral give the same expression $\tilde{A}(x,p)$. 
+Suppose the operator $A$ is only a function of $x$, than the Weyl transformationwill give:
+\begin{align}
+    \tilde{A} &= \int e^{-ipy/\hbar} \langle x + \frac{y}{2} | A | x - \frac{y}{2} \rangle dy \\
+              &= \int e^{-ipy/\hbar} \langle x + \frac{y}{2} | A | x - \frac{y}{2} \rangle \delta_{y=0} dy \\
+              &= \langle x | A | x \rangle = A(x)
+\end{align}
+The same will be true if an operator is purely a function of momentum $p$. However, this is not true 
+if an operator is a function of $x,p$ at the same time.
+It can be shown that:
+\begin{equation}
+    \text{Tr}[AB] = \frac{1}{\hbar} \int \int \tilde{A}(x,p) \tilde{B}(x,p) dx dp
+\end{equation}
+define the density operator $\rho$ so that $\text{Tr}[\rho A] = \langle A \rangle$, we thus have:
+\begin{equation}
+    \langle A \rangle = \frac{1}{\hbar} \int \int \tilde{\rho}(x,p) \tilde{A}(x,p) dx dp
+\end{equation}
+It is therefore convenient to define a function:
+\begin{align}
+    W(x,p)  &= \frac{1}{\hbar} \int e^{-ipy/\hbar} \langle x + \frac{y}{2} | \rho | x - \frac{y}{2} \rangle dy \\
+            &= \frac{1}{\hbar} \int e^{ ixu/\hbar} \langle p + \frac{u}{2} | \rho | p - \frac{u}{2} \rangle du
+\end{align}
+This is called \emph{Wigner function}. Now, we can find expectation value of an operator by 
+integrating over phase space $x,p$, similar to classical statistic mechanics:
+\begin{align}
+    \langle A \rangle = \int \int W(x,p) \tilde{A}(x,p) dx dp
+\end{align}
+Intergrating over one phase space coordinates gives the probability distribution of another:
+\begin{equation}
+    \langle A \rangle (x) = \int W(x,p) \tilde{A}(x,p) dp
+\end{equation}
+Wigner function is real and normalized:
+\begin{equation}
+    \int\int W(x,p) dx dp = 1
+\end{equation}
+But it is not always positive, therefore, it cannot be interpreted as a classical probability density.
+
+\end{document}
