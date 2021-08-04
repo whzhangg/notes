@@ -1,0 +1,318 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage[margin=0.8in]{geometry}
+\usepackage{verbatim}
+
+\newcommand{\pfrac}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\ql}{\lambda,q}
+
+\begin{document}
+
+\title{Equations for iterative solution to phonon BTE}
+\author{WH}
+\date{\today}
+\maketitle
+
+\section{The Boltzmann equation for Phonon}
+We write the Boltzmann equation for phonon as:
+\begin{equation}
+    \pfrac{n_1}{t} = -\pfrac{H_1}{p} \pfrac{n_1}{r} + \left( \pfrac{n_1}{t} \right)_{coll} = 0 
+\end{equation}
+where index $1$ indicate single particle distribution function and Hamiltonian. 
+the diffusion part can be written linear to temperature gradient $\nabla T$ as:
+\begin{equation}
+    v_{k,s} \pfrac{n_{k,s}^0}{T} \nabla T = \left( \pfrac{n_{k,s}}{t} \right)_{coll} 
+            = \left( \pfrac{n_{k,s}}{t} \right)_{3ph}  + \left( \pfrac{n_{k,s}}{t} \right)_{other} \label{bte}
+\end{equation}
+for each of the phonon state indexed by $(k,s)$. 
+
+\section{three phonon scattering and iterative solution}
+
+The collision term includes the scattering events that change the phonon distribution at state $(k,s)$.
+Below we use the notation so that $q_1 = (k_1, s_1); q_2 = (k_2, s_2); q_3 = (k_3, s_3)$. The collision term due to 
+3 phonon interaction can be written as:
+\begin{align}
+    \left( \pfrac{n_{q_1}}{t} \right)_{3ph} = \sum_{q_2,q_3} 
+        \{ &-n_{q_1}n_{q_2}(n_{q_3}+1)L_{q_1,q_2}^{q_3} + (n_{q_1}+1)(n_{q_2}+1)n_{q_3}L^{q_1,q_2}_{q_3}  \notag \\
+           &+ \frac{1}{2} \left[ -n_{q_1}(n_{q_2}+1)(n_{q_3}+1)L_{q_1}^{q_2,q_3} +  (n_{q_1}+1)n_{q_2}n_{q_3}L^{q_1}_{q_2,q_3} \right] \} \label{summation}
+\end{align}
+In the above equation, $L_i^j$ is the transition probability from initial state $i$ to final state $j$
+and we have $L_{q_1,q_2}^{q_3} = L^{q_1,q_2}_{q_3}$ 
+and $L_{q_2,q_3}^{q_1} = L^{q_2,q_3}_{q_1}$. 
+$\frac{1}{2}$ in the summation avoid double counting. $L_i^j$ includes the requirement for energy and momentum conservation:
+\begin{align}
+    L_{q_1,q_2}^{q_3} : \delta(k_1 + k_2 - k_3) \delta(\omega_1 + \omega_2 - \omega_3 ) \\
+    L^{q_2,q_3}_{q_1} : \delta(k_1 - k_2 - k_3) \delta(\omega_1 - \omega_2 - \omega_3 ) 
+\end{align}
+
+Now, we write the phonon distribution function $n_q$ as:
+\begin{equation}
+    n_q \approx n_q^0 + \beta n_q^0(n_q^0+1)\Phi_q  \label{dn}
+\end{equation}
+putting the above equation.\ref{dn} into equation.\ref{summation}, to the first order in $\Phi_q$ we have:
+\begin{equation}
+    \left( \pfrac{n_{q_1}}{t} \right)_{3ph} = - \beta \sum_{q_2,q_3} \left\{ P_{q_1,q_2}^{q_3} + \frac{1}{2} P^{q_2,q_3}_{q_1} \right\} 
+\end{equation}
+and
+\begin{align}
+    P_{q_1,q_2}^{q_3} = [\ &(n_{q_2}^0 - n_{q_3}^0) n_{q_1}^0 (n_{q_1}^0+1) \Phi_{q_1} + \notag \\ 
+                          & (n_{q_1}^0 - n_{q_3}^0) n_{q_2}^0 (n_{q_2}^0+1)    \Phi_{q_2} 
+                            - (n_{q_1}^0 + n_{q_2}^0 + 1) n_{q_3}^0 (n_{q_3}^0+1) \Phi_{q_3} ] L_{q_1,q_2}^{q_3} \\
+    P^{q_2,q_3}_{q_1} = [\ &(n_{q_2}^0 + n_{q_3}^0 + 1) n_{q_1}^0 (n_{q_1}^0+1) \Phi_{q_1} + \notag \\ 
+                         & (n_{q_1}^0 - n_{q_3}^0) n_{q_2}^0 (n_{q_2}^0+1) \Phi_{q_2} 
+                            + (n_{q_1}^0 - n_{q_2}^0) n_{q_3}^0 (n_{q_3}^0+1) \Phi_{q_3} ] L^{q_2,q_3}_{q_1} \label{complicated}
+\end{align}
+and it can be shown that when the energy conservation included in the $L_{q_1,q_2}^{q_3}$ and $L_{q_2,q_3}^{q_1}$ are satisfied, the 
+terms including $n_q$ can be simplified:
+\begin{align}
+    n_{q_1}^0 n_{q_2}^0 (n_{q_3}^0 + 1) &= (n_{q_2}^0 - n_{q_3}^0) n_{q_1}^0 (n_{q_1}^0+1) \notag \\
+                                  &= (n_{q_1}^0 - n_{q_3}^0) n_{q_2}^0 (n_{q_2}^0+1) \notag \\
+                                  &= (n_{q_1}^0 + n_{q_2}^0 + 1) n_{q_3}^0 (n_{q_3}^0+1) \\
+    n_{q_1}^0 (n_{q_2}^0+1) (n_{q_3}^0 + 1) &= (n_{q_2}^0 + n_{q_3}^0 + 1) n_{q_1}^0 (n_{q_1}^0+1) \notag \\
+                                    &= - (n_{q_1}^0 - n_{q_3}^0) n_{q_2}^0 (n_{q_2}^0+1) \notag \\
+                                    &= - (n_{q_1}^0 - n_{q_2}^0) n_{q_3}^0 (n_{q_3}^0+1)
+\end{align}
+So equation.\ref{complicated} can be simplified to be:
+\begin{align}
+    \left( \pfrac{n_{q_1}}{t} \right)_{3ph} = - \beta \sum_{q_2,q_3} 
+    \{\ &\left( \Phi_{q_1} + \Phi_{q_2} - \Phi_{q_3} \right) n_{q_1}^0 n_{q_2}^0 (n_{q_3}^0 + 1) L_{q_1,q_2}^{q_3} \\
+      + &\frac{1}{2}\left( \Phi_{q_1} - \Phi_{q_2} - \Phi_{q_3} \right) n_{q_1}^0 (n_{q_2}^0+1) (n_{q_3}^0 + 1) L^{q_2,q_3}_{q_1} \} \label{simple}
+\end{align}
+
+For phonon scattered by other sources, we can use a relaxation time approximation by writing:
+\begin{equation}
+    \left( \pfrac{n_{q_1}}{t} \right)_{other} = - \frac{dn_{q_1}}{\tau_{q_1}} = -\beta \frac{n_{q_1}^0(n_{q_1}^0+1)}{\tau_{q_1}} \Phi_{q_1}
+\end{equation}
+
+Now, let's write $\Phi_q$ linear in $\nabla T$:
+\begin{equation}
+    \Phi_q = \sum_i f_{q,i} \left( \nabla T \right)_i
+\end{equation}
+where $i$ denote cartesian direction. Equation.\ref{bte} can be written in terms of $f_{q,i}$:
+\begin{align}
+    - \frac{1}{\beta} v_{q_1,i} \pfrac{n_{q_1}^0}{T} =& \sum_{q_2,q_3} 
+    \{\ \left( f_{q_1,i} + f_{q_2,i} - f_{q_3,i} \right) n_{q_1}^0 n_{q_2}^0 (n_{q_3}^0 + 1) L_{q_1,q_2}^{q_3} \\
+      + &\frac{1}{2}\left( f_{q_1,i} - f_{q_2,i} - f_{q_3,i} \right) n_{q_1}^0 (n_{q_2}^0+1) (n_{q_3}^0 + 1) L^{q_2,q_3}_{q_1} \} 
+      + \frac{n_{q_1}^0(n_{q_1}^0+1)}{\tau_{q_1}} f_{q_1,i}\label{bte2}
+\end{align}
+Writing out explicitly the transition probability $L_{q_1,q_2}^{q_3}$ and $L_{q_2,q_3}^{q_1}$, we have:
+\begin{gather}
+    L_{q_1,q_2}^{q_3} = \frac{2\pi}{\hbar}|V^{(3)}(q_1, q_2, -q_3)|^2 \delta(\omega_1 + \omega_2 - \omega_3) \\
+    L^{q_2,q_3}_{q_1} = \frac{2\pi}{\hbar}|V^{(3)}(q_1, -q_2, -q_3)|^2 \delta(\omega_1 - \omega_2 - \omega_3)
+\end{gather}
+with the interaction $V^{(3)}(q_1, q_2, q_3)$ as:
+\begin{align}
+    V^{(3)}(q_1, q_2, q_3) = \left( \frac{\hbar}{2N} \right)^{\frac{3}{2}} 
+                \sum_{\kappa_1,\kappa_2,\kappa_3} \sum_{R_1,R_2,R_3} \sum_{\alpha, \beta, \gamma} &
+                \frac{\varepsilon^{\kappa_1}_\alpha(q_1)\varepsilon^{\kappa_2}_\beta(q_2)\varepsilon^{\kappa_3}_\gamma(q_3) }
+                { \sqrt{\omega_1 \omega_2 \omega_3} \sqrt{M_{\kappa_1}M_{\kappa_2}M_{\kappa_3}} } \notag \\
+             &exp \left[ i(q_1 R_1 + q_2 R_2 + q_3 R_3 ) \right] \Phi_{\alpha, \beta, \gamma}^{\kappa_1,\kappa_2,\kappa_3} (R_1,R_2,R_3)
+    %V^{(3)}(q_1, q_2, q_3) = \frac{1}{3!} \left( \frac{\hbar}{2N} \right)^{\frac{3}{2}} 
+    %         \sum_{\kappa_1,\kappa_2,\kappa_3} \sum_{R_1,R_2,R_3} \sum_{\alpha, \beta, \gamma} &
+    %         \frac{\varepsilon^{\kappa_1}_\alpha(q_1)\varepsilon^{\kappa_2}_\beta(q_2)\varepsilon^{\kappa_3}_\gamma(q_3) }
+    %         { \sqrt{\omega_1 \omega_2 \omega_3} \sqrt{M_{\kappa_1}M_{\kappa_2}M_{\kappa_3}} } \notag \\
+    %      &exp \left[ i(k_1 R_1 + k_2 R_2 + k_3 R_3 ) \right] \Phi_{\alpha, \beta, \gamma}^{\kappa_1,\kappa_2,\kappa_3} (R_1,R_2,R_3)
+\end{align}
+which is non-zero only when $k1 + k2 + k3 = 0$. 
+the transport equation Eq.\ref{bte2} is then becomes:
+\begin{align}
+    - \frac{1}{\beta} v_{q_1,i} \pfrac{n_{q_1}^0}{T} = 
+    \sum_{q_2,q_3} \{\ &\left( f_{q_1,i} + f_{q_2,i} - f_{q_3,i} \right) n_{q_1}^0 n_{q_2}^0 (n_{q_3}^0 + 1) L_{q_1,q_2}^{q_3} \notag \\
+      + \frac{1}{2} &\left( f_{q_1,i} - f_{q_2,i} - f_{q_3,i} \right) n_{q_1}^0 (n_{q_2}^0+1) (n_{q_3}^0 + 1) L^{q_2,q_3}_{q_1}\} 
+      + \frac{n_{q_1}^0(n_{q_1}^0+1)}{\tau_{q_1}} f_{q_1,i} \label{bte3} 
+%      \\
+%    = \sum_{q_2} \{\ &\left( f_{q_1,i} + f_{q_2,i} - f_{q_{1+2},i} \right) n_{q_1}^0 n_{q_2}^0 (n_{q_{1+2}}^0 + 1) L_{q_1,q_2}^{q_{1+2}} \notag \\
+%    + &\frac{1}{2}\left( f_{q_1,i} - f_{q_2,i} - f_{q_{1-2},i} \right) n_{q_1}^0 (n_{q_2}^0+1) (n_{q_{1-2}}^0 + 1) L^{q_2,q_{1-2}}_{q_1} \} 
+%    + \frac{n_{q_1}^0(n_{q_1}^0+1)}{\tau_{q_1}} f_{q_1,i} \label{bte3}
+\end{align}
+%with $q_{1+2}$ stands for phonon with reciprocal vector $k = k_1+k_2$, and $q_{1-2}$ stands for phonon with $k = k_1-k_2$. 
+%\begin{gather}
+%    q_3: \ k_3 = k_1 - k_2 \\
+%    q_3': \ k_3' = k_1 + k_2
+%\end{gather}
+%so that we have:
+%\begin{align}
+%    - \frac{1}{\beta} v_{q_1,i} \pfrac{n_{q_1}^0}{T} = 
+%    \sum_{q_2} \{\ &\left( f_{q_1,i} + f_{q_2,i} - f_{q_{3}',i} \right) n_{q_1}^0 n_{q_2}^0 (n_{q_{3}'}^0 + 1) L_{q_1,q_2}^{q_{3}'} \notag \\
+%    + &\frac{1}{2}\left( f_{q_1,i} - f_{q_2,i} - f_{q_3,i} \right) n_{q_1}^0 (n_{q_2}^0+1) (n_{q_3}^0 + 1) L^{q_2,q_3}_{q_1} \}  \label{bte3}
+%\end{align}
+now, writing out explicitly the term $L_{q_1,q_2}^{q_3}$ and $L^{q_2,q_3}_{q_1}$ in Eq.\ref{bte3} 
+with $\delta$ functions for energy and crystal momentum conservation and ignore the final term, we have:
+\begin{align}
+    - &\frac{1}{\beta} v_{q_1,i} \pfrac{n_{q_1}^0}{T} =  \notag \\ 
+     &\frac{2\pi}{\hbar} \sum_{q_2,q_3} \{\ \left( f_{q_1,i} + f_{q_2,i} - f_{q_3,i} \right) 
+            n_{q_1}^0 n_{q_2}^0 (n_{q_3}^0 + 1) |V^{(3)}(q_1, q_2, -q_3)|^2 
+            \delta(\omega_1 + \omega_2 - \omega_3) \delta(q_1 + q_2 - q_3) \} \notag\\
+    + \frac{1}{2} &\frac{2\pi}{\hbar}\sum_{q_2,q_3} \{\ \left( f_{q_1,i} - f_{q_2,i} - f_{q_3,i} \right) 
+            n_{q_1}^0 (n_{q_2}^0+1) (n_{q_3}^0 + 1) |V^{(3)}(q_1, -q_2, -q_3)|^2 
+            \delta(\omega_1 - \omega_2 - \omega_3)\delta(q_1 - q_2 - q_3) \} \notag\\
+    = &\frac{2\pi}{\hbar} \sum_{q_2,q_3} \{\ \left( f_{q_1,i} + f_{-q_2,i} - f_{q_3,i} \right) 
+            n_{q_1}^0 n_{q_2}^0 (n_{q_3}^0 + 1) |V^{(3)}(q_1, -q_2, -q_3)|^2 
+            \delta(\omega_1 + \omega_2 - \omega_3) \delta(q_1 - q_2 - q_3) \} \notag\\
+    + \frac{1}{2} &\frac{2\pi}{\hbar}\sum_{q_2,q_3} \{\ \left( f_{q_1,i} - f_{q_2,i} - f_{q_3,i} \right) 
+            n_{q_1}^0 (n_{q_2}^0+1) (n_{q_3}^0 + 1) |V^{(3)}(q_1, -q_2, -q_3)|^2 
+            \delta(\omega_1 - \omega_2 - \omega_3)\delta(q_1 - q_2 - q_3) \} 
+\end{align}
+where we have changed the dummy summation index from $-q_2 \to q_2$ and use the fact that 
+$n_{q_2}^0 = n_{-q_2}^0;\ \omega_{q_2} = \omega_{-q_2} $. So Eq.\ref{bte3} can be simpled to:
+\begin{align}
+    - \frac{1}{\beta} v_{q_1,i} \pfrac{n_{q_1}^0}{T} & =
+        \frac{2\pi}{\hbar} \sum_{q_2,q_3} |V^{(3)}(q_1, -q_2, -q_3)|^2 \delta(q_1 - q_2 - q_3) \notag \\ 
+    & \{\ \left( f_{q_1,i} + f_{-q_2,i} - f_{q_3,i} \right)  n_{q_1}^0 n_{q_2}^0 (n_{q_3}^0 + 1) \delta(\omega_1 + \omega_2 - \omega_3) \notag \\
+    & + \frac{1}{2} \left( f_{q_1,i} - f_{q_2,i} - f_{q_3,i} \right) n_{q_1}^0 (n_{q_2}^0+1) (n_{q_3}^0 + 1) \delta(\omega_1 - \omega_2 - \omega_3) \}
+\end{align}
+We define $Q$ and $W_i$ to be:
+%\begin{align}
+%    Q_1 &= \sum_{q_2,q_3} \left\{ n_{q_1}^0 n_{q_2}^0 (n_{q_{3}}^0 + 1) L_{q_1,q_2}^{q_{3}} + \frac{1}{2}n_{q_1}^0 (n_{q_2}^0+1) (n_{q_{3}}^0 + 1) L^{q_2,q_{3}}_{q_1} \right\} 
+%            + \frac{n_{q_1}^0(n_{q_1}^0+1)}{\tau_{q_1}}\\
+%    W_{1,i}^n &= \sum_{q_2,q_3} \{\ \left( f_{q_2,i}^n - f_{q_{3},i}^n \right) n_{q_1}^0 n_{q_2}^0 (n_{q_{3}}^0 + 1) L_{q_1,q_2}^{q_{3}} 
+%            - \frac{1}{2}\left( f_{q_2,i}^n + f_{q_{3},i}^n \right) n_{q_1}^0 (n_{q_2}^0+1) (n_{q_{3}}^0 + 1) L^{q_2,q_{3}}_{q_1} \} 
+%\end{align}
+\begin{align}
+    Q_1 = \frac{2\pi}{\hbar} \sum_{q_2,q_3} & |V^{(3)}(q_1, -q_2, -q_3)|^2 \delta(q_1 - q_2 - q_3) \notag \\ 
+    & \{\  n_{q_1}^0 n_{q_2}^0 (n_{q_3}^0 + 1) \delta(\omega_1 + \omega_2 - \omega_3) + \frac{1}{2} n_{q_1}^0 (n_{q_2}^0+1) (n_{q_3}^0 + 1) \delta(\omega_1 - \omega_2 - \omega_3) \} \\
+    W_{1,i}^n = \frac{2\pi}{\hbar} \sum_{q_2,q_3} & |V^{(3)}(q_1, -q_2, -q_3)|^2 \delta(q_1 - q_2 - q_3) \notag \\ 
+    & \{\ \left(f_{-q_2,i} - f_{q_3,i} \right)  n_{q_1}^0 n_{q_2}^0 (n_{q_3}^0 + 1) \delta(\omega_1 + \omega_2 - \omega_3) \notag \\
+    & \ \ \ \ \ \ \ \ -\frac{1}{2} \left( f_{q_2,i} + f_{q_3,i} \right) n_{q_1}^0 (n_{q_2}^0+1) (n_{q_3}^0 + 1) \delta(\omega_1 - \omega_2 - \omega_3) \}
+\end{align}
+so that Eq.\ref{bte3} becomes:
+\begin{equation}
+    - \frac{1}{\beta} v_{q_1,i} \pfrac{n_{q_1}^0}{T} = \left( Q_1 + \frac{n_{q_1}^0(n_{q_1}^0+1)}{\tau_{q_1}} \right) f_{q_1,i} + W_{1,i} = Q_1' f_{q_1,i} + W_{1,i} 
+\end{equation}
+Iteration starts with:
+\begin{equation}
+    f_{q_1,i}^0 = \frac{-v_{q_1,i} \pfrac{n_{q_1}^0}{T}}{\beta Q_1'}
+\end{equation}
+and is updated by:
+\begin{equation}
+    f_{q_1,i}^{(n+1)} = - ( \frac{1}{\beta} v_{q_1,i} \pfrac{n_{q_1}^0}{T} + W_{1,i}^{n} ) / Q_1'
+\end{equation}
+
+\section{Thermal conductivity}
+The lattice thermal conductivity is given by:
+\begin{equation}
+    J_{phonon,i} = \frac{1}{N_k \Omega}\sum_q \hbar \omega_q v_{q,i} dn_{q,j} = -\sum_j \kappa_{i,j} \left( \nabla T \right)_j \label{jp} 
+\end{equation}
+where $dn_q = \sum_i \beta n_q^0(n_q^0+1)f_{q,i} \left( \nabla T \right)_i $. We then find the thermal conductivity to be:
+\begin{equation}
+    \kappa_{i,j} = -\frac{1}{N_k \Omega}\sum_q \hbar \omega_q v_{q,i} \beta n_q^0(n_q^0+1)f_{q,j}
+\end{equation}
+
+\pagebreak
+\section{Direct solution of phonon transport equation}
+The direct solution of phonon BTE can be obtained by writing in matrix form. Starting from
+Eq.\ref{bte2}, we can write:
+\begin{equation}
+    \sum_{q_2} A_{q_1,q_2} f_{q_2,i} = b_{q_1,i} \label{matrix1}
+\end{equation}
+where i indicate cartesian direction, the terms are defined by:
+\begin{gather}
+    b_{q_1,i} = - \frac{1}{\beta} v_{q_1,i} \pfrac{n_{q_1}^0}{T} = -\hbar \omega_1 v_{q_1,i} n_{q_1}^0 (n_{q_1}^0 + 1) \frac{1}{T} \\
+    \Lambda_{q_1,q_2}^{q_3} = n_{q_1}^0 n_{q_2}^0 (n_{q_3}^0 + 1) L_{q_1,q_2}^{q_3} \\
+    \Lambda^{q_2,q_3}_{q_1} = n_{q_1}^0 (n_{q_2}^0+1) (n_{q_3}^0 + 1) L^{q_2,q_3}_{q_1} \\
+\end{gather}
+and the matrix:
+\begin{equation}
+    A_{q_1,q_2} = \frac{n_{q_1}^0 (n_{q_1}^0 + 1)}{\tau} \delta_{q_1,q_2} 
+            - \sum_{q_3} \left( \Lambda_{q_1,q_3}^{q_2} -  \Lambda_{q_1,q_2}^{q_2} + \Lambda^{q_2,q_3}_{q_1} \right) \label{A}
+\end{equation}
+where $\tau$ is defined to be:
+\begin{equation}
+    \frac{n_{q_1}^0 (n_{q_1}^0 + 1)}{\tau_{q_1}} = 
+    \sum_{q_3,q_4} \left\{ \Lambda_{q_1,q_3}^{q_{4}} + \frac{1}{2} \Lambda^{q_3,q_{4}}_{q_1} \right\} 
+    + \frac{n_{q_1}^0(n_{q_1}^0+1)}{\tau_{q_1}}
+\end{equation}
+To see the origin of the second term in Eq.\ref{A}, ew can write:
+\begin{align}
+        &\sum_{q_2,q_3} \left\{ (f_{q_2,i} - f_{q_3,i}) \Lambda_{q_1,q_2}^{q_3} - \frac{1}{2} (f_{q_2,i} + f_{q_3,i}) \Lambda_{q_1}^{q_2,q_3}  \right\} \notag \\
+    = &\sum_{q_2,q_3} (\Lambda_{q_1,q_2}^{q_3} - \frac{1}{2}\Lambda_{q_1}^{q_2,q_3} ) f_{q_2,i} 
+        - \sum_{q_2,q_3} (\Lambda_{q_1,q_2}^{q_3} + \frac{1}{2}\Lambda_{q_1}^{q_2,q_3} ) f_{q_3,i} \notag \\ 
+    = &\sum_{q_2,q_3} (\Lambda_{q_1,q_2}^{q_3} - \frac{1}{2}\Lambda_{q_1}^{q_2,q_3} ) f_{q_2,i} 
+        - \sum_{q_2,q_3} (\Lambda_{q_1,q_3}^{q_2} + \frac{1}{2}\Lambda_{q_1}^{q_3,q_2} ) f_{q_2,i} \notag \\ 
+    = &\sum_{q_2,q_3} \left( \Lambda_{q_1,q_2}^{q_3} - \Lambda_{q_1,q_3}^{q_2} - \Lambda_{q_1}^{q_2,q_3} \right) f_{q_2,i} \notag \\
+    = &- \sum_{q_2,q_3} \left( \Lambda_{q_1}^{q_2,q_3} - \Lambda_{q_1,q_2}^{q_3} + \Lambda_{q_1,q_3}^{q_2} \right) f_{q_2,i}
+\end{align}
+Eq.\ref{matrix1} $(AF_i = b_i)$ can be solved by:
+\begin{equation}
+    F_i = A^{+}b_i + (I - A^{+}A) y
+\end{equation}
+with $A^{+}$ the pseudoinverse of $A$ and $(I - A^{+}A) y$ with arbitrary $y$ arise
+when the solution is not unique.
+
+The direct solution can be simplified further. First, we define
+\begin{align}
+    A^{in}_{q_1,q_2} & = - \sum_{q_3} \left( \Lambda_{q_1,q_3}^{q_2} -  \Lambda_{q_1,q_2}^{q_2} + \Lambda^{q_2,q_3}_{q_1} \right) \notag \\
+             = -&\frac{2\pi}{\hbar} \sum_{q_3} |V^{(3)}(q_1, -q_2, q_3)|^2 n_{q_1}^0 n_{q_3}^0 (n_{q_2}^0 + 1) \delta(\omega_1 + \omega_3 - \omega_2) \notag \\
+               +&\frac{2\pi}{\hbar} \sum_{q_3} |V^{(3)}(q_1, q_2, -q_3)|^2 n_{q_1}^0 n_{q_2}^0 (n_{q_3}^0 + 1) \delta(\omega_1 + \omega_2 - \omega_3) \notag \\
+               -&\frac{2\pi}{\hbar} \sum_{q_3} |V^{(3)}(q_1, -q_2, -q_3)|^2 n_{q_1}^0 (n_{q_2}^0+1) (n_{q_3}^0 + 1) \delta(\omega_1 - \omega_2 - \omega_3)
+               \label{explicit}
+\end{align}
+The second term can be modified by changing the summation index $q_3$ into $q_3' = -q_3$ as:
+\begin{align}
+    -&\frac{2\pi}{\hbar} \sum_{q_3} |V^{(3)}(q_1, q_2, -q_3)|^2 n_{q_1}^0 n_{q_2}^0 (n_{q_3}^0 + 1) \delta(\omega_1 + \omega_2 - \omega_3) \notag \\
+    =&\frac{2\pi}{\hbar} \sum_{q_3'=-q_3} |V^{(3)}(q_1, q_2, q_3')|^2 n_{q_1}^0 n_{q_2}^0 (n_{q_3}^0 + 1) \delta(\omega_1 + \omega_2 - \omega_3) \notag \\
+    =&\frac{2\pi}{\hbar} \sum_{q_3} |V^{(3)}(q_1, q_2, q_3)|^2 n_{q_1}^0 n_{q_2}^0 (n_{q_3}^0 + 1) \delta(\omega_1 + \omega_2 - \omega_3)
+\end{align}
+we do the same for the third term:
+\begin{align}
+    -&\frac{2\pi}{\hbar} \sum_{q_3} |V^{(3)}(q_1, -q_2, -q_3)|^2 n_{q_1}^0 (n_{q_2}^0+1) (n_{q_3}^0 + 1) \delta(\omega_1 - \omega_2 - \omega_3) \notag \\
+    =&\frac{2\pi}{\hbar} \sum_{q_3'=-q_3} |V^{(3)}(q_1, -q_2, q_3')|^2 n_{q_1}^0 (n_{q_2}^0+1) (n_{q_3}^0 + 1) \delta(\omega_1 - \omega_2 - \omega_3) \notag \\
+    =&\frac{2\pi}{\hbar} \sum_{q_3} |V^{(3)}(q_1, -q_2, q_3)|^2 n_{q_1}^0 (n_{q_2}^0+1) (n_{q_3}^0 + 1) \delta(\omega_1 - \omega_2 - \omega_3)
+\end{align}
+so that 
+\begin{align}
+    A^{in}_{q_1,q_2} & = - \sum_{q_3} \left( \Lambda_{q_1,q_3}^{q_2} -  \Lambda_{q_1,q_2}^{q_2} + \Lambda^{q_2,q_3}_{q_1} \right) \notag \\
+             = -&\frac{2\pi}{\hbar} \sum_{q_3} |V^{(3)}(q_1, -q_2, q_3)|^2 \left[ n_{q_1}^0 n_{q_3}^0 (n_{q_2}^0 + 1) \delta(\omega_1 + \omega_3 - \omega_2) + n_{q_1}^0 (n_{q_2}^0+1) (n_{q_3}^0 + 1) \delta(\omega_1 - \omega_2 - \omega_3) \right]\notag \\
+               & \ \ \ \ +\frac{2\pi}{\hbar} \sum_{q_3} |V^{(3)}(q_1, q_2, q_3)|^2 n_{q_1}^0 n_{q_2}^0 (n_{q_3}^0 + 1) \delta(\omega_1 + \omega_2 - \omega_3) 
+\end{align}
+define short hands for the above equations:
+\begin{align}
+    A^{in}_{q_1,q_2} &= I_{q_1,q_2} (-B_{q_1,q_2} + C_{q_1,q_2}) \\
+    B_{q_1,q_2} &= \frac{\pi}{\hbar} \sum_{q_3} |V^{(3)}(q_1, -q_2, q_3)|^2 \frac{1}{sinh(\beta\hbar\omega_3 / 2)} 
+                \left\{\delta(\omega_1 + \omega_3 - \omega_2) + \delta(\omega_1 - \omega_2 - \omega_3) \right\} \\
+    C_{q_1,q_2} &= \frac{\pi}{\hbar} \sum_{q_3} |V^{(3)}(q_1, q_2, q_3)|^2 \frac{1}{sinh(\beta\hbar\omega_3 / 2)}  \delta(\omega_1 + \omega_2 - \omega_3) \\
+    I_{q_1,q_2} &= \sqrt{n_{q_1^0}(n_{q_1}^0 + 1)n_{q_2}^0(n_{q_2}^0 + 1)}
+\end{align}
+Eq.\ref{matrix1} can now be written as:
+\begin{align}
+    b_{q_1,i} &=\sum_{q_2} \left( \frac{n_{q_1}^0 (n_{q_1}^0 + 1)}{\tau} \delta_{q_1,q_2} - I_{q_1,q_2} B_{q_1,q_2} + I_{q_1,q_2} C_{q_1,q_2} \right) f_{q_2,i} \notag \\
+            &=\sum_{q_2} \left( \frac{n_{q_1}^0 (n_{q_1}^0 + 1)}{\tau} \delta_{q_1,q_2} + I_{q_1,q_2} C_{q_1,q_2} \right) f_{q_2,i} - \sum_{q_2} I_{q_1,q_2} B_{q_1,q_2}f_{q_2,i}
+\end{align}
+since $f_{q_2,i} = -f_{-q_2,i}$, we have:
+\begin{align}
+    - \sum_{q_2'} I_{q_1,q_2'} &B_{q_1,q_2'}f_{q_2',i} \notag \\ 
+     = - &\sum_{q_2 = -q_2'} I_{q_1,q_2'} B_{q_1,q_2'}f_{q_2',i} \notag \\
+     = - &\sum_{q_2} I_{q_1,-q_2} B_{q_1,-q_2}f_{-q_2,i} \notag \\
+     = &\sum_{q_2} I_{q_1,q_2} B_{q_1,-q_2} f_{q_2,i}
+\end{align}
+So that
+\begin{align}
+    b_{q_1,i} &=\sum_{q_2} \left( \frac{n_{q_1}^0 (n_{q_1}^0 + 1)}{\tau} \delta_{q_1,q_2} + I_{q_1,q_2} ( B_{q_1,-q_2} + C_{q_1,q_2} ) \right) f_{q_2,i} \notag 
+\end{align}
+and the term $B_{q_1,-q_2} + C_{q_1,q_2}$ can be written as:
+\begin{align}
+    B_{q_1,-q_2} + C_{q_1,q_2} = \frac{\pi}{\hbar} \sum_{q_3} &|V^{(3)}(q_1, q_2, q_3)|^2 \frac{1}{sinh(\beta\hbar\omega_3 / 2)} \notag \\
+    &\left\{ \delta(\omega_1 + \omega_3 - \omega_2) + \delta(\omega_1 - \omega_2 - \omega_3) + \delta(\omega_1 + \omega_2 - \omega_3) \right\}
+\end{align}
+now we can see that only a single matrix element need to be computed for each $q_1,q_2,q_3$ triplet.
+
+\section{Solving the Irreducible Brillouin zone}
+Using $k$ to refer to a point in the irreducible Brillouin zone and $q$ to a general point in reciprocal space, 
+we can write Eq.\ref{matrix1} to be:
+\begin{align}
+    b_{k_1,i} &= \sum_{q_2} A_{k_1,q_2} f_{q_2,i} \\
+              &= \sum_{k_2} \sum_R A_{k_1,Rk_2} f_{Rk_2,i} \label{rot}
+\end{align}
+where the sum is over symmetry operations $R$ that generate a general $q_2$ from $k_2$ in the irBZ. 
+for $f_{Rk_2,i}$, it transform under rotation:
+\begin{equation}
+    f_{Rk_2,i} = \sum_j R_{ij} f_{k_2,j}
+\end{equation}
+so now we can write Eq.\ref{rot} as:
+\begin{align}
+    b_{k_1,i} &= \sum_{k_2} \sum_j \left( \sum_R R_{ij} A_{k_1,Rk_2} \right) f_{k_2,j} \notag \\
+              &= \sum_{k_2} \sum_j \Omega_{i,k_1,j,k_2} f_{k_2,j} 
+\end{align}
+now the matrix $\Omega$ will have the dimension $3 \times n_s \times n_{k,ir}$.
+
+\end{document}

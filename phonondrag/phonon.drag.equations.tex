@@ -1,0 +1,620 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage[margin=0.8in]{geometry}
+\newcommand{\pfrac}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\fak}{f_{\alpha,k,\uparrow}}
+\newcommand{\fbk}{f_{\beta,k',\uparrow}}
+\newcommand{\nlq}{n_{\lambda,q}}
+\newcommand{\ak}{\alpha,k,\uparrow}
+\newcommand{\bk}{\beta,k',\uparrow}
+\newcommand{\ql}{\lambda,q}
+
+\begin{document}
+
+\title{Equations for phonon drag}
+\author{WH}
+\date{\today}
+\maketitle
+
+\section{The coupled equations}
+Boltzmann equation enable us to reduce the $6N$ phase space of 
+a $N$ particles distribution to a one-particle distribution function $f_1$.
+In this case, we say that "$f_1$ captures all we really need to know about
+a system" 
+%\footnote{Does this ignores the correlation and thus is incorrect for correlated system?}.
+The most general form of the Boltzmann euqation, for a distribution in equilibrium is:
+\begin{equation}
+    \pfrac{f_1}{t} = \pfrac{H_1}{r_i} \pfrac{f_1}{p_i} - \pfrac{H_1}{p_i} \pfrac{f_1}{r_i} 
+                        + \left(\pfrac{f_1}{t}\right)_{coll} = 0  
+\end{equation} 
+with the summation implied for cartesian directions $i$. 
+For an electron in an electric field $\phi$, we have:
+\begin{equation}
+    \pfrac{H_1}{r_i}=e \pfrac{\phi}{r_i} ; \pfrac{H_1}{p_i} = v_i
+\end{equation}
+Including the temperature gredient, we have:
+\begin{align}
+    v_i \pfrac{f_1}{r_i} - e \pfrac{f_1}{p_i}\pfrac{\phi}{r_i} &=\left(\pfrac{f_1}{t}\right)_{coll} \\
+    v_i \pfrac{f_1}{T}\nabla T - e v_i \pfrac{f_1}{\varepsilon}\nabla \phi &=\left(\pfrac{f_1}{t}\right)_{coll} 
+\end{align}
+with 
+\begin{align}
+    \pfrac{f_1}{r_i} &= \pfrac{f_1}{T} \pfrac{T}{r_i} \\
+    \pfrac{f_1}{p_i} &= \pfrac{f_1}{E} \pfrac{E}{p_i} = \pfrac{f_1}{E} v_i 
+\end{align}
+and gradient as a vector:
+\begin{align}
+    \nabla A &= \left( \pfrac{A}{x},\pfrac{A}{y},\pfrac{A}{z} \right)
+\end{align}
+
+We separate the collision term of electrons into two parts, one with phonons, one without phonons as:
+\begin{equation}
+    \left(\pfrac{f_1}{t}\right)_{coll} = -\frac{f_1 - f_1^0}{\tau_e *} + \left(\pfrac{f_1}{t}\right)_{e-p}
+\end{equation}
+with the local equilibrium of electrons and phonon given by the distribution function, 
+the states of electrons and phonons are indicated by $\ak$ and $\ql$:
+\begin{align}
+    \fak^0 &= \frac{1}{e^{(\varepsilon_{\ak}-\mu)/k_B T} +1} \\
+    \nlq^0 &= \frac{1}{e^{\hbar \omega_{\ql}/k_B T} -1}  
+\end{align}
+for phonon, we also write its Boltzmann equation, since it only response to the temperature gredient:
+\begin{equation}
+    v \pfrac{n_1}{T} \nabla T = 
+         \left(\pfrac{n_1}{t}\right)_{coll} = -\frac{n_1 - n_1^0}{\tau_{ph} *} + \left(\pfrac{n_1}{t}\right)_{e-p}
+\end{equation}
+for the collision without electron-phonon interaction, the term $\tau_e *$ and $\tau_{ph} *$ can 
+be mode dependent and includes
+\begin{itemize}
+    \item $\tau_e *$ can include electron-impurity sacttering. 
+    \item $\tau_{ph} *$ includes phonon-phonon and impurity-phonon.
+\end{itemize}.
+
+In summery, we obtained two coupled equations, with band index $\alpha$, $\lambda$ and wave vector
+$k$ and $q$:
+\begin{align}
+    v_{\alpha}(k) \pfrac{\fak}{T} &\nabla T - 
+      e v_{\ak} \pfrac{\fak}{\varepsilon}\nabla \phi = 
+        -\frac{\fak - \fak^0}{\tau_{\ak}} + \left(\pfrac{\fak}{t}\right)_{e-p} \label{BTE1} \\
+    v_{\ql} \pfrac{\nlq}{T} &\nabla T = 
+      -\frac{\nlq - \nlq^0}{\tau_{\ql}*} + \left(\pfrac{\nlq}{t}\right)_{e-p} \label{BTE2}
+\end{align}
+
+\section{Electron-phonon interaction}
+In the Born approximation, the electron feels the extra potential of the ionic 
+displacement, and is scattered by this potential. we can define the electron-phonon 
+matrix element $g_{\alpha,\beta,\lambda}(k,k',q)$ scattering an electron from $(\alpha, k)$ to $(\beta, k')$ by a phonon 
+$(\lambda, q)$. The value of $|g|^2$ in the following text is given by:
+\begin{equation}
+    g^2 = \frac{\hbar}{2m_0 \omega_{\ql}}|\langle\bk|\partial_{\ql}V|\ak\rangle|^2 
+\end{equation}
+We classify the scattering even into 4 different kinds and write, with the delta function denoting both the 
+momemtum conservation as well as the energy conservation requirement.
+\begin{table}[h]
+    \centering
+    \caption{Four distinct scattering event}
+    \begin{tabular}{|l|l|l|l|}
+        \hline
+        $F_1$ & phonon emission   & $(\ak) \rightarrow (\ql) + (\bk)$ & $\fak(1-\fbk)(\nlq+1)|g|^2\delta(k-k'-q)$ \\ \hline
+        $F_2$ & phonon absorption & $(\ak) + (\ql) \rightarrow (\bk)$ & $\fak(1-\fbk)(\nlq)  |g|^2\delta(k+q-k')$ \\ \hline
+        $F_3$ & phonon emission   & $(\bk) \rightarrow (\ql) + (\ak)$ & $\fbk(1-\fak)(\nlq+1)|g|^2\delta(k+q-k')$ \\ \hline
+        $F_4$ & phonon absorption & $(\bk) + (\ql) \rightarrow (\ak)$ & $\fbk(1-\fak)(\nlq)  |g|^2\delta(k-k'-q)$ \\ \hline
+    \end{tabular}
+\end{table}
+
+We note that spin is conserved in the scattering event so that the spin of the two electronic state $\ak$ and $\bk$ should 
+have the same spin. In other words, the two spin channels are independent to each other.
+
+For an arbitrary electronic state $\ak$, the rate of change of its distribution function 
+due to electron-phonon interaction is given by
+\begin{equation}
+    \left(\pfrac{\fak}{t}\right)_{e-ph} = \frac{1}{N_q}\frac{2\pi}{\hbar}\sum_{\bk,\ql}(-F_1 - F_2 + F_3 + F_4) \label{electron_scattering_rate}
+\end{equation}
+
+For phonon, we have, from a single spin channel:
+\begin{equation}
+    \left(\pfrac{\nlq}{t}\right)_{e-ph} = \frac{1}{2}\frac{1}{N_k}\frac{2\pi}{\hbar}\sum_{\ak,\bk}(F_1 - F_2 + F_3 - F_4)
+\end{equation}
+We note that the summation over electronic state $\ak$ and $\bk$ are double counted, therefore we have the leading $\frac{1}{2}$ to 
+take care of this. But the summation of the $F_1$ term is exactly the same as $F_3$ if we change the summation index. Therefore we 
+can reduce the equation to:
+\begin{equation}
+    \left(\pfrac{\nlq}{t}\right)_{e-ph} = \frac{1}{N_k}\frac{2\pi}{\hbar}\sum_{\ak,\bk}(F_1 - F_2)
+\end{equation}
+Furthermore, taking account of the spin degeneracy(sum up the spin up and down contribution), we would have
+\begin{equation}
+    \left(\pfrac{\nlq}{t}\right)_{e-ph} = \frac{2}{N_k}\frac{2\pi}{\hbar}\sum_{\ak,\bk}(F_1 - F_2) \label{phonon_scattering_rate}
+\end{equation}
+
+To linearize the equation for both electron part and phonon part, we write the distribution function
+\begin{align}
+    \fak &= \fak^0 + \Delta \fak \\
+    \fbk &= \fbk^0 + \Delta \fbk \\
+    \nlq &= \nlq^0 + \Delta \nlq 
+\end{align}
+
+We try to find the parts in $\left(\partial\fak / \partial t\right)_{e-ph}$ and $\left(\partial\nlq / \partial t\right)_{e-ph}$ that 
+is linear in $\Delta \fak$ and $\Delta \nlq$. To do this, we simply replace the distribution function in equation.\ref{electron_scattering_rate}
+and \ref{phonon_scattering_rate} to their $\Delta$ counterpart. As an example, equation.\ref{electron_scattering_rate} linearized in 
+terms of $\Delta\fak$ is given by:
+\begin{align}
+    -F_1 + F_4 &= \left[ -\Delta\fak(1-\fbk)(\nlq+1) + \fbk(-\Delta\fak)\nlq \right]|g|^2\delta(k-k'-q) \notag \\
+               &= -(\nlq+1-\fbk)|g|^2\delta(k-k'-q)\Delta\fak \\
+    -F_2 + F_3 &= \left[ -\Delta\fak(1-\fbk)(\nlq) + \fbk(-\Delta\fak)(\nlq+1) \right]|g|^2\delta(k+q-k') \notag \\
+               &= -(\nlq+\fbk)|g|^2\delta(k+q-k')\Delta\fak
+\end{align}
+so that when we sum them together, we obtain(note that $\Delta \fak$ can now be pulled outside of the summation)
+\begin{equation}
+    \left(\pfrac{\fak}{t}\right)_{e-ph} = - \frac{1}{N_q}\frac{2\pi}{\hbar}\sum_{\bk,\ql}\left[ (\nlq+1-\fbk)|g|^2\delta(k-k'-q) + (\nlq+\fbk)|g|^2\delta(k+q-k') \right]  \Delta\fak
+\end{equation}
+
+Using the same method, we write the linearized part in terms of other two variation in distribution:
+\begin{align}
+    \left(\pfrac{\fak}{t}\right)_{e-ph} &= \frac{1}{N_q}\frac{2\pi}{\hbar}\sum_{\bk,\ql}\left[ \left\{ (\fak+\nlq)|g|^2\delta(k-k'-q) + (\nlq+1-\fak)|g|^2\delta(k+q-k') \right\} \Delta\fbk \right]\\
+    \left(\pfrac{\fak}{t}\right)_{e-ph} &= \frac{1}{N_q}\frac{2\pi}{\hbar}\sum_{\bk,\ql}\left[ \left\{ (\fbk-\fak)|g|^2\delta(k-k'-q) + (\fbk-\fak)|g|^2\delta(k+q-k')   \right\} \Delta\nlq \right]
+\end{align}
+
+The relaxation time due to the electron-phonon interaction is given by:
+\begin{equation}
+    -\frac{\Delta\fak}{\tau_{\ak}} = \left(\pfrac{\fak}{t}\right)_{e-ph}
+\end{equation}
+i.e. the linear coefficient of $\Delta\fak$. Therefore, we obtain:
+\begin{equation}
+    \frac{1}{\tau_{\ak}} = \frac{1}{N_q}\frac{2\pi}{\hbar}\sum_{\bk,\ql}\left[ (\nlq+1-\fbk)|g|^2\delta(k-k'-q) + (\nlq+\fbk)|g|^2\delta(k+q-k') \right]
+\end{equation}
+
+Which is the same equation as relaxation time from the self-energy approximation, see equation.8 of the paper \emph{EPW:Electron-phonon coupling, Computer Physics Communication}.
+The relaxation time is given by:
+\begin{equation}
+    \frac{1}{\tau_{\ak}(\omega,T)} = 2 \Sigma''_{\ak}(\omega,T)
+\end{equation}
+and the change from k-space summation and integration is given by:
+\begin{equation}
+    \int_{BZ}\frac{dq}{\Omega_{BZ}} \Rightarrow \frac{1}{N_q}\sum_{q}
+\end{equation}
+
+
+Linearizing the phonon scattering rate, we have:
+\begin{align}
+    \left(\pfrac{\nlq}{t}\right)_{e-ph} = \frac{2}{N_k}\frac{2\pi}{\hbar}\sum_{\ak,\bk} \left[ \fak(1-\fbk)(\nlq+1)|g|^2\delta(k-k'-q) - \fak(1-\fbk)(\nlq)  |g|^2\delta(k+q-k') \right]
+\end{align}
+Noting that the second part can be rewrite by changing the index $(\ak)\rightarrow(\bk)$ and vice versa:
+\begin{equation}
+    \fak(1-\fbk)(\nlq)  |g|^2\delta(k+q-k') \Rightarrow \fbk(1-\fak)(\nlq)  |g|^2\delta(k-k'-q)
+\end{equation}
+
+We have, to linear part:
+\begin{align}
+    \left(\pfrac{\nlq}{t}\right)_{e-ph} = \frac{4\pi}{N_k\hbar}\sum_{\ak,\bk} & \left\{ (\nlq+1-\fbk)|g|^2\delta(k-k'-q)\Delta\fak - (\fak+\nlq)|g|^2\delta(k-k'-q)\Delta\fbk \right\} \notag \\
+                    +\frac{4\pi}{N_k\hbar}& \left\{ \sum_{\ak,\bk}(\fak-\fbk)|g|^2\delta(k-k'-q) \right\} \Delta\nlq
+\end{align}
+
+We are able to write the phonon relaxation:
+\begin{equation}
+    \frac{1}{\tau_{\ql}} = \frac{4\pi}{N_k\hbar} \sum_{\ak,\bk}(\fbk-\fak)|g|^2\delta(k-k'-q) 
+\end{equation}
+
+notice the sign of the relaxation time, we should have $\fbk > \fak$, which is true since from the delta function $\delta(k-k'-q)$, 
+state $(\bk)$ should have a lower energy. This equation is comparable to equation.9 of \emph{EPW:Electron-phonon coupling}. 
+
+As a temporary summary, we write down the linearized parts as:
+\begin{align}
+    \left(\pfrac{\fak}{t}\right)_{e-ph} = - \frac{\Delta \fak}{\tau_{\ak}} 
+         +\sum_{\bk,\ql} \left[ \varGamma_{\bk}(\ak,\ql)\Delta\fbk 
+           +\varGamma_{\ql}(\ak,\bk)\Delta\nlq \right]  \label{collision1} \\
+    \left(\pfrac{\nlq}{t}\right)_{e-p} = - \frac{\Delta\nlq}{\tau_{\ql}}
+        + \sum_{\ak,\bk} \left[ \varXi_{\ak}(\bk,\ql)\Delta \fak 
+                              + \varXi_{\bk}(\ak,\ql)\Delta\fbk \right] \label{collision2}
+\end{align} 
+notice here that the electronic part equation.\ref{collision1} is only for single spin channel while 
+the second equation for the phonon already take into account the spin degeneracy, the $\uparrow$ in the 
+thus only mean a single state, in equation.\ref{collision2}.
+With the relaxation time already defined above and the $\varXi$ and $\varGamma$ defined as:
+\begin{align}
+    \varGamma_{\bk}(\ak,\ql) &= \frac{1}{N_q}\frac{2\pi}{\hbar}\left\{ (\fak+\nlq)|g|^2\delta(k-k'-q) + (\nlq+1-\fak)|g|^2\delta(k+q-k') \right\} \\
+    \varGamma_{\ql}{\ak,\bk} &= \frac{1}{N_q}\frac{2\pi}{\hbar}\left\{ (\fbk-\fak)|g|^2\delta(k-k'-q) + (\fbk-\fak)|g|^2\delta(k+q-k')   \right\} \\
+    \varXi_{\ak}(\bk,\ql) &= \frac{4\pi}{N_k\hbar} (\nlq+1-\fbk)|g|^2\delta(k-k'-q) \\
+    \varXi_{\bk}(\ak,\ql) &= -\frac{4\pi}{N_k\hbar} (\fak+\nlq)|g|^2\delta(k-k'-q)
+\end{align}
+
+Putting the terms $\left(\partial\fak / \partial t\right)_{e-ph}$ and $\left(\partial\nlq / \partial t\right)_{e-ph}$ in 
+equation.\ref{collision1} and \ref{collision2} 
+back into the coupled transport equation.\ref{BTE1} and \ref{BTE2}. We would then obtain the necessary equation 
+to solve the phonon drag problem.
+
+
+
+%The collision terms of state $\alpha, k$ can be obtained by iterating over the the end states and the 
+%phonon that cause the scattering. 
+%\begin{align}
+%    \left(\pfrac{\fak}{t}\right)_{e-p} =& \frac{2\pi}{\hbar}\sum_{(\beta, k'),(\lambda, q)} \varLambda_{(\alpha, k),(\beta, k'),(\lambda, q)} \\
+%    \varLambda_{(\alpha, k),(\beta, k'),(\lambda, q)}= 
+%        &( - |g|^2 \nlq\fak(1-\fbk)\delta(k+q-k')     \notag\\
+%        &  - |g|^2(\nlq+1)\fak(1-\fbk)\delta(k-k'-q) \notag\\
+%        &  + |g|^2\nlq(1-\fak)\fbk\delta(q+k'-k)     \notag\\
+%        &  + |g|^2(\nlq+1)(1-\fak)\fbk\delta(k'-k-q) )    
+%\end{align}
+%For the phonons, we also have:
+%\begin{align}
+%    \left(\pfrac{\nlq}{t}\right)_{e-p}=& \frac{2\pi}{2\hbar}\sum_{(\alpha, k),(\beta, k')} \varUpsilon_{(\alpha, k),(\beta, k'),(\lambda, q)} \\
+%    \varUpsilon_{(\alpha, k),(\beta, k'),(\lambda, q)} = 
+%        &( - |g|^2 \nlq\fak(1-\fbk)\delta(k+q-k')    \notag \\
+%        &  + |g|^2(\nlq+1)\fak(1-\fbk)\delta(k-k'-q) \notag \\ 
+%        &  - |g|^2\nlq(1-\fak)\fbk\delta(q+k'-k)     \notag \\
+%        &  + |g|^2(\nlq+1)(1-\fak)\fbk\delta(k'-k-q) )
+%\end{align}
+%Note that there is a factor $1/2$ for double counting the electron states of $(\alpha, k)$ and $(\beta, k')$.
+%
+%We express the conservation of both energy and momemtum by the $\delta$ function (selection). Especially, we donate the delta 
+%function in such a way that implies the scattering process: the $k$ indexes with $+$ are the incoming states while
+%the $k$ indexes with $-$ sign are the outgoing states. For example, $\delta(k-k'-q)$ suggests 
+%the process $k\rightarrow k'+q$. 
+%
+%We also point out here that in $\varLambda$ and $\varUpsilon$ above, the first and fourth
+%terms have the same selection function, the second and third terms share another distinct selection function.
+%These processes can be seems to be the time reversal process of each other.
+%
+%Next we linearize the equation by:
+%\begin{align}
+%    \fak &= \fak^0 + \Delta \fak \\
+%    \fbk &= \fbk^0 + \Delta \fbk \\
+%    \nlq &= \nlq^0 + \Delta \nlq 
+%\end{align}
+%We substituting the above into the equation for electron and phonon interaction and keep only upto the linear
+%terms. This is done, for example: 
+%\begin{align}
+%    \nlq\fak(1-\fbk)=& \nlq^0\fak^0+\fak^0\Delta\nlq+\nlq^0\Delta\fak  \notag \\
+%                    &+ \nlq^0\fak^0\fbk^0 +\fak^0\fbk^0\Delta\nlq +\nlq^0\fbk^0\Delta\fak +\nlq^0\fak^0\Delta\fbk   
+%\end{align}
+%collecting the terms, we have:
+%\begin{align}
+%    \left(\pfrac{\fak}{t}\right)_{e-p} \approx  
+%        &-\left[ \sum_{(\beta, k'),(\lambda, q)}\varGamma_{\alpha,k}(\beta, k',\lambda, q) \right] \Delta\fak \notag \\
+%        &+\sum_{(\beta, k'),(\lambda, q)} \left[ \varGamma_{\beta,k'}(\alpha,k,\lambda, q)\Delta\fbk \right]
+%         +\sum_{(\beta, k'),(\lambda, q)} \left[ \varGamma_{\lambda,q}(\alpha,k,\beta, k')\Delta\nlq \right] \label{collision1} \\
+%    \left(\pfrac{\nlq}{t}\right)_{e-p} \approx
+%        & \sum_{(\alpha,k),(\beta,k')} \left[ \varXi_{\alpha,k}(\beta,k',\lambda,q)\Delta \fak 
+%                                            + \varXi_{\beta,k'}(\alpha,k,\lambda,q)\Delta\fbk \right] \notag \\
+%        & - \left[ \sum_{(\alpha,k),(\beta,k')} \varXi_{\lambda,q}(\alpha,k,\beta,k') \right] \Delta\nlq \label{collision2}
+%\end{align}
+%with the terms defined to be:
+%\begin{align}
+%    \varGamma_{\alpha,k}(\beta,k',\lambda,q) &= (\nlq^0+\fbk^0)\Pi_{-} + (\nlq^0+1-\fbk^0)\Pi_{+} \\
+%    \varGamma_{\beta,k'}(\alpha,k,\lambda,q) &= (\nlq^0+1-\fak^0)\Pi_{-} + (\nlq^0+\fak^0)\Pi_{+} \\
+%    \varGamma_{\lambda,q}(\alpha,k,\beta,k') &= (\fbk^0-\fak^0)\Pi_{-} + (\fbk^0-\fak^0)\Pi_{+} \\
+%    \varXi_{\alpha,k}(\beta,k',\lambda,q) &= -(\nlq^0+\fbk^0)\Pi_{-} + (\nlq^0+1-\fbk^0)\Pi_{+} \\
+%    \varXi_{\beta,k'}(\alpha,k,\lambda,q) &= (\nlq^0+1-\fak^0)\Pi_{-} - (\nlq^0+\fak^0)\Pi_{+} \\
+%    \varXi_{\lambda,q}(\alpha,k,\beta,k') &= (\fbk^0-\fak^0)\Pi_{-} - (\fbk^0+1-\fak^0)\Pi_{+} 
+%\end{align}
+%with $\Pi$ refer to two kind of process:
+%\begin{align}
+%    \Pi_{-} &= \frac{2\pi}{\hbar} |g(k,k',q)|^2 \delta(k+q-k') \\
+%    \Pi_{+} &= \frac{2\pi}{\hbar} |g(k,k',q)|^2 \delta(k-k'-q)
+%\end{align}
+%We notice that here all the terms of $\varGamma$ and $\varXi$ are given by the equilibrium distribution, thus
+%this can be calculated before solving the Boltzmann equation.
+%
+%In equation.\ref{collision1} and \ref{collision2}, we can take the term that is linear in $\Delta\fak$ and
+%$\Delta\nlq$ and absorb them into the mode specific relaxation time. In this case, we define the new
+%relaxation time:
+%\begin{align}
+%    \frac{1}{\tau_{\alpha,k}} &=\frac{1}{\tau_{\alpha,k}*} + 
+%            \left[ \sum_{(\beta, k'),(\lambda, q)}\varGamma_{\alpha,k}(\beta, k',\lambda, q) \right] \\
+%    \frac{1}{\tau_{\lambda,q}} &=\frac{1}{\tau_{\lambda,q}*} + 
+%            \left[ \sum_{(\alpha,k),(\beta,k')} \varXi_{\lambda,q}(\alpha,k,\beta,k') \right]
+%\end{align}
+%Now the relaxation time includes the scattering of electrons by equilibrium phonon and phonon scattering by 
+%equilibrium phonon. 
+%Finally, the Boltzmann equation (equation.\ref{BTE1} and \ref{BTE2}) becomes:
+%\begin{align}
+%    v_{\ak}\pfrac{\fak}{T} \nabla T - e v_{\ak} \pfrac{\fak}{\varepsilon}\nabla \phi = 
+%        &-\frac{\fak - \fak^0}{\tau_{\ak}} \notag \\
+%        &+\sum_{(\beta, k'),(\lambda, q)} \left[ \varGamma_{\beta,k'}(\alpha,k,\lambda, q)\Delta\fbk + \varGamma_{\lambda,q}(\alpha,k,\beta, k')\Delta\nlq \right] \label{BTE11} \\
+%    v_{\ql} \pfrac{\nlq}{T} \nabla T = 
+%        &-\frac{\nlq - \nlq^0}{\tau_{\lambda,q}}  \notag \\
+%        &+\sum_{(\alpha,k),(\beta,k')} \left[ \varXi_{\alpha,k}(\beta,k',\lambda,q)\Delta \fak 
+%             + \varXi_{\beta,k'}(\alpha,k,\lambda,q)\Delta\fbk \right] \label{BTE22}
+%\end{align}
+
+\section{Seebeck in the uncoupled case}
+We start with the general linear relationship between current flow and 
+the field, following mainly the notation of the paper 
+\emph{"Transpor coefficients from first-principles calculations, PRB, 2003"}. The 
+general linear current response to an applied temperature gradient and a electric field is
+given by:
+\begin{align}
+    J_c&=\sigma E - \zeta \nabla T \\
+    J_q&=T\zeta E - \kappa_0 \nabla T 
+\end{align} 
+with $J_c$ the charge current, $J_q$ the thermal current, $\sigma$ and $\kappa$ can
+be recognized to be the electric conductivity and the total 
+thermal conductivity. In the matrix form, we have:
+\begin{equation}
+    \begin{pmatrix} J_c \\ J_q \end{pmatrix} 
+    = \begin{pmatrix} \sigma & -\zeta \\ T\zeta & -\kappa_0 \end{pmatrix} 
+      \begin{pmatrix} E \\ \nabla T \end{pmatrix}
+\end{equation}
+
+Each currents are vectors with element $i,j,k$ correspond to three cartesian directions,
+the same is true for the gradient of the field we consider here. Note that
+the electric field is given from the electric potential by 
+$E = -\nabla \phi$. The 
+transport properties $\sigma$, $\zeta$ and $\kappa$ are corresponding tensors 
+so that, for example:
+\begin{equation}
+    J_{c,i} = \sum_j \sigma_{ij} E_j
+\end{equation}
+according to the above definition, we find the Seebeck coefficients and the Peltier 
+coefficients to be:
+\begin{align}
+    S   &=\frac{\zeta}{\sigma} \\
+    \Pi &=\frac{T\zeta}{\sigma} \\
+    \pi &= TS
+\end{align}
+
+The final equation is the Kelvin equation. The current flow $J_c$ is solely due to 
+electrons while the heat flow is from both electrons and phonons. We have:
+\begin{align}
+    J_{c,i,\uparrow} &= \frac{e}{N_k\Omega}\sum_{\ak} f_{\ak} v_{\ak,i} \label{jce} \\
+    J_{q,ele,i,\uparrow} &=  \frac{1}{N_k \Omega}\sum_{\ak} (\varepsilon_{\ak}-\mu) f_{\ak} v_{\ak,i} \label{jqe}\\
+    J_{q,phonon,i} &= \frac{1}{N_q \Omega}\sum_{\ql} \hbar \omega_{\ql} n_{\ql} v_{\ql,i} \label{jqp}
+\end{align}
+where $\Omega$ is the volumn of the unit cell.
+Dividing the $N_{k(q)}\Omega$ term is necessary because the these properties are defined as 
+"density" and we should note that $N_{k(q)}\Omega$ term is simply the volumn of the 
+finite system that we are concerning with. $N_k$ gives the number of unit cells in the 
+system.
+
+We can consider two cases:
+\begin{itemize}
+    \item Starting with $\nabla T =0$ and $E\neq 0 $. This correspond to the Peltier effect.
+    \item Starting with $\nabla T \neq 0$ and $E= 0 $. This correspond to the process of 
+           Seebeck effect.
+\end{itemize}
+
+We start by first deriving the transport equation of decoupled 
+equations in the Peltier case, the off-equilibrium electron distribution,
+given by (the equilibrium part of the distribution sum up to zero):
+\begin{equation}
+    \Delta \fak = e \sum_j \left(-\pfrac{\fak^0}{\varepsilon}\right) \tau_{\ak} v_{\ak,j} E_j
+\end{equation} 
+where we explicitly written down the summation.
+the electric current flow is given by equation.\ref{jce} as:
+\begin{align}
+    J_{c,i} &= 2J_{c,i,\uparrow} = \frac{2e^2}{N_k \Omega} \sum_j \sum_{\ak} \left(-\pfrac{\fak^0}{\varepsilon}\right) \tau_{\ak} v_{\ak,i}v_{\ak,j} E_j \\
+    J_{c,i} &= \sum_j \sigma_{ij} E_j
+\end{align}
+with $J_{c,i}$ now denote the total current of both spin channel by the 
+factor of 2 and giving the result for $\sigma$:
+\begin{equation}
+    \sigma_{ij} = \frac{2e^2}{N_k \Omega} \sum_{\ak} \left(-\pfrac{\fak^0}{\varepsilon}\right) \tau_{\ak} v_{\ak,i}v_{\ak,j} \label{econd}
+\end{equation}
+
+Since the electron and phonon are decoupled, phonon do not respond to the electric field. All the 
+heat flow is due to electrons, and thus we have, from equation.\ref{jqe}:
+\begin{align}
+    J_{q,ele,i} &= \frac{2e}{N_k \Omega} \sum_j \sum_{\ak} (\varepsilon_{\ak}-\mu)  \left(-\pfrac{\fak^0}{\varepsilon}\right) \tau_{\ak} v_{\ak,i}v_{\ak,j} E_j \\
+    J_{q,i} &= T \sum_j \zeta_{ij} E_j \\
+\end{align}
+finally giving: 
+\begin{equation}
+    \zeta_{ij} = \frac{2e}{N_k \Omega T} \sum_{\ak} (\varepsilon_{\ak}-\mu)  \left(-\pfrac{\fak^0}{\varepsilon}\right) \tau_{\ak} v_{\ak,i}v_{\ak,j} \label{zeta_uncouple_peltier}
+\end{equation}
+the Seebeck coefficients are thus given by: 
+\begin{equation}
+    S_{ij} = \left[ \frac{2e}{N_k \Omega T} \sum_{\ak} (\varepsilon_{\ak}-\mu)  \left(-\pfrac{\fak^0}{\varepsilon}\right) \tau_{\ak} v_{\ak,i}v_{\ak,j} \right] / \sigma
+\end{equation}
+in which the division should be interpreted as matrix operation. 
+
+In the Seebeck picture, $E= 0$ and electrons are driven by the thermal gradient $\nabla T $:
+\begin{equation}
+    \Delta \fak = - \sum_j \left(\pfrac{\fak^0}{T}\right) \tau_{\ak} v_{\ak,j} (\nabla T)_j
+\end{equation}
+the electric conductivity is still given by equation.\ref{econd}. Now we consider:
+\begin{align}
+    J_{c,i} &= -\frac{2e}{N_k \Omega} \sum_j \sum_{\ak}\left(\pfrac{\fak^0}{T}\right) \tau_{\ak}v_{\ak,i}v_{\ak,j} (\nabla T)_j \\
+    J_{c,i} &= -\sum_j \zeta_{ij} (\nabla T)_j 
+\end{align}
+finally, we have:
+\begin{equation} 
+    \zeta_{ij} = \frac{2e}{N_k \Omega}\sum_{\ak}\left(\pfrac{\fak^0}{T}\right) \tau_{\ak}v_{\ak,i}v_{\ak,j} \label{zeta_uncouple_seebeck}
+\end{equation}
+
+The two equations of $\zeta$ (\ref{zeta_uncouple_peltier} and \ref{zeta_uncouple_seebeck}) are the same, obeying the 
+Kelvin relation. This can be seen, with $\varepsilon' = (\varepsilon_{\ak}-\mu)/k_B T$ by:
+\begin{align}
+    \pfrac{f_k}{T} &= \pfrac{f_k}{\varepsilon'} \pfrac{\varepsilon'}{T} = \pfrac{f_k}{\varepsilon'} \left( -\frac{\varepsilon_{\ak}-\mu}{k_B T^2} \right) \\
+    \pfrac{f_k}{\varepsilon} &= \pfrac{f_k}{\varepsilon'} \pfrac{\varepsilon'}{\varepsilon} = \pfrac{f_k}{\varepsilon'} \left( \frac{1}{k_B T} \right) \\
+\end{align}
+so that we find:
+\begin{equation}
+    \pfrac{f_k}{T} = \pfrac{f_k}{\varepsilon} \left( -\frac{\varepsilon_{\ak}-\mu}{T} \right) \label{partial_relation}
+\end{equation}
+Placing the above relation into equation.\ref{zeta_uncouple_seebeck}, we can recover the results in equation.\ref{zeta_uncouple_peltier}. 
+Thus the Seebeck coefficient calculated from the $\zeta$ function and $\sigma$ is the same.
+
+%%%%%%%% SEPARATION %%%%%%%%%%%%%%%%%%
+\section{Seebeck in the coupled case}
+Now we consider the transport equation when electron and phonon systems are coupled by the
+$e-ph$ interaction, as discussed before. The coupled equations are the set \ref{BTE1} and \ref{BTE2}.
+
+We still start with the Peltier case with $\nabla T = 0$. \
+Electric field is applied to drive the coupled 
+electron-phonon system. Off-equilibrium phonons are only because of the electron-phonon interaction.
+We make the following approximation to the coupled transport equation:
+\begin{itemize}
+    \item In the electron equation.\ref{collision1}, the $\Delta\fbk$ term is small and can be ignored. 
+    \item The term due to the non-equilibrium phonon is also small in equation.\ref{collision1} so that $\Delta\nlq$ is also insignificant.
+\end{itemize}
+
+The electron transport equation \ref{collision1} are now decoupled from the phonon one. 
+We can obtain the electronic part of the heat flow and the elctric conductivity:
+\begin{align}
+    \sigma_{ij} &= \frac{2e^2}{N_k \Omega} \sum_{\ak} \left(-\pfrac{\fak^0}{\varepsilon}\right) \tau_{\ak} v_{\ak,i}v_{\ak,j} \\
+    J_{q,ele,i} &= \frac{2e}{N_k \Omega} \sum_j \sum_{\ak} (\varepsilon_{\ak}-\mu)  \left(-\pfrac{\fak^0}{\varepsilon}\right) \tau_{\ak} v_{\ak,i}v_{\ak,j} E_j \\
+\end{align}
+for phonons, we have, from equation.\ref{BTE1} and \ref{collision1}:
+\begin{align}
+    \Delta n_{\ql} &= \tau_{\ql,tot}\sum_{\alpha,k,\beta,k'} \left[ \varXi_{\alpha,k}\Delta \fak + \varXi_{\beta,k'}\Delta\fbk \right]  \\
+    &\tau_{\ql,tot} = \tau_{\ql,others}+\tau_{\ql,e-ph}
+\end{align}
+where the index in function $\varXi$ is omitted for simplicity. The phonon heat flow is thus:
+\begin{align}
+    J_{q,phonon,i} &= \sum_j \frac{e}{N_q\Omega} \sum_{\ql} \hbar \omega_{\ql} \tau_{\ql} v_{\ql,i} \notag \\ 
+     & \sum_{\ak,\bk} \left[ \varXi_{\alpha,k} \left(-\pfrac{\fak^0}{\varepsilon}\right) \tau_{\ak} v_{\ak,j} + \varXi_{\beta,k'}  \left(-\pfrac{\fbk^0}{\varepsilon}\right) \tau_{\bk} v_{\bk,j} \right] E_j
+\end{align} 
+the total heat flow is given by:
+\begin{equation}
+    J_{q,i} = J_{q,ele,i} + J_{q,phonon,i}
+\end{equation}
+corresponding to 
+\begin{equation}
+    J_{q,i} = T \sum_j \zeta_{ij} E_j
+\end{equation}
+We obtain the $\zeta$ function:
+\begin{align}
+    \zeta_{ij} & = \frac{2e}{N_k \Omega T} \sum_{\ak} (\varepsilon_{\ak}-\mu)  \left(-\pfrac{\fak^0}{\varepsilon}\right) \tau_{\ak} v_{\ak,i}v_{\ak,j} \\
+      +& \frac{e}{N_q \Omega T} \sum_{\ql} \sum_{\alpha,k,\beta,k'} \hbar \omega_{\ql} \tau_{\ql} v_{\ql,i}\left[ \varXi_{\alpha,k} \left(-\pfrac{\fak^0}{\varepsilon}\right) \tau_{\ak} v_{\ak,j} + \varXi_{\beta,k'}  \left(-\pfrac{\fbk^0}{\varepsilon}\right) \tau_{\bk} v_{\bk,j} \right]
+\end{align}
+
+The Seebeck coefficient is thus given by the matrix operation:
+\begin{equation}
+    S=\zeta / \sigma
+\end{equation}
+
+% Coupled, seebeck derivation
+From the Seebeck picture, we consider the following:
+\begin{itemize}
+    \item Term $\Delta\fak$ and $\Delta\fbk$ in the phonon equation.\ref{collision2} are in-significant and thus ignored. 
+         Thus the phonons are decoupled from the electron equation.
+    \item In the electron equation.\ref{collision1}, the $\Delta\fbk$ term is small and can be ignored.
+\end{itemize}
+from this picture, we first obtain the off-equilibrium phonon:
+\begin{equation}
+    \Delta \nlq = - \sum_j \left( \pfrac{\nlq^0}{T} \right) \tau_{\ql} v_{\ql,j} (\nabla T)_j
+\end{equation} 
+
+The electrons themself are affected by the temperature gradient, and also the electron phonon interaction. 
+We have
+\begin{equation}
+    v_{\ak} \pfrac{\fak^0}{T} \nabla T  = 
+        -\frac{\fak - \fak^0}{\tau_{\alpha,k}}
+        +\sum_{\bk,\ql} \varGamma_{\lambda,q}\Delta\nlq
+\end{equation}
+We have the off-equilibrium electron distribution:
+\begin{align}
+    \Delta \fak = - \sum_j \tau_{\ak} \left[ \sum_{\beta, k',\lambda, q} \varGamma_{\lambda,q} \left( \pfrac{\nlq^0}{T} \right) \tau_{\ql} v_{\ql,j} + v_{\ak,j} \pfrac{\fak^0}{T} \right] (\nabla T)_j
+\end{align}
+the electron current is thus given by from equation.\ref{jce} as
+\begin{align}
+    &J_{c,i} = -\sum_j \zeta_{ij} (\nabla T)_j \\ 
+            &= -\frac{2e}{N_k \Omega} \sum_j \left[ \sum_{\ak}\sum_{\bk,\ql} v_{\ak,i} \tau_{\ak} \varGamma_{\lambda,q} \left( \pfrac{\nlq^0}{T} \right) \tau_{\ql} v_{\ql,j} 
+                              + \sum_{\ak} \left( \pfrac{\fak^0}{T} \right)\tau_{\ak}v_{\ak,i}v_{\ak,j} \right] (\nabla T)_j
+\end{align}
+We re-organize and recognize that the $\zeta$ function to be: 
+\begin{equation}
+    \zeta_{ij} = \frac{2e}{N_k \Omega} \left[ \sum_{\ak} \left( \pfrac{\fak^0}{T} \right)\tau_{\ak}v_{\ak,i}v_{\ak,j} 
+                        + \sum_{\ak}\sum_{\beta, k',\lambda, q} v_{\ak,i} \tau_{\ak} \varGamma_{\lambda,q} \left( \pfrac{\nlq^0}{T} \right) \tau_{\ql} v_{\ql,j} \right]
+\end{equation}
+Seebeck coefficient is given by the $\zeta$ and $\sigma$, as:
+\begin{equation}
+    S_{ij} = \frac{2e}{N_k \Omega \sigma} \left[ \sum_{\ak} \left( \pfrac{\fak^0}{T} \right)\tau_{\ak}v_{\ak,i}v_{\ak,j} 
+                        + \sum_{\ak}\sum_{\beta, k',\lambda, q} v_{\ak,i} \tau_{\ak} \varGamma_{\lambda,q} \left( \pfrac{\nlq^0}{T} \right) \tau_{\ql} v_{\ql,j} \right]
+\end{equation}
+
+\subsection*{Rewriting the equation for calculation }
+We implement the Seebeck picture in the calculation. In the code, we iterate 
+all the q points first, inside each q-point iteration, we iterate over the 
+electronic states $\ak$ and $\bk$ of interest. In the $\zeta_{ij}$ function above,
+the first part depends straight-forwardly on electronic properties only ($\tau$ given by 
+electron-phonon interaction) and is simple to implemented in the transport coefficient 
+calculation routine. The second part:
+\begin{equation}
+    \sum_{\ak}\sum_{\beta, k',\lambda, q} v_{\ak,i} \tau_{\ak} 
+            \varGamma_{\lambda,q} \left( \pfrac{\nlq^0}{T} \right) \tau_{\ql} v_{\ql,j}
+\end{equation}
+requires two part that need to be calculated: $\tau_{\ql}$ and coefficient $\varGamma_{\ql}$. 
+We can rewrite this part to:
+\begin{equation}
+    \sum_{\ak} v_{\ak,i} \tau_{\ak} \left[ \sum_{\ql} \sum_{\bk}  
+            \varGamma_{\lambda,q} \left( \pfrac{\nlq^0}{T} \right) \tau_{\ql} v_{\ql,j} \right]
+\end{equation}
+now the terms in the bracket is summed over $\bk$ and $\ql$, and therefore can be indexed by $\ak$ only. 
+The calculation of the bracket term is thus procede almost the same as the calculation of electron life time.
+
+Now, $\zeta$ can be written as:
+\begin{equation}
+    \zeta_{ij} = \frac{2e}{N_k \Omega} \sum_{\ak}\tau_{\ak}v_{\ak,i} \left[ \left( \pfrac{\fak^0}{T} \right) v_{\ak,j} 
+                        + \sum_{\beta, k',\lambda, q}  \varGamma_{\lambda,q} \left( \pfrac{\nlq^0}{T} \right) \tau_{\ql} v_{\ql,j} \right]
+\end{equation}
+with the two terms in the square bracket is the off-equilibrium electron distribution because of the temperature gradient (diffusive)
+and the phonon drag part.
+
+\newpage
+
+\section*{ Usage of atomic units}
+Hartree units are named after the physicist Douglas Hartree\footnote{the reference of this note is Wikipedia}, 
+in this unit
+\emph{the numerical values of the following four fundamental physical constants 
+are all unity by definition}. They are:
+\begin{itemize}
+    \item \textbf{Reduced Planck Constant} $\hbar=1$ (unit of action)
+    \item \textbf{Elementary charge} $e=1$ (unit of charge)
+    \item \textbf{Bohr radius} $a_0=1$ (unit of length)
+    \item \textbf{Electron mass} $m_e=1$ (unit of mass)
+\end{itemize}
+
+Each unit in this system can be expressed as a product of powers of four physical
+constants \emph{without a multiplying constant}. Therefore, they are 
+consistent units, meaning that given any mathematical expression, if all the values 
+are in atomic unit, the result will come out as atomic unit without the need for 
+conversion.
+The derived units in atomic unit system
+are converted to SI unit by replacing the value of those constants (the constants
+are used as units).
+\begin{table}[h]
+    \centering
+    \caption{Defining constants}
+    \begin{tabular}{|l|l|l|}
+        \hline 
+        \textbf{Symbol} & \textbf{Definition} & \textbf{Value in SI units} \\ \hline
+        $\hbar$         & $\hbar$             &$1.054571\times 10^{-34} J\cdot s$ \\ \hline
+        $e$             & $e$                 & $1.602176\times 10^{-19} C$  \\ \hline
+        $a_0$           & $4\pi\epsilon_0\hbar^2/(m_ee^2)$ & $5.291772\times 10^{-11} m$  \\ \hline
+        $m_e$           & $m_e$               & $9.109383\times 10^{-31} kg$ \\ \hline
+        $E_h$           & $\hbar^2/(m_ea_0^2) $ & $\hbar^2/(m_e a_0^2)$ \\ \hline
+    \end{tabular}
+\end{table}
+
+\section{Unit conversion}
+As an example, the speed of light in atomic unit of velocity is approximately 137.036,
+The atomic unit of velocity is expressed by the constants $a_0 E_h /\hbar$, which is converted 
+to SI unit by $a_0 E_h / \hbar = 2.187\times10^6 m/s$, and therefore 
+$137.036\times 2.187\times10^6 = 2.99 \times 10^8 m/s$
+
+\begin{table}[h]
+    \centering
+    \caption{Derived atomic units}
+    \begin{tabular}{|l|l|l|}
+        \hline
+        \textbf{Atomic unit of} & \textbf{Expression} & \textbf{Value in SI} \\ \hline
+        Action                  & $\hbar$           & $1.054\times 10^{-34} J\cdot s$ \\ \hline
+        Charge                  & $e$               & $1.602\times 10^{-19} C$ \\ \hline
+        Charge Density          & $e/a_0^3$         & $1.081\times 10^12 C\cdot m^{-3}$ \\ \hline
+        Current                 & $eE_h/\hbar$      & $6.623\times 10^{-3} A$ \\ \hline
+        Electric Field          & $E_h/(ea_0)$      & $5.142\times 10^11 V/m $ \\ \hline
+        Electric Potential      & $E_h/e$           & $27.211V $ \\ \hline
+        Electric Dipole moment  & $ea_0$            & $8.478\times 10^{-30} C\cdot m $ \\ \hline
+        Energy                  & $E_h$             & $4.359\times 10^{-18} J $ \\ \hline
+        Force                   & $E_h/a_0$         & $8.238\times 10^{-8} N$ \\ \hline
+        Length                  & $a_0$             & $5.291\times 10^{-11} m $ \\ \hline
+        Magnetic Dipole Moment  & $e\hbar/m_e$      & $1.854\times 10^{-23} J/T$ \\ \hline
+        Mass                    & $m_e$             & $9.109\times 10^{-31} kg $ \\ \hline
+        Momentum                & $\hbar/a_0$       & $1.992\times 10^{-24} kg\cdot m/s $ \\ \hline
+        Permitivity             & $e^2/(a_0E_h)$    & $1.112\times 10^{-10} F/m$ \\ \hline
+        Time                    & $\hbar/E_h$       & $2.418\times 10^{-17} s $ \\ \hline   
+        Pressure                & $E_h/a_0^3$       & $2.942\times 10^{13} Pa $ \\ \hline
+        Velocity                & $a_0E_h/\hbar$    & $2.187\times 10^6 m/s $ \\ \hline
+    \end{tabular}
+\end{table}
+
+\end{document}

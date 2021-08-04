@@ -1,0 +1,276 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage[margin=0.8in]{geometry}
+\newcommand{\pfrac}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\fak}{f_{\alpha,k,\uparrow}}
+\newcommand{\fbk}{f_{\beta,k',\uparrow}}
+\newcommand{\nlq}{n_{\lambda,q}}
+\newcommand{\ak}{\alpha,k,\uparrow}
+\newcommand{\bk}{\beta,k',\uparrow}
+\newcommand{\ql}{\lambda,q}
+
+\begin{document}
+
+\title{Equations for phonon drag}
+\author{WH}
+\date{\today}
+\maketitle
+
+\section{Boltzmann equation}
+We can write out the Boltzmann transport equation for both electrons and phonons as:
+\begin{align}
+    v_{nk} \pfrac{f_{nk}^0}{T} &\nabla T - 
+      e v_{nk} \pfrac{f_{nk}^0}{\varepsilon}\nabla \phi = 
+        -\frac{df_{nk}}{\tau_{nk}^{ext}} + \left(\pfrac{f_{nk}}{t}\right)_{e-p} \label{BTE1} \\
+    v_{qs} \pfrac{n_{qs}^0}{T} &\nabla T = 
+      -\frac{dn_{qs}}{\tau_{qs}^{ext}} + \left(\pfrac{n_{qs}}{t}\right)_{e-p} \label{BTE2}
+\end{align}
+where $k, \alpha$ indicate electron wavevector and band, $\phi$ is the external electrical potential, 
+$\tau*$ indicate the relaxation time apart from electron-phonon interaction. The equilibrium 
+distribution function is given by:
+\begin{align}
+    f_{nk}^0 &= \frac{1}{e^{(\varepsilon_{nk}-\mu)/k_B T} +1} \\
+    f_{qs}^0 &= \frac{1}{e^{\hbar \omega_{qs}/k_B T} -1}  
+\end{align}
+
+\section{Linearized transport equation}
+\subsection{Electronic part}
+We now consider the term $\left(\pfrac{f_{n,k}}{t}\right)_{e-p}$. It can be written out to be
+\begin{equation}
+    \left(\pfrac{f_{k}}{t}\right)_{e-p} = \sum_{q,k'} \left\{ - \Gamma_{k,q}^{k'} + \Gamma_{k'}^{k,q} - \Gamma_{k}^{k',q} + \Gamma_{k',q}^{k} \right\} \label{col}
+\end{equation}
+where $\Gamma_i^f$ denotes the transition rate from initial state $i$ to final state $j$. 
+Using the result in the Appendix, we have:
+\begin{align}
+    - \Gamma_{k,q}^{k'} + \Gamma_{k'}^{k,q} = \frac{2\pi}{\hbar} |g^{SE}(k,k',q)|^2 \delta(\varepsilon_{nk} + \hbar\omega_{q,s} - \varepsilon_{n'k'}) \delta(k+q-k') \notag \\
+        \left\{ -f_{nk} (1-f_{n'k'}) n_{q,s} + f_{n'k'} (1-f_{nk}) (n_{q,s}+1) \right\} \label{Gamma1} \\
+    - \Gamma_{k}^{k',q} + \Gamma_{k',q}^{k} = \frac{2\pi}{\hbar} |g^{SE}(k,k',-q)|^2 \delta(\varepsilon_{nk} - \hbar\omega_{q,s} - \varepsilon_{n'k'}) \delta(k-q-k') \notag \\
+        \left\{ -f_{nk} (1-f_{n'k'}) (n_{q,s}+1) + f_{n'k'} (1-f_{nk}) n_{q,s} \right\} 
+\end{align}
+with the term $g^{SE}(k,k',q)$ given as:
+\begin{equation}
+    g^{SE}(k,k',q) = \frac{1}{N_e} \sum_{\kappa, R_p} \sum_{mm'R} \left( \frac{\hbar}{2N_q \omega_{q,s} m_{\kappa}} \right)^{1/2} 
+    U_{m'n'}(k') U^{\dagger}_{mn}(k) e_{q,s}^{\kappa} e^{ikR + iqR_p}
+             \langle m'0 | \partial_{\kappa, R_p}V | mR \rangle 
+\end{equation}
+changing the dummy index in the summation of Eq.\ref{col} from $q$ to $-q$ in the last two term, we have:
+\begin{align}
+    \left(\pfrac{f_{k}}{t}\right)_{e-p} = \frac{2\pi}{\hbar} \sum_{q,k'} |g^{SE}(k,k',q)|^2 & \delta(k+q-k') \notag \\
+    \{ &\left[ -f_{nk} (1-f_{n'k'}) n_{q,s} + f_{n'k'} (1-f_{nk}) (n_{q,s}+1)\right] \delta(\varepsilon_{nk} + \hbar\omega_{q,s} - \varepsilon_{n'k'}) \notag \\
+       &+ \left[ -f_{nk} (1-f_{n'k'}) (n_{-q,s}+1) + f_{n'k'} (1-f_{nk}) n_{-q,s} \right] \delta(\varepsilon_{nk} - \hbar\omega_{q,s} - \varepsilon_{n'k'}) \}\label{col2}
+\end{align}
+The term in the square bracket can be linearized to first order with 
+$f_k = f_k^0 + df_k$ and $n_q = n_q^0 + dn_q$ to be:
+\begin{align}
+    -f_{k} & (1-f_{k'}) n_{q} + f_{k'} (1-f_{k}) (n_{q}+1) \notag \\
+          &\to -\left(f_{k'}^0 + n_{q}^0\right) df_k + \left( 1 + n_q^0 - f_k^0 \right) df_{k'} + \left( f_{k'}^0 - f_k^0 \right) dn_q \\
+    -f_{k} & (1-f_{k'}) (n_{-q}+1) + f_{k'} (1-f_{k}) n_{-q} \notag \\
+                &\to -\left(n_{q}^0 + 1 - f_{k'}^0 \right) df_k + \left( n_q^0 + f_k^0 \right) df_{k'} + \left( f_{k'}^0 - f_k^0 \right) dn_{-q} \\
+\end{align}
+%\begin{eqnarray}
+%    f_{k'}n_q + f_k - f_{k'}f_kn_q - f_kf_{k'} - f_kn_q + f_kf_{k'}n_q
+%\end{eqnarray}
+we ignore the terms linear in $dn_k'$, so that we can write Eq.\ref{col2} into two part:
+\begin{align}
+    \frac{1}{\tau_{nk}^{ph}} &= \frac{2\pi}{\hbar} \sum_{q,k'} |g^{SE}(k,k',q)|^2  \delta(k+q-k')
+      \left\{ \left(f_{k'}^0 + n_{q}^0\right)\delta(\varepsilon_{nk} + \hbar\omega_{q,s} - \varepsilon_{n'k'}) + \left(n_{q}^0 + 1 - f_{k'}^0 \right) \delta(\varepsilon_{nk} - \hbar\omega_{q,s} - \varepsilon_{n'k'})\right\} \label{taunk} \\
+    D_{nk} &= \frac{2\pi}{\hbar} \sum_{q,k'} |g^{SE}(k,k',q)|^2  \delta(k+q-k') \left( f_{k'}^0 - f_k^0 \right)
+      \left\{  \delta(\varepsilon_{nk} + \hbar\omega_{q,s} - \varepsilon_{n'k'}) dn_q + \delta(\varepsilon_{nk} - \hbar\omega_{q,s} - \varepsilon_{n'k'})dn_{-q} \right\} \notag \\
+            & = \sum_{q,k'} \Pi_{k,k',q} \left\{  \delta(\varepsilon_{nk} + \hbar\omega_{q,s} - \varepsilon_{n'k'}) dn_q + \delta(\varepsilon_{nk} - \hbar\omega_{q,s} - \varepsilon_{n'k'})dn_{-q} \right\} \label{Dnk}
+\end{align}
+where the final equation is introduced for simplicity.
+\begin{equation}
+    \left(\pfrac{f_{k}}{t}\right)_{e-p} = -\frac{df_{nk}}{\tau_{nk}^{ph}} + 
+      \sum_{q,k'} \Pi_{k,k',q} \left\{  \delta(\varepsilon_{nk} + \hbar\omega_{q,s} - \varepsilon_{n'k'}) dn_q + \delta(\varepsilon_{nk} - \hbar\omega_{q,s} - \varepsilon_{n'k'})dn_{-q} \right\} 
+\end{equation}
+
+\subsection{Phonon lifetime}
+for the term $\left(\pfrac{n_{qs}}{t}\right)_{e-p} $ in Eq.\ref{BTE2}, we count the scattering in and out process:
+\begin{align}
+    \left(\pfrac{n_{qs}}{t}\right)_{e-p} &= \frac{1}{2} \sum_{k,k'} 
+        \left\{ - \Gamma_{k,q}^{k'} -\Gamma_{k',q}^{k} + \Gamma_{k'}^{k,q} + \Gamma_{k}^{k',q}  \right\}  \notag \\
+    &= \frac{1}{2} \sum_{k,k'} 2  \left\{ - \Gamma_{k,q}^{k'} + \Gamma_{k'}^{k,q}  \right\}  
+        = \sum_{k,k'} \left\{ - \Gamma_{k,q}^{k'} + \Gamma_{k'}^{k,q}  \right\}
+\end{align}
+where the the initial $1/2$ take care of the double counting of $k, k'$, and 
+the second equality comes by exchanging the dummy index in the summation. 
+Using Eq.\ref{Gamma1} that we already obtained, we have:
+\begin{align}
+    \left(\pfrac{n_{qs}}{t}\right)_{e-p} = \frac{2\pi}{\hbar} \sum_{k,k'}|g^{SE}(k,k',q)|^2 \delta(\varepsilon_{nk} + \hbar\omega_{q,s} - \varepsilon_{n'k'}) \delta(k+q-k') \notag \\
+    \left\{ -f_{nk} (1-f_{n'k'}) n_{q,s} + f_{n'k'} (1-f_{nk}) (n_{q,s}+1) \right\}
+\end{align}
+keeping only to linear part in $dn_{qs}$ and using the relationship $\left(\partial n_{qs} / \partial t\right)_{e-p} = -dn_{qs} / \tau_{q,s}^{e-p}$, we have:
+\begin{align}
+    \frac{1}{\tau_{q,s}^{e-p}} = \frac{2\pi}{\hbar} \sum_{k,k'}|g^{SE}(k,k',q)|^2 \delta(\varepsilon_{nk} + \hbar\omega_{q,s} - \varepsilon_{n'k'}) \delta(k+q-k') (f_k - f_{k'})
+\end{align}
+
+\section{Transport properties}
+the charge and energy current can be expressed as:
+\begin{gather}
+    Q^i = \frac{e}{N_k \Omega} \sum_{n,k} f_{nk} v_{nk}^i = \sigma E - \zeta \nabla T\\
+    J_{ele}^i = \frac{1}{N_k \Omega} \sum_{n,k} (\varepsilon_{nk} - \mu)f_{nk} v_{nk}^i 
+\end{gather}
+where $\Omega$ is the volume of the unit cell.
+We consider the external temperature gradient $\nabla T$ and ignoring the effect of electron-phonon
+interaction on in the phonon Boltzmann equation Eq.\ref{BTE2}, we have the 
+phonon off equilibrium part:
+\begin{equation}
+    dn_{q,s} = -\sum_j \left( \frac{\partial n_{q,s}^0}{\partial T} \right) \tau_{q,s} v_{q,s}^j (\nabla T)^j = \sum_j \phi_{q,s}^j (\nabla T)^j
+\end{equation}
+with $\phi_{q,s}^j$ defined as:
+\begin{equation}
+    \phi_{q,s}^j = - \left( \frac{\partial n_{q,s}^0}{\partial T} \right) \tau_{q,s} v_{q,s}^j
+\end{equation}
+where the lifetime is given by the $1/\tau_{q,s} = 1/\tau_{q,s}^{ext} + 1/\tau_{q,s}^{e-p}$.
+The electronic transport equation now becomes:
+\begin{equation}
+    v_{n,k} \pfrac{f_{n,k}^0}{T} \nabla T = - \left( \frac{1}{\tau_{nk}^{ext}} + \frac{1}{\tau_{nk}^{ph}} \right) df_{nk} + 
+    \sum_{q,k'} \Pi_{k,k',q} \left\{  \delta(\varepsilon_{nk} + \hbar\omega_{q,s} - \varepsilon_{n'k'}) dn_q + \delta(\varepsilon_{nk} - \hbar\omega_{q,s} - \varepsilon_{n'k'})dn_{-q} \right\} 
+\end{equation}
+now define:
+\begin{gather}
+    \frac{1}{\tau^*_{k}} = \frac{1}{\tau_{k}^{ext}} + \frac{1}{\tau_{k}^{ph}}
+\end{gather}
+we have for $\zeta$ as a tensor:
+\begin{align}
+    \zeta_{ij} = \frac{e}{N_k \Omega} \sum_{k} v_k^i \tau_k^*
+    \left[ v_k^j \pfrac{f_{n,k}^0}{T} - \sum_{q,k'} \Pi_{k,k',q} \left\{  \delta(\varepsilon_{nk} + \hbar\omega_{q,s} - \varepsilon_{n'k'}) \phi_{q,s}^j + \delta(\varepsilon_{nk} - \hbar\omega_{q,s} - \varepsilon_{n'k'})\phi_{-q,s}^j \right\}  \right]
+\end{align}
+electrical conductivity tensor $\sigma_{ij}$ is given by:
+\begin{equation}
+    \sigma_{i,j} = \frac{e^2}{N_k \Omega} \sum_{k} \left( -\pfrac{f_k^0}{\varepsilon} \right) \tau_k v_k^i v_k^j
+\end{equation}
+Seebeck coefficient is given by:
+\begin{equation}
+    S = \zeta / \sigma
+\end{equation}
+
+\pagebreak
+\section*{Appendix A}
+\subsection{Derivation of electron-phonon vertex elements}
+We consider linear approximation of the perturbation to the potential energy:
+\begin{equation}
+    V_{perturb} = \sum_{\kappa, R_p} \partial_{\kappa, R_p}V \cdot \eta_{\kappa, R_p}
+\end{equation}
+where $\eta_{\kappa, R_p}$ is the atomic displacement of the $\kappa^{th}$ atom in $R_p^{th}$ cell, this is 
+given in the form of phonon creation and annihilation operator:
+\begin{equation}
+    \eta_{\kappa, R_p} = \sum_{q,s} \left( \frac{\hbar}{2N_q \omega_{q,s} m_{\kappa}} \right)^{1/2} e_{q,s}^{\kappa} e^{iqR_p} (a_{q,s} + a_{-q,s}^{\dagger}) \label{eta}
+\end{equation}
+where $e_{q,s}$ is the phonon eigenvector. 
+
+\textbf{Absorption process} \ Consider the transition of electronic state $n,k$ to $n',k'$, while absorb a phonon
+$q,s$. The vertex element of such a process is denoted by $g_{k,q}^{k'} $ and is given by:
+\begin{align}
+    g_{k,q}^{k'} &= \langle f | V_{perturb} | i \rangle  \notag \\
+                 &= \langle n_{q,s}-1;n'k' | \sum_{\kappa, R_p} \partial_{\kappa, R_p}V \cdot \eta_{\kappa, R_p} | n_{q,s};nk \rangle
+\end{align}
+where $| n_q;k \rangle = |n_q \rangle | k \rangle$ because of the Born approximation. 
+the creation and annihilation operater act on the phonon states to give:
+\begin{equation}
+    \langle n_{q,s}-1 | (a_{q',s'} + a_{-q',s'}^{\dagger}) | n_{q,s} \rangle = \sqrt{n_{q,s}} \delta_{qq',ss'}
+\end{equation}
+so that we now have:
+\begin{align}
+    g_{k,q}^{k'} = \sum_{\kappa, R_p} \left( \frac{\hbar}{2N_q \omega_{q,s} m_{\kappa}} \right)^{1/2} e_{q,s}^{\kappa} e^{iqR_p}
+             \langle n' k' | \partial_{\kappa, R_p}V | nk \rangle \sqrt{n_{q,s}} \label{g1}
+\end{align}
+using the Wannier transformation:
+\begin{equation}
+    | nk \rangle = \frac{1}{N_e} \sum_{mR} e^{ikR} U^{\dagger}_{mn}(k) | mR \rangle
+\end{equation}
+we can write:
+\begin{equation}
+    \langle n' k' | \partial_{\kappa, R_p}V | nk \rangle 
+    = \frac{1}{N_e^2}\sum_{m'R'}\sum_{mR} e^{ikR - ik'R'} 
+      U_{m'n'}(k') U^{\dagger}_{mn}(k)  \langle m'R' | \partial_{\kappa,R_p}V | mR \rangle \label{elpart}
+\end{equation}
+putting Eq.\ref{elpart} into Eq.\ref{g1} and using the relationship:
+\begin{align}
+    \sum_{R'} e^{ikR + iqR_p - ik'R'} &= \sum_{R'} e^{ik(R-R') + iq(R_p-R')} e^{i(k+q-k')R'}  \\
+                                    & = e^{ik(R-R') + iq(R_p-R')} N_e \delta(k+q-k') 
+\end{align}
+choosing $R' = 0$ gives
+\begin{align}
+    g_{k,q}^{k'} = \frac{\sqrt{n_{q,s}}}{N_e} \sum_{\kappa, R_p} \sum_{mm'R} \left( \frac{\hbar}{2N_q \omega_{q,s} m_{\kappa}} \right)^{1/2} 
+    U_{m'n'}(k') U^{\dagger}_{mn}(k) e_{q,s}^{\kappa} e^{ikR + iqR_p}
+             \langle m'0 | \partial_{\kappa, R_p}V | mR \rangle \delta(k+q-k') 
+\end{align} 
+The transition probability is given by \emph{Fermi golden rule} as:
+\begin{equation}
+    \Gamma_{k,q}^{k'} = \frac{2\pi}{\hbar} |g_{k,q}^{k'}|^2 f_{nk} (1-f_{n'k'}) \delta(\varepsilon_{nk} + \hbar\omega_{q,s} - \varepsilon_{n'k'})
+\end{equation}
+where the momentum conservation and phonon distribution function $n_{q,s}$ is contained in $|g_{k,q}^{k'}|^2$.
+
+\textbf{Emission process} \ Now consider the transition of electronic state $n,k$ to $n',k'$ but emitt a phonon
+$q,s$. we denote vertex element as $g_{k}^{k',q} $ and is given by
+\begin{equation}
+    g_{k,q}^{k'} = \langle n_{q,s}+1;n'k' | \sum_{\kappa, R_p} \partial_{\kappa, R_p}V \cdot \eta_{\kappa, R_p} | n_{q,s};nk \rangle \label{g2}
+\end{equation}
+we can change the dummy index of Eq.\ref{eta} so that we have:
+\begin{align}
+    \eta_{\kappa, R_p} &= \sum_{q,s} \left( \frac{\hbar}{2N_q \omega_{q,s} m_{\kappa}} \right)^{1/2} e_{q,s}^{\kappa} e^{iqR_p} (a_{q,s} + a_{-q,s}^{\dagger}) \notag \\
+                       &= \sum_{-q,s} \left( \frac{\hbar}{2N_q \omega_{q,s} m_{\kappa}} \right)^{1/2} e_{-q,s}^{\kappa} e^{-iqR_p} (a_{-q,s} + a_{q,s}^{\dagger}) \notag \\
+                       &= \sum_{q,s} \left( \frac{\hbar}{2N_q \omega_{q,s} m_{\kappa}} \right)^{1/2} e_{-q,s}^{\kappa} e^{-iqR_p} (a_{-q,s} + a_{q,s}^{\dagger}) \label{eta2}
+\end{align}
+putting Eq.\ref{eta2} into Eq.\ref{g2} and applying the Wannier transformation, we find:
+\begin{align}
+    g_{k}^{k',q} = \frac{\sqrt{n_{q,s}+1}}{N_e} \sum_{\kappa, R_p} \sum_{mm'R} \left( \frac{\hbar}{2N_q \omega_{q,s} m_{\kappa}} \right)^{1/2} 
+    U_{m'n'}(k') U^{\dagger}_{mn}(k) e_{-q,s}^{\kappa} e^{ikR - iqR_p}
+             \langle m'0 | \partial_{\kappa, R_p}V | mR \rangle \delta(k-q-k') 
+\end{align}
+and the transition probability is given by:
+\begin{equation}
+    \Gamma_{k}^{k',q} = \frac{2\pi}{\hbar} |g_{k}^{k',q}|^2 f_{nk} (1-f_{n'k'}) \delta(\varepsilon_{nk} - \hbar\omega_{q,s} - \varepsilon_{n'k'})
+\end{equation}
+
+Now define $g^{SE}(k,k',q)$ as:
+\begin{equation}
+    g^{SE}(k,k',q) = \frac{1}{N_e} \sum_{\kappa, R_p} \sum_{mm'R} \left( \frac{\hbar}{2N_q \omega_{q,s} m_{\kappa}} \right)^{1/2} 
+    U_{m'n'}(k') U^{\dagger}_{mn}(k) e_{q,s}^{\kappa} e^{ikR + iqR_p}
+             \langle m'0 | \partial_{\kappa, R_p}V | mR \rangle 
+\end{equation}
+we can write $g_{k}^{k',q}$ and $g_{k,q}^{k'}$ by:
+\begin{align}
+    g_{k,q}^{k'} &= \sqrt{n_{q,s}} g^{SE}(k,k',q) \delta(k+q-k')  \\
+    g_{k}^{k',q} &= \sqrt{n_{q,s}+1} g^{SE}(k,k',-q) \delta(k-q-k') 
+\end{align}
+so that 
+\begin{align}
+    \Gamma_{k,q}^{k'} &= \frac{2\pi}{\hbar} |g^{SE}(k,k',q)|^2 f_{nk} (1-f_{n'k'}) n_{q,s} \delta(k+q-k') \delta(\varepsilon_{nk} + \hbar\omega_{q,s} - \varepsilon_{n'k'}) \\
+    \Gamma_{k}^{k',q} &= \frac{2\pi}{\hbar} |g^{SE}(k,k',-q)|^2 f_{nk} (1-f_{n'k'}) (n_{q,s}+1) \delta(k-q-k') \delta(\varepsilon_{nk} - \hbar\omega_{q,s} - \varepsilon_{n'k'}) 
+\end{align}
+
+\section*{Appendix B}
+\subsection*{Adaptive smearing}
+For the delta function in Eq.\ref{taunk} and Eq.\ref{Dnk}, we can replace it with 
+gaussian functions. 
+\begin{equation}
+    g(x) = \frac{1}{\sqrt{2\pi}\sigma} exp \left( -\frac{(x-\mu)^2}{2\sigma^2} \right)
+\end{equation}
+The smearing width is related to the mean squre deviation of 
+energy in $\hbar \omega_{q,s} + \varepsilon_{n',k'}$  and $- \hbar \omega_{q,s} + \varepsilon_{n',k'}$
+with respect to the uncertainty in $q$
+With the requirement that $k' = k + q$, we find, for the two delta function:
+\begin{gather}
+    \delta(\varepsilon_{nk} + \hbar\omega_{q,s} - \varepsilon_{n'k'}) :\ \ \frac{d (- \hbar \omega_{q,s} + \varepsilon_{n',k'})}{d q} = 
+        \frac{d \varepsilon_{n'k'} }{d k'} \frac{dk'}{d q} - \frac{d\hbar \omega_{q,s}}{dq} = v_{n'k'} - v_{q,s} \\
+    \delta(\varepsilon_{nk} - \hbar\omega_{q,s} - \varepsilon_{n'k'}) :\ \ \frac{d (\hbar \omega_{q,s} + \varepsilon_{n',k'})}{d q} =
+        \frac{d \varepsilon_{n'k'} }{d k'} \frac{dk'}{d q} + \frac{d\hbar \omega_{q,s}}{dq} = v_{n'k'} + v_{q,s} \\
+\end{gather}
+and the smearing width $\sigma$ is given by:
+\begin{gather}
+    \sigma_w = \frac{1}{\sqrt{12}}
+     \sqrt{\sum_\mu\left[ \sum_{\alpha} (v_{n'k'}^{\alpha} \pm v_{q,s}^{\alpha}) \frac{Q_{\mu}^{\alpha}}{N_{q,\mu}} \right]^2}
+\end{gather}
+where $\alpha$ is the cartesian direction and $\mu$ is the direction along reciprocal lattice vector.
+\subsection*{Adaptive smearing in phonon selfenergy}
+For phonon selfenergy, we find a delta function
+$\delta(\varepsilon_{nk} + \hbar\omega_{q,s} - \varepsilon_{n'k'}) \delta(k+q-k')$. 
+This give the expression for smearing width
+\begin{equation}
+    \sigma_w = \frac{1}{\sqrt{12}}
+     \sqrt{\sum_\mu\left[ \sum_{\alpha} (v_{n'k'}^{\alpha} - v_{n,k}^{\alpha}) \frac{Q_{\mu}^{\alpha}}{N_{q,\mu}} \right]^2}
+\end{equation}
+
+\end{document}

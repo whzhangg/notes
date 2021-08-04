@@ -1,0 +1,130 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage[margin=0.8in]{geometry}
+\newcommand{\pfrac}[2]{\frac{\partial #1}{\partial #2}}
+
+\begin{document}
+
+\title{Adaptive Smearing Method}
+\author{WH}
+\date{\today}
+\maketitle
+
+\section{The case of three phonon interation}
+we follow the derivation of the \emph{ShengBTE} paper. 
+\footnote{ShengBTE: a solver for boltzmann transport equation for phonon}
+To approximate a delta function $\delta(q_1 - q_2 -q_3)\delta(\omega_1 - \omega_2 - \omega_3)$, we 
+first write:
+\begin{equation}
+    W(q_2) = \omega_2 + \omega_3
+\end{equation}
+to linear approximation, we have:
+\begin{equation}
+    W(q_2') \approx W(q_2^0) + \sum_\mu \left( \pfrac{W}{q_2^{\mu}} \right) \left( {q'}_2^{\mu} - {q^0}_2^{\mu}\right) \label{3ph}
+\end{equation}
+where $q^0$ indicate a $q$ point that we sampled in the BZ. The mean square deviation of $W(q_2')$
+in the volume $\Omega_{BZ} / N_q$ around $q^0$ will be given by:
+\begin{equation}
+    \sigma^2_{W,q_2^0} = \sum_\mu \left( \pfrac{W}{q_2^{\mu}} \right)^2 E\left\{ \left( q_2'^{\mu} - q_2^{0\mu}\right)^2 \right\}
+\end{equation}
+using:
+\begin{equation}
+    E\left\{ \left( q_2'^{\mu} - q_2^{0\mu}\right)^2 \right\} 
+        = \left( \frac{ \Delta q_2^{\mu} }{\sqrt{12}} \right)^2
+\end{equation}
+so that we have, for the mean square deviation:
+\begin{align}
+    \sigma_{W,q_2^0} &= \frac{1}{\sqrt{12}} \sqrt{ \sum_\mu \left( \pfrac{W}{q_2^{\mu}} \right)^2
+                            ( \Delta q_2^{\mu} )^2  } \\
+        &= \frac{1}{\sqrt{12}} \sqrt{ \sum_\mu \left[ \sum_{\alpha}\left( \pfrac{W}{q_2^{\alpha}} \right)
+                 \frac{Q_{\alpha}^{\mu}}{ N_{\mu}}  \right]^2  }
+\end{align}
+where we use $\mu$ to indicate direction along a reciprocial lattice vector 
+and $\alpha$ for the cartesian direction.
+The term $ \partial W / \partial q_2^{\alpha}$ is given by:
+\begin{equation}
+   \frac{ \partial(\omega_2 + \omega_3) } {\partial q_2^{\alpha} } 
+    = v_{q_2}^{\alpha} + \sum_{\beta} v_{q_3}^{\beta} \frac{\partial q_3^{\beta}}{\partial q_2^{\alpha}}
+    = v_{q_1}^{\alpha} - v_{q_2}^{\alpha}
+\end{equation}
+where the second equal comes from the requirement that $q_1 + q_2 = q$. The final smearing width is given 
+by the group velocity of phonons:
+\begin{equation}
+    \sigma_{W,q_2^0} = \frac{1}{\sqrt{12}} \sqrt{ \sum_\mu \left[ \sum_{\alpha}\left( v_{q_2}^{\alpha} - v_{q_3}^{\alpha} \right)
+                 \frac{Q_{\alpha}^{\mu}}{ N_{\mu}}  \right]^2  } \label{final1}
+\end{equation}
+The second delta function $\delta(q_1 - q_2 -q_3)\delta(\omega_1 + \omega_2 - \omega_3)$ gives:
+\begin{equation}
+    \frac{ \partial( - \omega_2 + \omega_3) } {\partial q_2^{\alpha} } 
+    = - v_{q_2}^{\alpha} + \sum_{\beta} v_{q_3}^{\beta} \frac{\partial q_3^{\beta}}{\partial q_2^{\alpha}}
+    = - ( v_{q_1}^{\alpha} + v_{q_2}^{\alpha} )
+\end{equation}
+so that 
+\begin{equation}
+    \sigma_{W,q_2^0} = \frac{1}{\sqrt{12}} \sqrt{ \sum_\mu \left[ \sum_{\alpha}\left( v_{q_2}^{\alpha} + v_{q_3}^{\alpha} \right)
+                 \frac{Q_{\alpha}^{\mu}}{ N_{\mu}}  \right]^2  } \label{final2}
+\end{equation}
+
+\section{The case of four phonon}
+The delta function in the case of four phonon interaction is:
+\begin{gather}
+    \delta(q_1 - q_2 - q_3 - q_4)\delta(\omega_1 - \omega_2 - \omega_3 - \omega_4) \notag \\
+    \delta(q_1 - q_2 - q_3 - q_4)\delta(\omega_1 + \omega_2 - \omega_3 - \omega_4) \notag \\
+    \delta(q_1 - q_2 - q_3 - q_4)\delta(\omega_1 - \omega_2 + \omega_3 + \omega_4) \notag \\
+\end{gather}
+with now two free paramter, we have, for the first case:
+\begin{equation}
+    W(q_2, q_3) = \omega_2 + \omega_3 + \omega_4
+\end{equation}
+To linear approximation, we can write:
+\begin{align}
+    W(q_2',q_3') &\approx W(q_2^0,q_3^0) 
+                + \sum_\mu \left( \pfrac{W}{q_2^{\mu}} \right) \left( q_2'^{\mu} - q_2^{0\mu}\right)
+                + \sum_\nu \left( \pfrac{W}{q_3^{\nu}} \right) \left( q_3'^{\nu} - q_3^{0\nu}\right)
+\end{align}
+The mean square deviation is given by:
+\begin{equation}
+    \sigma^2_{W,q_2^0,q_3^0} = \sum_\mu \left( \pfrac{W}{q_2^{\mu}} \right)^2 E\left\{ \left( q_2'^{\mu} - q_2^{0\mu}\right)^2 \right\}
+                             + \sum_\nu \left( \pfrac{W}{q_3^{\nu}} \right)^2 E\left\{ \left( q_3'^{\nu} - q_3^{0\nu}\right)^2 \right\}
+\end{equation}
+so that sigma is given by:
+\begin{equation}
+    \sigma_{W,q_2^0,q_3^0} = \frac{1}{\sqrt{12}} \sqrt{ \sum_\mu \left( \pfrac{W}{q_2^{\mu}} \right)^2 ( \Delta q_2^{\mu} )^2 
+                                                      + \sum_\nu \left( \pfrac{W}{q_3^{\nu}} \right)^2 ( \Delta q_3^{\nu} )^2   } 
+\end{equation}
+changing the coordinate from reciprocial axis to cartesian axis, we have:
+\begin{equation}
+    \sigma_{W,q_2^0,q_3^0} = \frac{1}{\sqrt{12}} 
+        \sqrt{ \sum_\mu \left[ \sum_{\alpha}\left( \pfrac{W}{q_2^{\alpha}} \right) \frac{Q_{\alpha}^{\mu}}{ N_{\mu}}  \right]^2 
+             + \sum_\nu \left[ \sum_{\beta}\left( \pfrac{W}{q_3^{\beta}} \right) \frac{Q_{\beta}^{\nu}}{ N_{\nu}}  \right]^2  } 
+\end{equation}
+the linear coefficients are given by:
+\begin{align}
+    \pfrac{W}{q_2^{\alpha}} &= \frac{ \partial \left[ \omega_2 + \omega_3 + \omega_4 \right] }{\partial q_2^{\alpha}} 
+                          = v_{q_2}^{\alpha} - v_{q_4}^{\alpha} \\
+    \pfrac{W}{q_3^{\alpha}} &= \frac{ \partial \left[ \omega_2 + \omega_3 + \omega_4 \right] }{\partial q_3^{\alpha}} 
+                          = v_{q_3}^{\alpha} - v_{q_4}^{\alpha}
+\end{align}
+since $\frac{\partial \omega_2(q_2)}{\partial q_1^{\alpha}}\bigg|_{q_2^0} = 0$ to first order.
+The final result is thus:
+\begin{equation}
+    \sigma_{W,q_2^0,q_3^0} = \frac{1}{\sqrt{12}} 
+        \sqrt{ \sum_\mu \left[ \sum_{\alpha}\left( v_{q_2}^{\alpha} - v_{q_4}^{\alpha} \right) \frac{Q_{\alpha}^{\mu}}{ N_{\mu}}  \right]^2 
+             + \sum_\nu \left[ \sum_{\beta}\left( v_{q_3}^{\beta} - v_{q_4}^{\beta} \right) \frac{Q_{\beta}^{\nu}}{ N_{\nu}}  \right]^2  } 
+\end{equation}
+
+For the other two delta function, the mean square deviation will be the same, we go through the above step to find:
+\begin{align}
+    \frac{ \partial \left[ \omega_2 - \omega_3 - \omega_4 \right] }{\partial q_2^{\alpha}} 
+                          = v_{q_2}^{\alpha} + v_{q_4}^{\alpha} \\
+    \frac{ \partial \left[ \omega_2 - \omega_3 - \omega_4 \right] }{\partial q_3^{\alpha}} 
+                          = v_{q_3}^{\alpha} - v_{q_4}^{\alpha}
+\end{align}
+and we will have:
+\begin{equation}
+    \sigma_{W,q_2^0,q_3^0} = \frac{1}{\sqrt{12}} 
+        \sqrt{ \sum_\mu \left[ \sum_{\alpha}\left( v_{q_2}^{\alpha} + v_{q_4}^{\alpha} \right) \frac{Q_{\alpha}^{\mu}}{ N_{\mu}}  \right]^2 
+             + \sum_\nu \left[ \sum_{\beta}\left( v_{q_3}^{\beta} - v_{q_4}^{\beta} \right) \frac{Q_{\beta}^{\nu}}{ N_{\nu}}  \right]^2  } 
+\end{equation}
+
+\end{document}
