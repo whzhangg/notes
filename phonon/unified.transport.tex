@@ -15,58 +15,128 @@ We consider that the system of phonons are governed by the equation:
 \begin{equation}
     \frac{\partial \rho(t)}{\partial t} + \frac{i}{\hbar} \left[H_0, \rho(t)\right] = \left. \frac{\partial\rho(t) }{\partial t} \right|_{coll} \label{master}
 \end{equation}
-with the harmonic Hamiltonian:
+Define the creation and annhiliation operator $a_{qb}$ and $a^{\dagger}_{qb}$ with 
+$b = (b,\alpha)$, which is related 
+to phonon creation and annhiliation operator $a_{qv}$ and $a^{\dagger}_{qv}$ by:
+\begin{align}
+    a_{qb} = \sum_v e^b_{qv} a_{qv} \\
+    a^{\dagger}_{qb} = \sum_v e^{*b}_{qv} a^{\dagger}_{qv}
+\end{align}
+$e^b_{qv}$ gives the transformation between the two set of operators. 
+The Harmonic Hamiltonian written using $a_{qb}$ and $a^{\dagger}_{qb}$ is:
+\begin{equation}
+    H_0 = \sum_{q} \sum_{b,b'} \hbar \sqrt{D_q}_{bb'} \left( a^{\dagger}_{qb}a_{qb'} + \frac{1}{2} \delta_{bb'} \right)
+\end{equation}
+$\sqrt{D_q}$ is the square root of matrix $D_q$ with matrix 
+elements $\Phi_{q,bb'} (m_b m_{b'})^{-\frac{1}{2}}$.
+Taking $e^b_{qv}$ to be the $v^{th}$ orthonormal eigenvector of the 
+Dynamic matrix $D_q e^b_{qv} = \omega^2_{qv}e^b_{qv}$. $e^b_{qv}$ then also
+is the eigenvector of matrix $\sqrt{D_q}$ with eigenvalue $\omega_{qv}$. We can then recovery
+the harmonic Hamiltonian in its usual form:
 \begin{equation}
     H_0 = \sum_{q,v} \hbar \omega_{qv} \left( a^{\dagger}_{qv}a_{qv} + \frac{1}{2} \right)
 \end{equation}
+
 The one body density matrix $\rho_1(q,q',t)$ is defined as:
 \begin{equation}
-    \rho_1(q,q',t)_{v,v'} = \text{Tr}[\rho(t)a^{\dagger}_{qv}a_{q'v'}]
+    \rho_1(q,q',t)_{b,b'} = \text{Tr}[\rho(t)a^{\dagger}_{q'b'}a_{qb}]
 \end{equation}
-We insert $H_0$ into Eq.\ref{master} and multiply on both side $a^{\dagger}_{qv}a_{q'v'}$ and take the trace:
+% here, the reversed $a^{\dagger}_{q'b'}a_{qb}$ is not very natural but 
+% with this we can write the equation in matrix form 
+We insert $H_0$ into Eq.\ref{master} and multiply on both side $a^{\dagger}_{q'b'}a_{qb}$ and take the trace:
 \begin{align}
-    \text{Tr}\left[ \frac{\partial \rho(t) a^{\dagger}_{qv}a_{q'v'} }{\partial t}  \right] &= \frac{\partial \rho_1(q,q',t)_{v,v'} }{\partial t} \\
-    \text{Tr}\left[ \left( \frac{\partial\rho(t) a^{\dagger}_{qv}a_{q'v'} }{\partial t} \right) _{coll} \right] 
-        &= \left. \frac{\partial \rho_1(q,q',t)_{v,v'} }{\partial t} \right|_{coll}
+    \text{Tr}\left[ \frac{\partial \rho(t) a^{\dagger}_{q'b'}a_{qb} }{\partial t}  \right] &= \frac{\partial \rho_1(q,q',t)_{b,b'} }{\partial t} \\
+    \text{Tr}\left[ \left( \frac{\partial\rho(t) a^{\dagger}_{q'b'}a_{qb} }{\partial t} \right) _{coll} \right] 
+        &= \left. \frac{\partial \rho_1(q,q',t)_{b,b'} }{\partial t} \right|_{coll}
 \end{align} 
-For the term $\frac{i}{\hbar} \left[H_0, \rho(t)\right]$, we can derive:
-\begin{equation}
-    \left[H_0, \rho(t)\right] = \hbar \omega_{q'v'} \rho_1(q,q',t)_{v,v'} - \hbar \omega_{qv} \rho_1(q,q',t)_{v,v'} 
-\end{equation}
+For the term $\text{Tr}\left[\frac{i}{\hbar} \left[H_0, \rho(t)\right]a^{\dagger}_{q'b'}a_{qb}\right]$, we can derive:
+\begin{align}
+    i &\sum_{q_1} \sum_{b_1b_2} \sqrt{D_{q_1}}_{b_1b_2} \text{Tr}
+    \left[ \rho (a^{\dagger}_{q'b'}a_{qb}a^{\dagger}_{q_1b_1}a_{q_1b_2} - a^{\dagger}_{q_1b_1}a_{q_1b_2}a^{\dagger}_{q'b'}a_{qb} ) \right] \notag \\
+    &= i\sum_{q_1} \sum_{b_1b_2} \sqrt{D_{q_1}}_{b_1b_2} \text{Tr}
+    \left[ \rho ( \delta_{q,q_1}\delta_{b,b_1} a^{\dagger}_{q'b'}a_{q_1b_2} - \delta_{q',q_1}\delta_{b',b_2} a^{\dagger}_{q_1b_1}a_{qb} ) \right] \notag \\
+    &= i \left( \sum_{q_1} \sum_{b_1b_2} \sqrt{D_{q_1}}_{b_1b_2} \text{Tr} \right.
+       [ \rho \delta_{q,q_1}\delta_{b,b_1} a^{\dagger}_{q'b'}a_{q_1b_2} ] -
+    \sum_{q_1} \sum_{b_1b_2} \sqrt{D_{q_1}}_{b_1b_2} \text{Tr} 
+    \left. [ \rho \delta_{q',q_1}\delta_{b',b_2} a^{\dagger}_{q_1b_1}a_{qb} ] \right) \notag \\
+    &= i \left( \sum_{b_2} \sqrt{D_{q}}_{bb_2} \text{Tr} \right.
+       [ \rho a^{\dagger}_{q'b'}a_{qb_2} ] - \sum_{b_1} \sqrt{D_{q'}}_{b_1b'} \text{Tr} 
+        \left. [ \rho a^{\dagger}_{q'b_1}a_{qb} ] \right) \notag \\
+    &= i \left( \sum_{b_2} \sqrt{D_{q}}_{bb_2} \rho_1(q,q',t)_{b_2,b'} - \sum_{b_1} \sqrt{D_{q'}}_{b_1b'} \rho_1(q,q',t)_{b,b_1} \right) \notag \\
+    &= i \left[ \sqrt{D_q}\cdot \rho_1(q,q',t) - \rho_1(q,q',t) \cdot \sqrt{D_{q'}} \right] _{bb'} 
+\end{align}
 So that we obtain the equation:
 \begin{equation}
-    \frac{\partial \rho_1(q,q',t)_{v,v'} }{\partial t} + i \left(\omega_{q'v'} \rho_1(q,q',t)_{v,v'} - \omega_{qv} \rho_1(q,q',t)_{v,v'}\right) 
-     = \left. \frac{\partial \rho_1(q,q',t)_{v,v'} }{\partial t} \right|_{coll}  \label{derived1}
+    \frac{\partial \rho_1(q,q',t)_{b,b'} }{\partial t} + i \left[ \sqrt{D_q}\cdot \rho_1(q,q',t) - \rho_1(q,q',t) \cdot \sqrt{D_{q'}} \right] _{bb'}
+     = \left. \frac{\partial \rho_1(q,q',t)_{b,b'} }{\partial t} \right|_{coll}  \label{derived1}
 \end{equation}
-We perform the Weyl transformation to $\partial \rho_1(q,q',t)_{v,v'}$:
+We perform the Weyl transformation to $\partial \rho_1(q,q',t)_{b,b'}$:
 \begin{equation}
-    N(R,q,t)_{v,v'} = \sum_{q''} \rho_1(q+q'',q-q'',t)_{v,v'} e^{2iq''R}
+    N(R,q,t)_{b,b'} = \sum_{q''} \rho_1(q+q'',q-q'',t)_{b,b'} e^{2iq''R}
 \end{equation}
 to Eq.\ref{derived1}, we will have:
 \begin{align}
-    \frac{\partial \rho_1(q+q'',q-q'',t)_{v,v'} }{\partial t} + & i \left(\omega_{q-q''v'} \rho_1(q+q'',q-q'',t)_{v,v'} - \omega_{q+q''v} \rho_1(q+q'',q-q'',t)_{v,v'}\right) 
-    \\ &= \left. \frac{\partial \rho_1(q+q'',q-q'',t)_{v,v'} }{\partial t} \right|_{coll}
+    \frac{\partial \rho_1(q+q'',q-q'',t)_{b,b'} }{\partial t} + & + i \left[ \sqrt{D_{q+q''}}\cdot \rho_1(q+q'',q-q'',t) - \rho_1(q+q'',q-q'',t) \cdot \sqrt{D_{q-q''}} \right] _{bb'}
+    \\ &= \left. \frac{\partial \rho_1(q+q'',q-q'',t)_{b,b'} }{\partial t} \right|_{coll}
 \end{align}
-Assume the one particle density $\rho_1(q+q'',q-q'',t)_{v,v'}$ is sharply peaked at $q$, $q''$ will be small,
-we can then replace frequency $\omega_{q+q''v}$ and $\omega_{q-q''v'}$ by:
+Assume the one particle density $\rho_1(q+q'',q-q'',t)_{b,b'}$ is sharply peaked at $q$, $q''$ will be small,
+we can then replace frequency $\sqrt{D_{q+q''}}$ and $\sqrt{D_{q-q''}}$ by:
 \begin{align}
-    \omega_{q+q''v} &= \omega_{qv} + \frac{\partial \omega_{qv}}{\partial q''} q'' \\
-    \omega_{q-q''v'} &= \omega_{qv'} - \frac{\partial \omega_{qv'}}{\partial q''} q'' 
+    \sqrt{D_{q+q''}} &= \sqrt{D_q} + \frac{\partial\sqrt{D_q}}{\partial q''} q''\\
+    \sqrt{D_{q-q''}} &= \sqrt{D_q} - \frac{\partial\sqrt{D_q}}{\partial q''} q''
+%    \omega_{q+q''v} &= \omega_{qv} + \frac{\partial \omega_{qv}}{\partial q''} q'' \\
+%    \omega_{q-q''v'} &= \omega_{qv'} - \frac{\partial \omega_{qv'}}{\partial q''} q'' 
 \end{align}
 Multiply both side with $e^{2iq''R}$ and integrate, we have:
 \begin{align}
-    \frac{\partial N(R,q,t)_{vv'}}{\partial t} + i \left(\omega_{qv'} N(R,q,t)_{vv'} - \omega_{qv} N(R,q,t)_{vv'}\right) + 
-        \frac{1}{2} \left( \nabla_q \omega_{qv'} \nabla_R N(R,q,t)_{vv'} + \nabla_q \omega_{qv} \nabla_R N(R,q,t)_{vv'}  \right) 
-        = \left. \frac{\partial N(R,q,t)_{vv'} }{\partial t} \right|_{coll} \label{derived2}
+    \frac{\partial N(R,q,t)_{bb'}}{\partial t} + &i \left[ \sqrt{D_q}\cdot N(R,q,t) - N(R,q,t) \cdot \sqrt{D_q} \right] _{bb'} \notag \\
+    + &\frac{1}{2} \left[ \nabla_q\sqrt{D_q} \cdot \nabla_R N(R,q,t) + \nabla_R N(R,q,t) \cdot \nabla_q\sqrt{D_q}  \right]_{bb'} = \left. \frac{\partial N(R,q,t)_{bb'} }{\partial t} \right|_{coll}
 \end{align}
-In the form of $ n_v \times n_v$ matrix, we can rewrite Eq.\ref{derived2} as:
+which can be simplified a bit:
+\begin{equation}
+    \frac{\partial N(R,q,t)_{bb'}}{\partial t} + i \left[ \sqrt{D_q}, N(R,q,t) \right] _{bb'} 
+    + \frac{1}{2} \left\{ \nabla_q\sqrt{D_q} , \nabla_R N(R,q,t) \right\}_{bb'} = \left. \frac{\partial N(R,q,t)_{bb'} }{\partial t} \right|_{coll}
+\end{equation}
+%\begin{align}
+%    \frac{\partial N(R,q,t)_{vv'}}{\partial t} + i \left(\omega_{qv'} N(R,q,t)_{vv'} - \omega_{qv} N(R,q,t)_{vv'}\right) + 
+%        \frac{1}{2} \left( \nabla_q \omega_{qv'} \nabla_R N(R,q,t)_{vv'} + \nabla_q \omega_{qv} \nabla_R N(R,q,t)_{vv'}  \right) 
+%        = \left. \frac{\partial N(R,q,t)_{vv'} }{\partial t} \right|_{coll} \label{derived2}
+%\end{align}
+%In the form of $ n_v \times n_v$ matrix, we can rewrite Eq.\ref{derived2} as:
+%\begin{align}
+%    \frac{\partial N(R,q,t)}{\partial t} + i \left[ N(R,q,t), \omega_{q} \right] + 
+%        \frac{1}{2} \left\{ \nabla_R N(R,q,t), \nabla_q \omega_{q} \right\} 
+%        = \left. \frac{\partial N(R,q,t) }{\partial t} \right|_{coll} \label{derived3}
+%\end{align}
+% the difference in sequency in communicator come from the different definition of one partial density matrix $\rho_1(q,q',t)$
+Finally, we apply the transformation from $(qb)$ to phonon coordinate $(qv)$, obtaining:
 \begin{align}
-    \frac{\partial N(R,q,t)}{\partial t} + i \left[ N(R,q,t), \omega_{q} \right] + 
-        \frac{1}{2} \left\{ \nabla_R N(R,q,t), \nabla_q \omega_{q} \right\} 
+    \frac{\partial N(R,q,t)}{\partial t} + i \left[ \Omega_{q},N(R,q,t) \right] + 
+        \frac{1}{2} \left\{ V_{q}, \nabla_R N(R,q,t) \right\} 
         = \left. \frac{\partial N(R,q,t) }{\partial t} \right|_{coll} \label{derived3}
 \end{align}
-% the difference in sequency in communicator come from the different definition of one partial density matrix $\rho_1(q,q',t)$
+where $\Omega_q$ is a diagonal matrix with diagonal element the frequency of phonon mode $\omega_{qv}$, and $V_{qbb'}$ is 
+the velocity matrix containing off-diagonal elements:
+\begin{equation}
+    V_{q,vv'} = \sum_{bb'} e^{*b}_{qv} ( \nabla_q\sqrt{D_q})_{bb'} e^{b'}_{qv'}
+\end{equation}
+
 \section{Solving the equation}
+The scattering term on the right of Eq.\ref{derived3} is given:
+\begin{align}
+    \left. \frac{\partial N(R,q,t)_{vv'} }{\partial t} \right|_{coll} 
+    = - (1-\delta_{vv'}) \frac{\Gamma_{qv} + \Gamma_{qv'}}{2} N(R,q,t)_{vv'} 
+      - \frac{\delta_{vv'}}{VN} \sum_{q''v''} A_{qv}^{q''v''}  (N(R,q'',t)_{v''v''} - \bar{N}_{q''v''} )
+\end{align}
+We aim to solve the Eq.\ref{derived3} under a temperature field $T_l(R)$, $l$ indicate local temperature 
+as opposed to the equilibrium temperature $T$. In an steady state, $N(R,q,t)$ will be time independent, we 
+linearize $N(R,q)$ as:
+\begin{equation}
+    N(R,q)_{vv'} = \delta_{vv'} \left[ \bar{N}(qv) + \partial \bar{N}(qv)/\partial T (T_l(R)-T) \right] + n^{(1)}_{q,vv'} \cdot \nabla T \label{linear}
+\end{equation}
+the first term of the right hand side depend only on equilibrium temperature, the second term accounts for the correction 
+due to the local temperature, and the third term is the linear response (vector) correspond to a temperature grident.
+Putting Eq.\ref{linear} into Eq.\ref{derived3}
 
 
 \pagebreak
