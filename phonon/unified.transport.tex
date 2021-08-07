@@ -70,13 +70,13 @@ So that we obtain the equation:
     \frac{\partial \rho_1(q,q',t)_{b,b'} }{\partial t} + i \left[ \sqrt{D_q}\cdot \rho_1(q,q',t) - \rho_1(q,q',t) \cdot \sqrt{D_{q'}} \right] _{bb'}
      = \left. \frac{\partial \rho_1(q,q',t)_{b,b'} }{\partial t} \right|_{coll}  \label{derived1}
 \end{equation}
-We perform the Weyl transformation to $\partial \rho_1(q,q',t)_{b,b'}$:
+We perform the Weyl transformation to $\rho_1(q,q',t)_{b,b'}$:
 \begin{equation}
     N(R,q,t)_{b,b'} = \sum_{q''} \rho_1(q+q'',q-q'',t)_{b,b'} e^{2iq''R}
 \end{equation}
 to Eq.\ref{derived1}, we will have:
 \begin{align}
-    \frac{\partial \rho_1(q+q'',q-q'',t)_{b,b'} }{\partial t} + & + i \left[ \sqrt{D_{q+q''}}\cdot \rho_1(q+q'',q-q'',t) - \rho_1(q+q'',q-q'',t) \cdot \sqrt{D_{q-q''}} \right] _{bb'}
+    \frac{\partial \rho_1(q+q'',q-q'',t)_{b,b'} }{\partial t} &+ i \left[ \sqrt{D_{q+q''}}\cdot \rho_1(q+q'',q-q'',t) - \rho_1(q+q'',q-q'',t) \cdot \sqrt{D_{q-q''}} \right] _{bb'}
     \\ &= \left. \frac{\partial \rho_1(q+q'',q-q'',t)_{b,b'} }{\partial t} \right|_{coll}
 \end{align}
 Assume the one particle density $\rho_1(q+q'',q-q'',t)_{b,b'}$ is sharply peaked at $q$, $q''$ will be small,
@@ -126,18 +126,77 @@ The scattering term on the right of Eq.\ref{derived3} is given:
 \begin{align}
     \left. \frac{\partial N(R,q,t)_{vv'} }{\partial t} \right|_{coll} 
     = - (1-\delta_{vv'}) \frac{\Gamma_{qv} + \Gamma_{qv'}}{2} N(R,q,t)_{vv'} 
-      - \frac{\delta_{vv'}}{VN} \sum_{q''v''} A_{qv}^{q''v''}  (N(R,q'',t)_{v''v''} - \bar{N}_{q''v''} )
+      - \delta_{vv'} \sum_{q''v''} A_{qv,q''v''}  (N(R,q'',t)_{v''v''} - \bar{N}_{q''v''} )
+\end{align}
+$\Gamma_{qv}$ is the phonon linewidth $\Gamma_{qv} = 1 / \tau_{qv}$, 
+$\bar{N}_{qv}$ is the equilibrium Bosen distribution. The scattering matrix A is given by:
+\begin{equation}
+    A_{q,q'} = \frac{1}{\tau_{q}} \delta_{q,q'} 
+            - \sum_{q''} \left( \Lambda_{q,q''}^{q'} -  \Lambda_{q,q'}^{q''} + \Lambda^{q',q''}_{q} \right) \label{A}
+\end{equation}
+with $\Lambda$ given by:
+\begin{align}
+    \Lambda_{q,q'}^{q''} &= \frac{\bar{N}_{q} \bar{N}_{q'} (\bar{N}_{q''} + 1)}{\bar{N}_{q} (\bar{N}_{q} + 1)} L_{q,q'}^{q''} \\
+    \Lambda^{q',q''}_{q} &= \frac{\bar{N}_{q} (\bar{N}_{q'}+1) (\bar{N}_{q''} + 1)}{\bar{N}_{q} (\bar{N}_{q} + 1)} L^{q',q''}_{q} 
+\end{align}
+and $L$ is the standard scattering probability of phonon absorption and emission events.
+We focus on the case of RTA and ignore the second term in Eq.\ref{A}. Eq.\ref{derived3} is then:
+\begin{align}
+    &\left[ \frac{\partial N(R,q,t)}{\partial t} + i \left[ \Omega_{q},N(R,q,t) \right] + \right.
+      \left.  \frac{1}{2} \left\{ V_{q}, \nabla_R N(R,q,t) \right\} \right]_{vv'} \notag \\
+        &=  - (1-\delta_{vv'}) \frac{\Gamma_{qv} + \Gamma_{qv'}}{2} N(R,q,t)_{vv'} 
+           - \delta_{vv'} A_{qv,qv} (N(R,q,t)_{vv} - \bar{N}_{qv} ) \label{final}
 \end{align}
 We aim to solve the Eq.\ref{derived3} under a temperature field $T_l(R)$, $l$ indicate local temperature 
 as opposed to the equilibrium temperature $T$. In an steady state, $N(R,q,t)$ will be time independent, we 
 linearize $N(R,q)$ as:
 \begin{equation}
-    N(R,q)_{vv'} = \delta_{vv'} \left[ \bar{N}(qv) + \partial \bar{N}(qv)/\partial T (T_l(R)-T) \right] + n^{(1)}_{q,vv'} \cdot \nabla T \label{linear}
+    N(R,q)_{vv'} = \delta_{vv'} \left[ \bar{N}_{qv} + \frac{\partial \bar{N}_{qv}}{\partial T} (T_l(R)-T) \right] + n^{(1)}_{q,vv'} \cdot \nabla T \label{linear}
 \end{equation}
 the first term of the right hand side depend only on equilibrium temperature, the second term accounts for the correction 
 due to the local temperature, and the third term is the linear response (vector) correspond to a temperature grident.
-Putting Eq.\ref{linear} into Eq.\ref{derived3}
-
+Putting Eq.\ref{linear} into Eq.\ref{final} and keep only linear term in $\nabla T$, we can write terms on the left side of Eq.\ref{final} as:
+\begin{align}
+    i \left[ \Omega_{q},N(R,q,t) \right] &= i \left( \omega_{qv} n^{(1)}_{q,vv'} - n^{(1)}_{q,vv'} \omega_{qv'} \right) \nabla T \\
+    \frac{1}{2} \left\{ V_{q}, \nabla_R N(R,q,t) \right\} &= 
+            \frac{1}{2} \left( V_{qvv'} \frac{\partial \bar{N}_{qv'}}{\partial T} + \frac{\partial \bar{N}_{qv}}{\partial T} V_{qvv'} \right) \nabla T
+\end{align}
+Heat flux is given by:
+\begin{align}
+    J(R,t) &= \frac{1}{2NV} \sum_{qv} \hbar \omega_{qv} \left\{ V_q, N(R,q,t)  \right\}_{vv} \notag \\
+           &= \frac{1}{2NV} \sum_{qv} \hbar \omega_{qv} \left\{ V_q, n^{(1)}_{q}  \right\}_{vv}\nabla T = - \kappa \nabla T
+\end{align}
+giving the expression for thermal conductivity:
+\begin{equation}
+    \kappa = - \frac{1}{2NV} \sum_{qv} \hbar \omega_{qv} \left\{ V_q, n^{(1)}_{q}  \right\}_{vv}
+\end{equation}
+We can separate matrix $n^{(1)}_{q}$ into a diagonal matrix and an off-diagonal matrix whose diagonal element is zero. 
+For the diagonal part, we find:
+\begin{gather}
+    v_{qv} \frac{\partial \bar{N}_{qv}}{\partial T} \nabla T = - A_{qv,qv} n^{(1)}_{q,vv} \nabla T \\
+    n^{(1)}_{q,vv} = - v_{qv} \frac{\partial \bar{N}_{qv}}{\partial T} \tau_{qv}
+\end{gather}
+The diagonal part gives the contribution to thermal conductivity:
+\begin{equation}
+    \kappa_{diagonal} = \frac{1}{NV} \sum_{qv} \hbar \omega_{qv} v_{qv} v_{qv} \frac{\partial \bar{N}_{qv}}{\partial T} \tau_{qv}
+\end{equation}
+which is the usual expression in RTA formulism. The off diagonal part of matrix $n^{(1)}_{q}$ is given by:
+\begin{gather}
+    i \left( \omega_{qv} n^{(1)}_{q,vv'} - n^{(1)}_{q,vv'} \omega_{qv'} \right) 
+    + \frac{1}{2} \left( V_{qvv'} \frac{\partial \bar{N}_{qv'}}{\partial T} + \frac{\partial \bar{N}_{qv}}{\partial T} V_{qvv'} \right)
+    = - \frac{\Gamma_{qv}+ \Gamma_{qv'}}{2} n^{(1)}_{q,vv'} \\
+    n^{(1)}_{q,v\neq v'} = -\frac{\hbar}{k_b T} V_{qvv'} 
+    \frac{\omega_{qv}\bar{N}_{qv} (\bar{N}_{qv} + 1) + \omega_{qv'} \bar{N}_{qv} (\bar{N}_{qv'} + 1)}{2i(\omega_{qv} - \omega_{qv'}) + (\Gamma_{qv}+ \Gamma_{qv'})}
+\end{gather}
+The diagonal part of $n^{(1)}_{q}$ contribute to thermal conductivity by:
+\begin{align}
+    \kappa_{off-diagonal} = \frac{\hbar^2}{k_b T^2} \frac{1}{NV} \sum_{q}\sum_{v\neq v'} &\frac{\omega_{qv} + \omega_{qv'}}{2} V_{qvv'} V_{qv'v} \notag \\
+    & \frac{\omega_{qv}\bar{N}_{qv} (\bar{N}_{qv} + 1) + \omega_{qv'} \bar{N}_{qv} (\bar{N}_{qv'} + 1)}{4(\omega_{qv} - \omega_{qv'})^2 + (\Gamma_{qv}+ \Gamma_{qv'})^2}(\Gamma_{qv}+ \Gamma_{qv'})
+\end{align}
+The total thermal conductivity is therefore:
+\begin{equation}
+    \kappa = \kappa_{diagonal} + \kappa_{off-diagonal}
+\end{equation}
 
 \pagebreak
 \section*{Appendix A. Wigner function}
