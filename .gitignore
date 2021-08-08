@@ -2,4 +2,5 @@ phonon/*.aux
 phonon/*.log
 phonondrag/*.aux
 phonondrag/*.log
-
+statistic/*.log
+statistic/*.aux

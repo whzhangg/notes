@@ -9,10 +9,12 @@
 \title{Statistic Physics}
 \author{Wenhao}
 \date{\today}
+\maketitle
 
-\section{Part 1}
-\subsection{The fundamental postulation and terms}
-\textbf{The Fundamental postulate} An isolated system in equilibrium is equally likely to be found in any
+\section{The fundamental postulation and Liouville's theorem}
+
+\subsection{The Fundamental postulate}
+An isolated system in equilibrium is equally likely to be found in any
 of the microstates accessible to it.
 
 \begin{itemize}
@@ -25,6 +27,170 @@ of the microstates accessible to it.
 
 \subsection{Motivation for the fundamental postulation}
 For $N$ particles we have in total $6N$ coordinates $(q_1, q_2, \cdots , q_{3N}, p_1, p_2, \cdots , p_{3N})$ which completely
-define a microscope state.
+define a microscope state. We define the "phase density" as:
+\begin{align}
+    &\rho(q_1, q_2, \cdots , q_{3N}, p_1, p_2, \cdots , p_{3N}, t) \\
+     &\ \ \   \to \text{Probability of finding a system near}\ (q_1, q_2, \cdots , q_{3N}, p_1, p_2, \cdots , p_{3N}) \text{at time} t
+\end{align}
+If property of this system is given by a function $f(q,p)$, then the ensemble average of $f$ at time $t$ will be 
+given as:
+\begin{align}
+    \langle f(t) \rangle = \frac{\int\int\cdots\int f(q,p)\rho(q,p,t)dq^{3N}dp^{3N}}{\int\int\cdots\int \rho(q,p,t)dq^{3N}dp^{3N}}
+\end{align}
+With the above definition, $\rho(q,p,t)dq^{3N}dp^{3N}$ gives the number of states (points) that are included in the phase space 
+volume $dq^{3N}dp^{3N}$ near $(q,p)$.
+\subsection{Liouville's theorem}
+Liouville's theorem states that the evolution of $\rho$ is given by:
+\begin{equation}
+    \frac{d\rho}{dt} = 0
+\end{equation}
+which is to say that if we follow the trajectory of a state $(q,p)$ as it 
+evolve over time, its phase space density will not change (total derivative): $\rho(q(0),p(0),t=0) = \rho(q(t'),p(t'), t = t')$. 
+
+\textbf{Proof 1} In this proof, we consider the phase space points inclosed by a volume at $t = 0$ at $(q_1,p_1)$, at a later time $\delta t$, 
+we locate those phase space points agian and we show that the volume of phase space that enclose these points are the same. This will
+thus mean the phase (point) density do not change following the trajectory.
+
+let's consider an area in a two dimensional phase space that is a rectangle specified by its 2 diagonal points $(q_1,p_1),(q_2,p_2)$ at some 
+initial time $t$, then at time $t+\delta t$, the points changed to $(q_1 + \dot{q_1}\delta t, p_1 + \dot{p_1}\delta t)$ and 
+$(q_2 + \dot{q_2}\delta t, p_2 + \dot{p_2}\delta t)$. The volume difference, to first order in $\delta t$ is:
+\begin{align}
+    \Delta V &= (q_2 + \dot{q_2}\delta t - q_1 - \dot{q_1}\delta t)(p_2 + \dot{p_2}\delta t - p_1 - \dot{p_1}\delta t) - (q_2 - q_1)(p_2 - p_1) \notag \\
+             &= (\dot{q_2} - \dot{q_1}) (p_2 - p_1) + (\dot{p_2} - \dot{p_1}) (q_2 - q_1) \notag \\
+             &= \frac{1}{V} \left( \frac{\dot{q_2} - \dot{q_1}}{q_2-q_1} + \frac{\dot{p_2} - \dot{p_1}}{p_2-p_1} \right) \notag \\
+             &= \frac{1}{V} \left( \frac{\partial \dot{q}}{\partial q} + \frac{\partial \dot{p}}{\partial p} \right) \delta t
+\end{align} 
+If a system envolve under Hamiltonian dynamics:
+\begin{align}
+    \dot{q_i} &= \frac{\partial H}{\partial p_i} ; \ \ \dot{p_i} = -\frac{\partial H}{\partial q_i}
+\end{align}
+then 
+\begin{equation}
+    \frac{\partial \dot{q}}{\partial q} + \frac{\partial \dot{p}}{\partial p} 
+    = \frac{\partial^2 H}{\partial p \partial q} - \frac{\partial^2 H}{\partial q\partial p} = 0
+\end{equation}
+which shows that the enclosing volume of those phase space points do not change as the system evolve, and therefore, the phase space density
+in this volume do not change over time, giving the result:
+\begin{equation}
+    \frac{d\rho}{dt} = \frac{\partial \rho}{\partial t} + 
+        \sum_i \left( \frac{\partial \rho}{\partial q_i}\frac{\partial q_i}{\partial t} + \frac{\partial \rho}{\partial p_i}\frac{\partial p_i}{\partial t} \right)
+        = 0
+\end{equation}
+Where the first equality is given merely by the definition of total derivative.
+
+\textbf{Proof 2} In this proof, we compute the partial derivatives first and show that they result in the result of Liouville's theorem.
+
+We first compute $\partial \rho / \partial t$. Consider the flow the phase space points in and out of a cubic volume element 
+in the phase space arount $(q,p)$, The net flow of phase space points is given by:
+\begin{align}
+    \frac{\partial N}{\partial t} 
+    &= -\sum_i \left( \frac{\partial (\rho \dot{q_i})}{\partial q_i} + \frac{\partial (\rho \dot{p_i})}{\partial p_i} \right) dq \cdots dp \notag \\
+    \frac{\partial \rho}{\partial t} 
+    &= -\sum_i \left( \frac{\partial (\rho \dot{q_i})}{\partial q_i} + \frac{\partial (\rho \dot{p_i})}{\partial p_i} \right)
+\end{align}
+the total derivatve is then:
+\begin{align}
+    \frac{d\rho}{dt} &= \frac{\partial \rho}{\partial t}
+    + \sum_i \left( \frac{\partial \rho}{\partial q_i}\frac{\partial q_i}{\partial t} + \frac{\partial \rho}{\partial p_i}\frac{\partial p_i}{\partial t} \right) \notag \\
+    &= -\sum_i \left( \frac{\partial (\rho \dot{q_i})}{\partial q_i} + \frac{\partial (\rho \dot{p_i})}{\partial p_i} \right) 
+    + \sum_i \left( \frac{\partial \rho}{\partial q_i}\frac{\partial q_i}{\partial t} + \frac{\partial \rho}{\partial p_i}\frac{\partial p_i}{\partial t} \right) \notag \\
+    &= - \sum_i \left( \rho\frac{\partial \dot{q_i}}{\partial q_i} + \rho\frac{\partial \dot{p_i}}{\partial p_i}  \right) = 0
+\end{align}
+thus proving the Liouville's theorem.
+
+\subsection{Ergodicity}
+In a complex system in equilibrium, over a sufficiently long time, all part of the phase space will be visited by a trajectory in the phase space. Since we have shown that the 
+phase space density on the trajectory will be the same, and we consider the system in equilibrium, which implies $\partial \rho / \partial t = 0$, We can conclude that 
+\begin{equation}
+    \rho(q,p,t) = \rho_0
+\end{equation}
+That is, we have equal phase space density over all accessible phase space.
+
+\section{Intensive and extensive properties}
+\subsection{Entropy}
+We define entropy $S$ for an isolated macroscopic system of $N$ particles in volume $V$ and energy $E$ to be:
+\begin{equation}
+    S(E,N,V,x) = k_b \ln\Omega(E,N,V,x)
+\end{equation}
+where $\Omega(E,N,V,x)$ is the number of accessible states at a given value of $E, N, V$, and $x$ is some constraints which 
+influence the number of accessible states.
+As a non-equilibrium isolated system allow to relax to equilibrium, entropy will increase monotonically and eventually maximize 
+at equilibrium.
+%imagine that the system will attempt to visit as many configurations as possible. 
+
+\textbf{Temperature} 
+consider an isolated system with two subsystem in weak contact but only energy is allowed to follw between the two subsystem.
+The total number of accessible states (configurations) are given by the product of the number of configurations of the 
+two subsystem. Entropy will be additive. Consider the energy of one of the subsystem $E_1$
+as the constrain for the configurations.
+\begin{align}
+    \Omega(E,E_1) = \Omega_1(E_1) \Omega_2(E_2) \\
+    S(E,E_1) = S_1(E_1) S_2(E_2)   
+\end{align}
+Relaxation process will increase entropy by changing $E_1$, at equilibrium, we have:
+\begin{gather}
+    \frac{\partial S}{\partial E_1} = 0 \ \Rightarrow \ 
+    \left. \frac{\partial S_1(E_1)}{\partial E_1} \right|_{N_1,V_1} = \left. \frac{\partial S_2(E_2)}{\partial E_2}\right|_{N_2,V_2} = \frac{1}{T}
+\end{gather}
+where the final equality gives the definition of temperature, thus if two subsystem reaches equilibrium in terms of energy follow, their 
+temperature will be equal.
+
+\textbf{Chemical potential}
+now, we fix only volume $V$ of each subsystem and allow both energy and particles to exchange, then:
+\begin{equation}
+    \left. \frac{\partial S_1(N_1)}{\partial N_1} \right|_{E_1,V_1} = \left. \frac{\partial S_2(N_2)}{\partial N_2}\right|_{E_2,V_2} = -\frac{\mu}{T}
+\end{equation}
+the last equality defines the chemical potential $\mu$. 
+% minus sign the divide by temperature is because of the tradition
+
+\textbf{Pressure}
+finally, we allow the volume of the system to exchange, and we can similar define pressure:
+\begin{equation}
+    \left. \frac{\partial S_1(V_1)}{\partial V_1} \right|_{E_1,N_1} = \left. \frac{\partial S_2(V_2)}{\partial V_2}\right|_{E_2,N_2} = \frac{P}{T}
+\end{equation}
+
+Thus, we can see that if we set an initial system not in equilibrium, the two subsystem will
+start to exchange energy, particles and volume until $T$, $P$ and $\mu$ become the same 
+for the two subsystem. 
+
+We can separate the macroscopic properties of a system into two different catagory:
+\begin{itemize}
+    \item \textbf{Extensive properties} that will increase proportional to the system size, such as $N,E,V$
+    \item \textbf{Intensive properties} that will be same for any of the subsystem, such as  $P,\mu,T$
+\end{itemize}
+
+Writing out the definition of  $T$, $P$ and $\mu$
+\begin{gather}
+    \frac{1}{T} = \left(\frac{\partial S}{\partial E}\right)_{N,V};\  
+    \frac{\mu}{T} = \left(\frac{\partial S}{\partial N}\right)_{E,V};\ 
+    \frac{P}{T} = \left(\frac{\partial S}{\partial V}\right)_{E,N};\ 
+\end{gather}
+we can organize:
+\begin{align}
+    dS &= \frac{1}{T} dE - \frac{\mu}{T}dN + \frac{P}{T}dV \\
+    dE &= TdS + \mu dN - P dV \label{partial_extensive}
+\end{align}
+For the Eq.\ref{partial_extensive}, we can integrate the subsystems parts by parts into 
+the whole system, since $T, \mu$ and $P$ will be the same for all subsystems, the integration
+gives:
+\begin{equation}
+    E = TS + \mu N - PV
+\end{equation}
+
+%\subsection{Carnot cycle}
+\section{Ensembles}
+We have already seem an ensemble containing possible configurations of an isolated system where energy
+is known and all configurations are of equal probability. 
+This ensemble is known as the \textbf{Microcanonical ensemble}. For a microcanonical ensemble, particle 
+number, volume and energy are specified at the same time, thus it is also called $NVE$ ensemble.
+
+Now consider a system that can exchange energy through a contact with a temperature bath and eventually 
+come to an equilibrium. This ensemble is called \textbf{Canonical ensemble}. For canonical ensemble, 
+it's dynamic is still governed by its internal interaction but now its energy may vary. Since now 
+the energy of this system can change, it is more appropriate to describe it in terms of 
+temperature $T$, from which we can find its energy. 
+
+Now we want to find the probability distribution of its microstate (probability of finding the system 
+to be in a specific microstate),
 
 \end{document}
