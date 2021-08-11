@@ -97,6 +97,7 @@ the total derivatve is then:
     &= - \sum_i \left( \rho\frac{\partial \dot{q_i}}{\partial q_i} + \rho\frac{\partial \dot{p_i}}{\partial p_i}  \right) = 0
 \end{align}
 thus proving the Liouville's theorem.
+% ref: https://hepweb.ucsd.edu/ph110b/110b_notes/node93.html
 
 \subsection{Ergodicity}
 In a complex system in equilibrium, over a sufficiently long time, all part of the phase space will be visited by a trajectory in the phase space. Since we have shown that the 
@@ -106,6 +107,7 @@ phase space density on the trajectory will be the same, and we consider the syst
 \end{equation}
 That is, we have equal phase space density over all accessible phase space.
 
+\pagebreak
 \section{Intensive and extensive properties}
 \subsection{Entropy}
 We define entropy $S$ for an isolated macroscopic system of $N$ particles in volume $V$ and energy $E$ to be:
@@ -130,7 +132,7 @@ as the constrain for the configurations.
 Relaxation process will increase entropy by changing $E_1$, at equilibrium, we have:
 \begin{gather}
     \frac{\partial S}{\partial E_1} = 0 \ \Rightarrow \ 
-    \left. \frac{\partial S_1(E_1)}{\partial E_1} \right|_{N_1,V_1} = \left. \frac{\partial S_2(E_2)}{\partial E_2}\right|_{N_2,V_2} = \frac{1}{T}
+    \left. \frac{\partial S_1(E_1)}{\partial E_1} \right|_{N_1,V_1} = \left. \frac{\partial S_2(E_2)}{\partial E_2}\right|_{N_2,V_2} = \frac{1}{T} \label{defineT}
 \end{gather}
 where the final equality gives the definition of temperature, thus if two subsystem reaches equilibrium in terms of energy follow, their 
 temperature will be equal.
@@ -159,30 +161,13 @@ We can separate the macroscopic properties of a system into two different catago
     \item \textbf{Intensive properties} that will be same for any of the subsystem, such as  $P,\mu,T$
 \end{itemize}
 
-Writing out the definition of  $T$, $P$ and $\mu$
-\begin{gather}
-    \frac{1}{T} = \left(\frac{\partial S}{\partial E}\right)_{N,V};\  
-    \frac{\mu}{T} = \left(\frac{\partial S}{\partial N}\right)_{E,V};\ 
-    \frac{P}{T} = \left(\frac{\partial S}{\partial V}\right)_{E,N};\ 
-\end{gather}
-we can organize:
-\begin{align}
-    dS &= \frac{1}{T} dE - \frac{\mu}{T}dN + \frac{P}{T}dV \\
-    dE &= TdS + \mu dN - P dV \label{partial_extensive}
-\end{align}
-For the Eq.\ref{partial_extensive}, we can integrate the subsystems parts by parts into 
-the whole system, since $T, \mu$ and $P$ will be the same for all subsystems, the integration
-gives:
-\begin{equation}
-    E = TS + \mu N - PV
-\end{equation}
-
 %\subsection{Carnot cycle}
+\pagebreak
 \section{Ensembles}
 We have already seem an ensemble containing possible configurations of an isolated system where energy
 is known and all configurations are of equal probability. 
 This ensemble is known as the \textbf{Microcanonical ensemble}. For a microcanonical ensemble, particle 
-number, volume and energy are specified at the same time, thus it is also called $NVE$ ensemble.
+number, volume and energy are specified at the same time, thus it is also called \textbf{NVE ensemble}.
 
 Now consider a system that can exchange energy through a contact with a temperature bath and eventually 
 come to an equilibrium. This ensemble is called \textbf{Canonical ensemble}. For canonical ensemble, 
@@ -191,6 +176,380 @@ the energy of this system can change, it is more appropriate to describe it in t
 temperature $T$, from which we can find its energy. 
 
 Now we want to find the probability distribution of its microstate (probability of finding the system 
-to be in a specific microstate),
+to be in a specific microstate), The system and reservior together is described by a microcanonical 
+ensemble, in which each state is described by $(q_1,\cdots, q_n, q_{n+1}, \cdots q_{N}, p_1,\cdots, p_n, p_{n+1}, \cdots p_{N})$
+where the first $n$ coordinates describe the system, and the rest coordinates describe the 
+microstate of the reservior. Every microstates of the combined system are equal likely, therefore,
+the probability to find the microstate of the canonical ensemble $(q_1',\cdots, q_n',p_1',\cdots, p_n')$ depend on the number 
+of possible configurations of the coordinates in the reservior, i.e. the number of the 
+microstate of the combined system in which $(q_1,\cdots, q_n,p_1,\cdots, p_n) = (q_1',\cdots, q_n',p_1',\cdots, p_n')$.
+
+We have, with $E^r_i$ denote the energy of the reservior for 
+the microstate $i$ of system, and $\Delta E = E_j - E_i$
+\begin{equation}
+    \frac{P_j}{P_i} = \frac{\Omega_r(E^r_i - \Delta E)}{\Omega_r(E^r_i)} = \exp\left( \frac{S_r(E^r_i-\Delta E)-S_r(E^r_i)}{k_b} \right)
+    \approx \exp\left( -\frac{E_j-E_i}{k_bT} \right)
+\end{equation}
+This give the result, with $\beta = 1/k_bT$
+\begin{equation}
+    P_i \propto e^{-\beta E_i}
+\end{equation}
+Define the canonical partition function $Q_N$
+\begin{equation}
+    Q_N(T,V,N) = \sum_j e^{-\beta E_j}
+\end{equation}
+The free energy is defined by:
+\begin{gather}
+    A(T,V,N) = -k_bT\ln Q_N
+\end{gather}
+The probability of finding a given microstate of the system is then
+\begin{equation}
+    P_i = \frac{1}{Q_N} e^{-\beta E_i} = e^{\beta(A - E_i)}
+\end{equation}
+
+To specific a canconical potential, we need to specify $V, N, T$, therefore, canonical potential 
+is also known as the \textbf{NVT ensemble}
+
+Finally, let's consider a system that can exchange both energy and particle with 
+a reservior. The equilibrium will be given by equal $T$ and $\mu$ between the 
+two part. This ensemble is named \textbf{Grand Canonical Ensemble}.
+We can derive the probability of the microstate of the system similar to the 
+case of the canconical ensemble, but now we need to consider the microstates with 
+different number of particles. 
+\begin{equation}
+    \frac{P_j}{P_i} = \frac{\Omega_r(E^r_i - \Delta E, N^r_i - \Delta N)}{\Omega_r(E^r_i,N^r_i)} = \exp\left( \frac{S_r(E^r_i - \Delta E, N^r_i - \Delta N)-S_r(E^r_i,N^r_i)}{k_b} \right)
+\end{equation}
+with $\Delta E = E_j - E_i, \Delta N = N_j - N_i$, to linear in $\Delta N, \Delta E$, we have:
+\begin{equation}
+    \frac{P_j}{P_i} = \exp\left( -\frac{1}{k_b} \frac{\partial S}{\partial E} \Delta E - \frac{1}{k_b} \frac{\partial S}{\partial N} \Delta N \right)
+    = \exp\left( -\frac{1}{k_bT} (E_j - E_i) + \frac{\mu}{k_bT} (N_j - N_i) \right)
+\end{equation}
+giving
+\begin{equation}
+    P_i \propto e^{-\beta (E_i - \mu N)}
+\end{equation}
+Define the grand canonical partition function 
+\begin{equation}
+    Q(\mu,T,V) = \sum_N\sum_j e^{-\beta (E_j - \mu N)}
+\end{equation}
+and the grand potential 
+\begin{eqnarray}
+    \Omega(\mu,T,V) = -k_bT\ln Q
+\end{eqnarray}
+we have the probability to find a microstate:
+\begin{equation}
+    P_{i,N} = \frac{1}{Q} e^{-\beta (E_i - \mu N)} = e^{\beta(\Omega - E_i + \mu N)}
+\end{equation}
+The grand canonical ensemble is known as the \textbf{$\mu$VT ensemble}
+
+\pagebreak
+\section{Thermodynamic potentials}
+
+It follows from the definition of  $T$, $P$ and $\mu$ that 
+\begin{gather}
+    \frac{1}{T} = \left(\frac{\partial S}{\partial E}\right)_{N,V};\  
+    \frac{\mu}{T} = \left(\frac{\partial S}{\partial N}\right)_{E,V};\ 
+    \frac{P}{T} = \left(\frac{\partial S}{\partial V}\right)_{E,N}
+\end{gather}
+we can organize:
+\begin{align}
+    dS &= \frac{1}{T} dE - \frac{\mu}{T}dN + \frac{P}{T}dV \\
+    dE &= TdS + \mu dN - P dV \label{partial_extensive}
+\end{align}
+leading to:
+\begin{align}
+    T = \left(\frac{\partial E}{\partial S}\right)_{N,V};\  
+    \mu = \left(\frac{\partial E}{\partial N}\right)_{S,V};\ 
+    P = -\left(\frac{\partial E}{\partial V}\right)_{S,N}
+\end{align}
+For the Eq.\ref{partial_extensive}, we can integrate the subsystems parts by parts into 
+the whole system ($S$, $N$ and $V$ are extensive parts), 
+since $T, \mu$ and $P$ will be the same for all subsystems, the integration
+gives:
+\begin{equation}
+    E = TS + \mu N - PV \label{energy}
+\end{equation}
+
+Now, let's consider the canonical ensemble. The energy of the system
+is no longer fixed, as opposed to microcanonical ensemble in which all the 
+microstates in the ensemble have fixed energy. 
+However, for each energy, it is associated with a 
+probability and thus we only consider the average energy, which we define
+as \textbf{internal energy}:
+\begin{equation}
+    U \equiv \langle E \rangle = \sum_j P_j E_j = \frac{\sum_j E_j e^{-\beta E_j}}{\sum_j e^{-\beta E_j}} = -\frac{1}{Q_N} \frac{\partial Q_N}{\partial \beta}
+\end{equation}
+The internal energy is now the macroscopic observable instead of energy, as
+in the microcanonical case.
+We wish to establish an relationship between the internal energy and 
+the free energy $Q_N = \exp(-\beta A)$
+
+Let's write
+\begin{equation}
+    Q_N = \sum_j e^{-\beta E_j} = \sum_{E_j} \Omega(E_j) e^{-\beta E_j}
+\end{equation}
+with $\Omega(E_j)$ gives the number of microstates that have energy $E_j$. With the definition of entropy $S(E) = k_B \ln \Omega(E)$, we have:
+\begin{eqnarray}
+    Q_N = \sum_{E_j} e^{-\beta (E_j - S(E_j)T)} \simeq e^{-\beta (E' - S(E')T)} \label{approx}
+\end{eqnarray}
+with $E'$ be the value that minimize the function $E - S(E)T$. If the fluctuation is small, we can consider only
+the term $e^{-\beta (E' - S(E')T)}$ in the summation is not ignorable, which gives the approximation.
+The requirement that $E'$ minimize function $E - S(E)T$ is:
+\begin{equation}
+    \left. \frac{\partial (E-S(E)T)}{\partial E}\right|_{E'} = \left. 1 - T\frac{\partial S(E)}{\partial E}\right|_{E'} = 0
+\end{equation}
+therefore, $E'$ is the energy in which:
+\begin{equation}
+    \left. \frac{\partial S(E)}{\partial E}\right|_{E'} = \frac{1}{T}
+\end{equation}
+that is to say, $E'$ is the energy where the 
+system's temperature defined by Eq.\ref{defineT} is equal to
+the temperature of the heat bath, which is the equilibrium condition. 
+This motivate us to equal $E' = \langle E \rangle = U$
+leading to the result that 
+\begin{equation}
+    A = U - TS(U) \label{eqA}
+\end{equation}
+$U$ minimize $U - TS(U)$ at equilibrium, therefore, the equilibrium condition of 
+a canonical potential is the minimization of free energy $A$.
+
+With Eq.\ref{eqA}, Eq.\ref{partial_extensive} and $U = \langle E \rangle$,  we have
+\begin{equation}
+    dA(N,V,T) = dU - TdS - SdT = -SdT - pdV + \mu dN
+\end{equation}
+and 
+\begin{equation}
+    S = -\left(\frac{\partial A}{\partial T}\right)_{N,V};\  
+    \mu = \left(\frac{\partial A}{\partial N}\right)_{T,V};\ 
+    P = -\left(\frac{\partial A}{\partial V}\right)_{T,N}
+\end{equation}
+
+For Grand canonical ensemble, we can apply similar method as in the canonical ensemble, but 
+this time adding the particle number as a summation variable in the calculation of 
+partition function, we can obtain:
+\begin{equation}
+    \Omega(\mu,T,V) = U - TS - \mu \bar{N}
+\end{equation}
+with $\bar{N}$ being the average particle number. The equilibrium 
+condition of a grand canonical ensemble is then the minimization of $\Omega$. 
+We also have the following relationship:
+\begin{equation}
+    d\Omega(\mu,T,V) = -SdT - Nd\mu - PdV
+\end{equation}
+and
+\begin{equation}
+    S = -\left(\frac{\partial \Omega}{\partial T}\right)_{\mu,V};\  
+    N = -\left(\frac{\partial \Omega}{\partial \mu}\right)_{T,V};\ 
+    P = -\left(\frac{\partial \Omega}{\partial V}\right)_{T,\mu}
+\end{equation}
+
+\subsection*{Legendre transformation}
+We have seem that intensity and extensity properties would come in pairs, such as $(T,S)$, $(\mu,N)$
+and $(P,V)$ due to their definition. We have also see that by defining different ensemble, we can
+write down different potential function for each ensemble:
+\begin{align}
+    \text{NVT ensemble} &\Rightarrow A(N,V,T) = -SdT - pdV + \mu dN\notag \\
+    \text{$\mu$VT ensemble} &\Rightarrow \Omega(\mu,V,T) = -SdT - Nd\mu - PdV \notag \\
+    (Gibbs)\ \text{NPT ensemble} &\Rightarrow G(N,p,T) = -SdT + Vdp + \mu dN \notag \\
+    &\cdots \notag
+\end{align}
+The relationship between different potential function can be expressed with \textbf{Legendre transformation}.
+
+Writting $x$ for an intensive property and $X$ as the conjugating extensive property. For a potential $Y(X)$
+with the thermodynamic relationship $dY = xdX + A$, if another potential is related to $Y(X)$ by 
+\begin{equation}
+    Z(x) = Y(X) - xX
+\end{equation}
+then, we can show find 
+\begin{align}
+    dZ = dY - xdX - Xdx \notag \\
+    \Rightarrow dZ = -Xdx \notag
+\end{align}
+
+As an example, consider the Gibbs free energy $G(N,p,T)$ and free energy in canonical ensemble
+$A(N,V,T)$. They are related by:
+\begin{equation}
+    A = G - PV \notag
+\end{equation}
+with $dA = -pdV$, we therefore find $dG = VdP$. 
+
+On the other hand, if we already know the expression of free energy $A(N,V,T) = - PdV  + A'$ but we want an potential
+in terms of pressure $P$, we can write $G(N,P,T) = A(N,V,T) + PV$, which indeed is the expression for Gibbs' free energy. (We choose 
+$G = A + PV$ instead of $G = A - PV$ is because the form $A = -PdV$ correspond to $dZ = -Xdx$)
+
+\subsection{Gibbs expression of entropy}
+For the canonical ensemble, we have:
+\begin{gather}
+    P_i = \frac{1}{Q} e^{-\beta E_i} \notag \\
+    A = -k_B T\ln Q = U - TS \notag
+\end{gather}
+This lead to the relationship:
+\begin{equation}
+    S = -k_B \sum_i P_i \ln P_i
+\end{equation}
+This is the Gibbs' form of entropy in terms of probability.
+
+\pagebreak
+\section{Quantum Statistical Mechanics}
+For a quantum \textbf{ensemble} $|\Psi\rangle$ expressed in a complete set of basis $|\phi_i\rangle$ (state of system)as 
+% both \Phi and \phi_i are the state of the whole system
+\begin{equation}
+    |\Psi\rangle = \sum_i c_i |\phi_i\rangle
+\end{equation}
+we define the density matrix 
+\begin{equation}
+    \rho = |\Psi\rangle \langle \Psi | = \sum_{ij} |\phi_i\rangle \langle \phi_i| \Psi\rangle \langle \Psi |\phi_j\rangle \langle \phi_j|
+    = \sum_{ij} c_i c_j^* |\phi_i\rangle \langle \phi_j| \label{density1}
+\end{equation}
+and therefore
+\begin{equation}
+    \langle \phi_i | \rho | \phi_j \rangle = c_i c_j^*
+\end{equation}
+So that the expectation value of observables $A$ is then:
+\begin{equation}
+    \langle A \rangle = \langle \Psi | A | \Psi \rangle
+    = \sum_{ij} \langle \Psi |\phi_i\rangle \langle \phi_i| A | \phi_j\rangle \langle \phi_j|\Psi \rangle
+    = \sum_{ij} c_i^* c_j \langle \phi_i| A | \phi_j\rangle
+\end{equation}
+while we also have:
+\begin{equation}
+    \text{Tr}[\rho A] = \sum_i \langle \phi_i | \rho A | \phi_i \rangle
+        = \sum_{ij} \langle \phi_i | \rho | \phi_j \rangle \langle \phi_j | A | \phi_i \rangle
+        = \sum_{ij} c_i c_j^* \langle \phi_j | A | \phi_i \rangle = \langle A \rangle
+\end{equation}
+So that we find the relationship
+\begin{equation}
+    \langle A \rangle = \text{Tr}[\rho A]
+\end{equation}
+
+Now, we consider the time dependence of the trace operator, using the time evolution operator:
+\begin{align}
+    -ih\frac{\partial}{\partial t} \rho &= -ih \frac{\partial}{\partial t}  \sum_{ij} c_i c_j^* |\phi_i\rangle \langle \phi_j| \notag \\
+        &= \sum_{ij} c_i c_j^* \left( -ih\frac{\partial}{\partial t} |\phi_i\rangle \langle \phi_j| - |\phi_i\rangle ih\frac{\partial}{\partial t} \langle \phi_j|  \right) \notag \\
+        &= \sum_{ij} c_i c_j^* \left(  H|\phi_i\rangle \langle \phi_j| - |\phi_i\rangle \langle \phi_j| H \right) \notag \\
+        &= [H\rho  - \rho H] = [H,\rho]
+\end{align}
+In an equilibrium, the density operator will be time dependent: $\partial \rho / \partial t = 0$, suggesting that 
+$H$ and $\rho$ commute:
+$[H,\rho] = 0$. The eigenstates of the Hamiltonian thus are also the eigenstates of the density operator.
+Therefore, the density operator in Eq.\ref{density1} can be written in this form:
+\begin{equation}
+    \rho = \sum_n w_n | n \rangle \langle n | \label{density2}
+\end{equation}
+where $|n\rangle$ are the eigenstates of the Hamiltonian, and $w_n = c_n^* c_n = |c_n|^2$ is the probability for the 
+system $|\Psi\rangle$ to be in the energy eigenstate $|n\rangle$
+For Microcanonical ensemble with $\Omega$ accessible states, we simply have:
+\begin{equation}
+    w_n = \frac{1}{\Omega}
+\end{equation}
+For Canonical ensemble, we have:
+\begin{equation}
+    w_n = \frac{e^{-\beta E_n}}{\sum_{n'} e^{-\beta E_{n'}}}
+\end{equation}
+and the partition function $Q = \text{Tr}e^{-\beta H}$ (an observables).
+For Grand Canonical ensemble, taking account of the particle number in 
+an system state $|n\rangle$, we have:
+\begin{equation}
+    w_n = \frac{e^{-\beta (E_n-\mu N_n)}}{\sum_{n'} e^{-\beta (E_{n'}-\mu N_{n'})}}
+\end{equation}
+and partition function $Q =  \text{Tr}e^{-\beta (H-\mu N}$, where $N$ is the operator for 
+particle density.
+
+\subsection*{Distribution function}
+Suppose the Hamiltonian can be written as a function of particle number
+$H = \sum_p \varepsilon_p n_p$ with $\varepsilon_p$, $n_p$ denoting 
+the energy and occupation number of a single particle state $p$.
+We start by calculating the partition function of a quantum ensemble, since we wish 
+to study the probability of system containing different particle number, we 
+use the grand canonical potential:
+\begin{align}
+    Q(\mu,V,T) = \sum_{N=0}^{\infty} \sum_{\{n_p\}_N} e^{-\beta\sum_p (\varepsilon_p - \mu) n_p}
+               = \sum_{\{n_p\}} e^{-\beta\sum_p (\varepsilon_p - \mu) n_p}
+\end{align}
+where in the first expression, $\{n_p\}_N$ denotes a many body state with occupation $\{n_{p_1},n_{p_2}, \cdots, n_{p_i}\}$
+in each of the single particle with the constraint that the total number of particles sum up to $N$. In the second 
+expression, the two summation in the first expression are combined.
+We now take the summation $p$ in the exponential out:
+\begin{equation}
+    Q(\mu,V,T) = \sum_{\{n_p\}} e^{-\beta\sum_p (\varepsilon_p - \mu) n_p} = \prod_p \sum_{n_p} e^{-\beta(\varepsilon_p - \mu) n_p} = \prod_p Q_p
+\end{equation}
+We can now study the sum of $e^{-\beta(\varepsilon_p - \mu) n_p}$ over all possible occupation number:
+\textbf{Fermion}
+we can only take $n_p = 0$ or $1$, so that 
+\begin{gather}
+    Q_p = 1 + e^{-\beta(\varepsilon_p - \mu)} \\
+    \Omega_p = -k_BT\ln Q_p
+\end{gather}
+and 
+\begin{equation}
+    N_p = -\left(\frac{\partial \Omega}{\partial \mu}\right)_{T,V} = \frac{1}{e^{\beta(\varepsilon_p - \mu)}+1}
+\end{equation}
+\textbf{Boson}
+the sum of $n_p$ is from $0$ to $\infty$, thus:
+\begin{equation}
+    \sum_{n_p=0}^{\infty} e^{-\beta(\varepsilon_p - \mu) n_p} 
+    =\frac{1}{1-e^{-\beta(\varepsilon_p - \mu)}} 
+\end{equation}
+giving
+\begin{equation}
+    N_p =  \frac{1}{e^{\beta(\varepsilon_p - \mu)}-1}
+\end{equation}
+The partition function and total particle number can be summarized by given by:
+\begin{gather}
+    \Omega = -ak_BT\sum_p\ln(1 + ae^{-\beta(\varepsilon_p - \mu)}) \\
+    N = \sum_p \frac{1}{e^{\beta(\varepsilon_p - \mu)} + a}
+\end{gather}
+with $a = 1$ for fermion and $-1 $ for boson.
+
+\subsection*{Boson gas}
+For an ideal gas of spinless bosons \footnote{for spin $S$, each momentum eigenstate $k$ will have $(2S+1)$ fold degeneracy}, 
+the single particle state will be the momentum eigenstate given by 
+$k$ and kinetic energy $\varepsilon_k = \frac{\hbar^2k^2}{2m}$. The chemical potential $\mu$ will be negative otherwise 
+the state with energy smaller than $\mu$ will have negative occupation.
+We calculate the grand potential:
+\begin{align}
+    \Omega &= k_BT \sum_k \ln(1-e^{-\beta(\varepsilon_p - \mu)}) \notag \\
+            &= k_BT \int_0^{\infty} \ln(1-e^{-\beta(\varepsilon_p - \mu)}) g(\varepsilon) d\varepsilon \notag \\
+            &= k_BT \int_0^{\infty} \ln(1-e^{-\beta(\varepsilon_p - \mu)}) \frac{V\varepsilon^{1/2}}{(2\pi)^2}\left(\frac{2m}{\hbar^2}\right)^{3/2} d\varepsilon \notag \\
+            &= -\frac{2}{3} \frac{V}{(2\pi)^2}\left(\frac{2m}{\hbar^2}\right)^{3/2} \int_0^{\infty} \frac{\varepsilon^{3/2}d\varepsilon}{e^{\beta(\varepsilon_p - \mu)}-1} \label{todos}
+\end{align}
+define $z = e^{\beta\mu}$, the particle number and internal energy can be written as:
+\begin{align}
+    N = \frac{V}{(2\pi)^2}\left(\frac{2m}{\hbar^2}\right)^{3/2} \int_0^{\infty} \frac{\varepsilon^{1/2}d\varepsilon}{e^{\beta\varepsilon_p}/z-1} \\
+    U = \frac{V}{(2\pi)^2}\left(\frac{2m}{\hbar^2}\right)^{3/2} \int_0^{\infty} \frac{\varepsilon^{3/2}d\varepsilon}{e^{\beta\varepsilon_p}/z-1}
+\end{align}
+The integral we can write in terms of \textbf{polylogarithm} function:
+\begin{align}
+    \int_0^{\infty} \frac{\varepsilon^{n-1}d\varepsilon}{e^{\beta\varepsilon_p}/z-1} = (k_BT)^n (n-1)! L_n(z)
+\end{align}
+with $n/2! = n/2 \times (n-2)/2 \times \cdots \times 1/2$ with n an odd number.
+So that 
+\begin{align}
+    N &= \frac{V}{(2\pi)^2}\left(\frac{2m}{\hbar^2}\right)^{3/2} (k_BT)^{3/2} (1/2)! L_{3/2}(z) = \frac{V}{\lambda^3} L_{3/2}(z) \label{eqbosonN} \\
+    U &= \frac{V}{(2\pi)^2}\left(\frac{2m}{\hbar^2}\right)^{3/2} (k_BT)^{5/2} (3/2)! L_{5/2}(z) = \frac{3}{2}\frac{Vk_BT}{\lambda^3} L_{5/2}(z)
+\end{align}
+$\lambda$ is defined to absorbed all the numerical factor in Eq.\ref{eqbosonN} and $\lambda \propto T^{-1/2}$. 
+Let's now consider Eq.\ref{eqbosonN}
+\begin{equation}
+    n \lambda^3 = L_{3/2}(z) \label{conflict}
+\end{equation}
+since $\mu$ need to be negative, the value of $z$ is bound to $(0,1)$, the function $L_{3/2}$ is monoclinically increaing with $z$ and bound
+between $(0,L_{3/2}(1)) \approx (0,2.612)$, however, as we decrease temperature and $z \to 1$, 
+$\lambda$ will increase without bound, which conflict with Eq.\ref{conflict}. 
+
+This inconsistency come from the fact that when we convert the summation of $k$ into integral of energy $\varepsilon$, we essentially omitted 
+a single state $(k=0,\varepsilon=0)$ since $g(\varepsilon=0)=0$. Its density of state $g(\varepsilon)$ is ignorable compared to other states but
+at low temperature, it's occupation maybe very large. Including the occupation of this ground state explicitly in Eq.\ref{eqbosonN}:
+\begin{equation}
+    N = N_0 + N_1 = \frac{1}{1/z-1} + \frac{V}{\lambda^3} L_{3/2}(z)
+\end{equation}
+if we define 
+\begin{equation}
+    n \lambda(T_c)^3 = L_{3/2}(z=1)
+\end{equation}
+then
+\begin{equation}
+    \frac{N_0}{N} = \frac{N-N_1}{N} = 1-\left(\frac{T}{T_c}\right)^{3/2}
+\end{equation}
 
 \end{document}
