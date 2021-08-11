@@ -112,7 +112,7 @@ That is, we have equal phase space density over all accessible phase space.
 \subsection{Entropy}
 We define entropy $S$ for an isolated macroscopic system of $N$ particles in volume $V$ and energy $E$ to be:
 \begin{equation}
-    S(E,N,V,x) = k_b \ln\Omega(E,N,V,x)
+    S(E,N,V,x) = k_B \ln\Omega(E,N,V,x)
 \end{equation}
 where $\Omega(E,N,V,x)$ is the number of accessible states at a given value of $E, N, V$, and $x$ is some constraints which 
 influence the number of accessible states.
@@ -187,10 +187,10 @@ microstate of the combined system in which $(q_1,\cdots, q_n,p_1,\cdots, p_n) = 
 We have, with $E^r_i$ denote the energy of the reservior for 
 the microstate $i$ of system, and $\Delta E = E_j - E_i$
 \begin{equation}
-    \frac{P_j}{P_i} = \frac{\Omega_r(E^r_i - \Delta E)}{\Omega_r(E^r_i)} = \exp\left( \frac{S_r(E^r_i-\Delta E)-S_r(E^r_i)}{k_b} \right)
-    \approx \exp\left( -\frac{E_j-E_i}{k_bT} \right)
+    \frac{P_j}{P_i} = \frac{\Omega_r(E^r_i - \Delta E)}{\Omega_r(E^r_i)} = \exp\left( \frac{S_r(E^r_i-\Delta E)-S_r(E^r_i)}{k_B} \right)
+    \approx \exp\left( -\frac{E_j-E_i}{k_BT} \right)
 \end{equation}
-This give the result, with $\beta = 1/k_bT$
+This give the result, with $\beta = 1/k_BT$
 \begin{equation}
     P_i \propto e^{-\beta E_i}
 \end{equation}
@@ -200,7 +200,7 @@ Define the canonical partition function $Q_N$
 \end{equation}
 The free energy is defined by:
 \begin{gather}
-    A(T,V,N) = -k_bT\ln Q_N
+    A(T,V,N) = -k_BT\ln Q_N
 \end{gather}
 The probability of finding a given microstate of the system is then
 \begin{equation}
@@ -217,12 +217,12 @@ We can derive the probability of the microstate of the system similar to the
 case of the canconical ensemble, but now we need to consider the microstates with 
 different number of particles. 
 \begin{equation}
-    \frac{P_j}{P_i} = \frac{\Omega_r(E^r_i - \Delta E, N^r_i - \Delta N)}{\Omega_r(E^r_i,N^r_i)} = \exp\left( \frac{S_r(E^r_i - \Delta E, N^r_i - \Delta N)-S_r(E^r_i,N^r_i)}{k_b} \right)
+    \frac{P_j}{P_i} = \frac{\Omega_r(E^r_i - \Delta E, N^r_i - \Delta N)}{\Omega_r(E^r_i,N^r_i)} = \exp\left( \frac{S_r(E^r_i - \Delta E, N^r_i - \Delta N)-S_r(E^r_i,N^r_i)}{k_B} \right)
 \end{equation}
 with $\Delta E = E_j - E_i, \Delta N = N_j - N_i$, to linear in $\Delta N, \Delta E$, we have:
 \begin{equation}
-    \frac{P_j}{P_i} = \exp\left( -\frac{1}{k_b} \frac{\partial S}{\partial E} \Delta E - \frac{1}{k_b} \frac{\partial S}{\partial N} \Delta N \right)
-    = \exp\left( -\frac{1}{k_bT} (E_j - E_i) + \frac{\mu}{k_bT} (N_j - N_i) \right)
+    \frac{P_j}{P_i} = \exp\left( -\frac{1}{k_B} \frac{\partial S}{\partial E} \Delta E - \frac{1}{k_B} \frac{\partial S}{\partial N} \Delta N \right)
+    = \exp\left( -\frac{1}{k_BT} (E_j - E_i) + \frac{\mu}{k_BT} (N_j - N_i) \right)
 \end{equation}
 giving
 \begin{equation}
@@ -234,7 +234,7 @@ Define the grand canonical partition function
 \end{equation}
 and the grand potential 
 \begin{eqnarray}
-    \Omega(\mu,T,V) = -k_bT\ln Q
+    \Omega(\mu,T,V) = -k_BT\ln Q
 \end{eqnarray}
 we have the probability to find a microstate:
 \begin{equation}
@@ -551,5 +551,12 @@ then
 \begin{equation}
     \frac{N_0}{N} = \frac{N-N_1}{N} = 1-\left(\frac{T}{T_c}\right)^{3/2}
 \end{equation}
+if the temperature is low enough so that $N_0/N \approx 1$, then almost all particles are condensed in the ground state. $T_c$ for an ideal boson gas can be calculated:
+\begin{equation}
+    k_B T_c \approx 0.061 \frac{\hbar^2}{m} n^{2/3}
+\end{equation}
+For example, liquid Helium$^4$ with a density of $1.5e22 cm^{-3}$ gives a $T_c \approx 3K$. Expreiment observed a phase transition to a 
+new phase with superfluid properties around this temperature, associated with the condensation.
+
 
 \end{document}
