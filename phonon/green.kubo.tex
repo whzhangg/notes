@@ -1,0 +1,48 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage[margin=0.8in]{geometry}
+\newcommand{\pfrac}[2]{\frac{\partial #1}{\partial #2}}
+
+\begin{document}
+
+\title{Green Kubo formula for thermal conductivity}
+\author{WH}
+\date{\today}
+\maketitle
+
+\section{formulation}
+With the harmonic hamiltonian and periodic condition not assumed:
+\begin{equation}
+    H = \sum_{i} \frac{1}{2m_b} p_{i} p_{i} + \frac{1}{2} \sum_{ij} G_{ij} u_{i} u_{j} + V_0 \label{eq1}
+\end{equation}
+$G$ is the harmonic force constants. $i$ is the index of the atom in the whole sample that we concern. $p_i$ and $u_i$ are the 
+momentum and displacement of atom $i$. Summation of cartesian direction is implied. 
+The heat flux can be written as:
+\begin{eqnarray}
+    J = \frac{1}{2}\sum_{ij} (R_i - R_j) G_{ij} u_i \dot{u}_j
+\end{eqnarray}
+using the standard form of phonon creation and annihiliation operator (taking summation of $q$ to consist of 
+only $\Gamma$, then $N = 1$):
+\begin{align}
+    u_i &= \sum_{m} \sqrt{ \frac{\hbar}{2\omega_m m_i} } e_{m}^i (a_m + a^{\dagger}_m) \\
+    p_i &= -i \sum_{m} \sqrt{ \frac{\hbar \omega_m m_i}{2} } e_{m}^i (a_m - a^{\dagger}_m)
+\end{align}
+The current flux operator is then:
+\begin{align}
+    J & = -\frac{i}{2} \sum_{ij} (R_i - R_j) G_{ij} \sum_{m} \sqrt{ \frac{\hbar}{2\omega_m m_i} } e_{m}^i (a_m + a^{\dagger}_m)
+    \sum_{n} \sqrt{ \frac{\hbar \omega_m}{2m_j} } e_{n}^j (a_n - a^{\dagger}_n) \notag \\
+      & = -\frac{i\hbar}{2} \sum_{mn} \left( \frac{1}{2}\sum_{ij} \frac{R_i - R_j}{\sqrt{m_im_j}} G_{ij} e_m^i e_n^j \right) 
+      \left(\frac{\omega_n}{\omega_m}\right)^{1/2} (a_m + a^{\dagger}_m)(a_n - a^{\dagger}_n) \notag \\
+      & = -\frac{i\hbar}{2} V_{mn} \omega_n (a_m + a^{\dagger}_m)(a_n - a^{\dagger}_n)
+\end{align}
+with the term $V_{mn}$ given by:
+\begin{equation}
+    V_{mn} = \frac{1}{2\sqrt{\omega_m \omega_n}} \sum_{ij}\frac{R_i - R_j}{\sqrt{m_im_j}} G_{ij} e_m^i e_n^j
+\end{equation}
+The green kubo formula of thermal conductivity is given by:
+\begin{equation}
+    \kappa_{\alpha\beta} = 
+    \frac{1}{VT} \int_0^{\beta} d\tau \int_0^{+\infty} \langle J_{\alpha}(t + i\hbar\tau) J_{\beta} (0) \rangle
+\end{equation}
+
+\end{document}
