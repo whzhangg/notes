@@ -1,0 +1,93 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage[margin=1in]{geometry}
+\usepackage{verbatim}
+\usepackage{graphicx}
+
+\begin{document}
+
+\title{Quantum condition}
+\author{Wenhao}
+\date{\today}
+\maketitle
+In quantum mechanics, observables do not obey the commutative law of multiplication so
+it is necessary for us to study the value of $\zeta\eta - \eta\zeta$ when $\zeta$ and $\eta$
+are two observables. These new relationships are called \textbf{quantum conditions} or
+\textbf{commutation relationships} 
+\footnote{Principles of Quantum mechanics, Paul Dirac, 1958, Chapter IV}.
+
+Suppose $p$ and $q$ are a set of canonical momentum and coordinates, we can define the classic
+\textbf{Poisson bracket} of any two variables $u$ and $v$:
+\begin{equation}
+    \{ u,v \}_C = \sum_r \left\{ \frac{\partial u}{\partial q_r}\frac{\partial v}{\partial p_r} - \frac{\partial u}{\partial p_r}\frac{\partial v}{\partial q_r} \right\}
+\end{equation}
+Poisson brackets satisfy the following properties:
+\begin{gather}
+    \{u,v\}_C = - \{v,u\}_C \\
+    \{u,c\}_C = 0 \\
+    \begin{cases}
+        \{ u_1 + u_2, v\}_C = \{ u_1, v\}_C + \{u_2,v\}_C \notag \\
+        \{ u, v_1 + v_2\}_C = \{ u, v_1\}_C + \{u,v_2\}_C 
+    \end{cases}
+\end{gather}
+\begin{align}
+    \{u_1u_2,v\}_C 
+    &= \sum_r \left\{ \left( \frac{\partial u_1}{\partial q_r} u_2 + u_1\frac{\partial u_2}{\partial q_r}\right)\frac{\partial v}{\partial p_r} \right. 
+                \left.- \left( \frac{\partial u_1}{\partial p_r} u_2 + u_1\frac{\partial u_2}{\partial p_r}\right)\frac{\partial v}{\partial q_r} \right\} \notag \\
+    &= \{u_1,v\}_C u_2 + u_1 \{ u_2,v \}_C \notag \\
+    \{u,v_1v_2\}_C &= \{u,v_1\}_C v_2 + v_1 \{ u,v_2 \}_C
+\end{align}
+\begin{equation}
+    \{u \{v,w\}_C\}_C + \{v \{w,u\}_C\}_C + \{w \{u,v\}_C\}_C = 0
+\end{equation}
+
+Now we introduce \textbf{Quantum Poisson bracket}, which we assume to satisfy all the above properties with the same order. 
+These requirements sufficiently determine the form of the quantum poisson bracket. 
+writting down:
+\begin{align}
+    \{u_1u_2,v_1v_2\}_Q &= \{u_1,v_1v_2\}_Qu_2 + u_1\{u_2,v_1v_2\}_Q \notag \\
+                      &= \{u_1,v_1\}_Qv_2u_2 + v_1\{u_1,v_2\}_Qu_2 + u_1\{u_2,v_1\}_Qv_2 + u_1v_1\{ u_2,v_2 \}_Q \\
+    \{u_1u_2,v_1v_2\}_Q &= \{u_1u_2,v_1\}_Qv_2 + v_1\{u_1u_2,v_2\}_Q \notag \\
+                      &= \{u_1,v_1\}_Qu_2v_2 + u_1\{u_2,v_1\}_Qv_2 + v_1\{u_1,v_2\}_Qu_2 + v_1u_1\{ u_2,v_2 \}_Q        
+\end{align} 
+equating the above two results, we have the relationships:
+\begin{equation}
+    \{u_1,v_1\}_Q(u_2v_2 - v_2u_2) = (u_1v_1 - v_1u_1)\{u_2,v_2\}_Q
+\end{equation}
+since this equation should hold for $u_1,v_1$ independent of $u_2,v_2$, while 
+the commutative property of multiplication is no longer true ($uv-vu\neq 0$) in general. we thus require:
+\begin{align}
+    u_2v_2 - v_2u_2 \equiv [u_2, v_2] = c\{u_2,v_2\}_Q \\
+    u_1v_1 - v_1u_1 \equiv [u_1, v_1] = c\{u_1,v_1\}_Q
+\end{align}
+with $c$ some universial numerical factor independent of the observable $u$ and $v$. 
+
+we want the poisson bracket of two observables to be real, but $uv - vu$ will be 
+imaginary for two operators of real observable. Therefore, numerical factor $c$ must
+be purly imaginary.  In order that the theory agree with experiment, we must take 
+$c = i\hbar$, where $\hbar$ has the unit of action, giving the final result:
+\begin{equation}
+    [u,v] = i\hbar\{u,v\}_Q
+\end{equation}
+which gives the connection between quantum theory and classic theory.
+We observe that the commutator $uv - vu$ is of the order of $\hbar$. Approximating $\hbar \to 0$
+leads to $uv \approx vu$ and thus the classic limit.
+
+We can check that the quantum poisson bracket of two variables given by their commutation relationship
+satisfy all the properties of the classic poisson bracket. Therefore, we further assume that
+\emph{the quantum poisson bracket has the same value as the classic poisson bracket} 
+$\{u,v\}_Q = \{u,v\}_C$.
+
+In the classical mechanics, the poisson bracket of canonical coordinates and momenta having the value:
+\begin{gather}
+    \{q_r,q_s\} = \{p_r,p_s\} = 0\\
+    \{q_r,p_s\} = \delta_{rs}
+\end{gather}
+which gives the quantum commutation result:
+\begin{gather}
+    [q_r,q_s] = [p_r,p_s] = 0\\
+    [q_r,p_s] = i\hbar\delta_{rs}
+\end{gather}
+
+
+\end{document}
