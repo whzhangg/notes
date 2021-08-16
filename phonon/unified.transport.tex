@@ -184,15 +184,29 @@ which is the usual expression in RTA formulism. The off diagonal part of matrix 
 \begin{gather}
     i \left( \omega_{qv} n^{(1)}_{q,vv'} - n^{(1)}_{q,vv'} \omega_{qv'} \right) 
     + \frac{1}{2} \left( V_{qvv'} \frac{\partial \bar{N}_{qv'}}{\partial T} + \frac{\partial \bar{N}_{qv}}{\partial T} V_{qvv'} \right)
-    = - \frac{\Gamma_{qv}+ \Gamma_{qv'}}{2} n^{(1)}_{q,vv'} \\
-    n^{(1)}_{q,v\neq v'} = -\frac{\hbar}{k_b T} V_{qvv'} 
-    \frac{\omega_{qv}\bar{N}_{qv} (\bar{N}_{qv} + 1) + \omega_{qv'} \bar{N}_{qv} (\bar{N}_{qv'} + 1)}{2i(\omega_{qv} - \omega_{qv'}) + (\Gamma_{qv}+ \Gamma_{qv'})}
+    = - \frac{\Gamma_{qv}+ \Gamma_{qv'}}{2} n^{(1)}_{q,vv'} \notag 
 \end{gather}
+\begin{align}
+    n^{(1)}_{q,v\neq v'} &= - V_{qvv'} 
+        \frac{\partial \bar{N}_{qv} / \partial T + \partial \bar{N}_{qv'} / \partial T }{2i(\omega_{qv}-\omega_{qv'}) + (\Gamma_{qv} + \Gamma_{qv'}) } \notag \\
+    &= -\frac{\hbar}{k_b T^2} V_{qvv'}  
+    \frac{\omega_{qv}\bar{N}_{qv} (\bar{N}_{qv} + 1) + \omega_{qv'} \bar{N}_{qv} (\bar{N}_{qv'} + 1)}{2i(\omega_{qv} - \omega_{qv'}) + (\Gamma_{qv}+ \Gamma_{qv'})}
+\end{align}
 The diagonal part of $n^{(1)}_{q}$ contribute to thermal conductivity by:
 \begin{align}
-    \kappa_{off-diagonal} = \frac{\hbar^2}{k_b T^2} \frac{1}{NV} \sum_{q}\sum_{v\neq v'} &\frac{\omega_{qv} + \omega_{qv'}}{2} V_{qvv'} V_{qv'v} \notag \\
-    & \frac{\omega_{qv}\bar{N}_{qv} (\bar{N}_{qv} + 1) + \omega_{qv'} \bar{N}_{qv} (\bar{N}_{qv'} + 1)}{4(\omega_{qv} - \omega_{qv'})^2 + (\Gamma_{qv}+ \Gamma_{qv'})^2}(\Gamma_{qv}+ \Gamma_{qv'})
+    \kappa_{off-diagonal} &= -\frac{1}{2NV} \sum_{qv} \hbar\omega_{qv} \sum_{v'\neq v} \left( V_{qvv'}n^{(1)}_{q,v' v}  + n^{(1)}_{q,vv'} V_{qv'v} \right) \notag \\
+        &= \frac{1}{2NV} \sum_{qv,v'\neq v}\hbar\omega_{qv} \left( V_{qvv'} \frac{\partial \bar{N}_{qv} / \partial T + \partial \bar{N}_{qv'} / \partial T }{2i(\omega_{qv}-\omega_{qv'}) + (\Gamma_{qv} + \Gamma_{qv'}) } V_{qv'v} \right.
+        \left. + V_{qvv'}V_{qv'v} \frac{\partial \bar{N}_{qv} / \partial T + \partial \bar{N}_{qv'} / \partial T }{2i(\omega_{qv'}-\omega_{qv}) + (\Gamma_{qv} + \Gamma_{qv'}) } \right)  \notag \\
+        &= \frac{1}{NV}  \sum_{qv,v'\neq v} \hbar \omega_{qv} V_{qvv'}V_{qv'v} 
+        \frac{(\partial \bar{N}_{qv} / \partial T + \partial \bar{N}_{qv'} / \partial T )(\Gamma_{qv}+ \Gamma_{qv'})}{4(\omega_{qv} - \omega_{qv'})^2 + (\Gamma_{qv}+ \Gamma_{qv'})^2} \notag \\
+        &= \frac{1}{NV}  \sum_{qv,v'\neq v}\frac{\omega_{qv}+\omega_{qv'}}{2\omega_{qv}\omega_{qv'}} V_{qvv'}V_{qv'v} 
+        \frac{ \left( c_{v,qv}\omega_{qv'} + c_{v,qv'}\omega_{qv} \right)(\Gamma_{qv}+ \Gamma_{qv'}) }{4(\omega_{qv} - \omega_{qv'})^2 + (\Gamma_{qv}+ \Gamma_{qv'})^2}
+%    \frac{\hbar^2}{k_b T^2} \frac{1}{NV} \sum_{q}\sum_{v\neq v'} &\frac{\omega_{qv} + \omega_{qv'}}{2} V_{qvv'} V_{qv'v} \notag \\
+%    & \frac{\omega_{qv}\bar{N}_{qv} (\bar{N}_{qv} + 1) + \omega_{qv'} \bar{N}_{qv} (\bar{N}_{qv'} + 1)}{4(\omega_{qv} - \omega_{qv'})^2 + (\Gamma_{qv}+ \Gamma_{qv'})^2}(\Gamma_{qv}+ \Gamma_{qv'})
 \end{align}
+where $c_v$ is the specific heat capacity, using $c_v = \hbar\omega_{qv} \bar{N}_{qv}(\bar{N}_{qv}+1) / k_B T^2$ recover the result in the paper. Changing 
+$\omega_{qv}$ into $(\omega_{qv} + \omega_{qv'})/2$ in the last equality is for symmeterizing the experssion (exchange $v$ and $v'$ to obtain another expression and then average).
+% the expression do not change upon change of index, except for \omega_{qv}
 The total thermal conductivity is therefore:
 \begin{equation}
     \kappa = \kappa_{diagonal} + \kappa_{off-diagonal}

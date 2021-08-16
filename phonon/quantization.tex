@@ -193,10 +193,11 @@ $V^{(n)}(qv,q'v',\cdots,q^nv^n)$ is invariable to the permutation of $qv$, for e
 where we exchanged the $l'b'$ and $l''b''$ in the second equality and use the fact that $G_{lbl'b'l''b''}$ is invariant under permutation of index.
 
 \section{Perturbation expansion}
+\label{section:perturbationexpansion}
 \subsection{Phonon propagator}
 We define the phonon green's function as:
 \begin{align}
-    G(qvv';t) = \langle i | \mathcal{T}[A_{qv}(t)A_{qv'}^{\dagger}(0)]| i \rangle
+    G(qvv';t) = \langle i | \mathcal{T}[A_{qv}(t)A_{qv'}^{\dagger}(0)]| i \rangle \label{green_A}
 \end{align}
 where $\mathcal{T}[\cdots]$ is the time ordering operator:
 \begin{equation}
@@ -230,7 +231,7 @@ of trace:
 this enable us to define the fourier transformation of $G(qvv';\tau )$ as follows:
 \begin{align}
     G(qvv';\tau) = \sum_{n = - \infty}^{\infty} G(qvv';i\omega_n) e^{i\omega_n\tau} \\
-    G(qvv';i\omega_n) = \frac{1}{2\beta\hbar} \int_{-\beta\hbar}^{\beta\hbar} G(qvv';\tau) e^{-i\omega_n\tau} d\tau \\
+    G(qvv';i\omega_n) = \frac{1}{2\beta\hbar} \int_{-\beta\hbar}^{\beta\hbar} G(qvv';\tau) e^{-i\omega_n\tau} d\tau
 \end{align} 
 In the non-interacting case, we have the bare phonon propagator:
 \begin{align}
@@ -266,7 +267,9 @@ So that for the green's function
 \end{equation}
 where now the thermal average is only with respect to non-perturbed Hamiltonian. 
 Writing out the form of $S$ in the numerator and use Wick's theorem at finite temperature to factor the thermal average product of operators into 
-product of phonon propagater, we can separate the connected diagrams and disconnected diagrams:
+product of phonon propagater, we can separate the connected diagrams and disconnected diagrams
+(note, we should \textbf{first} use Wick's theorem to write the numerator and denominator into product of
+propagators, then cancell the disconnected parts)
 \begin{align}
     &\sum_{n=0}^{\infty} \frac{1}{n!} \left( -\frac{1}{\hbar} \right)^n 
     \int_0^{\beta\hbar} d\tau_1 \cdots \int_0^{\beta\hbar} d\tau_n \langle \mathcal{T}[ A^H_{qv}(\tau) A_{qv'}^{\dagger}(0) H_I(\tau_1) \cdots H_I(\tau_n) ] \rangle_0  \notag \\
@@ -523,7 +526,11 @@ To see how it give raise to self-energy, we perform transformation into frequenc
 \end{align}
 The self-energy is defined to be:
 \begin{equation}
-    G(q;i\omega_n) = G_0(q;i\omega_n) + \frac{1}{\beta\hbar} G_0(q;i\omega_n) \Sigma(q;i\omega_n) G(q;i\omega_n)
+    G(q;i\omega_n) = G_0(q;i\omega_n) + \beta\hbar G_0(q;i\omega_n) \Sigma(q;i\omega_n) G(q;i\omega_n)
+\end{equation}
+or equivalently
+\begin{equation}
+    G(q;i\omega_n)^{-1} = G_0(q;i\omega_n)^{-1} - \beta\hbar \Sigma(q;i\omega_n) 
 \end{equation}
 so that we find the self-energy in the above expression:
 \begin{equation}
@@ -682,5 +689,73 @@ and the analogy of Eq.\ref{wick1} for bosons are therefore:
     \langle ABC \cdots XYZ  \rangle = & \langle AB  \rangle \langle  C \cdots XYZ \rangle  + \langle AC\rangle  \langle BD \cdots XYZ  \rangle  \notag \\
                                                 & + \cdots + \langle AZ\rangle  \langle BC \cdots XY  \rangle \label{wick2}
 \end{align}
+
+\pagebreak
+\section*{Appendix E. Phonon green's function in terms of $a_{qv}$ and $a_{qv}^{\dagger}$}
+In Section.\ref{section:perturbationexpansion}, we define the green's function as:
+\begin{align}
+    G(qvv';t) = \langle i | \mathcal{T}[A_{qv}(t)A_{qv'}^{\dagger}(0)]| i \rangle \notag
+\end{align}
+which is convenient to treat anharmonic interaction. 
+
+In this appendix let's consider 
+the green's function in terms of phonon creation and annihilation operator $a_{qv}$ and $a^{\dagger}_{qv}$:
+\begin{equation}
+    D(qvv';t) = \langle i | \mathcal{T}[a_{qv}(t)a_{qv'}^{\dagger}(0)]| i \rangle \notag
+\end{equation}
+at finite temperature, taking real variable $\tau = it$, we define the imaginary time green's function
+\begin{align}
+    D(qvv';\tau) = 
+    \begin{cases}
+        \frac{1}{Z} Tr\left\{ e^{-(\beta-\tau/\hbar)H} a_{qv} e^{-\tau H/\hbar } a_{qv'}^{\dagger} \right\}, &\tau > 0 \\
+        \frac{1}{Z} Tr\left\{ e^{-\beta H} a_{qv'}^{\dagger} e^{\tau H/\hbar } a_{qv} e^{- \tau H/\hbar } \right\}, &\tau < 0 \\
+    \end{cases}
+\end{align}
+with $-\beta\hbar < \tau < \beta \hbar$,
+$D{qvv';\tau}$ has a period of $\beta\hbar$, we calculate the free phonon green's function:
+\textbf{for $\tau > 0$:}
+\begin{align}
+    D_{qvv';\tau} &= \frac{1}{Z} \sum_{ij} 
+                    \langle i | e^{-(\beta-\tau/\hbar)H} a_{qv} e^{-\tau/\hbar H} | j\rangle \langle j | a^{\dagger}_{qv'} | i \rangle \notag \\
+                  &= \delta_{vv'} e^{-\tau\omega_{qv}} \frac{1}{Z} \sum_i e^{-\beta \varepsilon_i} \langle i | a_{qv} a^{\dagger}_{qv} | i\rangle \notag \\
+                  &= \delta_{vv'} e^{-\tau\omega_{qv}} \langle n_{qv} + 1 \rangle 
+\end{align}
+\textbf{for $\tau < 0$:}
+\begin{align}
+    D_{qvv';\tau} &= \frac{1}{Z} \sum_{ij} 
+                    \langle i | e^{-\beta H} a^{\dagger}_{qv} | j \rangle \langle j | e^{\tau/\hbar H}a_{qv'}e^{-\tau/\hbar H} | i \rangle \notag \\
+                  &= \delta_{vv'} e^{-\tau\omega_{qv}} \frac{1}{Z} \sum_i e^{-\beta \varepsilon_i} \langle i | a^{\dagger}_{qv} a_{qv} | i\rangle \notag \\
+                  &= \delta_{vv'} e^{-\tau\omega_{qv}} \langle n_{qv} \rangle 
+\end{align}
+So that 
+\begin{align}
+    D(qvv';\tau) = \delta_{vv'}
+    \begin{cases}
+        e^{-\tau\omega_{qv}} \langle n_{qv} + 1 \rangle, &\tau > 0 \\
+        e^{-\tau\omega_{qv}} \langle n_{qv} \rangle , &\tau < 0 \\
+    \end{cases}
+\end{align}
+
+We can verify the periodicity as:
+\begin{align}
+    D(qv;\tau) &= \frac{e^{-\tau\omega_{qv}}}{e^{\beta\hbar\omega_{qv}}- 1} \ \ (\tau < 0) \notag \\
+    D(qv;\tau+\beta\hbar) &= \frac{e^{-(\tau+\beta\hbar)\omega_{qv}} e^{\beta\hbar\omega_{qv}}}{e^{\beta\hbar\omega_{qv}}- 1} 
+                         = \frac{e^{-\tau\omega_{qv}}}{e^{\beta\hbar\omega_{qv}}- 1} \notag
+\end{align}
+
+The fourier transformation is given similar to the previous case:
+\begin{gather}
+        D(qvv';\tau) = \sum_{n = - \infty}^{\infty} D(qvv';i\omega_n) e^{i\omega_n\tau} \\
+        D(qvv';i\omega_n) = \frac{1}{\beta\hbar} \int_{0}^{\beta\hbar} D(qvv';\tau) e^{-i\omega_n\tau} d\tau
+\end{gather}
+and $\omega_n$ take discrete value $\omega_n = 2n\pi/\beta\hbar$, we have:
+\begin{align}
+    D(qvv';i\omega_n) &= \frac{1}{\beta\hbar} \int_{0}^{\beta\hbar} e^{-\tau\omega_{qv}} \langle n_{qv} + 1 \rangle e^{-i\omega_n\tau} d\tau \notag \\
+                    &= \frac{1}{\beta\hbar} \frac{e^{\beta\hbar\omega_{qv}}}{e^{\beta\hbar\omega_{qv}}- 1} \int_0^{\beta\hbar} e^{-(\omega_{qv} + i\omega_n)\tau} d\tau \notag \\
+                    &= - \frac{1}{\beta\hbar} \frac{e^{\beta\hbar\omega_{qv}}}{e^{\beta\hbar\omega_{qv}}- 1} \frac{e^{-(\omega_{qv} + i\omega_n)\beta\hbar} - 1}{\omega_{qv} + i\omega_n} \notag \\
+                    &= \frac{1}{\beta\hbar} \frac{1}{\omega_{qv} + i\omega_n}\frac{e^{\beta\hbar\omega_{qv}}- e^{-i\omega_n \beta\hbar}}{e^{\beta\hbar\omega_{qv}}- 1}  \notag \\
+                    &= \frac{1}{\beta\hbar} \frac{1}{\omega_{qv} + i\omega_n}
+\end{align}
+where in the last equality, we use the fact that $\omega_n = 2n\pi/\beta\hbar$ and $e^{-i\omega_n \beta\hbar} = 1$
 
 \end{document}
