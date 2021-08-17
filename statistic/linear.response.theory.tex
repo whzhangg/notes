@@ -1,0 +1,99 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage[margin=0.8in]{geometry}
+\usepackage{verbatim}
+\usepackage{graphicx}
+
+\begin{document}
+
+\title{Linear Response Theory}
+\author{Wenhao}
+\date{\today}
+\maketitle
+
+\section{Response functions}
+We consider a time dependent Hamiltonian $H$, which is acted upon by an external time dependent field
+$f(t)$ which couple linearly to an observable $B$ of the system:
+\begin{equation}
+    H(t) = H_0 + f(t)B
+\end{equation} 
+at $t \le t_0$, the system is in its groud state, at $t = t_0$ the external field is turned on and 
+the system begin to evolve adiabatically. 
+The time evolution of the system is given by:
+\begin{align}
+    | \Psi_n(t) \rangle &= U(t,t_0) | \Psi_n(t_0) \rangle \notag \\
+                     &= e^{-\frac{i}{\hbar}H_0(t-t_0)} U_I(t,t_0) | \Psi_n(t_0) \rangle \notag 
+\end{align}
+$U_I(t,t_0)$ is given by the equation of motion:
+\begin{equation}
+    i\hbar \frac{\partial}{\partial t} U_I(t,t_0) = f(t) B(t-t_0) U_I(t,t_0) \label{eqmotion}
+\end{equation}
+with the initial condition $U_I(t_0,t_0) = 1$. Making the approximation that $U_I(t,t_0) = 1$ on the 
+right hand side of the Eq.\ref{eqmotion} and integrate from time $t_0 \to t$, we obtain the first order approximation:
+\begin{equation}
+    U_I^{(1)}(t,t_0) = 1 - \frac{i}{\hbar} \int_{t_0}^{t} f(t') B(t'-t_0) dt'
+\end{equation}
+
+The thermal average of another observable of the system $A$ is given by:
+\begin{equation}
+    \langle A\rangle_0 = \frac{1}{Z} \sum_n e^{-\beta E_n} \langle \Psi_n(t_0) | A | \Psi_n(t_0) \rangle 
+\end{equation}
+and since we consider adiabatic evolution, at a later time $t$, the thermal average is 
+given by:
+\begin{equation}
+    \langle A\rangle(t) = \frac{1}{Z} \sum_n e^{-\beta E_n} \langle \Psi_n(t) | A | \Psi_n(t) \rangle 
+\end{equation}
+where the probability of finding each state is kept constants (instead of $e^{-\beta H}$ as an operator).
+Now, inserting the evolution of states, we obtain:
+\begin{equation}
+    \langle A\rangle(t) - \langle A\rangle_0 = -\frac{i}{\hbar} \int_{t_0}^{t} \langle [ A(t), B(t') ] \rangle_0 f(t') dt'
+\end{equation} 
+where is thermal average is taken at the time independent equilibrium ensemble, and the time dependence of
+the operator $A(t)$ and $B(t)$ is given by the Heisenburg form:
+\begin{equation}
+    B(t) = e^{\frac{i}{\hbar}H_0t} B e^{-\frac{i}{\hbar}H_0t}
+\end{equation}
+taking $\tau = t - t' > 0$, we can define:
+\begin{equation}
+    \chi_{AB}(\tau) = -\frac{i}{\hbar} \theta(\tau) \langle [ A(\tau), B ] \rangle_0 \label{responsefunction}
+\end{equation}
+so that 
+\begin{equation}
+    \langle A\rangle(t) = \langle A\rangle_0 + \int_{0}^{t-t_0} \chi_{AB}(\tau) f(t - \tau) d\tau
+\end{equation} 
+where we changed the integral variable from $t'$ to $\tau = t - t'$. 
+
+Because of the $\theta(\tau)$ in Eq.\ref{responsefunction}, $\chi_{AB}(\tau)$ is called the retarded response function.
+We have previously taken the external field to turn on instantly at $t_0$, however, if we allow the field to switch on
+slowly, as $f(t) \to 0$ as $t_0 \to -\infty$, the result at time $t$ should remain the same, so we 
+can also take:
+\begin{equation}
+    \langle A\rangle(t) = \langle A\rangle_0 + \int_{0}^{\infty} \chi_{AB}(\tau) f(t - \tau) d\tau \label{response}
+\end{equation} 
+
+\section{Frequency domain}
+Consider a switching on (real) periodic perturbation, which vanish for $t \to -\infty$:
+\begin{equation}
+    f(t) = f_{\omega}e^{-i(\omega + i\eta) t} + c.c.
+\end{equation}
+$\eta$ is a positive and $\eta^{-1}$ give a time scale that longer than period of the perturbation.
+We can thus apply the linear response formalism and take the limit $\eta \to 0^+$ at the 
+end of the calculation. If this limit exist, it should describe the reponse of the 
+system to a steady periodic field that has been applied long enough so that initial 
+condition is ignorable.
+
+Inserting the periodic perturbation into Eq.\ref{response} gives:
+\begin{equation}
+    \langle A\rangle(t) - \langle A\rangle_0 = \chi_{AB}(\omega) f_{\omega} e^{-i\omega t} + c.c.
+\end{equation}
+where 
+\begin{equation}
+    \chi_{AB}(\omega) = -\frac{i}{\hbar} \lim_{\eta\to 0^+} \int_{0}^{\infty} \langle [ A(\tau), B ] \rangle_0 e^{i(\omega+i\eta)\tau} d\tau
+\end{equation}
+For any general perturbation, we fourier transform between $t$ and $\omega$ is given by:
+\begin{gather}
+    f(t) = \frac{1}{2\pi} \int_{-\infty}^{\infty} f(\omega) e^{i\omega t} d\omega \\
+    f(\omega) = \int_{-\infty}^{\infty} f(t) e^{i\omega t} dt
+\end{gather}
+
+\end{document}
