@@ -13,12 +13,129 @@
 
 \section{Response functions}
 We consider a time dependent Hamiltonian $H$, which is acted upon by an external time dependent field
-$f(t)$ which couple linearly to an observable $B$ of the system:
+$F(t)$ which couple linearly to an observable $B$ of the system:
 \begin{equation}
-    H(t) = H_0 + f(t)B
+    H(t) = H_0 - AF(t)
 \end{equation} 
 at $t \le t_0$, the system is in its groud state, at $t = t_0$ the external field is turned on and 
 the system begin to evolve adiabatically. 
+In the classical theory, the phase space probability $\rho$ evolve as:
+\begin{eqnarray}
+    \frac{\partial \rho}{\partial t} = \{ H(t), \rho\}
+\end{eqnarray}
+where $\{,\}$ is the poisson bracket. 
+In linear approximation $\rho(t) = \rho_0 + \Delta \rho$, the equation of motion is:
+\begin{gather}
+    \frac{\partial \rho(t)}{\partial t} = \{ H_0, \rho(t)\} + \{H', \rho_0\} \notag \\
+    \frac{\partial \Delta \rho(t)}{\partial t} = \{ H_0, \Delta \rho(t)\} - \{A, \rho_0\}F(t) \notag \\
+\end{gather}
+
+The change of the observed quantity $B$ is given by:
+\begin{align}
+    \Delta B(t) &= \int dqdp \Delta \rho(t) B(q,p) \notag \\
+               &= -\int dqdp \int_{-\infty}^{t} \{A, \rho_0\} B(t-t') F(t') dt'
+\end{align}
+and the time dependence of operator $B$ is given by the Heisenburg equation:
+\begin{equation}
+    \dot{B}(p,q) = \{B,H_0\}
+\end{equation}
+The response function is defined by the reponse of an observable after time $t$ of a unit pulse:
+\begin{align}
+    \phi_{BA} (t) &= -\int dqdp \int_{-\infty}^{t} \{A, \rho_0\} B(t-t') \delta(t') dt' \notag \\
+                &= -\int dqdp \{A, \rho_0\} B(t) \label{def_phi_t}
+\end{align}
+so that 
+\begin{equation}
+    \Delta B(t) = \int_{-\infty}^{t} \phi_{BA} (t-t') F(t') dt'
+\end{equation}
+which is summed over all the past time.
+
+We define the frequency components of the response function as
+\footnote{this follows the definition of \emph{Kubo 1957} Eq.2.21, in terms
+of the more conventional way, we have:
+\begin{equation}
+    \chi_{BA}(\omega) = \lim_{\eta\to 0^+} \int_{0}^{\infty} \phi_{BA} (t) e^{i(\omega+i\eta)\tau} dt
+\end{equation}
+}
+:
+\begin{equation}
+    \chi_{BA}(\omega) = \lim_{\eta\to 0^+} \int_{0}^{\infty} \phi_{BA} (t) e^{-\eta t-i\omega t} dt
+\end{equation}
+
+Let's consider the case where a (constant pertrubation) $F$ is applied continuously from $t = -\infty$ to 
+$t = 0$ and stops. The system then relax throught internal interaction. The observable will
+follow:
+\begin{align}
+    \Delta B(t) &= \int_{-\infty}^{0} \phi_{BA} (t-t') dt' F \notag \\
+                &= \int_{t}^{\infty} \phi_{BA} (t') dt' F \notag \\
+                &= \Phi_{BA} (t) F
+\end{align}
+and
+\begin{equation}
+    \Phi_{BA} (t) = \lim_{\eta\to 0^+} \int_{t}^{\infty} \phi_{BA} (t') e^{-\eta t'} dt'
+\end{equation}
+
+\section{Response functions in Quantum case}
+In quantum case, the evolution of density matrix $\rho$ is given by:
+\begin{gather}
+    \frac{d}{dt} \rho'(t) = \frac{1}{i\hbar} [ H(t), \rho'(t) ] \\
+    \rho'(t) = \rho_0 + \Delta\rho(t)
+\end{gather}
+and 
+\begin{equation}
+    \phi_{BA} (t) = - \frac{1}{i\hbar} \text{Tr} \int_{-\infty}^{t} [A, \rho_0] B(t-t') \delta(t') dt'
+\end{equation}
+with the time dependence of $B$ given by:
+\begin{equation}
+    \dot{B}(t) = \frac{1}{i\hbar} [B(t), H_0]
+\end{equation}
+with $B(0) = B$ in the Schrodinger's picture.
+\begin{align}
+    \phi_{BA} (t) &=\frac{1}{i\hbar} \text{Tr} [\rho_0, A] B(t) \\
+                &= \frac{1}{i\hbar} \text{Tr} \rho_0 [A, B(t)] \\
+                &= \frac{1}{i\hbar} \langle [A, B(t)] \rangle_0
+\end{align}
+
+We can find the following relationship:
+\begin{equation}
+    [\rho_0, A] = i\hbar \int_0^{\beta} \rho_0 \dot{A}(-i\hbar\lambda) d\lambda
+\end{equation}
+So that we can express:
+\begin{align}
+    \phi_{BA} (t) &= \int_0^{\beta} \text{Tr} \rho_0 \dot{A}(-i\hbar\lambda) B(t) d\lambda \\
+    \chi_{BA}(\omega) &= 
+    \lim_{\eta\to 0^+} \int_0^{\beta} d\lambda \int_{0}^{\infty} e^{-\eta t-i\omega t} dt \text{Tr} \rho_0 \dot{A}(-i\hbar\lambda) B(t)
+\end{align}
+
+%For the function $\Phi_{BA}(t)$, we can obtain:
+%\begin{align}
+%    \Phi_{BA} (t) = \int_{t}^{\infty} \phi_{BA} (t') dt' \notag \\
+%\end{align}
+\section{Linear response formula of conductivity}
+We consider an uniform external electric field (potential zero is arbitrary):
+\begin{gather}
+    H'(t) = -e \sum_i x_i E(t) = - A E(t) \\
+    \dot{A} = e \sum_i \dot{x}_i = J
+\end{gather}
+
+where $x_i$ is the position operator of the $i^{th}$ particle. The current operator is 
+defined to be:
+\begin{equation}
+    J_{\mu} = e \sum_i \dot{x}_i
+\end{equation}
+The response function is given by:
+\begin{align}
+    \phi_{\mu\nu} (t) &= \int_0^{\beta} \langle J_{\nu}(-i\hbar\lambda) J_{\mu}(t) \rangle_0 d\lambda \\
+    \chi_{\mu\nu}(\omega)&= 
+    \lim_{\eta\to 0^+} \int_0^{\beta} d\lambda \int_{0}^{\infty} e^{-\eta t-i\omega t} dt  \langle J_{\nu}(-i\hbar\lambda) J_{\mu}(t) \rangle_0
+\end{align}
+and the conductivity is given by:
+\begin{equation}
+    \sigma_{\mu\nu} = \int_0^{\beta} d\lambda \int_{0}^{\infty} dt \langle J_{\nu}(-i\hbar\lambda) J_{\mu}(t) \rangle_0
+\end{equation}
+
+\pagebreak
+\section{From Q.T.E.L.}
 The time evolution of the system is given by:
 \begin{align}
     | \Psi_n(t) \rangle &= U(t,t_0) | \Psi_n(t_0) \rangle \notag \\
