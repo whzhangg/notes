@@ -76,31 +76,103 @@ and
 \end{equation}
 
 \section{Response functions in Quantum case}
-In quantum case, the evolution of density matrix $\rho$ is given by:
-\begin{gather}
-    \frac{d}{dt} \rho'(t) = \frac{1}{i\hbar} [ H(t), \rho'(t) ] \\
-    \rho'(t) = \rho_0 + \Delta\rho(t)
-\end{gather}
-and 
-\begin{equation}
-    \phi_{BA} (t) = - \frac{1}{i\hbar} \text{Tr} \int_{-\infty}^{t} [A, \rho_0] B(t-t') \delta(t') dt'
-\end{equation}
-with the time dependence of $B$ given by:
-\begin{equation}
-    \dot{B}(t) = \frac{1}{i\hbar} [B(t), H_0]
-\end{equation}
-with $B(0) = B$ in the Schrodinger's picture.
+In quantum case, we wish to find:
 \begin{align}
-    \phi_{BA} (t) &=\frac{1}{i\hbar} \text{Tr} [\rho_0, A] B(t) \\
-                &= \frac{1}{i\hbar} \text{Tr} \rho_0 [A, B(t)] \\
-                &= \frac{1}{i\hbar} \langle [A, B(t)] \rangle_0
+    \langle B \rangle(t) - \langle B \rangle_0 
+    &= \sum_n \langle n, t | \rho B | n, t \rangle - \sum_n \langle n, -\infty | \rho B | n, -\infty \rangle \notag \\
+    &= \sum_n \langle n, t | \rho B | n, t \rangle - \sum_n \langle n, -\infty | \rho_{0} B | n, -\infty \rangle
 \end{align}
-
-We can find the following relationship:
+where in the second equality, we use the adabatic approximation to assume that the probability of 
+the states remain the same as in the unperturbed case. The states evolve according to the Schrodinger equation:
+\begin{align}
+    U(t,-\infty) &= e^{-i\frac{H_0}{h}t} U_I(t,-\infty) \notag \\
+                 &= e^{-i\frac{H_0}{h}t} \exp\left[ -\frac{i}{\hbar} \int_{-\infty}^{t} H_I'(t') dt'  \right] \notag \\
+                 &\approx e^{-i\frac{H_0}{h}t} \left( 1 + \frac{i}{\hbar} \int_{-\infty}^{t} A(t')f(t') dt' \right)
+\end{align}
+so the expectation value of $B$ at time t is given by:
+\begin{align}
+    \langle B \rangle(t) &=
+    \sum_n \langle n, -\infty | \left( 1 - \frac{i}{\hbar} \int_{-\infty}^{t} A(t')f(t') dt' \right) e^{i\frac{H_0}{h}t} \rho_{eq} B
+    e^{-i\frac{H_0}{h}t} \left( 1 + \frac{i}{\hbar} \int_{-\infty}^{t} A(t')f(t') dt' \right) | n, -\infty \rangle \notag \\
+    &\approx \langle B \rangle_0  + \frac{i}{\hbar} \int_{-\infty}^{t} dt' 
+    \left[ \sum_n \langle n, -\infty | e^{i\frac{H_0}{h}t} \rho_{eq} B e^{-i\frac{H_0}{h}t} A(t')f(t') - A(t')f(t') e^{i\frac{H_0}{h}t} \rho_{eq} B e^{-i\frac{H_0}{h}t} A(t')f(t') | n, -\infty \rangle \right] \notag \\
+    & = \langle B \rangle_0  + \frac{i}{\hbar} \int_{-\infty}^{t} dt' 
+    \text{Tr} \rho_{eq} [B(t),A(t')]
+\end{align}
+So that the difference is given by:
 \begin{equation}
-    [\rho_0, A] = i\hbar \int_0^{\beta} \rho_0 \dot{A}(-i\hbar\lambda) d\lambda
+    \Delta B(t) = \frac{i}{\hbar} \int_{-\infty}^{t} dt' \text{Tr} \rho_{eq} [B(t),A(t')]
 \end{equation}
-So that we can express:
+The response function is given by
+\begin{align}
+    \phi_{BA} (t) &=\frac{i}{\hbar} \langle [B(t),A] \rangle_0 \\
+                &= -\frac{i}{\hbar} \text{Tr} \rho_0 [A, B(t)] \\
+                &= \frac{1}{i\hbar} \text{Tr} [\rho_0, A] B(t)
+\end{align}
+%In quantum case, the evolution of density matrix $\rho$ is given by:
+%\begin{align}
+%    \rho(t) &= U^{-1}(t,-\infty) \rho U(t,-\infty) \notag \\
+%            &= U_{I}^{-1}(t,-\infty) e^{it/\hbar H_0}\rho e^{-it/\hbar H_0}  U_{I}(t,-\infty) \notag \\
+%            &= U_{I}^{-1}(t,-\infty) \rho_{eq} U_{I}(t,-\infty)
+%\end{align}
+%where $U$ is the time evolution operator and $U_{I}$ is the time evolution operator due to the perturbation.
+%\begin{equation}
+%    U_I(t,-\infty) = exp\left( -\frac{i}{\hbar} \int_{-\infty}^{t} H'(t') dt'  \right)
+%\end{equation}
+%Now, $H'(t')$ is given by $H'(t') = -A(t')f(t')$. To linear approximation, we have:
+%\begin{equation}
+%    U_I(t,-\infty) \approx 1 + \frac{i}{\hbar} \int_{-\infty}^{t} A(t')f(t') dt' 
+%\end{equation}
+%And the density matrix is therefore:
+%\begin{align}
+%    \rho(t) &\approx \left( 1 - \frac{i}{\hbar} \int_{-\infty}^{t} A(t')f(t') dt' \right) \rho_{eq} 
+%                    \left( 1 + \frac{i}{\hbar} \int_{-\infty}^{t} A(t')f(t') dt' \right) \notag \\
+%            &\approx \rho_{eq} + \frac{i}{\hbar} \int_{-\infty}^{t} [\rho_{eq} , A(t') ]f(t') dt' 
+%\end{align}
+%The evolution of density matrix $\rho$ is given by:
+%\begin{gather}
+%    \frac{d}{dt} \rho_I(t) = \frac{1}{i\hbar} [ H_I'(t), \rho_I(t) ] 
+%\end{gather}
+%which is solved by, in linear order:
+%\begin{equation}
+%    \rho_I(t) \approx \rho_0 + \frac{i}{\hbar} \int_{-\infty}^{t}  [A(t'),\rho_{eq} ] f(t') dt'
+%\end{equation}
+%The change in expectation value of operator $B$ is then:
+%\begin{align}
+%    \Delta \langle B \rangle (t) &= \text{Tr} d\rho_I(t)B_I(t) \notag \\
+%                &= \frac{i}{\hbar} \text{Tr}\int_{-\infty}^{t} [A(t'),\rho_{eq} ] B(t) f(t') dt' \notag \\
+%                &= \frac{i}{\hbar} \text{Tr}\int_{-\infty}^{t} [A(t'),\rho_{eq} ] B(t-t') f(t') dt'
+%\end{align}
+%and 
+%\begin{equation}
+%    \phi_{BA} (t) = - \frac{1}{i\hbar} \text{Tr} [A, \rho_0] B(t-t') 
+%\end{equation}
+%with the time dependence of $B$ given by:
+%\begin{equation}
+%    \dot{B_I}(t) = \frac{1}{i\hbar} [B(t), H_0]
+%\end{equation}
+%with $B(0) = B$ in the Schrodinger's picture.
+%\begin{align}
+%    \phi_{BA} (t) &=\frac{1}{i\hbar} \text{Tr} [\rho_0, A] B(t) \\
+%                &= \frac{1}{i\hbar} \text{Tr} \rho_0 [A, B(t)] \\
+%                &= \frac{1}{i\hbar} \langle [A, B(t)] \rangle_0
+%\end{align}
+Using the identity:
+
+\begin{gather}
+    [A, e^{-\beta H_0}] = e^{-\beta H_0} \int_0^{\beta} e^{\lambda H_0} [H_0, A] e^{-\lambda H_0} d\lambda 
+    = e^{-\beta H_0} \int_0^{\beta} e^{\lambda H_0} (-i\hbar) \dot{A} e^{-\lambda H_0} d\lambda 
+\end{gather}
+\begin{align}
+    [\rho_{eq}, A] &=  i\hbar \rho_{eq} \int_0^{\beta} e^{\lambda H_0} \dot{A} e^{-\lambda H_0} d\lambda \notag \\
+                &=  i\hbar  \int_0^{\beta} \rho_{eq} \dot{A}(-i\hbar\lambda) d\lambda
+\end{align}
+so that $\exp(-iH_0t/\hbar) \to \exp( -H_0\lambda ) $
+%We can find the following relationship:
+%\begin{equation}
+%    [\rho_0, A] = i\hbar \int_0^{\beta} \rho_0 \dot{A}(-i\hbar\lambda) d\lambda
+%\end{equation}
+So that we can arrive at the formula given by Kubo:
 \begin{align}
     \phi_{BA} (t) &= \int_0^{\beta} \text{Tr} \rho_0 \dot{A}(-i\hbar\lambda) B(t) d\lambda \\
     \chi_{BA}(\omega) &= 
@@ -111,6 +183,7 @@ So that we can express:
 %\begin{align}
 %    \Phi_{BA} (t) = \int_{t}^{\infty} \phi_{BA} (t') dt' \notag \\
 %\end{align}
+\pagebreak
 \section{Linear response formula of conductivity}
 We consider an uniform external electric field (potential zero is arbitrary):
 \begin{gather}
@@ -131,8 +204,45 @@ The response function is given by:
 \end{align}
 and the conductivity is given by:
 \begin{equation}
-    \sigma_{\mu\nu} = \int_0^{\beta} d\lambda \int_{0}^{\infty} dt \langle J_{\nu}(-i\hbar\lambda) J_{\mu}(t) \rangle_0
+    \sigma_{\mu\nu} = \frac{1}{V} \int_0^{\beta} d\lambda \int_{0}^{\infty} dt \langle J_{\nu}(-i\hbar\lambda) J_{\mu}(t) \rangle_0
 \end{equation}
+
+\section{Linear response formula of thermal conductivity}
+Derivation of the expression of thermal conductivity is provided by \emph{Allen and Feldman, 1993}. 
+The total current operator is given by:
+\begin{equation}
+    J_{\alpha} = \sum_{ij\beta\gamma} (R_{i\alpha} - R_{j\alpha}) \Phi_{ij}^{\beta\gamma} u_{i\beta} \dot{u}_{j\gamma}
+\end{equation}
+We consider the Hamiltonian of the system to be:
+\begin{equation}
+    H = \int h(x)  d^3x
+\end{equation}
+where $h(x) = \sum_i h_i \delta(x - x_i)$ consists of the vibration energy of each atom $i$. 
+The local current operator $S(x)$ is related to $h(x)$ by the continuity equation:
+\begin{gather}
+    \frac{\partial h(x)}{\partial t} + \nabla\cdot S(x) = 0 \\
+    J = \int S(x) d^3x
+\end{gather}
+The density matrix can be written as:
+\begin{equation}
+    \rho = \frac{1}{Z} e^{- \int \beta(x) h(x) d^3x}
+\end{equation}
+and $\beta(x) \approx \beta[1-\delta T(x)/T]$ with $T$ the average temperature, then
+\begin{equation}
+    \rho = \frac{1}{Z} e^{- \int \beta[1-\delta T(x)/T] h(x) d^3x} = \frac{1}{Z} e^{- \beta (H + H')}
+\end{equation}
+with $H'$:
+\begin{align}
+    H' &= -\frac{1}{T} \int \delta T(x)h(x) d^3x \notag \\
+        & = \frac{1}{T} \int d^3x \int _{-\infty}^{0} dt \delta T(x) \nabla\cdot S(x,t) \notag \\
+        & = - \left( \frac{1}{T} \int d^3x \int _{-\infty}^{0} dt S(x,t) \right) \nabla T \notag \\
+        & = - \left( \frac{1}{T} \int _{-\infty}^{0} dt J(t) \right) \nabla T 
+\end{align}
+where we take $\nabla T$ to be uniform. Now, we can apply the Kubo's formula:
+\begin{align}
+    \kappa_{\mu\nu} (t) & = \frac{1}{VT} \int_0^{\beta} \langle J_{\nu}(-i\hbar\lambda) J_{\mu}(t) \rangle d\lambda \\
+    \kappa_{\mu\nu} (\omega) & = \frac{1}{VT} \int_0^{\beta} d\lambda \int_{0}^{\infty} e^{-i\omega t} dt \langle J_{\nu}(-i\hbar\lambda) J_{\mu}(t) \rangle 
+\end{align}
 
 \pagebreak
 \section{From Q.T.E.L.}
