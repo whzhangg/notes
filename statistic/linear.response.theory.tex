@@ -12,43 +12,76 @@
 \maketitle
 
 \section{Response functions}
-We consider a time dependent Hamiltonian $H$, which is acted upon by an external time dependent field
-$F(t)$ which couple linearly to an observable $B$ of the system:
+we wish to find the change of observable $B$ with a perturbation term in addition to the equilibrium Hamiltonian 
+that is turned on at 
 \begin{equation}
-    H(t) = H_0 - AF(t)
-\end{equation} 
-at $t \le t_0$, the system is in its groud state, at $t = t_0$ the external field is turned on and 
-the system begin to evolve adiabatically. 
-In the classical theory, the phase space probability $\rho$ evolve as:
-\begin{eqnarray}
-    \frac{\partial \rho}{\partial t} = \{ H(t), \rho\}
-\end{eqnarray}
-where $\{,\}$ is the poisson bracket. 
-In linear approximation $\rho(t) = \rho_0 + \Delta \rho$, the equation of motion is:
-\begin{gather}
-    \frac{\partial \rho(t)}{\partial t} = \{ H_0, \rho(t)\} + \{H', \rho_0\} \notag \\
-    \frac{\partial \Delta \rho(t)}{\partial t} = \{ H_0, \Delta \rho(t)\} - \{A, \rho_0\}F(t) \notag \\
-\end{gather}
+     H = H_0 - Af(t)
+\end{equation}
+The perturbation is turned on from $t_0$, 
+In Schrodinger picture, the time dependence of a state is given by:
+\begin{align}
+    | \Psi_n(t) \rangle &= U(t,t_0) | \Psi_n(t_0) \rangle 
+    %\notag \\ &= e^{-\frac{i}{\hbar}H_0(t-t_0)} U_I(t,t_0) | \Psi_n(t_0) \rangle \notag 
+\end{align}
+with
+\begin{align}
+    U(t,t_0) &= e^{-i\frac{H_0}{h}(t-t_0)} U_I(t,t_0) \notag \\
+                 &= e^{-i\frac{H_0}{h}(t-t_0)} \exp\left[ -\frac{i}{\hbar} \int_{t_0}^{t} H_I'(t') dt'  \right] \notag \\
+                 &\approx e^{-i\frac{H_0}{h}(t-t_0)} \left( 1 + \frac{i}{\hbar} \int_{t_0}^{t} A_I(t')f(t') dt' \right)
+\end{align}
+and $A_I(t) = \exp(iH_0t/\hbar) A \exp(-iH_0t/\hbar)$. We find the difference:
+\begin{align}
+    \langle B \rangle(t) - \langle B \rangle(t_0) 
+    &= \sum_n \langle \Psi_n(t) | \rho_{0} B | \Psi_n(t) \rangle - \sum_n \langle \Psi_n(t_0) | \rho B | \Psi_n(t_0) \notag \\
+    &\approx \sum_n \langle \Psi_n(t) | \rho_{0} B | \Psi_n(t) \rangle - \sum_n \langle \Psi_n(t_0) | \rho_{0} B | \Psi_n(t_0) \rangle
+\end{align}
+where $\rho_0 = e^{-\beta H_0} / Z$ and we use the adabatic approximation to assume that the probability of 
+the states remain the same as in the unperturbed case. 
+%The states evolve according to the Schrodinger equation:
+%\begin{align}
+%    U(t,-\infty) &= e^{-i\frac{H_0}{h}t} U_I(t,-\infty) \notag \\
+%                 &= e^{-i\frac{H_0}{h}t} \exp\left[ -\frac{i}{\hbar} \int_{-\infty}^{t} H_I'(t') dt'  \right] \notag \\
+%                 &\approx e^{-i\frac{H_0}{h}t} \left( 1 + \frac{i}{\hbar} \int_{-\infty}^{t} A(t')f(t') dt' \right)
+%\end{align}
+so the expectation value of $B$ at time t is given by:
+\begin{align}
+    \langle B \rangle(t) &=
+    \sum_n \langle \Psi_n(t_0) | \left( 1 - \frac{i}{\hbar} \int_{t_0}^{t} A(t')f(t') dt' \right) e^{i\frac{H_0}{h}(t-t_0)} \rho_{0} B
+    e^{-i\frac{H_0}{h}(t-t_0)} \left( 1 + \frac{i}{\hbar} \int_{t_0}^{t} A(t')f(t') dt' \right) | \Psi_n(t_0) \rangle \notag \\
+    %&\approx \langle B \rangle_0  + \frac{i}{\hbar} \int_{t_0}^{t} dt' 
+    %\left[ \sum_n \langle \Psi_n(t_0) | e^{i\frac{H_0}{h}(t-t_0)} \rho_{0} B e^{-i\frac{H_0}{h}(t-t_0)} A(t')f(t') - A(t')f(t') e^{i\frac{H_0}{h}(t-t_0)} \rho_{eq} B e^{-i\frac{H_0}{h}(t-t_0)} A(t')f(t') | \Psi_n(t_0) \rangle \right] \notag \\
+    &\approx \langle B \rangle_0  + \frac{i}{\hbar} \int_{t_0}^{t} dt' 
+    \text{Tr} \rho_{0} [B(t-t_0),A(t')] f(t')
+\end{align}
+So that the difference is given by:
+\begin{align}
+    \Delta B(t) &= \frac{i}{\hbar} \int_{t_0}^{t} dt' \text{Tr} \rho_{0} [B(t-t_0),A(t')] f(t') 
+\end{align}
+The response function is defined to be the response after a unit unit impulse at $t = 0$:
+\begin{align}
+    \phi_{BA} (t) &= \frac{i}{\hbar} \int_{t_0}^{t} dt' \text{Tr} \rho_{0} [B(t-t_0),A(t')] \delta(t'=0) \notag \\
+            &= \frac{i}{\hbar} \text{Tr} \rho_{0} [B(t),A(0)] 
+\end{align} 
+\begin{align}
+    \phi_{BA} (t) &=\frac{i}{\hbar} \langle [B(t),A] \rangle_0 = \frac{1}{i\hbar} \text{Tr} \rho_0 [A, B(t)]
+                = \frac{1}{i\hbar} \text{Tr} [\rho_0, A] B(t)
+\end{align}
 
-The change of the observed quantity $B$ is given by:
+Using the identity:
+\begin{gather}
+    [A, e^{-\beta H_0}] = e^{-\beta H_0} \int_0^{\beta} e^{\lambda H_0} [H_0, A] e^{-\lambda H_0} d\lambda 
+    = e^{-\beta H_0} \int_0^{\beta} e^{\lambda H_0} (-i\hbar) \dot{A} e^{-\lambda H_0} d\lambda 
+\end{gather}
 \begin{align}
-    \Delta B(t) &= \int dqdp \Delta \rho(t) B(q,p) \notag \\
-               &= -\int dqdp \int_{-\infty}^{t} \{A, \rho_0\} B(t-t') F(t') dt'
+    [\rho_{0}, A] &=  i\hbar \rho_{0} \int_0^{\beta} e^{\lambda H_0} \dot{A} e^{-\lambda H_0} d\lambda \notag \\
+                &=  i\hbar  \int_0^{\beta} \rho_{0} \dot{A}(-i\hbar\lambda) d\lambda
 \end{align}
-and the time dependence of operator $B$ is given by the Heisenburg equation:
-\begin{equation}
-    \dot{B}(p,q) = \{B,H_0\}
-\end{equation}
-The response function is defined by the reponse of an observable after time $t$ of a unit pulse:
+so that $\exp(-iH_0t/\hbar) \to \exp( -H_0\lambda ) $
+and we can arrive at the formula given by Kubo:
 \begin{align}
-    \phi_{BA} (t) &= -\int dqdp \int_{-\infty}^{t} \{A, \rho_0\} B(t-t') \delta(t') dt' \notag \\
-                &= -\int dqdp \{A, \rho_0\} B(t) \label{def_phi_t}
+    \phi_{BA} (t) &= \int_0^{\beta} \text{Tr} \rho_0 \dot{A}(-i\hbar\lambda) B(t) d\lambda 
+    = \int_0^{\beta} \langle \dot{A}(-i\hbar\lambda) B(t) \rangle_0 d\lambda 
 \end{align}
-so that 
-\begin{equation}
-    \Delta B(t) = \int_{-\infty}^{t} \phi_{BA} (t-t') F(t') dt'
-\end{equation}
-which is summed over all the past time.
 
 We define the frequency components of the response function as
 \footnote{this follows the definition of \emph{Kubo 1957} Eq.2.21, in terms
@@ -61,8 +94,13 @@ of the more conventional way, we have:
 \begin{equation}
     \chi_{BA}(\omega) = \lim_{\eta\to 0^+} \int_{0}^{\infty} \phi_{BA} (t) e^{-\eta t-i\omega t} dt
 \end{equation}
+We obtain the frequency response function:
+\begin{equation}
+    \chi_{BA}(\omega) = 
+    \lim_{\eta\to 0^+} \int_0^{\beta} d\lambda \int_{0}^{\infty} dt e^{-\eta t-i\omega t} \langle \dot{A}(-i\hbar\lambda) B(t) \rangle_0 
+\end{equation}
 
-Let's consider the case where a (constant pertrubation) $F$ is applied continuously from $t = -\infty$ to 
+Let's also consider the case where a (constant pertrubation) $F$ is applied continuously from $t = -\infty$ to 
 $t = 0$ and stops. The system then relax throught internal interaction. The observable will
 follow:
 \begin{align}
@@ -74,124 +112,18 @@ and
 \begin{equation}
     \Phi_{BA} (t) = \lim_{\eta\to 0^+} \int_{t}^{\infty} \phi_{BA} (t') e^{-\eta t'} dt'
 \end{equation}
+is called the relaxation function.
 
-\section{Response functions in Quantum case}
-In quantum case, we wish to find:
-\begin{align}
-    \langle B \rangle(t) - \langle B \rangle_0 
-    &= \sum_n \langle n, t | \rho B | n, t \rangle - \sum_n \langle n, -\infty | \rho B | n, -\infty \rangle \notag \\
-    &= \sum_n \langle n, t | \rho B | n, t \rangle - \sum_n \langle n, -\infty | \rho_{0} B | n, -\infty \rangle
-\end{align}
-where in the second equality, we use the adabatic approximation to assume that the probability of 
-the states remain the same as in the unperturbed case. The states evolve according to the Schrodinger equation:
-\begin{align}
-    U(t,-\infty) &= e^{-i\frac{H_0}{h}t} U_I(t,-\infty) \notag \\
-                 &= e^{-i\frac{H_0}{h}t} \exp\left[ -\frac{i}{\hbar} \int_{-\infty}^{t} H_I'(t') dt'  \right] \notag \\
-                 &\approx e^{-i\frac{H_0}{h}t} \left( 1 + \frac{i}{\hbar} \int_{-\infty}^{t} A(t')f(t') dt' \right)
-\end{align}
-so the expectation value of $B$ at time t is given by:
-\begin{align}
-    \langle B \rangle(t) &=
-    \sum_n \langle n, -\infty | \left( 1 - \frac{i}{\hbar} \int_{-\infty}^{t} A(t')f(t') dt' \right) e^{i\frac{H_0}{h}t} \rho_{eq} B
-    e^{-i\frac{H_0}{h}t} \left( 1 + \frac{i}{\hbar} \int_{-\infty}^{t} A(t')f(t') dt' \right) | n, -\infty \rangle \notag \\
-    &\approx \langle B \rangle_0  + \frac{i}{\hbar} \int_{-\infty}^{t} dt' 
-    \left[ \sum_n \langle n, -\infty | e^{i\frac{H_0}{h}t} \rho_{eq} B e^{-i\frac{H_0}{h}t} A(t')f(t') - A(t')f(t') e^{i\frac{H_0}{h}t} \rho_{eq} B e^{-i\frac{H_0}{h}t} A(t')f(t') | n, -\infty \rangle \right] \notag \\
-    & = \langle B \rangle_0  + \frac{i}{\hbar} \int_{-\infty}^{t} dt' 
-    \text{Tr} \rho_{eq} [B(t),A(t')]
-\end{align}
-So that the difference is given by:
-\begin{equation}
-    \Delta B(t) = \frac{i}{\hbar} \int_{-\infty}^{t} dt' \text{Tr} \rho_{eq} [B(t),A(t')]
-\end{equation}
-The response function is given by
-\begin{align}
-    \phi_{BA} (t) &=\frac{i}{\hbar} \langle [B(t),A] \rangle_0 \\
-                &= -\frac{i}{\hbar} \text{Tr} \rho_0 [A, B(t)] \\
-                &= \frac{1}{i\hbar} \text{Tr} [\rho_0, A] B(t)
-\end{align}
-%In quantum case, the evolution of density matrix $\rho$ is given by:
-%\begin{align}
-%    \rho(t) &= U^{-1}(t,-\infty) \rho U(t,-\infty) \notag \\
-%            &= U_{I}^{-1}(t,-\infty) e^{it/\hbar H_0}\rho e^{-it/\hbar H_0}  U_{I}(t,-\infty) \notag \\
-%            &= U_{I}^{-1}(t,-\infty) \rho_{eq} U_{I}(t,-\infty)
-%\end{align}
-%where $U$ is the time evolution operator and $U_{I}$ is the time evolution operator due to the perturbation.
-%\begin{equation}
-%    U_I(t,-\infty) = exp\left( -\frac{i}{\hbar} \int_{-\infty}^{t} H'(t') dt'  \right)
-%\end{equation}
-%Now, $H'(t')$ is given by $H'(t') = -A(t')f(t')$. To linear approximation, we have:
-%\begin{equation}
-%    U_I(t,-\infty) \approx 1 + \frac{i}{\hbar} \int_{-\infty}^{t} A(t')f(t') dt' 
-%\end{equation}
-%And the density matrix is therefore:
-%\begin{align}
-%    \rho(t) &\approx \left( 1 - \frac{i}{\hbar} \int_{-\infty}^{t} A(t')f(t') dt' \right) \rho_{eq} 
-%                    \left( 1 + \frac{i}{\hbar} \int_{-\infty}^{t} A(t')f(t') dt' \right) \notag \\
-%            &\approx \rho_{eq} + \frac{i}{\hbar} \int_{-\infty}^{t} [\rho_{eq} , A(t') ]f(t') dt' 
-%\end{align}
-%The evolution of density matrix $\rho$ is given by:
-%\begin{gather}
-%    \frac{d}{dt} \rho_I(t) = \frac{1}{i\hbar} [ H_I'(t), \rho_I(t) ] 
-%\end{gather}
-%which is solved by, in linear order:
-%\begin{equation}
-%    \rho_I(t) \approx \rho_0 + \frac{i}{\hbar} \int_{-\infty}^{t}  [A(t'),\rho_{eq} ] f(t') dt'
-%\end{equation}
-%The change in expectation value of operator $B$ is then:
-%\begin{align}
-%    \Delta \langle B \rangle (t) &= \text{Tr} d\rho_I(t)B_I(t) \notag \\
-%                &= \frac{i}{\hbar} \text{Tr}\int_{-\infty}^{t} [A(t'),\rho_{eq} ] B(t) f(t') dt' \notag \\
-%                &= \frac{i}{\hbar} \text{Tr}\int_{-\infty}^{t} [A(t'),\rho_{eq} ] B(t-t') f(t') dt'
-%\end{align}
-%and 
-%\begin{equation}
-%    \phi_{BA} (t) = - \frac{1}{i\hbar} \text{Tr} [A, \rho_0] B(t-t') 
-%\end{equation}
-%with the time dependence of $B$ given by:
-%\begin{equation}
-%    \dot{B_I}(t) = \frac{1}{i\hbar} [B(t), H_0]
-%\end{equation}
-%with $B(0) = B$ in the Schrodinger's picture.
-%\begin{align}
-%    \phi_{BA} (t) &=\frac{1}{i\hbar} \text{Tr} [\rho_0, A] B(t) \\
-%                &= \frac{1}{i\hbar} \text{Tr} \rho_0 [A, B(t)] \\
-%                &= \frac{1}{i\hbar} \langle [A, B(t)] \rangle_0
-%\end{align}
-Using the identity:
-
-\begin{gather}
-    [A, e^{-\beta H_0}] = e^{-\beta H_0} \int_0^{\beta} e^{\lambda H_0} [H_0, A] e^{-\lambda H_0} d\lambda 
-    = e^{-\beta H_0} \int_0^{\beta} e^{\lambda H_0} (-i\hbar) \dot{A} e^{-\lambda H_0} d\lambda 
-\end{gather}
-\begin{align}
-    [\rho_{eq}, A] &=  i\hbar \rho_{eq} \int_0^{\beta} e^{\lambda H_0} \dot{A} e^{-\lambda H_0} d\lambda \notag \\
-                &=  i\hbar  \int_0^{\beta} \rho_{eq} \dot{A}(-i\hbar\lambda) d\lambda
-\end{align}
-so that $\exp(-iH_0t/\hbar) \to \exp( -H_0\lambda ) $
-%We can find the following relationship:
-%\begin{equation}
-%    [\rho_0, A] = i\hbar \int_0^{\beta} \rho_0 \dot{A}(-i\hbar\lambda) d\lambda
-%\end{equation}
-So that we can arrive at the formula given by Kubo:
-\begin{align}
-    \phi_{BA} (t) &= \int_0^{\beta} \text{Tr} \rho_0 \dot{A}(-i\hbar\lambda) B(t) d\lambda \\
-    \chi_{BA}(\omega) &= 
-    \lim_{\eta\to 0^+} \int_0^{\beta} d\lambda \int_{0}^{\infty} e^{-\eta t-i\omega t} dt \text{Tr} \rho_0 \dot{A}(-i\hbar\lambda) B(t)
-\end{align}
-
-%For the function $\Phi_{BA}(t)$, we can obtain:
-%\begin{align}
-%    \Phi_{BA} (t) = \int_{t}^{\infty} \phi_{BA} (t') dt' \notag \\
-%\end{align}
 \pagebreak
-\section{Linear response formula of conductivity}
-We consider an uniform external electric field (potential zero is arbitrary):
+\section{Linear response formula of electrical conductivity}
+We consider an uniform external electric field (potential zero is arbitrary) ($V(x) = E(t)x $):
 \begin{gather}
     H'(t) = -e \sum_i x_i E(t) = - A E(t) \\
     \dot{A} = e \sum_i \dot{x}_i = J
 \end{gather}
 
-where $x_i$ is the position operator of the $i^{th}$ particle. The current operator is 
+where $x_i$ is the position operator of the $i^{th}$ particle and $e$ is the charge associated with that
+particle. The current operator is 
 defined to be:
 \begin{equation}
     J_{\mu} = e \sum_i \dot{x}_i
@@ -215,7 +147,7 @@ The total current operator is given by:
 \end{equation}
 We consider the Hamiltonian of the system to be:
 \begin{equation}
-    H = \int h(x)  d^3x
+    H_0 = \int h(x)  d^3x
 \end{equation}
 where $h(x) = \sum_i h_i \delta(x - x_i)$ consists of the vibration energy of each atom $i$. 
 The local current operator $S(x)$ is related to $h(x)$ by the continuity equation:
@@ -229,7 +161,7 @@ The density matrix can be written as:
 \end{equation}
 and $\beta(x) \approx \beta[1-\delta T(x)/T]$ with $T$ the average temperature, then
 \begin{equation}
-    \rho = \frac{1}{Z} e^{- \int \beta[1-\delta T(x)/T] h(x) d^3x} = \frac{1}{Z} e^{- \beta (H + H')}
+    \rho = \frac{1}{Z} e^{- \int \beta[1-\delta T(x)/T] h(x) d^3x} = \frac{1}{Z} e^{- \beta (H_0 + H')}
 \end{equation}
 with $H'$:
 \begin{align}
@@ -238,89 +170,40 @@ with $H'$:
         & = - \left( \frac{1}{T} \int d^3x \int _{-\infty}^{0} dt S(x,t) \right) \nabla T \notag \\
         & = - \left( \frac{1}{T} \int _{-\infty}^{0} dt J(t) \right) \nabla T 
 \end{align}
-where we take $\nabla T$ to be uniform. Now, we can apply the Kubo's formula:
+
+Using the relationship (\emph{Allen 1993}):
+\begin{equation}
+    e^{-\beta (H_0 + H')} \approx e^{-\beta H_0} \left[ 1 + \int_0^{\beta} d\lambda e^{\lambda H_0} H' e^{-\lambda H_0} \right]
+        \approx e^{-\beta H_0} \left[ 1 - \frac{1}{T} \int_0^{\beta} d\lambda e^{\lambda H_0} \int _{-\infty}^{0} dt J(t) e^{-\lambda H_0} \right]
+\end{equation} 
+The expectation value of current $J_{\mu}$ is then:
+\begin{equation}
+    \text{Tr}\rho J_{\mu} = \text{Tr}\rho_0 J_{\mu} - \text{Tr}\rho_0\frac{1}{T}\int_0^{\beta} d\lambda \int _{-\infty}^{0} dt 
+    e^{\lambda H_0} (J(t) \nabla T) e^{-\lambda H_0} J_{\mu}
+\end{equation}
+The first term is zero under equilibrium, the second term gives $ - V \kappa_{\mu\nu} \nabla T$ and 
 \begin{align}
-    \kappa_{\mu\nu} (t) & = \frac{1}{VT} \int_0^{\beta} \langle J_{\nu}(-i\hbar\lambda) J_{\mu}(t) \rangle d\lambda \\
-    \kappa_{\mu\nu} (\omega) & = \frac{1}{VT} \int_0^{\beta} d\lambda \int_{0}^{\infty} e^{-i\omega t} dt \langle J_{\nu}(-i\hbar\lambda) J_{\mu}(t) \rangle 
+    \kappa_{\mu\nu} & = \text{Tr}\rho_0 \frac{1}{VT} \int_0^{\beta} d\lambda \int _{-\infty}^{0} dt 
+    e^{\lambda H_0} J_{\nu}(t) e^{-\lambda H_0} J_{\mu} \notag \\
+    & = \frac{1}{VT}\int_0^{\beta} d\lambda \int _{-\infty}^{0} dt \langle J_{\nu}(t-i\hbar\lambda) J_{\mu}(0) \rangle_0 \notag \\
+    & = \frac{1}{VT}\int_0^{\beta} d\lambda \int _{0}^{\infty} dt \langle J_{\nu}(-i\hbar\lambda) J_{\mu}(t) \rangle_0 
 \end{align}
+which agrees with the Kubo's formula for electrical conductivity. 
+\footnote{in the case of electrical conductivity of Kubo's derivation, 
+the pertrubation is in the Hamiltonian, but for heat conductivity, pertrubation 
+is in the density matrix, thus the process of derivation is different, i.e. The
+Hamiltonian is time dependent because of $T(t)$. Specially,
+we previously assumed $\rho = \rho_{0}$, which is no longer the approximation. 
+If I just directly apply Kubo's form with $H'$, we have an negative sign of conductivity }
+%where we take $\nabla T$ to be uniform. Now, we can apply the Kubo's formula:
+%The final result take the same form as the Kubo's formula for electrical conductivity.
+%\footnote{ I have not yet finish the derivation, since this case seems to be different from the above form,
+%where the perturbation is in the Hamiltonian, using the above form of $H' = -Af$ leads to a minus sign, since $J = -\kappa \nabla T$, suggesting
+%the form as used in electrical case may not apply here}
+%\begin{align}
+%    \kappa_{\mu\nu} (t) & = \frac{1}{VT} \int_0^{\beta} \langle J_{\nu}(-i\hbar\lambda) J_{\mu}(t) \rangle d\lambda \\
+%    \kappa_{\mu\nu} (\omega) & = \frac{1}{VT} \int_0^{\beta} d\lambda \int_{0}^{\infty} e^{-i\omega t} dt \langle J_{\nu}(-i\hbar\lambda) J_{\mu}(t) \rangle 
+%\end{align}
 
-\pagebreak
-\section{From Q.T.E.L.}
-The time evolution of the system is given by:
-\begin{align}
-    | \Psi_n(t) \rangle &= U(t,t_0) | \Psi_n(t_0) \rangle \notag \\
-                     &= e^{-\frac{i}{\hbar}H_0(t-t_0)} U_I(t,t_0) | \Psi_n(t_0) \rangle \notag 
-\end{align}
-$U_I(t,t_0)$ is given by the equation of motion:
-\begin{equation}
-    i\hbar \frac{\partial}{\partial t} U_I(t,t_0) = f(t) B(t-t_0) U_I(t,t_0) \label{eqmotion}
-\end{equation}
-with the initial condition $U_I(t_0,t_0) = 1$. Making the approximation that $U_I(t,t_0) = 1$ on the 
-right hand side of the Eq.\ref{eqmotion} and integrate from time $t_0 \to t$, we obtain the first order approximation:
-\begin{equation}
-    U_I^{(1)}(t,t_0) = 1 - \frac{i}{\hbar} \int_{t_0}^{t} f(t') B(t'-t_0) dt'
-\end{equation}
-
-The thermal average of another observable of the system $A$ is given by:
-\begin{equation}
-    \langle A\rangle_0 = \frac{1}{Z} \sum_n e^{-\beta E_n} \langle \Psi_n(t_0) | A | \Psi_n(t_0) \rangle 
-\end{equation}
-and since we consider adiabatic evolution, at a later time $t$, the thermal average is 
-given by:
-\begin{equation}
-    \langle A\rangle(t) = \frac{1}{Z} \sum_n e^{-\beta E_n} \langle \Psi_n(t) | A | \Psi_n(t) \rangle 
-\end{equation}
-where the probability of finding each state is kept constants (instead of $e^{-\beta H}$ as an operator).
-Now, inserting the evolution of states, we obtain:
-\begin{equation}
-    \langle A\rangle(t) - \langle A\rangle_0 = -\frac{i}{\hbar} \int_{t_0}^{t} \langle [ A(t), B(t') ] \rangle_0 f(t') dt'
-\end{equation} 
-where is thermal average is taken at the time independent equilibrium ensemble, and the time dependence of
-the operator $A(t)$ and $B(t)$ is given by the Heisenburg form:
-\begin{equation}
-    B(t) = e^{\frac{i}{\hbar}H_0t} B e^{-\frac{i}{\hbar}H_0t}
-\end{equation}
-taking $\tau = t - t' > 0$, we can define:
-\begin{equation}
-    \chi_{AB}(\tau) = -\frac{i}{\hbar} \theta(\tau) \langle [ A(\tau), B ] \rangle_0 \label{responsefunction}
-\end{equation}
-so that 
-\begin{equation}
-    \langle A\rangle(t) = \langle A\rangle_0 + \int_{0}^{t-t_0} \chi_{AB}(\tau) f(t - \tau) d\tau
-\end{equation} 
-where we changed the integral variable from $t'$ to $\tau = t - t'$. 
-
-Because of the $\theta(\tau)$ in Eq.\ref{responsefunction}, $\chi_{AB}(\tau)$ is called the retarded response function.
-We have previously taken the external field to turn on instantly at $t_0$, however, if we allow the field to switch on
-slowly, as $f(t) \to 0$ as $t_0 \to -\infty$, the result at time $t$ should remain the same, so we 
-can also take:
-\begin{equation}
-    \langle A\rangle(t) = \langle A\rangle_0 + \int_{0}^{\infty} \chi_{AB}(\tau) f(t - \tau) d\tau \label{response}
-\end{equation} 
-
-\section{Frequency domain}
-Consider a switching on (real) periodic perturbation, which vanish for $t \to -\infty$:
-\begin{equation}
-    f(t) = f_{\omega}e^{-i(\omega + i\eta) t} + c.c.
-\end{equation}
-$\eta$ is a positive and $\eta^{-1}$ give a time scale that longer than period of the perturbation.
-We can thus apply the linear response formalism and take the limit $\eta \to 0^+$ at the 
-end of the calculation. If this limit exist, it should describe the reponse of the 
-system to a steady periodic field that has been applied long enough so that initial 
-condition is ignorable.
-
-Inserting the periodic perturbation into Eq.\ref{response} gives:
-\begin{equation}
-    \langle A\rangle(t) - \langle A\rangle_0 = \chi_{AB}(\omega) f_{\omega} e^{-i\omega t} + c.c.
-\end{equation}
-where 
-\begin{equation}
-    \chi_{AB}(\omega) = -\frac{i}{\hbar} \lim_{\eta\to 0^+} \int_{0}^{\infty} \langle [ A(\tau), B ] \rangle_0 e^{i(\omega+i\eta)\tau} d\tau
-\end{equation}
-For any general perturbation, we fourier transform between $t$ and $\omega$ is given by:
-\begin{gather}
-    f(t) = \frac{1}{2\pi} \int_{-\infty}^{\infty} f(\omega) e^{i\omega t} d\omega \\
-    f(\omega) = \int_{-\infty}^{\infty} f(t) e^{i\omega t} dt
-\end{gather}
 
 \end{document}
