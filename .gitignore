@@ -4,4 +4,6 @@ phonondrag/*.aux
 phonondrag/*.log
 statistic/*.log
 statistic/*.aux
+electron/*.log
+electron/*.aux
 .DS_Store
