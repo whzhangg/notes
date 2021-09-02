@@ -1,0 +1,84 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage[margin=0.8in]{geometry}
+\usepackage{verbatim}
+\usepackage{graphicx}
+
+\begin{document}
+
+\title{Electronic wave packet}
+\author{Wenhao}
+\date{\today}
+\maketitle
+
+This short notes summarize some content in \emph{Ashcroft and Mermin} Chapter 2 and 12.
+\section{Sommerfeld Theory}
+
+Sommerfeld's theory improves the Drude theory of electron conduction by applying the fermi-dirac 
+distribution for electrons in solids with an free electron approximation. The number of 
+electrons per unit volume having velocity within $dv$ of $v$ is given by 
+($v = \hbar k/m$, thus $dv = (\hbar/m)^3 dk$):
+\begin{gather}
+    n(k) = \frac{V}{4\pi^3} f(\varepsilon_k) dk \\
+    n(v) = \frac{(m/\hbar)^3}{4\pi^3} f(\varepsilon_k) dv = f(v) dv
+\end{gather}
+
+However, this correspond to the result of free electron gas, where electrons have infinite
+spatial extention. In solids with finite size and defects, the above free electron theory
+will no longer apply, but in the limit that the electrons in solid approach free electron, 
+we should obtain the same result as in the free electron case. Therefore, it implies that 
+there are conditions within which we can apply the free electron approximation. 
+
+If we are able to describe the momentum of the electron accurately (i.e. $k$ are still good index
+for electronic states), then we expect the above semiclassical theory to apply. 
+The uncertainty in momentum $\Delta p$ must then be small compared to $\hbar k$. Taking $k_F \sim 2/r_s$
+and $r_s \sim 4 a_0$ for Na metal (Eq. 2.22 and Table 2.1),
+we have:
+\begin{equation}
+    \Delta x \sim \frac{\hbar}{\Delta p} \gg \frac{1}{k_F} \sim 2a_0
+\end{equation}
+
+Thus, the free electron approximation is possible if the uncertainty in electron's position is much 
+larger than the lattice parameter $a_0$ in simple metals. The requirement of uncertainty in position is ensured 
+if our theory do not require describing electrons' positions, or electrons' positions are not 
+constrained, for example, by some trapping potential.
+\begin{enumerate}
+    \item When we apply spatially varying potential energy from electromagnetic field, or a temperature gradient, we 
+            need to specify the position of the electrons. But if the applied field are small enough and do not vary
+            much on the scale $\sim a_0$, as is in most case, the requirement for electron's position are 
+            less important and the above condition applies. However, if the wave length of the external field is small, such 
+            as in the case of X-ray, the above condition fail and we need a full quantum description. 
+    \item The semiclassical theory also assumes that electrons propagate freely between the scattering events, implying that 
+            $\Delta x \ll l_{mfp}$. Therefore, the semiclassical theory would break down if mean free path $l \to a_0$.
+\end{enumerate}
+
+with the semiclassical theory, we can consider that we are describing the motion of a wave package, consist of 
+free electron states around $k$:
+\begin{equation}
+    \varPsi(r,t) = \sum_{k'} g(k') e^{i(k'r - \frac{\hbar k'^2}{2m}t)} \label{free electron}
+\end{equation}
+where $g(k')$ is weight function and $g(k') \approx 0$ if $|k'-k| > \Delta k$. 
+this wave package has uncertainty $\hbar \Delta k$ and $\Delta r$
+for momentum and position satisfying the uncertainty principle ($\Delta r \Delta k \approx 1$), but both are small enough so that the 
+position and velocity are relatively accurately described (as a semiclassical theory). 
+
+\section{Wave packet of Bloch electron}
+For Bloch electron, the same argument applies, except that the free electron wavefunction are 
+replaced by Bloch function $\psi_{nk}$, the wave packet is written:
+\begin{equation}
+    \varPsi(r,t) = \sum_{k'} g(k') \psi_{nk} e^{-i\frac{\varepsilon_{nk}}{\hbar}t}
+\end{equation}
+The mean velocity is now given by the group velocity $v_{nk} = 1/\hbar \partial \varepsilon_{nk}/\partial k$.
+
+The spatial extention of the Bloch wavepackage can be given by inspecting:
+\begin{equation}
+    \varPsi(r+R,t) = \sum_{k'} [ g(k') \psi_{nk} ] e^{i(k'R - \frac{\varepsilon_{nk}}{\hbar}t)}
+\end{equation}
+where we used the Bloch's theorem. This equation resemble Eq.\ref{free electron} with $r$ in Eq.\ref{free electron}
+replaced by discrete lattice translation $R$. We have the relationship $\Delta R \Delta k \approx 1$. 
+If $\Delta k$ is small compared to the Brillouin Zone size $\pi / a_0$, we need therefore $\Delta R \gg a_0$. The 
+spatial dimension of the wave package of bloch electrons need to be over a few unit cell. The condition for 
+the semiclassical theory follow the one for Sommerfeld case.
+
+
+\end{document}
