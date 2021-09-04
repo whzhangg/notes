@@ -1,0 +1,223 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage[margin=0.8in]{geometry}
+\usepackage{verbatim}
+\usepackage{graphicx}
+
+% renewcommand override the already defined command
+
+\newcommand{\pfrac}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\ddt}[1]{\frac{d}{dt}\left( #1 \right)}
+\renewcommand{\L}{\mathcal{L}}
+\renewcommand{\S}{\mathcal{S}}
+\renewcommand{\H}{\mathcal{H}}
+\newcommand{\dotx}{\dot{x}}
+\newcommand{\dotq}{\dot{q}}
+\newcommand{\dotp}{\dot{p}}
+
+\begin{document}
+
+\title{Title}
+\author{Wenhao}
+\date{\today}
+\maketitle
+
+\section{Lagrange method}
+\subsection{Equation of motion}
+We define the Lagrangian\footnote{From David Morin's chapter in \emph{Introduction to Classical Mechanics}} from the kinetic energy $T$ and potential energy $V$ as:
+\begin{equation}
+    \L(x,\dot{x},t) = T - V 
+\end{equation}
+and action $\S$ with the unit of energy $\times$ time:
+\begin{equation}
+    \S = \int_{t_1}^{t_2} \L(x,\dot{x},t) dt
+\end{equation}
+with the initial condition $x(t_1) = x_0, \dot{x}(t_0) = \dot{x}_0$. 
+The \textbf{equation of motion} can be determined by the 
+\textbf{Principle of least action} which states that $\S$ will be 
+a extrema (stationary point) for the dynamic of system from time
+$t_1$ to time $t_2$. 
+
+The equation of motion is obtained as:
+\begin{align}
+    \delta\S &= \int_{t_1}^{t_2} \L(x+\delta x,\dotx + \delta \dotx,t) dt - \int_{t_1}^{t_2} \L(x,\dot{x},t) dt \notag \\
+            &= \int_{t_1}^{t_2} \left( \L + \frac{\delta \L}{\delta x} \delta x + \frac{\delta \L}{\delta \dotx} \delta \dotx \right) dt - \int_{t_1}^{t_2} \L(x,\dot{x},t) dt \notag \\
+            &= \int_{t_1}^{t_2}\left( \frac{\delta \L}{\delta x} \delta x + \frac{\delta \L}{\delta \dotx} \delta \dotx \right) dt \notag \\
+            &= \int_{t_1}^{t_2}\left( \frac{\delta \L}{\delta x} \delta x + \frac{\delta \L}{\delta \dotx} \delta \dotx \right) dt \notag \\
+            &= \left. \frac{\delta \L}{\delta \dotx} \delta x \right|_1^2
+            + \int_{t_1}^{t_2}\left( \frac{\delta \L}{\delta x} \delta x - \frac{d}{dt}\left( \frac{\delta \L}{\delta \dotx} \right) \delta x \right) dt \label{eom} \\
+\end{align}
+where we used integral by parts to obtain the final equation. the boundary condition for choosing $\delta x$ is that they are $0$ at the initial coordinate and 
+final coordinate, therefore, $ (\delta \L / \delta \dotx) \delta x |_1^2 = 0$. $\delta x$ at other time can be choosen arbitrary. The requirement that
+$\S = 0$ thus lead to:
+\begin{equation}
+    \frac{\delta \L}{\delta x} - \frac{d}{dt}\left( \frac{\delta \L}{\delta \dotx} \right) = 0
+\end{equation}
+In terms of multiply coordinates, we have:
+\begin{equation}
+    \frac{\partial \L}{\partial x_i} - \frac{d}{dt}\left( \frac{\partial \L}{\partial \dotx_i} \right) = 0
+\end{equation}
+since the deviation of $\L$ is to first order in each coordiante.
+
+\subsection{Change of coordinates}
+We consider changing coordinate ${x_i}$ to ${q_i}$ as:
+\begin{equation}
+    q_i = \mathbf{q_i} (x_1, x_2 , \cdots, x_N, t)
+\end{equation}
+which does not depend on $\dotx$. Using the relationship:
+\begin{gather}
+    \dotx_i = \sum_{i=1}^N \pfrac{x_i}{q_m} \dotq_m + \pfrac{x_i}{t} \label{xq_relation}\\
+    \pfrac{\dotx_i}{\dotq_m} = \pfrac{x_i}{q_m}
+\end{gather}
+The equation of motion is
+given by:
+\begin{align}
+    \frac{d}{dt}\left( \frac{\partial \L}{\partial \dotq_m} \right)
+    &=  \frac{d}{dt}\left( \sum_{i=1}^N \pfrac{\L}{\dotx_i} \pfrac{\dotx_i}{\dotq_m} \right) \notag \\
+    &=  \sum_{i=1}^N \left[ \ddt{\pfrac{\L}{\dotx_i}} \pfrac{x_i}{q_m} + \pfrac{\L}{\dotx_i}\ddt{\pfrac{x_i}{q_m}} \right] \notag \\
+    &=  \sum_{i=1}^N \left[ \pfrac{\L}{x_i} \pfrac{x_i}{q_m} + \pfrac{\L}{\dotx_i} \pfrac{\dotx_i}{q_m} \right] \notag \\
+    &=  \sum_{i=1}^N \left[ \pfrac{\L}{x_i} \pfrac{x_i}{q_m} \right] = \pfrac{\L}{q_m}
+\end{align}
+where in the final step, $\partial \dotx_i / \partial q_m = 0$ is from Eq.\ref{xq_relation}. We can see that the 
+equation of motion still hold after the change of coordinate
+\footnote{
+we show that $\ddt{\pfrac{x_i}{q_m}} = \pfrac{\dotx_i}{q_m}$ is true:
+\begin{align}
+    \ddt{\pfrac{x_i}{q_m}} 
+    &= \sum_{k=i}^N \pfrac{\ }{q_k} \left( \pfrac{x_i}{q_m} \right) \dotq_k + \pfrac{}{t} \left( \pfrac{x_i}{q_m} \right) \notag \\
+    &= \sum_{k=i}^N \pfrac{\ }{q_k} \left( \pfrac{x_i}{q_m} \right) \dotq_k + \pfrac{}{q_m} \left( \pfrac{x_i}{t} \right) \notag \\
+    &= \sum_{k=i}^N \pfrac{\ }{q_m} \left( \pfrac{x_i}{q_k} \right) \dotq_k + \pfrac{}{q_m} \left( \pfrac{x_i}{t} \right) \notag \\
+    &= \pfrac{\ }{q_m} \left[ \sum_{k=i}^N  \left( \pfrac{x_i}{q_k} \right) \dotq_k + \left( \pfrac{x_i}{t} \right) \right] = \pfrac{\dotx_i}{q_m}\notag \\
+\end{align}
+}.
+
+\subsection{Conservation law}
+\textbf{Conserved quantity}
+If $\L$ does not explicitly depend on coordinate $q_k$, then
+\begin{equation}
+    \ddt{\pfrac{ \L}{\dotq_k}} = \pfrac{\L}{q_k} = 0
+\end{equation}
+thus, $\partial \L / \partial \dotq_k $ is a constant of motion.
+
+Now, we define a quantity $E$ as:
+\begin{equation}
+    E = \sum_{i=1}^N \pfrac{\L}{\dotq_i} \dotq_i - \L
+\end{equation}
+we can show that:
+\begin{align}
+    \frac{dE}{dt} &= \sum_{i=1}^N \ddt{\pfrac{\L}{\dotq_i} \dotq_i} - \frac{d\L}{dt} \notag \\
+    &= \sum_{i=1}^N \left[ \ddt{\pfrac{\L}{\dotq_i}}\dotq_i + \pfrac{\L}{\dotq_i}\ddot{q}_i \right]
+    - \left[ \sum_{i=1}^N\left( \pfrac{\L}{q_i}\dotq_i + \pfrac{\L}{\dotq_i}\ddot{q}_i \right) + \pfrac{\L}{t}\right] \notag \\
+    &= - \pfrac{\L}{t}
+\end{align}
+so that if $\L$ does not explicitly depend on time $t$ as $(\partial \L / \partial t = 0)$, than $E$ is a constant of motion.
+
+\subsection{$E$ and total energy}
+The quantity $E$ is a constant of motion if $\L$ does not explicitly depend on time, but $E$ is not 
+necessarily the total energy of the system.
+
+\textbf{Theorem} A necessary and sufficient condition for $E$ to the the 
+total energy of a system whose $\L$ is written in terms of a set of coordinates
+$q_i$ is that these $q_i$ are related to a cartesian set of coordinates $x_i$ by:
+\begin{equation}
+    x_i = \mathbf{x}_i (q_1, q_2, \cdots, q_N)
+\end{equation}
+which does not include $t$ or $\dotq$ dependence.
+
+We use three example as argument to see this is indeed correct:
+
+\textbf{Example 1.} 
+consider a particle in a horizontal plane connected to the origin by a spring. the potential 
+energy is $V = k(x^2+y^2) / 2$ and the kinetic energy is $T = m(\dotx^2 + \dot{y}^2)/2$. 
+\begin{align}
+    \L &= m(\dotx^2 + \dot{y}^2)/2 - k(x^2+y^2) / 2 \notag \\
+     &= m(\dot{r}^2 + r^2\dot{\theta}^2) - kr^2/2 \notag
+\end{align}
+with $x = r\cos\theta,\ y = r\sin\theta$. 
+In the coordinate $(r,\theta)$, we have $E = m(\dot{r}^2 + r^2\dot{\theta}^2) + kr^2/2$ is the total energy.
+
+\textbf{Example 2.}
+consider similar to the above case, but now we have the coordinate transformation 
+$x = r\cos(\omega t),\ y = r\sin(\omega t)$ depend on time $t$. The quantity
+$E$ is still conserved but is no longer the total energy:
+\begin{align}
+    \L = m(\dot{r}^2 + r^2\omega^2) - kr^2/2 \notag \\
+    E = m(\dot{r}^2 - r^2\omega^2) + kr^2/2 \notag
+\end{align}
+
+\textbf{Example 3.}
+A particle is fixed on a rod accelerating in $y$ direction: $y = at^2 / 2$. The 
+Lagrangian and $E$ is:
+\begin{equation}
+    \L = m(\dotx^2 + (at)^2 ) - (mg)at^2 / 2 \notag \\
+    E = m(\dotx^2 - (at)^2 ) + (mg)at^2 / 2 \notag 
+\end{equation}
+Still, $E$ is conserved but $E$ is not total energy since coordinate $y$ depend on 
+time $t$: $(x = x;\ y = a t)$
+
+We note that the for the later two examples, we have an accelerating frame of reference (rotating, accelerating) and 
+$E$ is not the total energy of the system.
+
+
+\subsection{Noether's theorem}
+Noether's theorem states that if $\L$ is invariant under transformation 
+$q_i \to q_i + \varepsilon K_i(q) $ ($\L$ does not explicitly depend on $\varepsilon$), 
+then some quantity will be conserved.
+
+\begin{align}
+    \pfrac{\L}{\varepsilon} 
+    &= \sum_{i=1}^{N} \left[ \pfrac{\L}{q_i}\pfrac{q_i}{\varepsilon} + \pfrac{\L}{\dotq_i}\pfrac{\dotq_i}{\varepsilon} \right] \notag \\
+    &= \sum_{i=1}^{N} \left[ \pfrac{\L}{q_i} K_i(q) + \pfrac{\L}{\dotq_i} \dot{K}_i(q) \right] \notag \\
+    &= \sum_{i=1}^{N} \left[ \pfrac{\L}{\dotq_i} \dot{K}_i(q) + \ddt{\pfrac{\L}{\dotq_i}}K_i(q) \right] \notag \\
+    &= \sum_{i=1}^{N} \left[ \pfrac{\L}{\dotq_i} \dot{K}_i(q) + \ddt{\pfrac{\L}{\dotq_i}K_i(q)} - \pfrac{\L}{\dotq_i}\dot{K}_i(q)  \right] \notag \\
+    &= \ddt{ \sum_{i=1}^{N} \pfrac{\L}{\dotq_i}K_i(q) }
+\end{align}
+So that if $\partial \L / \partial \varepsilon = 0$, the quantity $\sum_{i=1}^{N} (\partial \L / \partial \dotq_i) K_i(q) $ is constant of motion.
+
+As an example, suppose for $\L$ depend on coordinates $x$ that is invariant under translation $x \to x + \varepsilon$,
+then the quantity $\partial \L / \partial \dotx$ is conserved, which is momentum if $\L = m\dotx^2 / 2 - V(x)$
+
+\section{Hamiltanion method}
+\subsection{Hamiltonian}
+The quantity $E$ is given:
+\begin{equation}
+    E(q,\dotq) = \sum_{i=1}^N \pfrac{\L(q,\dotq)}{\dotq_i} \dotq_i - \L(q,\dotq) 
+\end{equation}
+Define the conjugate momentum and Hamiltonian:
+\begin{gather}
+    p_i = \pfrac{\L(q,\dotq)}{\dotq_i} \\
+    \H = \sum_{i=1}^N p_i \dotq_i - \L(q,\dotq)
+\end{gather}
+where $\dotq$ are implicit function of $(q,p)$
+we can find:
+\begin{equation}
+    \begin{cases}
+        \pfrac{\H}{p_i} = \dotq_i - \pfrac{\L}{p_i} = \dotq_i \notag \\
+        \pfrac{\H}{q_i} = 0 - \pfrac{\L}{q_i} = - \dotp_i \notag \\
+    \end{cases}
+\end{equation}
+and thus the Hamiltanion equation:
+\begin{align}
+        \dotq_i &= \pfrac{\H}{p_i} \\
+        \dotp_i &= - \pfrac{\H}{q_i}
+\end{align}
+
+The cyclic coordinates are still the ones which $\H$ does not explicitly depend on.
+
+\subsection{Legendre transformation}
+Legendre transformation states that if $Z(x) = Y(X) - xX$, then we should have the 
+relationship:
+\begin{equation}
+    \pfrac{Z}{x} = -X
+\end{equation}
+Using the relationship for Lagrangian and Hamiltanion, we can identify, for one specific coordinate i:
+\begin{gather}
+    \H(p_i) = p_i \dotq_i - \L(\dotq_i) \notag \\
+    Z(x) = -H(p_i) \notag \\
+    Y(X) = L(\dotq_i) \notag \\
+    \text{leading to}\ \ \pfrac{H(p_i)}{p_i} = \dotq_i
+\end{gather}
+
+
+
+\end{document}
