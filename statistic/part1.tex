@@ -3,6 +3,7 @@
 \usepackage[margin=1in]{geometry}
 \usepackage{verbatim}
 \usepackage{graphicx}
+\usepackage{hyperref}
 
 \begin{document}
 
@@ -344,38 +345,56 @@ and
 \end{equation}
 
 \subsection*{Legendre transformation}
+In general, Legendre transformation is a transformation on the real valued convex functions
+of one of the variable and is usually used to convert functions of one quantity (position, pressure) into function of
+the conjugate quantity (momentum, volume)
+Consider function $F(x)$ with $dF/dx = s(x)$, we can write a function
+$G(s)$ with property $dG/ds = x(s)$. They are related by:
+\begin{equation}
+    d(F+G) = sdx + xds = d(xs)
+\end{equation}
+so that $F(x) + G(s) = xs$. One property of Legendre transformation that the result of the transformation 
+is also convex function. For details of the geometry meaning and convex requirement, see Morin's chapter.
+
+For thermodynamic potentials, we use a \emph{non-standard definition} $dG/ds = -x(s)$, 
+so that the transformation agree with the thermal dynamic variables.
+leading to 
+\begin{equation}
+    d(F-G) = sdx + xds = d(xs)
+\end{equation}
+and therefore $F-G = xs$
+\footnote{
+    Both is obviously correct. An example of the standard usage is Legendre transformation 
+    for Lagrangian and Hamiltonian is given by $F+G = xs$. see "Understanding the transformation in terms of derivatives"
+    section in \url{https://en.wikipedia.org/wiki/Legendre_transformation}.
+}.
+
 We have seem that intensity and extensity properties would come in pairs, such as $(T,S)$, $(\mu,N)$
 and $(P,V)$ due to their definition. We have also see that by defining different ensemble, we can
 write down different potential function for each ensemble:
 \begin{align}
-    \text{NVT ensemble} &\Rightarrow A(N,V,T) = -SdT - pdV + \mu dN\notag \\
-    \text{$\mu$VT ensemble} &\Rightarrow \Omega(\mu,V,T) = -SdT - Nd\mu - PdV \notag \\
-    (Gibbs)\ \text{NPT ensemble} &\Rightarrow G(N,p,T) = -SdT + Vdp + \mu dN \notag \\
+    \text{NVT ensemble} &\Rightarrow dA(N,V,T) = -SdT - pdV + \mu dN\notag \\
+    \text{$\mu$VT ensemble} &\Rightarrow d\Omega(\mu,V,T) = -SdT - pdV - Nd\mu \notag \\
+    (Gibbs)\ \text{NPT ensemble} &\Rightarrow dG(N,p,T) = -SdT + Vdp + \mu dN \notag \\
     &\cdots \notag
 \end{align}
 The relationship between different potential function can be expressed with \textbf{Legendre transformation}.
 
-Writting $x$ for an intensive property and $X$ as the conjugating extensive property. For a potential $Y(X)$
-with the thermodynamic relationship $dY = xdX + A$, if another potential is related to $Y(X)$ by 
-\begin{equation}
-    Z(x) = Y(X) - xX
-\end{equation}
-then, we can show find 
-\begin{align}
-    dZ = dY - xdX - Xdx \notag \\
-    \Rightarrow dZ = -Xdx \notag
-\end{align}
+Writting $x$ for an intensive property and $S$ as the conjugating extensive property. For a potential $F(x)$
+with the thermodynamic relationship $dF = Sdx$, if another potential $G$ is related to $F(x)$ by $F(x) - G(S) = xS$,
+then, we can find $dG(S) = -xdS$.
 
-As an example, consider the Gibbs free energy $G(N,p,T)$ and free energy in canonical ensemble
-$A(N,V,T)$. They are related by:
+As an example, to find the Legendre transformation of the free energy in canonical ensemble $A(N,V,T)$ in terms of 
+variable $V$, we have:
 \begin{equation}
-    A = G - PV \notag
-\end{equation}
-with $dA = -pdV$, we therefore find $dG = VdP$. 
-
-On the other hand, if we already know the expression of free energy $A(N,V,T) = - PdV  + A'$ but we want an potential
-in terms of pressure $P$, we can write $G(N,P,T) = A(N,V,T) + PV$, which indeed is the expression for Gibbs' free energy. (We choose 
-$G = A + PV$ instead of $G = A - PV$ is because the form $A = -PdV$ correspond to $dZ = -Xdx$)
+    dA = -pdV \notag
+\end{equation} 
+The transformed potential is thus:
+\begin{equation}
+    dG(N,p,T) = Vdp \notag
+\end{equation} 
+corresponding to the 
+Gibbs potential. 
 
 \subsection{Gibbs expression of entropy}
 For the canonical ensemble, we have:
