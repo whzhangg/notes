@@ -6,4 +6,5 @@ statistic/*.log
 statistic/*.aux
 electron/*.log
 electron/*.aux
+electron/*.out
 .DS_Store

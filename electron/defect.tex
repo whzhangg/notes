@@ -10,15 +10,133 @@
 
 \begin{document}
 
-\title{Title}
+\title{First principle defect calculation}
 \author{Wenhao}
 \date{\today}
 \maketitle
 
-\section{}
+\section{Defect formation energy}
 
-\pagebreak
-\section*{Appendix A}
+Defect formation energy of an isolated defect $H^f_q$ is expressed by the reaction equation:
+\begin{equation}
+    \sum_i N_i \mu_i + E_f dn_e + H^f_q \to E^{def}_{iso,q}
+\end{equation}
+where the summation is over all the components $i$. $N$ and $\mu$ is the counts and 
+chemical potential of each components. $dn_e$ is the number of electrons that we additionally 
+added or removed to the system, $E_f$ is their energy. The chemical potential is calculated by 
+considering the equilibrium between coexisting phase, which is obtained from the phase 
+diagram\cite{Kuwabara2004}. $E^{def}_{iso,q}$ is the energy of a supercell that contain the isolated defect with total charge
+charge $q$, $q > 0$ for removing electrons and $q < 0$ for adding electrons ($dn_e = - q$ from definition).
+
+In actual calculation, we have:
+\begin{equation}
+    E^{def}_{iso,q} = E^{def}_{periodic,q} - E^{corr}_q
+\end{equation}
+$E^{corr}_q$ is the correction necessary to remove the contribution of calculated total 
+energy in the defected supercell. Rearranging, we have the expression for the 
+defect formation energy:
+\begin{equation}
+    H^{f}_q = E^{def}_{periodic,q} - \sum_i N_i \mu_i + qE_f - E^{corr}_q
+\end{equation}
+
+\section{Correction of the image charge}
+In this section, we provide a summary of the popular methods for the 
+finite size correction in charged defect calculation. We review the method
+by Freysoldt\cite{Freydoldt2009} and Kumagai\cite{Kumagai2014}
+
+\subsection*{Freysoldt's method}
+In Freysoldt's article, the creation of a charged point defect is split into three steps, 
+In the first step, we consider a charge neutral cell which contain the defect. Take the 
+As defect in Silicon as an example, compare to the perfect crystal, the additional ionic charge
+on the As atoms and an additional electron are introduced. This extra electron will form an orbital
+$\phi_d(r)$. Then we attend to remove this additional electron from this orbital 
+(to the conduction band bottom in some far away unitcell), leading to ionization. In the defect 
+supercell, we have a charge:
+\begin{equation}
+    q_d(r) = q |\phi_d(r)|2
+\end{equation}
+
+Next, we relax the system, allowing the electrons (and ions) to screen the introduced charge. The overall
+resulting electron distribution give raise to a change in electrostatic potential, compared to the 
+case of neutral defect:
+\begin{equation}
+    V_{q/0}(r) = V_{defect,q}(r) - V_{defect,0}(r) \label{charge_potential}
+\end{equation}
+$V_{q/0}(r)$ is the potential introduced from ionization. 
+Finally, we introduce the artificial periodicity and add a compensating homogeneous background charge density
+$n = -q/\Omega$, where $\Omega$ is the volume of the supercell. The compensating background removes the 
+divergence of the electrostatic potential:
+\begin{align}
+    V_{q/0}(G) = \int d^3r V_{q/0}(r) e^{-iGr} \\
+    \tilde{V}_{q/0}(r) = \frac{1}{\Omega} \sum_{G\neq 0} V_{q/0}(G) e^{iGr} \label{fourier}
+\end{align}
+where $q\neq 0$ removes the divergence with compensating background charge and $\tilde{V}_{q/0}(r)$ is now the 
+additional periodic potential (compared to charge neutral case) from charged periodic defects. 
+
+We keep track of the artificial elements we introduced in our calculation: the periodic image charge and their 
+potentials as well as the neutral compensating background. Thus the energy correction consist of two parts:
+\begin{align}
+    E^{inter} = \frac{1}{2} \int_{\Omega}  [q_d(r) + n ]  [ \tilde{V}_{q/0}(r) - V_{q/0}(r)  ] d^3 r \\
+    E^{intra} = \int_{\Omega} n V_{q/0}(r) d^3r = -\frac{q}{\Omega} \left( \int_{\Omega} V_{q/0}(r) d^3 r \right)
+\end{align}
+
+The first part is the interaction between the defect charge and compensating background in the home supercell with
+the potential from imaginary charge and background from image cells. The second part is the interaction of the 
+defect potential in the supercell introduced by the actual defect and the compensating background. The integral is 
+confined to the supercell, whose total energy is used.
+
+We now separate the potential $V_{q/0}(r)$ into two parts: 1) a long ranged part $V^{lr}_q(r)$, that we can approximate using 
+simple form. 2) a short ranged part $V^{sr}_q(r)$ that is zero outside of the supercell:
+\begin{align}
+    V_{q/0}(r) &= V^{lr}_{q}(r) + V^{sr}_{q/0}(r) \\
+    V^{lr}_{q}(r) &= \frac{1}{\epsilon} \int \frac{q_d(r')}{|r-r'|} d^3 r' \label{vlr}
+\end{align} 
+
+For their periodic form, we have:
+\begin{align}
+    \tilde{V}^{sr}_{q/0}(r) &= \sum_R V^{sr}_{q/0}(r+R) + C \\ \notag 
+                &\approx  V^{sr}_q(r) + C \\
+    \tilde{V}_{q/0}(r) = \tilde{V}^{lr}_{q}(r) &+ \tilde{V}^{sr}_{q/0}(r) = \tilde{V}^{lr}_{q}(r) + V^{sr}_q(r) + C \label{align}
+\end{align}
+the periodic part,$\tilde{V}^{lr}_q(r)$ is obtained from Eq.\ref{vlr} and Eq.\ref{fourier}. The constant C to reproduce the 
+absolute value of $\tilde{V}_{q/0}(r)$ (the value of $\tilde{V}^{lr}_{q/0}(r)$ is fixed once we choose the form the $q_d(r)$).
+
+The correction energy can be simplified to be:
+\begin{equation}
+    E^{corr} = E^{inter} + E^{intra} = E^{lat}_q + q\Delta_{q/0}
+\end{equation}
+with each part
+\begin{gather}
+    E^{lat}_q = \int_{\Omega} \left( \frac{1}{2} [ q_d(r) + n ][\tilde{V}^{lr}_{q}(r) - V^{lr}_{q}(r) ] +  n V^{lr}_{q}(r) \right) d^3r \\
+    \Delta_{q/0} = \frac{1}{\Omega} \int_{\Omega} V^{sr}_{q/0}(r) d^3r  \\
+    V^{sr}_{q/0}(r) = \tilde{V}_{q/0}(r) - \tilde{V}^{lr}_{q}(r) - C
+\end{gather}
+The correction energy thus depends only on values of $\epsilon$, $q_d(r)$, $\tilde{V}_{q/0}$ and $C$.
+the dielectric constant $\epsilon$ can be calculated by first principle methods such as DFPT, $\tilde{V}_{q/0}$ 
+are calculated by Eq.\ref{charge_potential} using the potential calculated for the charged supercell and 
+neutral defect (or perfect bulk potential). The constant $C$ is calculated by Eq.\ref{align}.
+For the charge density $q_d(r)$, reasonable approximation suffices (point charge $q_d(r) = \delta(r)q$ or 
+a Gaussian charge).
+
+Finally, the form of defect formation energy is:
+\begin{equation}
+    H^{f}_q = E^{def} - \sum_i N_i \mu_i - E^{lat}_q + q(E_f + \Delta_{q/0})
+\end{equation}
+$q$ is positive if we remove the electron from the supercell (The charge of the whole supercell is positive).
+
+\subsection*{Modified Freysoldt's method (Kumagai)}
+In Kumagai's paper, some method as Freysoldt is used. However, some modification is introduced 
+to consider the anisotropy and the difficult in potential alignment when the ions are polarizable.
+
+
+\begin{thebibliography}{99}
+    \bibitem{Kuwabara2004}
+        First Principles Calculation of Defect Formation Energies in Sr and Mg-Doped LaGaO$_3$, Akihide Kuwabara and Isao Tanaka. J. Phys. Chem. B 108, 9168-9172 (2004)
+    \bibitem{Freydoldt2009}
+        Fully Ab-initio Finite-size Corrections for Charged-Defect Supercell Calculations, Christoph Freysoldt, et. al. PRL 102, 016402 (2019)
+    \bibitem{Kumagai2014}
+        Electrostatics Based Finite Size Corrections for First-principle Point Defect Calculations, Kumagai, et. al. PRB 89, 195205 (2014) 
+\end{thebibliography}
 
 
 \end{document}
