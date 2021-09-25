@@ -127,7 +127,61 @@ $q$ is positive if we remove the electron from the supercell (The charge of the 
 \subsection*{Modified Freysoldt's method (Kumagai)}
 In Kumagai's paper, some method as Freysoldt is used. However, some modification is introduced 
 to consider the anisotropy and the difficult in potential alignment when the ions are polarizable.
+Kumagai's paper also reviews some simpler formula, summarized as follows:
 
+\textbf{Point Charge Correction} In the simplest consideration, we treat the defect charge as a point charge
+and the potential of the imagine charge and the compensating background can then be written as Madelung 
+potental in isotropic system:
+\begin{equation}
+    V_{PC,q}^{isot} = \frac{\alpha q}{\epsilon L}
+\end{equation}
+where \emph{isot} means isotropic, and the PC correction energy is then given as:
+\begin{equation}
+    E_{PC,q}^{isot} = \frac{1}{2}\int_{\Omega} V_{PC,q}^{isot} q \delta(r) d^3r = \frac{\alpha q^2}{2 \epsilon L}
+\end{equation}
+
+\textbf{Makov-Payne Correction} Makov and Payne derived the energy correction with order $L^{-3}$, in addition to the 
+correction term $L^{-1}$ given above when the defect charge density is no longer a simple point charge:
+\begin{align}
+    V_{MP,q}^{isot}(r) &=  V_{PC,q}^{isot} - \frac{2\pi q}{3 \epsilon L^3} r^2 + \frac{4\pi}{3 \epsilon L^3} p \cdot r - \frac{2\pi Q}{3 \epsilon L^3} + O(r^4) \\
+    E_{MP,q}^{isot} &= \frac{1}{2}\int_{\Omega} V_{MP,q}^{isot}(r) q_d(r) d^3r \\
+        &= E_{PC,q}^{isot} - \frac{2\pi q Q}{3 \epsilon L^3} + \frac{2\pi p^2}{3\epsilon L^3} + O(L^{-5})
+\end{align} 
+where $p = \int r q_d(r) d^3r$ and $Q = \int r^2 q_d(r) d^3 r$ is the dipole and second radial moment of the defect charge density. Usually, 
+using the point charge correction or Makov-Payne correction involves fittig the formation energy with respect to $L$ (supercell lattice constant)
+using $L^{-1}$ or $L^{-1} + L^{-3}$ and extend $L \to \infty$.
+
+Based on Freysoldt's method of energy correction, Kumagai et. al. purposed \textbf{Improved Freysoldt's method} to be used in the case of 
+an anisotropic ionic crystal. Firstly, the term $\tilde{V}^{lr}_{q}(r)$ is replaced using anisotropy dielectric constant $\mathbf{\epsilon}$ and point charge
+approximation of the defect charge density
+\footnote{
+    The notataion used in Kumagai and Freysoldt are different: In Kumagai, $V_{bulk}$ is the periodic potential in a perfect bulk system, $V_{defect,q}$
+    is the (calculated) potential in a defect supercell with periodic array of defect charge and neutralization background charge, $V_{isolated,q}$ is the 
+    potential of an system with an isolated defect. They correspond to:
+    \begin{align}
+        V_{isolated,q} - V_{bulk} &\to V_{q/0} \ (V_{q/b}) \notag \\
+        V_{defect,q} - V_{bulk} &\to \tilde{V}_{q/0} \ (V_{q/b}) \notag \\
+        V_{PC,d} \text{ (Eq.(5))} &\to \tilde{V}^{lr}_{q}(r=0) \notag \\
+        \Delta V_{PC,q/b} &\to  V^{sr} + C \ (\Delta V_{PC,q/b} |_{far} = C) \notag
+    \end{align}
+    where $V_{q/0}$ play the same role as $V_{q/b}$ depending on the reference potential (Bulk or neutral defect). 
+    Furthermore, In Kumagai's paper, the term $E_{PC}$ also differs from the term $E_{lattice}$ in Freysoldt, with the relationship:
+    \begin{equation}
+        E_{PC} = E_{lattice} - \frac{q}{\Omega} \int_{\Omega} d^3 r [ \tilde{V}_{q/0}(r) - \tilde{V}^{lr}_{q}(r) ]
+    \end{equation} 
+    and the fact $\int_{\Omega} \tilde{V}_{q/0} d^3 r = 0 $ by their convention:
+    \begin{equation}
+        \int_{\Omega} V_{defect,q} d^3 r = \int_{\Omega} V_{bulk} d^3 r = 0
+    \end{equation}
+}:
+\begin{align}
+    V_{PC,q}^{aniso} (r\neq 0) 
+    = \sum_{R_i} \frac{q}{\sqrt{|\bar{\epsilon}|}} \frac{\text{erfc}(\gamma \sqrt{(R_i-r) \bar{\epsilon}^{-1} (R_i-r) })}{\sqrt{(R_i-r) \bar{\epsilon}^{-1} (R_i-r) }} \\
+        - \frac{\pi q}{\Omega \gamma^2} + \sum_{G_i}^{i\neq 0} \frac{4\pi q}{\Omega} \frac{\exp(- G_i \bar{\epsilon} Gi / 4\gamma^2)}{G_i \bar{\epsilon} Gi} \cdot \exp(iG_i r)
+\end{align}
+which is obtained by Ewald summation. Secondly, for evaluating the $C$ term, the potential averaged at the atomic position in the relaxed defect supercell in a defined sampling 
+region (outside the shpere that is in contact with the Wigner-Seiz cell)
+is used instead of the comparing the plane averaged value as in Freysoldt's original method. See Figure 1), 2) and 3) in Kumagai's paper.
 
 \begin{thebibliography}{99}
     \bibitem{Kuwabara2004}
