@@ -27,11 +27,37 @@ of the microstates accessible to it.
 \end{itemize}
 
 \subsection{Motivation for the fundamental postulation}
+From the above fundamental postulation and use the ergodic hypothesis, we can relate the macroscopic properties of a system that we can measure 
+to the statistic (probabilistic) description of microstate. 
+
+\textbf{Ergodic hypothesis} assumes that 1) the system's internal dynamics are such that the microstates of the system are 
+constantly changing and 2) the system will visit all possible microstate and spend an equal time in each of them. 
+As a result, as we carry out measurement, the system will likely to be found in a configuration (macroscopic properties) that 
+is represented by the most microstates\footnote{Blundell, p35-37}. 
+
+The following example illustrate this notation: consider a box of 100 identical coins, shaked hard and we measure the number 
+of the coins facing up as we open the box (macroscopic result). We do not really care the actual configuration of the outcome 
+(coin 1 face up, $\cdots$ coin N face down)
+which is a microscopic property since we know each of these configurations is equally possible. 
+It's easy to see that the most probable result is 50 up and 50 down, but let's see the possibility of 
+outcome that deviate from this average value:
+\begin{align}
+    \text{50 up and 50 down}\ &= \frac{100!}{(50!)^2} \approx 4 \times 10^{27} \notag \\ 
+    \text{53 up and 47 down}\ &= \frac{100!}{53! 47!} \approx 3 \times 10^{27} \notag \\
+    \text{90 up and 10 down}\ &= \frac{100!}{90! 10!} \approx 10^{13} \notag \\
+    \text{100 up and 0 down}\ &= 1
+\end{align}
+where each result is determined by counting their configurations. We see that the probability that result deviate far from the 
+average decay exponentially. For actual physic system, the number of particles are $\propto 10^{23}$, which essentially 
+mean that the possibility of deviation is ignorable and when we measure the macroscopic properties of physical system, we almostly
+certainly obtain the value given from probabilistic calculation.
+
+The macroscopic propertie of the system can thus be calculated as following:
 For $N$ particles we have in total $6N$ coordinates $(q_1, q_2, \cdots , q_{3N}, p_1, p_2, \cdots , p_{3N})$ which completely
 define a microscope state. We define the "phase density" as:
 \begin{align}
     &\rho(q_1, q_2, \cdots , q_{3N}, p_1, p_2, \cdots , p_{3N}, t) \\
-     &\ \ \   \to \text{Probability of finding a system near}\ (q_1, q_2, \cdots , q_{3N}, p_1, p_2, \cdots , p_{3N}) \text{at time} t
+     &\ \ \   \to \text{Probability of finding a system near}\ (q_1, q_2, \cdots , q_{3N}, p_1, p_2, \cdots , p_{3N}) \text{at time}\ t
 \end{align}
 If property of this system is given by a function $f(q,p)$, then the ensemble average of $f$ at time $t$ will be 
 given as:
@@ -40,6 +66,7 @@ given as:
 \end{align}
 With the above definition, $\rho(q,p,t)dq^{3N}dp^{3N}$ gives the number of states (points) that are included in the phase space 
 volume $dq^{3N}dp^{3N}$ near $(q,p)$.
+
 \subsection{Liouville's theorem}
 Liouville's theorem states that the evolution of $\rho$ is given by:
 \begin{equation}
@@ -79,7 +106,8 @@ in this volume do not change over time, giving the result:
 \end{equation}
 Where the first equality is given merely by the definition of total derivative.
 
-\textbf{Proof 2} In this proof, we compute the partial derivatives first and show that they result in the result of Liouville's theorem.
+\textbf{Proof 2} In this proof, we compute the partial derivatives first and show that they result in the result of Liouville's theorem
+\footnote{Taken from \url{https://hepweb.ucsd.edu/ph110b/110b_notes/node93.html}}.
 
 We first compute $\partial \rho / \partial t$. Consider the flow the phase space points in and out of a cubic volume element 
 in the phase space arount $(q,p)$, The net flow of phase space points is given by:
@@ -98,18 +126,18 @@ the total derivatve is then:
     &= - \sum_i \left( \rho\frac{\partial \dot{q_i}}{\partial q_i} + \rho\frac{\partial \dot{p_i}}{\partial p_i}  \right) = 0
 \end{align}
 thus proving the Liouville's theorem.
-% ref: https://hepweb.ucsd.edu/ph110b/110b_notes/node93.html
-
-\subsection{Ergodicity}
-In a complex system in equilibrium, over a sufficiently long time, all part of the phase space will be visited by a trajectory in the phase space. Since we have shown that the 
-phase space density on the trajectory will be the same, and we consider the system in equilibrium, which implies $\partial \rho / \partial t = 0$, We can conclude that 
-\begin{equation}
-    \rho(q,p,t) = \rho_0
-\end{equation}
-That is, we have equal phase space density over all accessible phase space.
 
 \pagebreak
 \section{Intensive and extensive properties}
+
+\subsection{Heat}
+We provide a definition of heat as \emph{The thermal energy in transit}, denoted as $Q$\footnote{Blundell, p14}. We define the heat capacity
+$C$ of an object as the amount of heat that is needed to increase its temperature:
+\begin{equation}
+    C = \frac{dQ}{dT}
+\end{equation}
+thus $C$ has the unit $J/K$. The specific heat is defined to be the heat capacity per unit mass, having the unit $J/(kg\cdot K)$
+
 \subsection{Entropy}
 We define entropy $S$ for an isolated macroscopic system of $N$ particles in volume $V$ and energy $E$ to be:
 \begin{equation}
@@ -122,7 +150,7 @@ at equilibrium.
 %imagine that the system will attempt to visit as many configurations as possible. 
 
 \textbf{Temperature} 
-consider an isolated system with two subsystem in weak contact but only energy is allowed to follw between the two subsystem.
+consider an isolated system with two subsystem in weak contact but heat is allowed to follw between the two subsystem.
 The total number of accessible states (configurations) are given by the product of the number of configurations of the 
 two subsystem. Entropy will be additive. Consider the energy of one of the subsystem $E_1$
 as the constrain for the configurations.
@@ -130,13 +158,14 @@ as the constrain for the configurations.
     \Omega(E,E_1) = \Omega_1(E_1) \Omega_2(E_2) \\
     S(E,E_1) = S_1(E_1) S_2(E_2)   
 \end{align}
-Relaxation process will increase entropy by changing $E_1$, at equilibrium, we have:
+Relaxation process will increase entropy by changing $E_1$, towards a macroscopic that correspond to 
+more configurations. At equilibrium (heat no longer exchange), we have:
 \begin{gather}
     \frac{\partial S}{\partial E_1} = 0 \ \Rightarrow \ 
     \left. \frac{\partial S_1(E_1)}{\partial E_1} \right|_{N_1,V_1} = \left. \frac{\partial S_2(E_2)}{\partial E_2}\right|_{N_2,V_2} = \frac{1}{T} \label{defineT}
 \end{gather}
-where the final equality gives the definition of temperature, thus if two subsystem reaches equilibrium in terms of energy follow, their 
-temperature will be equal.
+where the final equality gives the definition of temperature, thus if two subsystem reaches equilibrium in terms of energy flow, their 
+temperature will be equal. This process is irreversible and thus define a arrow of time.
 
 \textbf{Chemical potential}
 now, we fix only volume $V$ of each subsystem and allow both energy and particles to exchange, then:
@@ -165,6 +194,8 @@ We can separate the macroscopic properties of a system into two different catago
 %\subsection{Carnot cycle}
 \pagebreak
 \section{Ensembles}
+We can define an ensemble as a collection of possible configurations that satisfy a given macroscopic 
+property\footnote{Blundell, p38}.
 We have already seem an ensemble containing possible configurations of an isolated system where energy
 is known and all configurations are of equal probability. 
 This ensemble is known as the \textbf{Microcanonical ensemble}. For a microcanonical ensemble, particle 
