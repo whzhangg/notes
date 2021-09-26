@@ -157,8 +157,57 @@ hole depend on velocity $v$ (in Eq.\ref{flux}), therefore the speed distribution
 of those that go through the hole as an extra factor $v$, compare to the speed 
 distribution of gas molecules inside the box.
 
-\subsection*{Mean free path}
+\subsection*{Average lifetime}
+We start by considering a molecule moving at speed $v$ with other molecules in
+the gas stationary. Within a time $dt$, the molecule sweep through an area $\sigma v dt$,
+where $\sigma$ is the collision cross-section of the molecule. We denote $P(t)$ as 
+the probability of this molecule travel without any collision up to time $t$. We have:
+\begin{align}
+    P(t + dt) &= P(t) + \frac{dP}{dt}dt \\
+    P(t + dt) &= P(t) (1 - n\sigma v dt) 
+\end{align}
+with $n$ the number density of gas and therefore $(1 - n\sigma v dt)$ gives the 
+probability of having no other gas molecule in the volume the moving molecule is going 
+to sweep over from time $t$ to $t + dt$. 
+Withe the above two equation, we obtain the result:
+\begin{equation}
+    P(t) = e^{-n\sigma vt}
+\end{equation}
+We have the boundary condition $P(0) = 1$ and $P(\infty) = 0$
 
+The probability that the molecule collide in time interval from $t$ to $t+dt$ is given by
+the probability that molecule does not collide at time $t$ but do collide at time $t + dt$:
+$P(t) - P(t + dt)$, we have:
+\begin{equation}
+    - dP(t) = n\sigma v e^{-n\sigma vt} dt
+\end{equation}
+(since P(t) decay with time, $dP(t) < 0$). We can calculate the mean scattering time:
+\begin{align}
+    \tau &= \int_{0}^{\infty} t \sigma v e^{-n\sigma vt} dt \notag \\
+         &= \frac{1}{n\sigma v} \int_{0}^{\infty} x e^{-x} dx \notag \\
+         &= \frac{1}{n\sigma v}
+\end{align}
+where $x = n\sigma v t$ represent a change of variable.
+
+In the case of hard sphere approximation in a gas consist of molecules with
+equal radius, the collision cross-section is given as:
+\begin{equation}
+    \sigma = \pi (r_1 + r_2) ^ 2 = 4 \pi a^2
+\end{equation}
+
+\subsection*{Mean free path of gas}
+With the previous result, we have, for the mean free path
+\begin{equation}
+    \lambda = \langle v \rangle \tau = \langle v \rangle \frac{1}{n\sigma \langle v_r\rangle }
+\end{equation}
+$\langle v \rangle$ is the average speed of gas molecules,
+where for the lifetime, instead of using $v$, we recognize that we should use 
+relative speed $v_r$ in a real system when all particles are in motion. It is not attempted to derive
+the value of $\langle v_r\rangle$ here (refer to Blundell, p73). But the final result
+is: 
+\begin{equation}
+    \lambda = \frac{1}{\sqrt{2}n\sigma}
+\end{equation}
 
 \pagebreak
 \section*{Appendix A}
