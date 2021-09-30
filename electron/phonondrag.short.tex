@@ -104,6 +104,37 @@ keeping only to linear part in $dn_{qs}$ and using the relationship $\left(\part
     \frac{1}{\tau_{q,s}^{e-p}} = \frac{2\pi}{\hbar} \sum_{k,k'}|g^{SE}(k,k',q)|^2 \delta(\varepsilon_{nk} + \hbar\omega_{q,s} - \varepsilon_{n'k'}) \delta(k+q-k') (f_k - f_{k'})
 \end{align}
 
+\subsection{Electron-phonon average approximations}
+Georgy Samsonidze et al. purposed the use the energy average of the electron-phonon
+interaction matrix element to replace the exact electron phonon interaction matrix 
+element. Their method is as follows:
+From Eq.\ref{taunk}, we approximate:
+\begin{align}
+    |g_{nn's}^{SE}(k,k',q)|^2 &\to g_s^2 (\varepsilon_{nk}, \varepsilon_{n'k'}) \\
+    \omega_{qs} &\to \bar{\omega_s}
+\end{align}
+so that the matrix element $g$ is a function of two variable $\varepsilon_1$ and $\varepsilon_2$ for each phonon mode. 
+we also used a mode average phonon frequency to replace the $q$ dependent phonon frequency. Using these approximations, Eq.\ref{taunk}
+can be written as:
+\begin{align}
+    \frac{1}{\tau_{nk}^{ph}} = \frac{2\pi}{\hbar} \sum_{qs,k'n'} g_v^2 (\varepsilon_{nk}, \varepsilon_{n'k'}) \delta(k+q-k')
+    \left\{ [ f(\varepsilon_{n'k'}) + n(\hbar\bar{\omega_s}) ]\delta(\varepsilon_{nk} + \hbar\bar{\omega_s} - \varepsilon_{n'k'}) \right. \notag \\
+           \left. + [ n(\hbar\bar{\omega_s}) + 1 - f(\varepsilon_{n'k'}) ] \delta(\varepsilon_{nk} - \hbar\omega_{q,s} - \varepsilon_{n'k'})\right\} 
+\end{align}
+\begin{align}
+    \frac{1}{\tau_{nk}^{ph}} =  \frac{2\pi}{\hbar} \sum_{s,k'n'} \left\{ g_v^2 (\varepsilon_{nk}, \varepsilon_{nk}+\hbar\bar{\omega_s}) \right.
+    [ f(\varepsilon_{nk}+\hbar\bar{\omega_s}) + n(\hbar\bar{\omega_s}) ] \notag \\
+           \left. + g_v^2 (\varepsilon_{nk}, \varepsilon_{nk} - \hbar\omega_{q,s}) [ n(\hbar\bar{\omega_s}) + 1 - f(\varepsilon_{nk} - \hbar\omega_{q,s}) ] \right\}  
+\end{align}
+\begin{align}
+    \frac{1}{\tau_{nk}^{ph}}=  \frac{2\pi}{\hbar} \left( \frac{V}{2} \right) \sum_{s} \left\{ g_v^2 (\varepsilon_{nk}, \varepsilon_{nk}+\hbar\bar{\omega_s}) \right.
+     [ f(\varepsilon_{nk}+\hbar\bar{\omega_s}) + n(\hbar\bar{\omega_s}) ] D(\varepsilon_{nk}+\hbar\bar{\omega_s}) \notag \\
+            \left. + g_v^2 (\varepsilon_{nk}, \varepsilon_{nk} - \hbar\bar{\omega_s}) [ n(\hbar\bar{\omega_s}) + 1 - f(\varepsilon_{nk} - \hbar\omega_{q,s}) ]  D(\varepsilon_{nk}-\hbar\bar{\omega_s}) \right\} 
+\end{align}
+where in the final equation, we replaced the summation $\sum_{k'n'}$ with the density of states $V D(\varepsilon_{n'k'})/2$ where
+$D(\varepsilon)$ is the number of electric states in the Brillouin zone at energy $\varepsilon$ per volume (reason for the $V$ prefactor)
+including both spin (reason for the $1/2$).
+
 \section{Transport properties}
 the charge and energy current can be expressed as:
 \begin{gather}
