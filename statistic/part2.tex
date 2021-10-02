@@ -26,16 +26,22 @@ energy:
 we consider some assumption: 1) the molecules do not interact 
 with each other most of the time (only through collision) and 2) the collision is 
 not frequent. Through the collision, molecules exchange energy with each other,
-but every think remain in equilibrium. We also assume the motion before and 
+but every thing remain in equilibrium. We also assume the motion before and 
 after the collision is independent, thus their kinetic energies are 
 independent variables. With the above assumption, we can consider 
 each molecules as an independent system connected to the heat reservior at 
 temperature $T$, where heat reservior is "all other molecules in the gas"
-\footnote{Blundell, p48}.
+\footnote{Blundell, p48} and energy is exchanged with collisions
+\footnote{This point
+is not stated very clear in the book, but collision is the only way a gas molecule
+can interact with other molecules. The motion of the molecule after the collision is
+independent of their motion before the collision, therefore, the motion after the 
+collision is entirely determined by the heat bath.}.
 
 \subsection*{Velocity distribution}
 The velocity distribution $g(\mathbf{v})$ is defined to the fraction of molecules with 
-velocity $\mathbf{v}$. 
+velocity $\mathbf{v}$ 
+($\mathbf{v}$ is the vector velocity while $v$ is the absulote value). 
 \begin{align}
     g(\mathbf{v}) &\propto e^{-mv^2/2k_BT} dv_xdv_ydv_z \\
     &\propto e^{-m(v_x^2 + v_y^2 + v_z^2)/2k_BT} dv_xdv_ydv_z \\
@@ -71,9 +77,9 @@ We can find the following expectation values:
 \begin{align}
     \langle v \rangle &= \int_{0}^{\infty} v f(v) dv = \sqrt{\frac{8k_BT}{\pi m}} \notag \\
     \langle v^2 \rangle &= \int_{0}^{\infty} v^2 g(v) dv_x = \frac{3k_BT}{m} \notag  \\
-    v_{\rms} &= \sqrt{\langle v^2 \rangle} = \sqrt{\frac{3k_BT}{m}}
+    v_{rms} &= \sqrt{\langle v^2 \rangle} = \sqrt{\frac{3k_BT}{m}}
 \end{align}
-
+where $v_{rms}$ is the "root mean square" value. 
 The mean kinetic energy of a gas molecule is then:
 \begin{equation}
     \langle E_k \rangle = \frac{1}{2}m \langle v^2 \rangle = \frac{3}{2}k_BT
@@ -95,8 +101,9 @@ and $\theta + d\theta$ with direction $z$ is then:
 
 In a time interval $dt$, 
 a molecules with speed $v$ travelling at an angle $\theta$ to the normal of the wall
-will hit the container wall of area $A$ if it is $vdt\cos \theta$ away from the wall. 
-the number of such molecules hitting the wall is thus 
+will hit the container wall if it is $vdt\cos \theta$ away from the wall. 
+the number of such molecules (speed $v$ at an angle $\theta$) 
+hitting the wall of area $A$ is thus 
 \begin{equation}
     A vdt\cos \theta n \cdot \frac{1}{2} f(v) dv \sin\theta d\theta 
 \end{equation}
@@ -128,7 +135,7 @@ sum of pressures of each component:
 where $n_i = N_i / V$
 
 \subsection*{Effusion}
-Effusion is the process in which gas escape from a small hole\footnote{Blundell, p64}. we first define 
+Effusion is the process in which gas escape from a small hole\footnote{Blundell, p64}. we define 
 the flux $\Phi$ as the number of molecules going through unit area per unit time,
 therefore, $\Phi$ has the unit of $m^{-2}s^{-1}$. we use the above result of particles 
 hitting the wall to find flux:
@@ -150,15 +157,16 @@ escaping through the hole is given as:
 \begin{equation}
     \Phi A = \frac{pA}{\sqrt{2\pi m k_BT}}
 \end{equation}
-which is linear to pressure, inversely proportion to $T$ and $m$. It should be 
-noted that the speed distribution of the gas through the hole is no longer the 
+which is linear to pressure, inversely proportion to $T$ and $m$. 
+
+It should be noted that the speed distribution of the gas through the hole is no longer the 
 Maxwell-Boltzmann distribution, since the amount of gas that effuse through the 
 hole depend on velocity $v$ (in Eq.\ref{flux}), therefore the speed distribution
 of those that go through the hole as an extra factor $v$, compare to the speed 
 distribution of gas molecules inside the box.
 
 \subsection*{Average lifetime}
-We start by considering a molecule moving at speed $v$ with other molecules in
+We first considering a molecule moving at speed $v$ with other molecules in
 the gas stationary. Within a time $dt$, the molecule sweep through an area $\sigma v dt$,
 where $\sigma$ is the collision cross-section of the molecule. We denote $P(t)$ as 
 the probability of this molecule travel without any collision up to time $t$. We have:
@@ -177,13 +185,13 @@ We have the boundary condition $P(0) = 1$ and $P(\infty) = 0$
 
 The probability that the molecule collide in time interval from $t$ to $t+dt$ is given by
 the probability that molecule does not collide at time $t$ but do collide at time $t + dt$:
-$P(t) - P(t + dt)$, we have:
+$P(t) - P(t + dt)$ (since P(t) decay with time, $dP(t) < 0$), we have:
 \begin{equation}
     - dP(t) = n\sigma v e^{-n\sigma vt} dt
 \end{equation}
-(since P(t) decay with time, $dP(t) < 0$). We can calculate the mean scattering time:
+We can calculate the mean scattering time:
 \begin{align}
-    \tau &= \int_{0}^{\infty} t \sigma v e^{-n\sigma vt} dt \notag \\
+    \tau &= \int_{0}^{\infty} t n \sigma v e^{-n\sigma vt} dt \notag \\
          &= \frac{1}{n\sigma v} \int_{0}^{\infty} x e^{-x} dx \notag \\
          &= \frac{1}{n\sigma v}
 \end{align}
@@ -212,8 +220,106 @@ is:
 \section{Transport properties in Ideal gas}
 
 \subsection*{Viscosity}
-Viscosity measures th resistance of a liquid (gas) to deform by shear stress. Suppose 
+Viscosity $\eta$ measures th resistance of a liquid (gas) to deform by shear stress. Suppose we sandwich fluid between 
+two infinitly large plate. We fix the bottom plate and apply some force $F$ to the top plate. The fraction between the fluid and 
+the top plate will accelerate the fluid near it, the the momentum is passed down inside the liquid through internal interaction (collision)
 
+Now, we wait for long enough time until the whole system is in equilibrium. The top plate will reach some final speed $u$ and 
+the fluid near the top plate will have the same macroscopic speed (condition of equilibrium). The bottom plate and the fluid near the bottom 
+will be stationary (An external force is necessary to keep the bottom plate stationary). 
+Therefore, a velocity gradient will be set up in the fluid between the two plates (in $z$ direction). We define 
+the viscosity by equation:
+\begin{equation}
+    \tau_{shear} = \frac{F}{A} = \eta \frac{d \langle u_x \rangle}{dz}
+\end{equation}
+
+With force $F$ constantly applied on the top plate, we are inputing momentum $Fdt$ per unit area in time $dt$. In equilibrium, 
+These momentum will be transported completely to the bottom plate. Therefore, we have momentum flux through $z$ direction 
+(note that the momentum itself is along the plate, $x$ dirction, but the flux is along $z$):
+\begin{equation}
+    \Pi_z = - F / A = - \eta \frac{d \langle u_x \rangle}{dz}
+\end{equation}
+We have a negative sign because the momentum flow from high velocity area to low velocity area, which is opposite the velocity gradient.
+
+We can calculate the momentum flux by considering the microscopic motion of gas molecules. We consider that the motion of free ideal gas superimposed 
+with the collective drifting motion with velocity $\langle u_z \rangle$. A molecules travelling along $z$ direction will
+change their momentum by collision with other molecules in the final positon $z_2$ ($z_1 \to z_2$). The number of particle with velocity $v$ travelling
+at an angle $\theta$ with $z$ direction is $ v\cos \theta n \cdot \frac{1}{2} f(v) dv \sin\theta d\theta $ per unit area $A$ and time $dt$. How far they 
+travel will be given by the mean free path $\lambda$. The momentum difference of a molecule just after collision at $z_1$ and just after collision at $z_2$ is 
+given by:
+\begin{equation}
+    - m \left( \frac{\partial \langle u_x \rangle}{\partial z} \right) \lambda \cos\theta
+\end{equation}
+which is the momentum flux created by this single molecule. Summing over all molecules with different speed and angle, we have:
+\begin{align}
+    \Pi_z &= \int_0^{\infty} dv \int_0^{\pi/2} d\theta 
+     v \cos \theta n \frac{1}{2} f(v) \sin\theta \cdot m \left( \frac{\partial \langle u_x \rangle}{\partial z} \right) \lambda \cos\theta \\
+     &= -\frac{1}{3} n m \lambda \langle v \rangle \frac{\partial \langle u_x \rangle}{\partial z} \label{momentum_transfer}
+\end{align}
+We obtain the viscosity:
+\begin{equation}
+    \eta = \frac{1}{3} n m \lambda \langle v \rangle
+\end{equation}
+Using the previous result $\lambda = (\sqrt{2}n\sigma)^{-1}$ and $\langle v \rangle = ()\frac{8k_BT}{\pi m})^{1/2}$, we can also write:
+\begin{equation}
+    \eta = \frac{2}{3\sigma}\left( \frac{mk_BT}{\pi} \right)^{1/2}
+\end{equation}
+We have the following observations:
+\begin{enumerate}
+    \item $\eta$ is independent of pressure.
+    \item $\eta \propto T^{1/2}$.
+    \item For the above approximation of momentum transfer to be correct, we require $ L \ll \lambda \ll d $, where $d$ is the size of the molecule and $L$ is the size scale of the container.
+\end{enumerate}
+
+\subsection*{Thermal conductivity}
+We define the heat flux in the $z$ direction
+\begin{gather}
+    J_z = -\kappa \left( \frac{\partial T}{\partial z} \right) \\
+    \mathbf{J} = -\kappa \nabla T
+\end{gather}
+The gas molecules carrier heat through their kinetic energy, which depend on temperature $T$ via $\langle E_k \rangle = 3k_BT / 2$. Defining heat capacity of a 
+molecule as $C$, we can calculate the total heat flux:
+\begin{align}
+    J_z &= \int_0^{\infty} dv \int_0^{\pi/2} d\theta 
+    v \cos \theta n \frac{1}{2} f(v) \sin\theta \cdot - C \left( \frac{\partial T}{\partial z} \right) \lambda \cos\theta \\
+    &= -\frac{1}{3} n C \lambda \langle v \rangle \frac{\partial T}{\partial z} \label{heat_transfer}
+\end{align}
+Using $C_V = n C$, the thermal conductivity of gas is therefore
+\begin{equation}
+    \kappa = \frac{1}{3} C_V \lambda \langle v \rangle
+\end{equation}
+
+We observe that Eq.\ref{heat_transfer} is very similar to Eq.\ref{momentum_transfer}, and we have:
+\begin{equation}
+    \frac{\kappa}{\eta} = \frac{C}{m}
+\end{equation} 
+
+\subsection*{Particle Diffusion}
+We consider a gas of molecules in which some of them is labelled, if those labelled molecules are initially confined in 
+certain area and the confinement is removed, they will start to diffuse (Self-diffuse). Suppose that the diffusion is 
+along $z$ direction and we use $n^*(z)$ to denote the density of those labelled particles, we can define the 
+diffusion coefficient: 
+\begin{equation}
+    \Phi_z = -D \left( \frac{\partial n^*}{\partial z} \right)
+\end{equation}
+Following the above microscopic picture, we have:
+\begin{align}
+    \Phi_z &= \int_0^{\infty} dv \int_0^{\pi/2} d\theta 
+    v \cos \theta \frac{1}{2} f(v) \sin\theta \cdot - \left( \frac{\partial n^*}{\partial z} \right) \lambda \cos\theta \\
+    &= -\frac{1}{3} \lambda \langle v \rangle \frac{\partial T}{\partial z} 
+\end{align}
+giving the self-diffusion coefficient
+\begin{equation}
+    D = \frac{1}{3} \langle v \rangle
+\end{equation}
+
+We have the following relationship:
+\begin{enumerate}
+    \item $ D \propto T^{3/2}$
+    \item $D \rho = \eta $, where $rho$ is the density $\rho = nm$
+\end{enumerate}
+
+\subsection*{Heat diffusion equation}
 
 \pagebreak
 \section*{Appendix A}
