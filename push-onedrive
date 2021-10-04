@@ -1,0 +1,7 @@
+#!/bin/bash
+
+echo "push to location: ${ONEDRIVE}Notes"
+cp -r electron ${ONEDRIVE}Notes
+cp -r phonon ${ONEDRIVE}Notes
+cp -r statistic ${ONEDRIVE}Notes
+echo "Done"
