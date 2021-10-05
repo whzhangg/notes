@@ -431,8 +431,100 @@ where $v = \eta / \rho$ is the kinematic viscosity and $D$ is the thermal diffus
 This value of called \textbf{Prandtl number}. For $\sigma_p \gg 1$, the convection is the dominant mode of heat transport. 
 For gas, $\sigma_p$ can be found to be $2/3$ with the previous results. For liquid, $\sigma_p \gg 1$.
 
+\section{Sound velocity in gas}
+In fluids , only longnitudinal wave (compression) can be transitted. Transverse wave cannot be transitted since gas cannot transmit shear.
+Speed of sound for a fluid can be derived from the \textbf{continuity equation} and \textbf{Euler equation}. 
+The continuity equation for a fluid is:
+\begin{gather}
+    \int_S \rho \textbf{u} dS = \int_V \nabla\cdot(\rho \textbf{u}) dV = -\frac{\partial}{\partial t} \int_V \rho dV \label{continuity}\\
+    \nabla\cdot(\rho \textbf{u}) = - \frac{\partial \rho}{\partial t}
+\end{gather} 
+where $\rho$ is the local fluid density, $S$ is the surface area of a volume element $V$ and $\textbf{u}$ is the 
+local fluid velocity. The first term in Eq.\ref{continuity} is the flux through the surface, the second term is obtained 
+by divergence theorem. In 1D, the equation is reduced to:
+\begin{equation}
+    \frac{\partial (\rho u)}{\partial x} = - \frac{\partial \rho}{\partial t}
+\end{equation}
+
+The Euler equation, on the other hand, determines the dynamics of a fluid, as:
+\begin{gather}
+    -\frac{1}{\rho} \nabla p = \frac{\partial \textbf{u}}{\partial t} + (\textbf{u} \cdot \nabla) \textbf{u} \\
+    -\frac{1}{\rho} \frac{\partial p}{\partial x} = \frac{\partial u}{\partial t} + u \frac{\partial u}{\partial x}
+\end{gather}
+
+To obtain the velocity of sound in fluid in 1D, we expand the continuity equation and divide 
+both side by $\rho$:
+\begin{gather}
+    \frac{u}{\rho} \pfrac{\rho}{x} + \pfrac{u}{x} = - \frac{1}{\rho} \pfrac{\rho}{t} \\ 
+    \pfrac{u}{x} = - \frac{1}{\rho} \pfrac{\rho}{t}
+\end{gather}
+where we ignored the first term since it is second order ($u d\rho$). 
+We also discard the second order term in the Euler equation and obtain:
+\begin{gather}
+    -\frac{1}{\rho} \frac{\partial p}{\partial x} = \frac{\partial u}{\partial t} \\
+    - \frac{1}{\rho^2} \left( \rho \pfrac{P}{\rho} \right) \pfrac{\rho}{x} = \frac{\partial u}{\partial t} \\
+    - \frac{B}{\rho^2} \pfrac{\rho}{x} = \frac{\partial u}{\partial t}
+\end{gather}
+where we used the definition of the Bulk modulus:
+\begin{gather}
+    B = -V \pfrac{p}{V} = \rho \pfrac{p}{\rho} \\
+    \text{Using  } \ d\rho = M d\left( \frac{1}{V} \right) = - M \frac{dV}{V^2} = - \rho \frac{dV}{V}
+\end{gather}
+Now, using the result:
+\begin{align}
+    \pfrac{u}{x} &= - \frac{1}{\rho} \pfrac{\rho}{t} \\
+    \frac{\partial u}{\partial t} &= - \frac{B}{\rho^2} \pfrac{\rho}{x}
+\end{align}
+and partial differentiate with respect to $t$ and $x$, we can remove $u$:
+\begin{equation}
+    - \frac{\partial^2 \rho}{\partial t^2} = - \frac{B}{\rho} \frac{\partial^2 \rho}{\partial x^2}
+\end{equation}
+which is a wave equation and the solution is given by:
+\begin{equation}
+    \rho \approx e^{i(kx-\omega t)}
+\end{equation}
+with propogating velocity:
+\begin{equation}
+    v_s = \frac{\omega}{k} = \sqrt{\frac{B}{\rho}}
+\end{equation}
+
+\subsection*{Sound velocity under isothermal and adiabatic conditions}
+The difference between isothermal and adiabatic condition is whether temperature
+or entropy (no relaxation process) is fixed during the transmission of the 
+sound wave. In isothermal condition, we have:
+\begin{equation}
+    B_T = -V \left( \pfrac{p}{V} \right)_T = p
+\end{equation}
+so that the sound velocity is:
+\begin{equation}
+    v_s = \sqrt{\frac{B_T}{\rho}} = \sqrt{\frac{nm\langle v^2\rangle}{3\rho}} = \sqrt{\frac{\langle v^2\rangle}{3}}
+\end{equation}
+which coincide with the mean molecular speed in a given direction.
+
+In the adiabatic condition, the gas obey:
+\begin{equation}
+    \frac{dp}{p} = -\gamma \frac{dV}{V}
+\end{equation}
+The adiabatic bulk modulus is then:
+\begin{equation}
+    B_S = -V \left( \pfrac{p}{V} \right)_S = \gamma p
+\end{equation}
+and the speed of sound is given by:
+\begin{equation}
+    v_s = \sqrt{\frac{\gamma\langle v^2 \rangle }{3}}    
+\end{equation}
+
+Since sound wave is passed by compressing and decompressing the fluid and as the fluid is compressed, their 
+temperature will increase. Therefore,
+The isothermal process is realized if there are enough time for thermal equilibration to take place.  
+In the real case, the compression process is generally fast and the sound waves are almost always adiabatic.
+
+\section{Brownian motion and fluctuations}
+
+
 \pagebreak
-\section*{Appendix A}
+\section*{Appendix A Time average and ensemble average}
+
 
 
 \end{document}
