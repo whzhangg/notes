@@ -768,7 +768,123 @@ This is the statement of the fluctuations dissipation theorem, connecting the
 fluctuation (autocorrelation function) to the imaginary part of the response function.
 
 \section{Non-equilibrium thermodynamics}
+\subsection*{Irreversibility of transport process}
+We have the following relationship between local entropy density, local energy $u$, particle density and 
+charge density:
+\begin{gather}
+    ds = \frac{1}{T} du - \frac{\mu}{T} dn + \frac{\phi}{T} d\rho_e \\
+    ds = \sum_k \phi_k d\rho_k
+\end{gather}
+where in the second equation, we generalize all possible contribution to a local entropy change 
+with a generalized potential $\phi_k = \partial s / partial \rho_k$ and a generalized density $\rho_k$. 
+(For example, with $\rho_k = u$ we have $\phi_k = 1/T$). 
+Since the generalized density are conserved in the system, we have the continuous equation relating the 
+change of $\rho$ with respect to the current:
+\begin{equation}
+    \pfrac{\rho_k}{t} + \nabla \cdot \mathbf{J}_{k} = 0
+\end{equation}
 
+We can calculate the local change in entropy and the flow of entropy:
+\begin{gather}
+    \pfrac{s}{t} = \sum_k \phi_k \pfrac{\rho_k}{t} \\
+    \mathbf{J}_s = \sum_k \phi_k \mathbf{J}_{k}
+\end{gather}
+We find the following result:
+\begin{align}
+    \Sigma &= \pfrac{s}{t} +\nabla \cdot  \mathbf{J}_s \\
+    & = \sum_k \phi_k \pfrac{\rho_k}{t} + \nabla \cdot \left(\sum_k \phi_k \mathbf{J}_{k} \right)\\
+    & = \sum_k \phi_k \pfrac{\rho_k}{t} + \sum_k (\nabla  \phi_k) \mathbf{J}_{k} + \sum_k \phi_k (\nabla \cdot \mathbf{J}_{k}) \\
+    & = \sum_k \phi_k \pfrac{\rho_k}{t} + \sum_k (\nabla  \phi_k) \mathbf{J}_{k} - \sum_k \phi_k \pfrac{\rho_k}{t} \\
+    & = \sum_k \nabla \phi_k \mathbf{J}_{k}
+\end{align}
+Which gives the generation rate of entropy per unit volume.
+
+We further consider the current of the generalized density to be a linear response to the 
+gradient to the respective potential:
+\begin{equation}
+    \mathbf{J}_i = \sum_j L_{ij} \nabla \phi_j \label{linearresponse}
+\end{equation}
+where index $i,j$ denote different components and $L$ is called kinetic coefficient. 
+
+As an example, for thermal conduction $\mathbf{J}_u = - \kappa \nabla T$, we have 
+the $\mathbf{J}_u = \kappa T^2 \nabla (1/T)$ for the potential $1/T$. $L_uu = \kappa T^2$.
+Using Eq.\ref{linearresponse}, we obtain the entropy generation rate:
+\begin{align}
+    \Sigma &= \sum_k \nabla \phi_k \sum_j L_{kj} \nabla \phi_j \notag \\
+        & = \sum_{kj} \nabla \phi_k L_{kj} \nabla \phi_j
+\end{align}
+
+For the local entropy, we require it to increase monotonically in an irreversible process. Therefore,
+$\Sigma > 0$ and $L$ is positive definitive.
+
+\subsection*{Onsager's reciprocal relation}
+We consider a system that is near an equilibrium state, we define the 
+variable $\alpha_k = \rho_k - \rho_k^0$ the departure of the $k^{th}$ density
+variable. Writing $\alpha = (\alpha_1, \cdots, \alpha_m)$, we can write 
+the probability distribution:
+\begin{gather}
+    P(\alpha) \propto e^{\Delta S/k_B} \\
+    \Delta S = -\frac{1}{2} \sum_{ij} g_{ij} \alpha_i \alpha_j \\
+    g_{ij} = \left( \frac{\partial^2S}{\partial \alpha_i \partial \alpha_j} \right)_{\alpha=0}
+\end{gather}
+We have the relationship:
+\begin{equation}
+    \pfrac{\ln P}{\alpha_i} = \frac{1}{k_B} \frac{\partial S}{\partial \alpha_i} 
+    = \frac{1}{k_B} \sum_j g_{ij} \alpha_j \label{tmp}
+\end{equation}
+
+We can derived the following relationship:
+\begin{align}
+    \left\langle \pfrac{S}{\alpha_i} \alpha_j \right\rangle 
+    = k_B \left\langle \pfrac{\ln P}{\alpha_i} \alpha_j \right\rangle \notag \\
+    = k_B \int \pfrac{\ln P}{\alpha_i} \alpha_j P(\alpha) d\alpha \notag \\
+    = k_B \int \pfrac{P}{\alpha_i} \alpha_j  d\alpha \notag \\
+    = k_B \left( \int [P\alpha_j]_{\alpha_j = -\infty}^{\infty}  d\alpha' - \int \pfrac{\alpha_j}{\alpha_i} P d\alpha \right)\notag \\
+\end{align}
+where we integrate by parts for variable $d\alpha_i$ and $d\alpha'$ removes $d\alpha_i$ from $d\alpha$. The 
+first term is 0 since $P(\alpha_j \to \infty) = 0$. We have the final relationship:
+\begin{equation}
+    \left\langle \pfrac{S}{\alpha_i} \alpha_j \right\rangle  = - k_B \int \pfrac{\alpha_j}{\alpha_i} P d\alpha = -k_B \delta_{ij}
+    \label{derive}
+\end{equation}
+where we use $\partial \alpha_j / \partial \alpha_i = \delta_{ij}$ and the fact that $P$ is normalized to 1.
+
+We now make an important assumption of \textbf{microscopic reversibility}, which 
+states:
+\begin{align}
+    \langle \alpha_i(0)\alpha_j(t) \rangle &= 
+    \langle \alpha_i(0)\alpha_j(-t) \rangle \notag \\ 
+    &= \langle \alpha_i(t)\alpha_j(0) \rangle
+\end{align}
+We thus find:
+\begin{gather}
+    \langle \alpha_i(0)\alpha_j(t) \rangle - \langle \alpha_i(0)\alpha_j(0) \rangle  
+    = \langle \alpha_i(t)\alpha_j(0) \rangle - \langle \alpha_i(0)\alpha_j(0) \rangle   \notag \\
+    \langle \alpha_i \dot{\alpha}_j \rangle = \langle \dot{\alpha}_i \alpha_j \rangle \label{microreverse}
+\end{gather}
+where we divided time $t$ and take the limit $t \to 0$.
+
+We now make the consideration that $\dot{\alpha}$ is linear porpotional to $\alpha$:
+\begin{equation}
+    \dot{\alpha}_i = \sum_j \lambda_{ij} \alpha_j
+\end{equation}
+with Eq.\ref{tmp}, we find:
+\begin{equation}
+    \dot{\alpha}_i = \sum_{j} \left( \frac{\lambda}{g} \right)_{ij} \frac{\partial S}{\partial \alpha_j} 
+\end{equation}
+where the fraction is the matrix division. Substituting the above equation to Eq.\ref{microreverse}, we have:
+\begin{equation}
+    \sum_{k} \left( \frac{\lambda}{g} \right)_{jk} \left\langle \alpha_i \frac{\partial S}{\partial \alpha_j} \right\rangle
+    = \sum_{k} \left( \frac{\lambda}{g} \right)_{ik} \left\langle \frac{\partial S}{\partial \alpha_k} \alpha_j \right\rangle
+\end{equation}
+Using Eq.\ref{derive}, we have:
+\begin{equation}
+    \left( \frac{\lambda}{g} \right)_{ij} = \left(  \frac{\lambda}{g} \right)_{ji}
+\end{equation}
+Now, taking $L \propto \lambda / g$, we obtain the Onsager reciprocal relations:
+\begin{equation}
+    L_{ij} = L_{ji}
+\end{equation}
 
 \pagebreak
 \section*{Appendix A: Time average and ensemble average}
