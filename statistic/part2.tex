@@ -762,7 +762,7 @@ The mean value of $x$ can also be expressed by $\langle x \rangle_f = \chi(0)' f
 (The imaginary part $\chi''(0) = 0$). Then we have the result:
 \begin{equation}
     \langle x^2 \rangle = k_B T \chi(0)' = 
-    k_BT\int_{-\infty}^{\infty} \frac{d\omega'}{\pi} \frac{\chi''(\omega')}{\omega'} 
+    k_BT\int_{-\infty}^{\infty} \frac{d\omega'}{\pi} \frac{\chi''(\omega')}{\omega'} \label{fdt}
 \end{equation}
 This is the statement of the fluctuations dissipation theorem, connecting the 
 fluctuation (autocorrelation function) to the imaginary part of the response function.
@@ -804,7 +804,8 @@ gradient to the respective potential:
 \begin{equation}
     \mathbf{J}_i = \sum_j L_{ij} \nabla \phi_j \label{linearresponse}
 \end{equation}
-where index $i,j$ denote different components and $L$ is called kinetic coefficient. 
+where index $i,j$ denote different components.
+% and $L$ is called kinetic coefficient. 
 
 As an example, for thermal conduction $\mathbf{J}_u = - \kappa \nabla T$, we have 
 the $\mathbf{J}_u = \kappa T^2 \nabla (1/T)$ for the potential $1/T$. $L_uu = \kappa T^2$.
@@ -827,30 +828,63 @@ the probability distribution:
     \Delta S = -\frac{1}{2} \sum_{ij} g_{ij} \alpha_i \alpha_j \\
     g_{ij} = \left( \frac{\partial^2S}{\partial \alpha_i \partial \alpha_j} \right)_{\alpha=0}
 \end{gather}
+By definition, we have $g_{ij} = g_{ji}$. We now make the definition:
+\begin{equation}
+    \Lambda_i = - \pfrac{S}{\alpha_i} = \sum_k g_{ik} \alpha_k \label{conjugate_alpha}
+\end{equation}
+We call variable $\Lambda_i$ thermodynamic conjugate to $\alpha_i$
+\footnote{see Landau, section 110, 111, 118, 119, 120 and last part of 125}. 
+
 We have the relationship:
 \begin{equation}
     \pfrac{\ln P}{\alpha_i} = \frac{1}{k_B} \frac{\partial S}{\partial \alpha_i} 
-    = \frac{1}{k_B} \sum_j g_{ij} \alpha_j \label{tmp}
+    = - \frac{1}{k_B} \Lambda_i \label{tmp}
 \end{equation}
 
 We can derived the following relationship:
 \begin{align}
     \left\langle \pfrac{S}{\alpha_i} \alpha_j \right\rangle 
-    = k_B \left\langle \pfrac{\ln P}{\alpha_i} \alpha_j \right\rangle \notag \\
-    = k_B \int \pfrac{\ln P}{\alpha_i} \alpha_j P(\alpha) d\alpha \notag \\
-    = k_B \int \pfrac{P}{\alpha_i} \alpha_j  d\alpha \notag \\
-    = k_B \left( \int [P\alpha_j]_{\alpha_j = -\infty}^{\infty}  d\alpha' - \int \pfrac{\alpha_j}{\alpha_i} P d\alpha \right)\notag \\
+    &= k_B \left\langle \pfrac{\ln P}{\alpha_i} \alpha_j \right\rangle \notag \\
+    &= k_B \int \pfrac{\ln P}{\alpha_i} \alpha_j P(\alpha) d\alpha \notag \\
+    &= k_B \int \pfrac{P}{\alpha_i} \alpha_j  d\alpha \notag \\
+    &= k_B \left( \int [P\alpha_j]_{\alpha_j = -\infty}^{\infty}  d\alpha' - \int \pfrac{\alpha_j}{\alpha_i} P d\alpha \right)\notag \\
 \end{align}
 where we integrate by parts for variable $d\alpha_i$ and $d\alpha'$ removes $d\alpha_i$ from $d\alpha$. The 
 first term is 0 since $P(\alpha_j \to \infty) = 0$. We have the final relationship:
-\begin{equation}
-    \left\langle \pfrac{S}{\alpha_i} \alpha_j \right\rangle  = - k_B \int \pfrac{\alpha_j}{\alpha_i} P d\alpha = -k_B \delta_{ij}
-    \label{derive}
-\end{equation}
+\begin{gather}
+    \left\langle \pfrac{S}{\alpha_i} \alpha_j \right\rangle  = - k_B \int \pfrac{\alpha_j}{\alpha_i} P d\alpha = -k_B \delta_{ij} \\
+    \left\langle \Lambda_i \alpha_j \right\rangle = k_B \delta_{ij} \label{derive} \\
+\end{gather}
 where we use $\partial \alpha_j / \partial \alpha_i = \delta_{ij}$ and the fact that $P$ is normalized to 1.
 
+We also then find the relationship:
+\begin{gather}
+    \left\langle \Lambda_i \Lambda_j \right\rangle = \sum_k g_{jk} \left\langle \Lambda_i \alpha_k \right\rangle 
+    = k_B g_{ij} \\
+    \left\langle \Lambda_i \alpha_j \right\rangle = \sum_k g_{ik} \left\langle \alpha_i \alpha_j \right\rangle 
+    = k_B \delta_{ij} \\
+    \left\langle \alpha_i \alpha_j \right\rangle = k_B g^{-1}_{ij}
+\end{gather}
+with $g^{-1}$ the matrix inverse of $g$. 
+\newline
+\textbf{Correlation of fluctuation in time} 
+
+If quantity deviate from its equilibrium value, it will tend to reach 
+the equilibrium state again. The rate of change $\dot{\alpha}$ will in general 
+be a function of the deviation $\alpha$ itself. 
+If we now expand up to linear term:
+\begin{equation}
+    \dot{\alpha} = - \lambda \alpha
+\end{equation}
+$\lambda$ is a positive constant. In the case of multivariable, we 
+have:
+\begin{equation}
+    \dot{\alpha_i} = - \sum_{j} \lambda_{ij} \alpha_j  \label{recover}
+\end{equation}
+
 We now make an important assumption of \textbf{microscopic reversibility}, which 
-states:
+states\footnote{this is a statement of time reversible symmetry, in some case, such as 
+magnetic field, time reversible symmetry is no longer true}:
 \begin{align}
     \langle \alpha_i(0)\alpha_j(t) \rangle &= 
     \langle \alpha_i(0)\alpha_j(-t) \rangle \notag \\ 
@@ -864,24 +898,48 @@ We thus find:
 \end{gather}
 where we divided time $t$ and take the limit $t \to 0$.
 
-We now make the consideration that $\dot{\alpha}$ is linear porpotional to $\alpha$:
+Using equation Eq.\ref{conjugate_alpha} and Eq.\ref{recover}, we find:
+\begin{gather}
+    \dot{\alpha}_i = - \sum_{j} \gamma_{ij} \Lambda_j \label{recover2}\\
+    \gamma_{ij} = \sum_k \lambda_{ik} g^{-1}_{kj}
+\end{gather}
+$\gamma_{ij}$ is called \emph{kinetic coefficients}. 
+We ubstituting the above equation to Eq.\ref{microreverse}, we have:
 \begin{equation}
-    \dot{\alpha}_i = \sum_j \lambda_{ij} \alpha_j
-\end{equation}
-with Eq.\ref{tmp}, we find:
-\begin{equation}
-    \dot{\alpha}_i = \sum_{j} \left( \frac{\lambda}{g} \right)_{ij} \frac{\partial S}{\partial \alpha_j} 
-\end{equation}
-where the fraction is the matrix division. Substituting the above equation to Eq.\ref{microreverse}, we have:
-\begin{equation}
-    \sum_{k} \left( \frac{\lambda}{g} \right)_{jk} \left\langle \alpha_i \frac{\partial S}{\partial \alpha_j} \right\rangle
-    = \sum_{k} \left( \frac{\lambda}{g} \right)_{ik} \left\langle \frac{\partial S}{\partial \alpha_k} \alpha_j \right\rangle
+    \sum_{k} \gamma_{jk} \left\langle \alpha_i \Lambda_k \right\rangle
+    = \sum_{k'} \gamma_{ik'} \left\langle \Lambda_k' \alpha_j \right\rangle
 \end{equation}
 Using Eq.\ref{derive}, we have:
 \begin{equation}
-    \left( \frac{\lambda}{g} \right)_{ij} = \left(  \frac{\lambda}{g} \right)_{ji}
+    \gamma_{ij} = \gamma_{ji}
 \end{equation}
-Now, taking $L \propto \lambda / g$, we obtain the Onsager reciprocal relations:
+we obtain the \textbf{Onsager reciprocal relations}, which gives the symmetry of the 
+kinetic coefficients.
+
+\subsection*{Connection between response function and kinetic coefficients}
+From fluctuation dissipation theory, we have the relationship between statistic response 
+and fluctuation, as given by Eq.\ref{fdt}, generalizing to multivariable:
+\begin{equation}
+    \langle \alpha_i \alpha_j \rangle = k_BT \chi_{ij}(0) = k_B g^{-1}_{ij}
+\end{equation}
+where $\chi_{ij}$ is the response function of variable $\alpha_i$ 
+with a force coupled to variable $\alpha_j$. The average value of deviation is given by:
+\begin{gather}
+    \langle \alpha_i \rangle = \sum_{ij} \chi_{ij}(0) f_j = \frac{1}{T} \sum_{ij} g^{-1}_{ij} f_j \label{multilinear}\\
+    \langle \Lambda_i \rangle = f_i / T
+\end{gather}
+
+The recovery of variable $\alpha$ is then governed by, similar to Eq.\ref{recover2}:
+\begin{align}
+    \dot{\alpha}_i &= - \sum_j \gamma_{ij} (\Lambda_i - f_i / T) \notag \\
+    &= - \sum_j \gamma_{ij} (\sum_k g_{ik} \alpha_k - f_i / T) 
+\end{align}
+With Eq.\ref{multilinear}, this equation connects $\chi_{ij}$, $\gamma_{ij}$ and $g_{ij}$.
+Since $\gamma_{ij} = \gamma_{ji}$ by $g_{ij} = g_{ji}$ (by definition), we thus have
+\begin{equation}
+    \chi_{ij} = \chi_{ji}
+\end{equation} 
+when the response function is the transport function $L_{ij}$, we have:
 \begin{equation}
     L_{ij} = L_{ji}
 \end{equation}
@@ -894,7 +952,7 @@ In a system with random fluctuations
 one can only discuss the averaged quantity of a single system over a certain
 time (space) interval or averaged quantity of many identical systems at certain 
 time instance (spatial positions). The former is called \textbf{time average} and 
-the later is called \textbf{ensemble average}. 
+the later is called \textbf{ensemble average} (or, as called in Landau's book, statistical average) . 
 
 Let's consider N systems which have time dependent observable $x^{i}(t)$, where
 i index the system. We can define the following averages: \\
