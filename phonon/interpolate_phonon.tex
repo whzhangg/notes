@@ -1,0 +1,71 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage[margin=0.8in]{geometry}
+\usepackage{verbatim}
+\usepackage{graphicx}
+\usepackage{hyperref} % \url \href
+
+\newcommand{\pfrac}[2]{\frac{\partial #1}{\partial #2}}
+% \renewcommand{\H}{\mathcal{H}}
+
+\begin{document}
+
+\title{Interpolation of phonons}
+\author{Wenhao}
+\date{\today}
+\maketitle
+
+\section{Transformation of phonon green's function}
+The phonon green's function in terms of 
+phonon creation and annihilation operator can be written as
+\begin{align}
+    G(qvv';t) = \langle i | \mathcal{T}[A_{qv}(t)A_{qv'}^{\dagger}(0)]| i \rangle \label{green_A}
+\end{align}
+where $A_{qv} = a_{qv} + a^{\dagger}_{-qv}$. The atomic displacement operator 
+is connected with the phonon operator by transformation
+\begin{align}
+    \eta_{lb} &= \sum_{qv} \left(\frac{\hbar}{2N\omega_{qv}m_b}\right)^{\frac{1}{2}} 
+        e_{qv}^b e^{iql} A_{qv} \label{displacement} \\
+    A_{qv} &= \sum_{lb} \left( \frac{2\omega_{qv} m_b}{N\hbar} \right)^{\frac{1}{2}}
+        e_{qv}^{b*} e^{-iql} \eta_{lb}
+\end{align}
+The phonon green's function in terms of atomic displacement operator is 
+written as:
+\begin{equation}
+    D_{ll'bb'}(t) =  \langle i | \mathcal{T}[\eta_{lb}(t)\eta_{l'b'}^{\dagger}(0)]| i \rangle
+\end{equation}
+substituting Eq.\ref{displacement}, we obtain the relationship:
+\begin{align}
+    D_{ll'bb'}(t) &= \sum_{qq'vv'} \langle i | \mathcal{T}[
+        \left(\frac{\hbar}{2N\omega_{qv}m_b}\right)^{\frac{1}{2}} 
+        e_{qv}^b e^{iql} A_{qv}(t)
+         \left(\frac{\hbar}{2N\omega_{q'v'}m_b'}\right)^{\frac{1}{2}} 
+        e_{q'v'}^{b'*} e^{-iq'l'} A_{q'v'}^{\dagger}(0)]| i \rangle \\
+        &= \frac{\hbar}{2N}\sum_{qq'vv'} (\omega_{qv}m_b\omega_{q'v'}m_b')^{-\frac{1}{2}} 
+        \langle i | \mathcal{T}[
+            e_{qv}^b e^{iql} A_{qv}(t)
+            e_{q'v'}^{b'*} e^{-iq'l} A_{q'v'}^{\dagger}(0)]| i \rangle \\
+        & = \frac{\hbar}{2}\sum_{qvv'} (\omega_{qv}m_b\omega_{q'v'}m_b')^{-\frac{1}{2}} 
+            e^{iq(l-l')} e_{qv}^b e_{q'v'}^{b'*}
+            \langle i | \mathcal{T}[A_{qv}(t) A_{q'v'}^{\dagger}(0)]| i \rangle \\
+\end{align}
+where we used the result $\sum_{qq'}e^{i(ql-q'l')} = N\delta_{qq'} e^{iq(l-l')}$. The 
+reverse of the above relationship is:
+\begin{align}
+    G_{qvv'}(t) = \sum_{ll'bb'} \frac{2}{N\hbar} (\omega_{qv}\omega_{qv'}m_bm_b')^{\frac{1}{2}}
+                e^{b*}_{qv}e_{qv'}^{b'} e^{iq(l-l')} D_{ll'bb'}(t)
+\end{align}
+
+\section{Form of the phonon green's function} 
+
+\newpage
+\section*{Appendix}
+This section summarized the formulation of paper \emph{Review of Modern Physics, 89 Electron-phonon from first principle}.
+In that work, the displacement-displacement correlation function of atomic motion is given 
+by the function:
+\begin{equation}
+    D_{k\alpha p, k'\alpha'p'}(t) = -\frac{i}{\hbar} \langle \mathcal{T} [\tau_{k\alpha p}(t) \tau_{k'\alpha'p'}(0)] \rangle 
+\end{equation}
+
+
+\end{document}
