@@ -56,7 +56,57 @@ reverse of the above relationship is:
                 e^{b*}_{qv}e_{qv'}^{b'} e^{iq(l-l')} D_{ll'bb'}(t)
 \end{align}
 
-\section{Form of the phonon green's function} 
+\section{Phonon green's function} 
+We write the phonon Green's function as:
+\begin{equation}
+    G(qvv';t) = -i \langle \mathcal{T}[A_{qv}(t)A_{qv'}^{\dagger}(0)] \rangle \label{green_phonon}
+\end{equation}
+The time dependence of the operator is:
+\begin{equation}
+    A(t) = e^{i\frac{t}{\hbar}H} A e^{-i\frac{t}{\hbar}H}
+\end{equation}
+$\mathcal{T}$ is the Wick's time ordering operator and average is taken at a finite temperature:
+\begin{align}
+    iG(qvv';t) = 
+    \begin{cases} 
+        \frac{1}{Z} \text{Tr} \sum_n \langle n | e^{-\beta H} e^{i\frac{t}{\hbar}H} (a_{qv} + a^{\dagger}_{-qv}) e^{-i\frac{t}{\hbar}H} (a^{\dagger}_{qv'} + a_{-qv'}) | n \rangle & t > 0 \\
+        \frac{1}{Z} \text{Tr} \sum_n \langle n | e^{-\beta H} (a^{\dagger}_{qv'} + a_{-qv'}) e^{i\frac{t}{\hbar}H} (a_{qv} + a^{\dagger}_{-qv}) e^{-i\frac{t}{\hbar}H} | n \rangle & t < 0 \\
+    \end{cases}
+\end{align}
+We can obtain the result:
+\begin{align}
+    G(qvv';t > 0) = -i \delta_{vv'}  ( e^{i\omega_{qv}t}\langle n_{qv} \rangle + e^{-i\omega_{qv}t}\langle n_{qv}+1 \rangle ) \\
+    G(qvv';t < 0) = -i \delta_{vv'}  ( e^{-i\omega_{qv}t}\langle n_{qv} \rangle + e^{i\omega_{qv}t}\langle n_{qv}+1 \rangle )
+\end{align}
+
+Define the fourier transformation into frequency space:
+\begin{align}
+    G(qvv';\omega) &= \int_{-\infty}^{\infty} G(qvv';t) e^{-i\omega t} dt \\
+            & = \int_{-\infty}^{0} G(qvv';t < 0) e^{-i\omega t} dt + \int_{0}^{\infty} G(qvv';t > 0) e^{-i\omega t} dt \\
+\end{align}
+and we have:
+\begin{align}
+    \int_{0}^{\infty} G(qv;t > 0) e^{-i\omega t} dt 
+    &= -i \int_{0}^{\infty} \left( e^{i(\omega_{qv}-\omega)t}\langle n_{qv} \rangle + e^{-i(\omega_{qv}+\omega)t}\langle n_{qv}+1 \rangle \right) dt \notag \\
+    &= -i \lim_{\eta \to 0^{+}} \left( \frac{\langle n_{qv} \rangle}{i(\omega - \omega_{qv}) + \eta} + \frac{\langle n_{qv}+1 \rangle}{i(\omega + \omega_{qv}) + \eta} \right) \notag \\
+    &= - \lim_{\eta \to 0^{+}} \left( \frac{\langle n_{qv} \rangle}{\omega - \omega_{qv} - i\eta} + \frac{\langle n_{qv}+1 \rangle}{\omega + \omega_{qv} - i\eta} \right)
+\end{align}
+Similarly, for the second term in the integral, we have:
+\begin{align}
+    \int_{-\infty}^{0} G(qvv';t < 0) e^{-i\omega t} dt
+    & = -i \int_{-\infty}^{0} \left( e^{-i(\omega_{qv}+\omega)t}\langle n_{qv} \rangle + e^{i(\omega_{qv}-\omega)t}\langle n_{qv}+1 \rangle \right) dt \notag \\
+    & = i \int_{0}^{\infty} \left( e^{i(\omega_{qv}+\omega)t}\langle n_{qv} \rangle + e^{-i(\omega_{qv}-\omega)t}\langle n_{qv}+1 \rangle \right) dt \notag \\
+    & = i \lim_{\eta \to 0^{+}} \left( \frac{\langle n_{qv} \rangle}{-i(\omega + \omega_{qv}) + \eta} + \frac{\langle n_{qv}+1 \rangle}{i(\omega_{qv} - \omega) + \eta} \right) \notag \\
+    & = \lim_{\eta \to 0^{+}} \left( - \frac{\langle n_{qv} \rangle}{\omega + \omega_{qv} -i\eta} + \frac{\langle n_{qv}+1 \rangle}{\omega_{qv} - \omega -i\eta} \right)
+\end{align}
+So that the complete green's function is then:
+\begin{align}
+    G(qvv';\omega) = \delta_{vv'} \lim_{\eta \to 0^{+}} 
+    \left( - \frac{\langle n_{qv} \rangle}{\omega + \omega_{qv} -i\eta} + \frac{\langle n_{qv}+1 \rangle}{\omega_{qv} - \omega -i\eta} - \frac{\langle n_{qv} \rangle}{\omega - \omega_{qv} - i\eta} - \frac{\langle n_{qv}+1 \rangle}{\omega + \omega_{qv} - i\eta} \right)
+\end{align}
+
+% TODO this form looks correct, notice that in RMP, the phonon green function is defined at a certain temperature
+% we should reorganize this part and clearly verify the equations.
 
 \newpage
 \section*{Appendix}
