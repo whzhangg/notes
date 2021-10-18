@@ -16,10 +16,10 @@
 \maketitle
 
 \section{Transformation of phonon green's function}
-The phonon green's function in terms of 
+The temperature phonon green's function in terms of 
 phonon creation and annihilation operator can be written as
 \begin{align}
-    G(qvv';t) = \langle i | \mathcal{T}[A_{qv}(t)A_{qv'}^{\dagger}(0)]| i \rangle \label{green_A}
+    G(qvv',\tau) = \langle \mathcal{T}[A_{qv}(\tau)A_{qv'}^{\dagger}(0)] \rangle \label{green_A}
 \end{align}
 where $A_{qv} = a_{qv} + a^{\dagger}_{-qv}$. The atomic displacement operator 
 is connected with the phonon operator by transformation
@@ -32,29 +32,70 @@ is connected with the phonon operator by transformation
 The phonon green's function in terms of atomic displacement operator is 
 written as:
 \begin{equation}
-    D_{ll'bb'}(t) =  \langle i | \mathcal{T}[\eta_{lb}(t)\eta_{l'b'}^{\dagger}(0)]| i \rangle
+    D_{ll'bb'}(\tau) =  \langle \mathcal{T}[\eta_{lb}(\tau)\eta_{l'b'}(0)] \rangle
 \end{equation}
 substituting Eq.\ref{displacement}, we obtain the relationship:
 \begin{align}
-    D_{ll'bb'}(t) &= \sum_{qq'vv'} \langle i | \mathcal{T}[
+    D_{ll'bb'}(\tau) &= \sum_{qq'vv'} \langle \mathcal{T}[
         \left(\frac{\hbar}{2N\omega_{qv}m_b}\right)^{\frac{1}{2}} 
-        e_{qv}^b e^{iql} A_{qv}(t)
-         \left(\frac{\hbar}{2N\omega_{q'v'}m_b'}\right)^{\frac{1}{2}} 
-        e_{q'v'}^{b'*} e^{-iq'l'} A_{q'v'}^{\dagger}(0)]| i \rangle \\
-        &= \frac{\hbar}{2N}\sum_{qq'vv'} (\omega_{qv}m_b\omega_{q'v'}m_b')^{-\frac{1}{2}} 
-        \langle i | \mathcal{T}[
-            e_{qv}^b e^{iql} A_{qv}(t)
-            e_{q'v'}^{b'*} e^{-iq'l} A_{q'v'}^{\dagger}(0)]| i \rangle \\
-        & = \frac{\hbar}{2}\sum_{qvv'} (\omega_{qv}m_b\omega_{q'v'}m_b')^{-\frac{1}{2}} 
-            e^{iq(l-l')} e_{qv}^b e_{q'v'}^{b'*}
-            \langle i | \mathcal{T}[A_{qv}(t) A_{q'v'}^{\dagger}(0)]| i \rangle \\
+        e_{qv}^b e^{iql} A_{qv}(\tau)
+         \left(\frac{\hbar}{2N\omega_{q'v'}m_{b'}}\right)^{\frac{1}{2}} 
+        e_{q'v'}^{b'*} e^{-iq'l'} A_{q'v'}^{\dagger}(0)] \rangle \\
+        &= \frac{\hbar}{2N}\sum_{qq'vv'} (\omega_{qv}m_b\omega_{q'v'}m_{b'})^{-\frac{1}{2}} 
+        \langle \mathcal{T}[
+            e_{qv}^b e^{iql} A_{qv}(\tau)
+            e_{q'v'}^{b'*} e^{-iq'l} A_{q'v'}^{\dagger}(0)] \rangle \\
+        & = \frac{\hbar}{2}\sum_{qvv'} (\omega_{qv}m_b\omega_{qv'}m_{b'})^{-\frac{1}{2}} 
+            e^{iq(l-l')} e_{qv}^b e_{qv'}^{b'*}
+            \langle \mathcal{T}[A_{qv}(\tau) A_{qv'}^{\dagger}(0)] \rangle \\
 \end{align}
 where we used the result $\sum_{qq'}e^{i(ql-q'l')} = N\delta_{qq'} e^{iq(l-l')}$. The 
 reverse of the above relationship is:
 \begin{align}
-    G_{qvv'}(t) = \sum_{ll'bb'} \frac{2}{N\hbar} (\omega_{qv}\omega_{qv'}m_bm_b')^{\frac{1}{2}}
-                e^{b*}_{qv}e_{qv'}^{b'} e^{iq(l-l')} D_{ll'bb'}(t)
+    G(qvv',\tau) &= \sum_{ll'bb'} \frac{2}{N\hbar} (\omega_{qv}\omega_{qv'}m_bm_{b'})^{\frac{1}{2}}
+                e^{b*}_{qv}e_{qv'}^{b'} e^{-iq(l-l')} \langle \mathcal{T}[\eta_{lb}(\tau)\eta_{l'b'}(0)] \rangle \notag \\
+                & = \sum_{ll'bb'} \frac{2}{N\hbar} (\omega_{qv}\omega_{qv'}m_bm_{b'})^{\frac{1}{2}}
+                e^{b*}_{qv}e_{qv'}^{b'} e^{-iq(l-l')} D_{ll'bb'}(\tau)
 \end{align}
+This equation gives the interpolation of the green's function from the correlation function
+of atomic displacement. If we assume function $G(qvv',\tau)$ is diagonal in terms of 
+phonon branches $v$, then, we have:
+\begin{align}
+    G(q'v',\tau) &= \sum_{ll'bb'} \frac{2}{N\hbar} \omega_{q'v'}(m_bm_{b'})^{\frac{1}{2}}
+    e^{b*}_{q'v'}e_{q'v'}^{b'} e^{-iq'(l-l')} \left( \frac{\hbar}{2}\sum_{qv} \omega_{qv}^{-1}(m_bm_{b'})^{-\frac{1}{2}} 
+    e^{iq(l-l')} e_{qv}^b e_{qv}^{b'*}
+    G(qv,\tau) \right) \\
+    &= \frac{1}{N}  \sum_{ll'bb'qv} \frac{ \omega_{q'v'}}{\omega_{qv}}
+    e^{b*}_{q'v'}e_{q'v'}^{b'} e_{qv}^b e_{qv}^{b'*} e^{-i(q-q')(l-l')} G(qv,\tau)
+\end{align}
+In frequency space, we have:
+\begin{equation}
+    G(q'v',i\omega_n) = \frac{1}{N}  \sum_{ll'bb'qv} \frac{ \omega_{q'v'}}{\omega_{qv}}
+    e^{b*}_{q'v'}e_{q'v'}^{b'} e_{qv}^b e_{qv}^{b'*} e^{-i(q-q')(l-l')} G(qv,i\omega_n)
+\end{equation}
+which can be analytically continued to real frequency and coinicide with the retarded function.
+\begin{equation}
+    G^R_0(qv,\omega) = \frac{1}{\omega + \omega_{qv}} - \frac{1}{\omega - \omega_{qv}}
+\end{equation}
+which has pole at frequency $\omega_{qv}$ and $-\omega_{qv}$. 
+The interacting phonon greens function can be written with self-energy:
+\begin{align}
+    G^R(qv, \omega)^{-1} &= G^R_0(qv,\omega)^{-1} - \Sigma_{qv}(\omega) \\
+            &= \frac{\omega^2 - \omega_{qv}^2}{2\omega_{qv}} - \Sigma_{qv}(\omega)
+\end{align}
+taking the self-energy to be $\text{Re}\Sigma_{qv}(\omega_{qv}) + i \text{Im}\Sigma_{qv}(\omega_{qv})$, we 
+can find the pole of the interacting phonon greens function by $G^R(qv, \omega)^{-1} = 0$. The 
+result can be approximated as:
+\begin{equation}
+    G^R(qv, \omega) = \frac{1}{\omega + \omega_{qv} + i\Gamma_{qv}} - \frac{1}{\omega - \omega_{qv} - i\Gamma_{qv}}
+\end{equation}
+So that the interpolated function can be written as:
+\begin{equation}
+    G^R(q'v',\omega) = \frac{1}{N}  \sum_{ll'bb'qv} \frac{ \omega_{q'v'}}{\omega_{qv}}
+    e^{b*}_{q'v'}e_{q'v'}^{b'} e_{qv}^b e_{qv}^{b'*} e^{-i(q-q')(l-l')} 
+    \left[ \frac{1}{\omega + \omega_{qv} + i\Gamma_{qv}} - \frac{1}{\omega - \omega_{qv} - i\Gamma_{qv}} \right]
+\end{equation}
+Finally, we find the pole of the function
 
 \section{Phonon green's function} 
 We write the phonon Green's function as:
