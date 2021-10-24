@@ -6,8 +6,8 @@
 \usepackage{hyperref} % \url \href
 
 \newcommand{\pfrac}[2]{\frac{\partial #1}{\partial #2}}
-\newcommand{\dbar}{\mathbb{d}}
-\newcommand{\dnor}{d}
+\newcommand{\dbar}{d}
+\newcommand{\dnor}{\text{d}}
 % \renewcommand{\H}{\mathcal{H}}
 
 \begin{document}
@@ -21,7 +21,7 @@
 Suppose we have the function $f(x)$, where $x$ are parameters of the state. 
 If the integral:
 \begin{equation}
-    \Delta f = \int_{x_i}^{x_f} df = f(x_f) - f(x_i)
+    \Delta f = \int_{x_i}^{x_f} df = f(x_f) - f(x_i) 
 \end{equation}
 i.e., if $\Delta f$ is independent of the path chosen, then we call $f$ a 
 \textbf{function of state}, which only depend on the system parameter at a 
@@ -129,12 +129,17 @@ other effect other than the conversion, such as Carnot engine which work in cycl
 We define a carnot engine which consist of two reversible adiabatic and two reversible 
 isothermal process, working between temperature $T_h$ and $T_l$. The carnot engine do work
 in the following process:
-\begin{tabular}{ccc}
-    $ A \to B $ & isothermal expansion & $Q_h = RT_h \ln \frac{V_B}{V_A}$ \\
-    $ B \to C $ & adiabatic & $ \frac{T_h}{T_l} = \left( \frac{V_C}{V_B} \right) ^ {\gamma-1} $ \\
-    $ C \to D $ & isothermal compression & $Q_l = - RT_h \ln \frac{V_D}{V_C}$ \\
-    $ D \to A $ & adiabatic & $ \frac{T_h}{T_l} = \left( \frac{V_D}{V_A} \right) ^ {\gamma-1}$ \\
-\end{tabular}
+
+\begin{table*}
+    \centering
+    \begin{tabular}{ccc}
+        $ A \to B $ & isothermal expansion & $Q_h = RT_h \ln \frac{V_B}{V_A}$ \\
+        $ B \to C $ & adiabatic & $ \frac{T_h}{T_l} = \left( \frac{V_C}{V_B} \right) ^ {\gamma-1} $ \\
+        $ C \to D $ & isothermal compression & $Q_l = - RT_h \ln \frac{V_D}{V_C}$ \\
+        $ D \to A $ & adiabatic & $ \frac{T_h}{T_l} = \left( \frac{V_D}{V_A} \right) ^ {\gamma-1}$ \\
+    \end{tabular}
+\end{table*}
+
 The adiabatic process lead to $\frac{V_C}{V_B} = \frac{V_D}{V_A} $, with $V_B > V_A$. Finally, we 
 find the important result for a carnot energy:
 \begin{gather}
@@ -306,7 +311,8 @@ We find the result:
 \begin{equation}
     S = k_B \ln \Omega
 \end{equation}
-which we call the Boltzmann's definition of entropy.
+which we call the Boltzmann's definition of entropy
+\footnote{\url{https://physics.stackexchange.com/questions/141321/what-is-the-conceptual-difference-between-gibbs-and-boltzmann-entropies}}.
 
 Now, we consider ensembles other than microcanonical ensemble. Suppose the system 
 have in total N possible microstates of equal probability, 
@@ -332,9 +338,124 @@ applicable for microcanonical ensemble and we cannot access the actual number
 of the microstates.
 
 \section{Third Law}
+We can measure the change of entropy of a system by measuring its heat capacitiy:
+\begin{gather}
+    C_p = T\left(\pfrac{S}{T}\right)_p \label{thirdlawcp}\\
+    S = \int \frac{C_p}{T} \dnor T
+\end{gather}
+so that we have:
+\begin{equation}
+    S(T) = S(T_0) + \int_{T_0}^{T} \frac{C_p}{T} \dnor T
+\end{equation}
 
-\pagebreak 
-\section*{Appendix A}
+The third law states that the entropy of a system at absolute zero will be zero:
+
+\textbf{Planck's statement of the third law} The entropy of all systems in internal
+equilibrium is the same at absolute zero and may be taken to be zero.
+
+It is noted that the system should be in a relaxed internal equilibrium, it is possible,
+for example, to freeze a metastable glass phase instead of a crystalline phase and go down
+o $T \to 0$ with non zero entropy.
+
+As a consequence of the third law, Heat capacitiy, given by Eq.\ref{thirdlawcp} will
+necessarily go to zero as $T\to0$.
+
+As another implication, Using the statistical definition of the entropy $S = k_B \ln \Omega$
+implies that the ground states of a system at absolute zero, is necessary non-degenerate with
+$\Omega = 1$ so that the entropy will be zero. Such non-degeneracy would be enforced by the 
+third law for real systems, as well as the requirement for $C_pto 0$. 
+As an example, the curie's law gives a susceptibility $\chi \to \infty$ as $T \to 0$. But with
+the third law, we require $\partial \chi / \partial T \to 0$. This problem is caused because
+for Curie law, we assumed a mean field interaction where the interaction of magnetic
+moment is ignored\footnote{See discussion in page 204-205}. 
+
+\section{Thermodynamic potentials}
+We call \textbf{Thermodynamic potentials} functions that are constructed from 
+the functions of state. 
+We define the following Thermodynamic potentials, The first being the internal 
+energy, the following are the Enthalpy, Helmholtz function and the Gibbs 
+function:
+
+\begin{table*}
+    \centering
+    \begin{tabular}{rrr}
+        $U$          & $\dnor U =   T \dnor S - p \dnor V$ & $T = \left(\pfrac{U}{S}\right)_V$, $p = -\left(\pfrac{U}{V}\right)_S$ \\
+        $H = U + PV$ & $\dnor H =   T \dnor S + p \dnor V$ & $T = \left(\pfrac{H}{S}\right)_V$, $V = \left(\pfrac{H}{p}\right)_S$ \\
+        $F = U - TS$ & $\dnor F = - S \dnor T - p \dnor V$ & $S = -\left(\pfrac{F}{T}\right)_V$, $p = -\left(\pfrac{F}{V}\right)_T$ \\
+        $G = H - TS$ & $\dnor G = - S \dnor T + V \dnor p$ & $S = -\left(\pfrac{G}{T}\right)_p$, $V = \left(\pfrac{G}{p}\right)_T$ \\
+     \end{tabular}
+\end{table*}
+
+One convenience of these Thermodynamic potentials compared to the internal energy $U$ is that 
+they are presented in more convenient variables. For example, for a system
+that at a fixed volume and pressure during a process, we can know that its Gibbs 
+function must remain the same during that process.
+
+\subsection*{Maxwell's relationship}
+Maxwell's relationship can be derived from the above  definition of the thermodynamic
+potential function, and they are stated as below:
+\begin{gather}
+    \left(\pfrac{T}{V}\right)_S = - \left(\pfrac{p}{S}\right)_V \\
+    \left(\pfrac{T}{p}\right)_S = \left(\pfrac{V}{S}\right)_p \\
+    \left(\pfrac{S}{V}\right)_T = - \left(\pfrac{p}{T}\right)_V \\
+    \left(\pfrac{S}{p}\right)_T = - \left(\pfrac{V}{T}\right)_V 
+\end{gather}
+
+\subsection*{Isothermal magnetization and adiabatic demagnetization}
+To generalize the above treatment in general system, we can write:
+\begin{equation}
+    \dbar W = X dx
+\end{equation}
+where $X$ is some intensive generalized force and $x$ is some 
+extensive generalized displacement.
+
+Consider a system of magnetic moments arranged in a lattice. We 
+assume paramagnetic system with no interaction between the magnetic moments. 
+The first law of Thermodynamic for such system is 
+\begin{equation}
+    \dnor U = T \dnor S - m \dnor B
+\end{equation}
+We define the magnetic susceptibility as:
+\begin{equation}
+    \chi = \lim_{H\to0} \frac{M}{H} \approx \frac{\mu_0 M}{B}
+\end{equation}
+since $B = \mu_0(H+M)$ and $M \ll H$.
+Curie's law states $\chi \propto 1/T$ and therefore
+\begin{equation}
+    \left(\pfrac{\chi}{T}\right)_B < 0
+\end{equation}
+
+Consider the Helmholtz function:
+\begin{equation}
+    \dnor F = - S \dnor T - m \dnor B
+\end{equation}
+which gives the Maxwell relation:
+\begin{equation}
+    \left(\pfrac{S}{B}\right)_T = \left(\pfrac{m}{T}\right)_B 
+    \approx \frac{VB}{\mu_0} \left(\pfrac{\chi}{T}\right)_B
+\end{equation}
+The heat absorbed in an isothermal change of $B$ is:
+\begin{equation}
+    \Delta Q = T \left(\pfrac{S}{B}\right)_T \Delta B
+    = \frac{TVB}{\mu_0} \left(\pfrac{\chi}{T}\right)_B \Delta B < 0
+\end{equation}
+So that an isothermal increase of $B$ will 
+release heat to the environment.
+
+The change in temperature in an adiabatic change of $B$ is 
+\begin{equation}
+    \left( \pfrac{T}{B} \right)_S = - \left( \pfrac{T}{S} \right)_B \left( \pfrac{S}{B} \right)_T
+\end{equation}
+using 
+\begin{equation}
+    C_B = T \left( \pfrac{S}{T} \right)_B    
+\end{equation}
+we have:
+\begin{equation}
+    \left( \pfrac{T}{B} \right)_S = - \frac{TVB}{\mu_0 C_B} \left(\pfrac{\chi}{T}\right)_B > 0
+\end{equation}
+So that in an adiabatic process, the temperature will decrease with the decrease of magnetization,
+which is called \textbf{adiabatic demagnetization}
 
 
 \end{document}
