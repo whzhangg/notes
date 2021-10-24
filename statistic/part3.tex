@@ -6,6 +6,8 @@
 \usepackage{hyperref} % \url \href
 
 \newcommand{\pfrac}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\dbar}{\mathbb{d}}
+\newcommand{\dnor}{d}
 % \renewcommand{\H}{\mathcal{H}}
 
 \begin{document}
@@ -16,12 +18,322 @@
 \maketitle
 
 \section{First Law}
+Suppose we have the function $f(x)$, where $x$ are parameters of the state. 
+If the integral:
+\begin{equation}
+    \Delta f = \int_{x_i}^{x_f} df = f(x_f) - f(x_i)
+\end{equation}
+i.e., if $\Delta f$ is independent of the path chosen, then we call $f$ a 
+\textbf{function of state}, which only depend on the system parameter at a 
+certain instance.
+
+\textbf{Equation of states} are equation that contain only function of states:
+i.e., for ideal gas, we have $pV = RT$ which depend on $p, V, T$, all of them are 
+function of states.
+
+\textbf{First law}: energy is conserved in the form of heat and work.
+
+Writting $U$ as the internal energy, The equation of states can be written as
+\begin{gather}
+    \Delta U = \Delta Q + \Delta W \\
+    \dnor U = \dbar Q + \dbar W = \dbar Q - \dnor dV
+\end{gather}
+where $\Delta$ gives the total change and $\dnor$ represent differential change. $\dbar$
+represent changes that are path dependent. It is clear that 
+the heat absorbed and the work done to the system depend on the specific process, and 
+thus they cannot be exact differentiated with respect to the system parameters, while 
+volume $V$ is a function of states.
+
+\subsection*{Heat capacitiy of gas at constant volume or pressure}
+For ideal gas, we have:
+\begin{align}
+    \dbar Q &= \dnor U + p \dnor V \\
+    \dbar Q & = \left(\pfrac{U}{T}\right)_V \dnor T + \left(\pfrac{U}{V}\right)_T \dnor V + p \dnor V \\
+    \frac{\dbar Q}{\dnor T} &= \left(\pfrac{U}{T}\right)_V + \left[ \left(\pfrac{U}{V}\right)_T  + p \right] \frac{\dnor V}{\dnor T}
+\end{align}
+Therefore, at fixed volume, $\dnor V = 0$ and we have:
+\begin{equation}
+    C_V = \left(\frac{\dbar Q}{\dnor T}\right)_V = \left(\pfrac{U}{T}\right)_V
+\end{equation}
+at fixed pressure:
+\begin{align}
+    C_p & = \left(\frac{\dbar Q}{\dnor T}\right)_p \\
+        & = C_V + \left[ \left(\pfrac{U}{V}\right)_T  + p \right] \left(\frac{\dnor V}{\dnor T}\right)_p
+\end{align}
+For ideal gas, we have $\left(\pfrac{U}{V}\right)_T = 0$. and $p \left(\frac{\dnor V}{\dnor T}\right)_p = R$,
+so that we have: $C_p = C_V + R$. For an equilibrium gas at constant pressure, the volume of the gas also expand when
+the temperature of the gas is increased (gas do work to the environment). 
+So we in generally need to input more heat to the increase the temperature of the gas, compared to the case of constant 
+volume. 
+
+In general gas, we define the ratio $\gamma$ called \textbf{adiabatic index}:
+\begin{equation}
+    \gamma = \frac{C_p}{C_V}
+\end{equation}
+
 
 \section{Second Law}
 
+\subsection*{Reversible process}
+we define a process to be reversible if \textbf{at every moment during the process, the system
+is in equilibrium}. As an example, for an ideal gas, if the equation of state $pV = RT$ is hold true
+at every moment during the process, then it implies that the gas is always in an equilibrium state
+and the process is reversible: If this process is reversed we could not notice. 
+We consider two types of reversible process in terms of gas: First is called \textbf{Isothermal process}
+and the second is called \textbf{Adiabatic process}.
+
+In the isothermal process, the temperature of the system is fixed:
+\begin{equation}
+    \Delta T = 0
+\end{equation}
+For ideal gas, this implies that $\Delta U = 0$, for reversible process of ideal gas, The 
+equation of states is always true. This gives:
+\begin{gather}
+    \Delta U = \dbar Q - \frac{RT}{V} \dnor V = 0 \\
+    \Delta Q = \int_{V_1}^{V_2} \dbar Q = \int_{V_1}^{V_2} \frac{RT}{V} \dnor V = RT \ln \frac{V_2}{V_1}
+\end{gather}
+
+In the adiabatic process, the system is not allowed to exchange heat with the 
+environment, thus we have $\dbar Q = 0$. We find:
+\begin{gather}
+    \dnor U = \dbar W \\
+    C_V dT = - p \dnor V = - \frac{RT}{V} \dnor V \\
+    \ln \frac{T_2}{T_1} = - \frac{R}{C_V} \ln \frac{V_2}{V_1}
+\end{gather}
+For ideal gas, $C_p = C_V + R$, $\gamma = 1 + R / C_V$ and we find:
+\begin{gather}
+    \ln \frac{T_2}{T_1} = (1-\gamma) \ln \frac{V_2}{V_1} \\
+    \frac{T_2}{T_1} = \left( \frac{V_2}{V_1} \right) ^ {1-\gamma} = \left( \frac{V_1}{V_2} \right) ^ {\gamma-1} \\
+    T V^{\gamma - 1} = \text{const} \\
+    p V^{\gamma} = \text{const}
+\end{gather}
+where we used relationship $pV = RT$ to obtain the last relationship. Equation $p V^{\gamma}$ 
+enable us to find the pressure of the system if we know the volume of the 
+system during a adiabatic expansion or compression. Temperature can be derived using the ideal 
+gas law then, if we know the pressure and volume.
+
+\subsection*{second law}
+The second law can be stated in the following two equivalent form:
+
+\textbf{Clausius statement} No process whose sole effect is to transfer heat from cold to hot body
+
+\textbf{Kelvin statement} No process is possible whose sole effect is to convert heat into work
+
+It is important to note the work "sole effect". For example, in an isothermal process of ideal gas, 
+$\dbar Q + \dbar W = 0$ so all the heat is converted into work done by the system. However, the 
+accompanying effect is that the volume of the gas expanded. 
+Therefore, To study the ability to convert heat into work, we should consider process which has no 
+other effect other than the conversion, such as Carnot engine which work in cycles
+
+\subsection*{Carnot engine}
+We define a carnot engine which consist of two reversible adiabatic and two reversible 
+isothermal process, working between temperature $T_h$ and $T_l$. The carnot engine do work
+in the following process:
+\begin{tabular}{ccc}
+    $ A \to B $ & isothermal expansion & $Q_h = RT_h \ln \frac{V_B}{V_A}$ \\
+    $ B \to C $ & adiabatic & $ \frac{T_h}{T_l} = \left( \frac{V_C}{V_B} \right) ^ {\gamma-1} $ \\
+    $ C \to D $ & isothermal compression & $Q_l = - RT_h \ln \frac{V_D}{V_C}$ \\
+    $ D \to A $ & adiabatic & $ \frac{T_h}{T_l} = \left( \frac{V_D}{V_A} \right) ^ {\gamma-1}$ \\
+\end{tabular}
+The adiabatic process lead to $\frac{V_C}{V_B} = \frac{V_D}{V_A} $, with $V_B > V_A$. Finally, we 
+find the important result for a carnot energy:
+\begin{gather}
+    \frac{Q_h}{T_h} = \frac{Q_l}{T_l} \\
+    Q_h - Q_l = W
+\end{gather}
+where $W$ is the work done in one carnot cycle. We can find the efficiency of the engine
+\footnote{This carnot engine seems to convert all the heat absorbed into work, $Q_h - Q_l \to W$. But
+it has the additonal effect to transport heat from one source to another. Therefore, this does not 
+conflict with Kelvin's statement}:
+\begin{equation}
+    \eta = \frac{W}{Q_h} = 1 - \frac{T_l}{T_h}
+\end{equation}
+
+We have the following statement related to the (reversible) carnot engines:
+\begin{itemize}
+    \item Carnot engine is the most efficient engine
+    \item all reversible engine operating at the same temperature environment have the same efficiency
+    \item Clausius statement of the second law is the same as Kelvin's statement \footnote{See book}
+\end{itemize}
+
+\subsection*{Refrigerator}
+We consider the above carnot energy run backwards: it absorb heat $Q_l$ from the 
+low temperature side with an isothermal expansion. Input work $W$ is provided 
+during the adiabatic process, and dump heat $Q_h$ into the the hot side 
+with an isothermal compression process. The result for such a refrigerator is:
+\begin{gather}
+    Q_l + W = Q_h \\
+    \frac{Q_h}{T_h} = \frac{Q_l}{Q_l} \\
+    \eta = \frac{Q_l}{W} = \frac{T_l}{T_h - T_l}
+\end{gather} 
+
+\subsection*{Clausius theorem}
+Suppose we have a seriers of heat exchange in a working cycle of an engine. At 
+each step, the engine exchange heat $\dbar Q_i $ from a \textbf{contact} with 
+temperature $T_i$. The maximum work this engine can produce is then:
+\begin{equation}
+    \Delta W = \sum_i \dbar Q_i
+\end{equation}
+
+Furthermore, each of these contact are connect to \textbf{a single environment} 
+with temperature $T$ through a carnot cycle. Each of these carnot cycle can be considered
+as heat pumps or refrigerators, which operates to provide (absorb) heat $\dbar Q_i $
+at each contact.
+We have the relationship for these carnot cycles:
+\begin{gather}
+    \frac{\dbar Q}{T} = \frac{\dbar Q_i}{T_i} \\
+    \dbar Q = \dbar Q_i + \dbar W_i 
+\end{gather}
+
+Since this system work in cycles, it cannot absorb heat from a single heat resevior (environment at $T$) 
+and output work (second law). So the total work output by this system is necessary zero (do nothing) or negative 
+(external work need to be provided to get this system going). So we have the following requirement:
+\begin{equation}
+    \sum_i \dbar W_i + \Delta W \le 0
+\end{equation}
+We have:
+\begin{gather}
+    \dbar W_i = \dbar Q - \dbar Q_i = \dbar Q_i (\frac{T}{T_i} - 1) \\
+    \Delta W = \sum_i \dbar Q_i 
+\end{gather}
+So we can find:
+\begin{gather}
+    \sum_i \dbar Q_i \frac{T}{T_i} \le 0 \\
+    \sum_i \frac{\dbar Q_i}{T_i} \le 0 \ \ \text{or}\ \  \oint \frac{\dbar Q}{T} \le 0
+\end{gather}
+The second equation is the result of the Clausius theorem. The equal sign is only achieved for a reversible energy,
+which we write:
+\begin{equation}
+    \oint \frac{\dbar Q_{rev}}{T} = 0
+\end{equation}
+
+\subsection*{entropy}
+For an reversible process, we have the relationship:
+\begin{equation}
+    \oint \frac{\dbar Q_{rev}}{T} = 0
+\end{equation}
+suggesting that the integral:
+\begin{equation}
+    \int_{A}^{B} \frac{\dbar Q_{rev}}{T} \ \ \text{is path independent}
+\end{equation}
+We therefore define a value $\dnor S = \dbar Q_{rev} / T$ and the value 
+of $S$ is an function of state. $S$ is called the entropy. 
+For adiabatic process, $\dbar Q = 0$ and $\dnor S = 0$
+
+In general, we consider a general cycle consists of both reversible and 
+irreversible process. According to Clausius theorem, we have:
+\begin{equation}
+    \oint \frac{\dbar Q}{T} = \int_A^B \frac{\dbar Q}{T} + \int_B^A \frac{\dbar Q_{rev}}{T} \le 0
+\end{equation}
+so that we have:
+\begin{equation}
+    \int_A^B \frac{\dbar Q}{T} \le \int_A^B \frac{\dbar Q_{rev}}{T} = \int_A^B \dnor S
+\end{equation}
+taking the process from $A$ to $B$ infinitsemial, we thus find:
+\begin{equation}
+    \frac{\dbar Q}{T} \le \dnor S
+\end{equation}
+and the equality only happens for reversible process.
+
+In thermally isolated system, $\dbar Q = 0$, and we reach an
+important conclusion that for such isolated system, the entropy
+of the system can only increase: $ \dnor S \ge 0$.
+
+For a reversible process, $\dbar Q = T \dnor S$ and the first law gives:
+\begin{align}
+    \dnor U & = T \dnor S + \dbar W \\
+            & = T \dnor S - p \dnor V \label{internal energy}
+\end{align}
+Since value $U, T, S, p, V$ are all function of state. This 
+result is independent of the process and also holds for 
+irreversible process.
+For an irreversible process, $\dnor U = \dbar Q + \dbar W$
+but:
+\begin{gather}
+    \dbar Q \neq  T \dnor S \\
+    \dbar W \neq  - p \dnor V 
+\end{gather}
+but 
+\begin{equation}
+    \dbar Q + \dbar W = \dbar Q_{rev} - p \dnor V = T \dnor S - p \dnor V
+\end{equation}
+
+Equation.\ref{internal energy} also give the result:
+\begin{gather}
+    p = - \left(\frac{\dnor U}{\dnor V}\right)_S \\
+    T = \left(\frac{\dnor U}{\dnor S}\right)_V
+\end{gather}
+
+\subsection*{Joule Expansion}
+We consider a process of Joule expansion as an example of irreversible process:
+suppose a container is separate into half, each with volume $V_0$. The gas is 
+initially confined one side of the container with pressure $p_i$. The other side
+of the container is vacuum. Now we remove the separation and let the 
+gas take up the volume of the whole container.
+
+We have the equation of states:
+\begin{gather}
+    p_i V_0 = RT_i \\
+    p_f 2V_0 = RT_f
+\end{gather}
+since the internal energy of the gas does not change, $\Delta U = 0$ and therefore 
+for ideal gas, its temperature remain the same: $T_i = T_f$. We thus have:
+$p_f = \frac{1}{2} p_i$. and
+\begin{gather}
+    \dnor U = T \dnor S - p \dnor V = 0 \\
+    \dnor S = \frac{p}{T} \dnor V \\ 
+    \Delta S = \int_i^f \dnor S = \int_i^f \frac{p}{T} \dnor V = \int_i^f \frac{R}{V} \dnor V = R \ln2
+\end{gather}
+where we consider the process as a reversible isothermal expansion, but is since $S$ is function
+of state, the result is true for any process
+\footnote{
+Joule expansion is associated with Maxwell's Demon, which is an interesting read at page 149 of the book
+}.
+
+\subsection*{Entropy of macrostates and total entropy}
+Since we have the statistical definition of temperature
+\begin{equation}
+    \frac{1}{k_BT} = \frac{\dnor \ln\Omega}{\dnor E}
+\end{equation}
+where $\Omega$ is the number of microstates with energy $E$. 
+Assume a microcanonical ensemble (each microstates have the same energy
+and are equally probably), then the internal energy coinside 
+with energy $E$. Using the relation:
+\begin{equation}
+    T = \left( \pfrac{U}{S} \right)_V
+\end{equation}
+We find the result:
+\begin{equation}
+    S = k_B \ln \Omega
+\end{equation}
+which we call the Boltzmann's definition of entropy.
+
+Now, we consider ensembles other than microcanonical ensemble. Suppose the system 
+have in total N possible microstates of equal probability, 
+which can be divided into $i$ macrostates that we can distinguish by experimental measurement.
+Each of those macrostates contain $n_i$ microstates. We define the Gibb's entropy:
+\begin{equation}
+    S_{tot} = S + S_{micro}
+\end{equation}
+where $ S_{tot} = k_B \ln N$. The microscopic entropy is given by:
+\begin{equation}
+    S_{micro} = \langle S \rangle = \sum_i P_i S_i = \sum_i P_i k_B\ln n_i
+\end{equation}
+where the probability $p_i = n_i / N$ and $\sum_i p_i = 1$. We have:
+\begin{align}
+    S & = k_B \left(\sum_i p_i\right) \ln N - \sum_i P_i k_B\ln n_i \\
+    & = - k_B \sum_i p_i \ln p_i
+\end{align}
+
+Gibbs entropy formula is useful because we can generally measure the probability 
+distribution is macroscopic distinguishable states and calculate the entropy from 
+the probability distribution, while for Boltzmann's definition of entropy, it's only
+applicable for microcanonical ensemble and we cannot access the actual number 
+of the microstates.
+
 \section{Third Law}
 
-\pagebreak
+\pagebreak 
 \section*{Appendix A}
 
 
