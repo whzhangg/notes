@@ -3,14 +3,21 @@
 \usepackage[margin=1in]{geometry}
 \usepackage{verbatim}
 \usepackage{graphicx}
-\usepackage{hyperref}
+\usepackage{hyperref} % \url \href
+
+\newcommand{\pfrac}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\dbar}{\mathbf{\tilde{d}}}
+\newcommand{\dnor}{\text{d}}
+% \renewcommand{\H}{\mathcal{H}}
 
 \begin{document}
 
-\title{Statistic Physics}
+\title{Law of Thermodynamics}
 \author{Wenhao}
 \date{\today}
 \maketitle
+
+\tableofcontents
 
 \section{The fundamental postulation and Liouville's theorem}
 
@@ -127,72 +134,7 @@ the total derivatve is then:
 \end{align}
 thus proving the Liouville's theorem.
 
-\pagebreak
-\section{Intensive and extensive properties}
 
-\subsection{Heat}
-We provide a definition of heat as \emph{The thermal energy in transit}, denoted as $Q$\footnote{Blundell, p14}. We define the heat capacity
-$C$ of an object as the amount of heat that is needed to increase its temperature:
-\begin{equation}
-    C = \frac{dQ}{dT}
-\end{equation}
-thus $C$ has the unit $J/K$. The specific heat is defined to be the heat capacity per unit mass, having the unit $J/(kg\cdot K)$
-
-\subsection{Entropy}
-We define entropy $S$ for an isolated macroscopic system of $N$ particles in volume $V$ and energy $E$ to be:
-\begin{equation}
-    S(E,N,V,x) = k_B \ln\Omega(E,N,V,x)
-\end{equation}
-where $\Omega(E,N,V,x)$ is the number of accessible states at a given value of $E, N, V$, and $x$ is some constraints which 
-influence the number of accessible states.
-As a non-equilibrium isolated system allow to relax to equilibrium, entropy will increase monotonically and eventually maximize 
-at equilibrium.
-%imagine that the system will attempt to visit as many configurations as possible. 
-
-\textbf{Temperature} 
-consider an isolated system with two subsystem in weak contact but heat is allowed to follw between the two subsystem.
-The total number of accessible states (configurations) are given by the product of the number of configurations of the 
-two subsystem. Entropy will be additive. Consider the energy of one of the subsystem $E_1$
-as the constrain for the configurations.
-\begin{align}
-    \Omega(E,E_1) = \Omega_1(E_1) \Omega_2(E_2) \\
-    S(E,E_1) = S_1(E_1) S_2(E_2)   
-\end{align}
-Relaxation process will increase entropy by changing $E_1$, towards a macroscopic that correspond to 
-more configurations. At equilibrium (heat no longer exchange), we have:
-\begin{gather}
-    \frac{\partial S}{\partial E_1} = 0 \ \Rightarrow \ 
-    \left. \frac{\partial S_1(E_1)}{\partial E_1} \right|_{N_1,V_1} = \left. \frac{\partial S_2(E_2)}{\partial E_2}\right|_{N_2,V_2} = \frac{1}{T} \label{defineT}
-\end{gather}
-where the final equality gives the definition of temperature, thus if two subsystem reaches equilibrium in terms of energy flow, their 
-temperature will be equal. This process is irreversible and thus define a arrow of time.
-
-\textbf{Chemical potential}
-now, we fix only volume $V$ of each subsystem and allow both energy and particles to exchange, then:
-\begin{equation}
-    \left. \frac{\partial S_1(N_1)}{\partial N_1} \right|_{E_1,V_1} = \left. \frac{\partial S_2(N_2)}{\partial N_2}\right|_{E_2,V_2} = -\frac{\mu}{T}
-\end{equation}
-the last equality defines the chemical potential $\mu$. 
-% minus sign the divide by temperature is because of the tradition
-
-\textbf{Pressure}
-finally, we allow the volume of the system to exchange, and we can similar define pressure:
-\begin{equation}
-    \left. \frac{\partial S_1(V_1)}{\partial V_1} \right|_{E_1,N_1} = \left. \frac{\partial S_2(V_2)}{\partial V_2}\right|_{E_2,N_2} = \frac{P}{T}
-\end{equation}
-
-Thus, we can see that if we set an initial system not in equilibrium, the two subsystem will
-start to exchange energy, particles and volume until $T$, $P$ and $\mu$ become the same 
-for the two subsystem. 
-
-We can separate the macroscopic properties of a system into two different catagory:
-\begin{itemize}
-    \item \textbf{Extensive properties} that will increase proportional to the system size, such as $N,E,V$
-    \item \textbf{Intensive properties} that will be same for any of the subsystem, such as  $P,\mu,T$
-\end{itemize}
-
-%\subsection{Carnot cycle}
-\pagebreak
 \section{Ensembles}
 We can define an ensemble as a collection of possible configurations that satisfy a given macroscopic 
 property\footnote{Blundell, p38}.
@@ -274,8 +216,991 @@ we have the probability to find a microstate:
 \end{equation}
 The grand canonical ensemble is known as the \textbf{$\mu$VT ensemble}
 
-\pagebreak
+
+\section{First Law}
+Suppose we have the function $f(x)$, where $x$ are parameters of the state. 
+If the integral:
+\begin{equation}
+    \Delta f = \int_{x_i}^{x_f} df = f(x_f) - f(x_i) 
+\end{equation}
+i.e., if $\Delta f$ is independent of the path chosen, then we call $f$ a 
+\textbf{function of state}, which only depend on the system parameter at a 
+certain instance.
+
+\textbf{Equation of states} are equation that contain only function of states:
+i.e., for ideal gas, we have $pV = RT$ which depend on $p, V, T$, all of them are 
+function of states.
+
+\textbf{First law}: energy is conserved in the form of heat and work.
+
+Writting $U$ as the internal energy, The equation of states can be written as
+\begin{gather}
+    \Delta U = \Delta Q + \Delta W \\
+    \dnor U = \dbar Q + \dbar W = \dbar Q - p \dnor V
+\end{gather}
+where $\Delta$ gives the total change and $\dnor$ represent differential change. $\dbar$
+represent changes that are path dependent. It is clear that 
+the heat absorbed and the work done to the system depend on the specific process, and 
+thus they cannot be exact differentiated with respect to the system parameters, while 
+volume $V$ is a function of states.
+
+\subsection{Heat capacitiy of gas at constant volume or pressure}
+For ideal gas, we have:
+\begin{align}
+    \dbar Q &= \dnor U + p \dnor V \\
+    \dbar Q & = \left(\pfrac{U}{T}\right)_V \dnor T + \left(\pfrac{U}{V}\right)_T \dnor V + p \dnor V \\
+    \frac{\dbar Q}{\dnor T} &= \left(\pfrac{U}{T}\right)_V + \left[ \left(\pfrac{U}{V}\right)_T  + p \right] \frac{\dnor V}{\dnor T}
+\end{align}
+Therefore, at fixed volume, $\dnor V = 0$ and we have:
+\begin{equation}
+    C_V = \left(\frac{\dbar Q}{\dnor T}\right)_V = \left(\pfrac{U}{T}\right)_V
+\end{equation}
+at fixed pressure:
+\begin{align}
+    C_p & = \left(\frac{\dbar Q}{\dnor T}\right)_p \\
+        & = C_V + \left[ \left(\pfrac{U}{V}\right)_T  + p \right] \left(\frac{\dnor V}{\dnor T}\right)_p
+\end{align}
+For ideal gas, we have $\left(\pfrac{U}{V}\right)_T = 0$. and $p \left(\frac{\dnor V}{\dnor T}\right)_p = R$,
+so that we have: $C_p = C_V + R$. For an equilibrium gas at constant pressure, the volume of the gas also expand when
+the temperature of the gas is increased (gas do work to the environment). 
+So we in generally need to input more heat to the increase the temperature of the gas, compared to the case of constant 
+volume. 
+
+In general gas, we define the ratio $\gamma$ called \textbf{adiabatic index}:
+\begin{equation}
+    \gamma = \frac{C_p}{C_V}
+\end{equation}
+
+
+\section{Second Law}
+
+\subsection{Reversible process}
+we define a process to be reversible if \textbf{at every moment during the process, the system
+is in equilibrium}. As an example, for an ideal gas, if the equation of state $pV = RT$ is hold true
+at every moment during the process, then it implies that the gas is always in an equilibrium state
+and the process is reversible: we could not notice if this process happens in reversed. 
+We consider two types of reversible process in terms of gas: First is called \textbf{Isothermal process}
+and the second is called \textbf{Adiabatic process}.
+
+In the isothermal process, the temperature of the system is fixed, in contact with a heat reservior:
+\begin{equation}
+    \Delta T = 0
+\end{equation}
+For ideal gas, this implies that $\Delta U = 0$, for reversible process of ideal gas, The 
+equation of states $pV = RT$ is always true. This gives:
+\begin{gather}
+    \Delta U = \dbar Q - \frac{RT}{V} \dnor V = 0
+\end{gather}
+\[
+\boxed{\Delta Q = \int_{V_1}^{V_2} \dbar Q = \int_{V_1}^{V_2} \frac{RT}{V} \dnor V = RT \ln \frac{V_2}{V_1}}
+\]
+
+In the adiabatic process, the system is not allowed to exchange heat with the 
+environment, thus we have $\dbar Q = 0$. We find:
+\begin{gather}
+    \dnor U = \dbar W \\
+    C_V dT = - p \dnor V = - \frac{RT}{V} \dnor V \\
+    \ln \frac{T_2}{T_1} = - \frac{R}{C_V} \ln \frac{V_2}{V_1}
+\end{gather}
+For ideal gas, $C_p = C_V + R$, $\gamma = 1 + R / C_V$ and we find:
+\begin{gather}
+    \ln \frac{T_2}{T_1} = (1-\gamma) \ln \frac{V_2}{V_1} \\
+    \frac{T_2}{T_1} = \left( \frac{V_2}{V_1} \right) ^ {1-\gamma} = \left( \frac{V_1}{V_2} \right) ^ {\gamma-1} \\
+    T V^{\gamma - 1} = \text{const}
+\end{gather}
+\[ \boxed{p V^{\gamma} = \text{const}} \]
+
+where we used relationship $pV = RT$ to obtain the last relationship. Equation $p V^{\gamma}$ 
+enable us to find the pressure of the system if we know the volume of the 
+system during a adiabatic expansion or compression. Temperature can be derived using the ideal 
+gas law then, if we know the pressure and volume.
+
+\subsection{Second law}
+The second law can be stated in the following two equivalent form:
+
+\textbf{Clausius statement} No process whose sole effect is to transfer heat from cold to hot body
+
+\textbf{Kelvin statement} No process is possible whose sole effect is to convert heat into work
+
+It is important to note the work "sole effect". For example, in an isothermal process of ideal gas, 
+$\dbar Q + \dbar W = 0$ so all the heat is converted into work done by the system. However, the 
+accompanying effect is that the volume of the gas expanded. 
+Therefore, To study the ability to convert heat into work, we should consider process which has no 
+other effect other than the conversion, such as Carnot engine which work in cycles
+
+\subsection{Carnot engine}
+We define a carnot engine which consist of two reversible adiabatic and two reversible 
+isothermal process, working between temperature $T_h$ and $T_l$. The carnot engine do work
+in the following process:
+
+\begin{table*}[h]
+    \centering
+    \begin{tabular}{ccc}
+        $ A \to B $ & isothermal expansion & $Q_h = RT_h \ln \frac{V_B}{V_A}$ \\
+        $ B \to C $ & adiabatic & $ \frac{T_h}{T_l} = \left( \frac{V_C}{V_B} \right) ^ {\gamma-1} $ \\
+        $ C \to D $ & isothermal compression & $Q_l = - RT_h \ln \frac{V_D}{V_C}$ \\
+        $ D \to A $ & adiabatic & $ \frac{T_h}{T_l} = \left( \frac{V_D}{V_A} \right) ^ {\gamma-1}$ \\
+    \end{tabular}
+\end{table*}
+
+The adiabatic process lead to $\frac{V_C}{V_B} = \frac{V_D}{V_A} $, with $V_B > V_A$. Finally, we 
+find the important result for a carnot energy:
+\[\boxed{\frac{Q_h}{T_h} = \frac{Q_l}{T_l} }\]
+\begin{equation}
+    Q_h - Q_l = W 
+\end{equation}
+
+where $W$ is the work done in one carnot cycle. We can find the efficiency of the engine
+\footnote{This carnot engine seems to convert all the heat absorbed into work, $Q_h - Q_l \to W$. But
+it has the additonal effect to transport heat from one source to another. Therefore, this does not 
+conflict with Kelvin's statement}:
+\begin{equation}
+    \eta = \frac{W}{Q_h} = 1 - \frac{T_l}{T_h}
+\end{equation}
+
+We have the following statement related to the (reversible) carnot engines:
+\begin{itemize}
+    \item Carnot engine is the most efficient engine
+    \item all reversible engine operating at the same temperature environment have the same efficiency
+    \item Clausius statement of the second law is the same as Kelvin's statement \footnote{See book}
+\end{itemize}
+
+\subsection{Refrigerator}
+We consider the above carnot energy run backwards: it absorb heat $Q_l$ from the 
+low temperature side with an isothermal expansion. Input work $W$ is provided 
+during the adiabatic process, and dump heat $Q_h$ into the the hot side 
+with an isothermal compression process. The result for such a refrigerator is:
+\begin{gather}
+    Q_l + W = Q_h \\
+    \frac{Q_h}{T_h} = \frac{Q_l}{Q_l} \\
+    \eta = \frac{Q_l}{W} = \frac{T_l}{T_h - T_l}
+\end{gather} 
+
+\subsection{Clausius theorem}
+Suppose we have a seriers of heat exchange in a working cycle of an engine. At 
+each step, the engine exchange heat $\dbar Q_i $ from a \textbf{contact} with 
+temperature $T_i$. The maximum work this engine can produce is then:
+\begin{equation}
+    \Delta W = \sum_i \dbar Q_i
+\end{equation}
+
+Furthermore, suppose each of these contact are connect to \textbf{a single environment} 
+with temperature $T$ through a carnot cycle. Each of these carnot cycle can be considered
+as heat pumps or refrigerators, which operates to provide (absorb) heat $\dbar Q_i $
+at each contact.
+We have the relationship for these carnot cycles:
+\begin{gather}
+    \frac{\dbar Q}{T} = \frac{\dbar Q_i}{T_i} \\
+    \dbar Q = \dbar Q_i + \dbar W_i 
+\end{gather}
+
+Since this system work in cycles, it cannot absorb heat from a single heat resevior (environment at $T$) 
+and output work (second law). So the total work output by this system is necessary zero (do nothing) or negative 
+(external work need to be provided to get this system going). So we have the following requirement:
+\begin{equation}
+    \sum_i \dbar W_i + \Delta W \le 0
+\end{equation}
+We have:
+\begin{gather}
+    \dbar W_i = \dbar Q - \dbar Q_i = \dbar Q_i (\frac{T}{T_i} - 1) \\
+    \Delta W = \sum_i \dbar Q_i 
+\end{gather}
+So we can find:
+\begin{gather}
+    \sum_i \dbar Q_i \frac{T}{T_i} \le 0 
+\end{gather}
+\[
+\boxed{\sum_i \frac{\dbar Q_i}{T_i} \le 0 \ \ \text{or}\ \  \oint \frac{\dbar Q}{T} \le 0}
+\]
+The second equation is the result of the Clausius theorem. The equal sign is only achieved for a reversible energy,
+which we write:
+\[
+   \boxed{ \oint \frac{\dbar Q_{rev}}{T} = 0 }
+\]
+
+\subsection{Entropy}
+For an reversible process, we have the relationship:
+\begin{equation}
+    \oint \frac{\dbar Q_{rev}}{T} = 0
+\end{equation}
+suggesting that the integral:
+\begin{equation}
+    \int_{A}^{B} \frac{\dbar Q_{rev}}{T} \ \ \text{is path independent}
+\end{equation}
+We therefore define a value $\dnor S = \dbar Q_{rev} / T$ and the value 
+of $S$ is an function of state. $S$ is called the (Clausius) \textbf{entropy}. 
+\textbf{For adiabatic process, $\dbar Q = 0$ and $\dnor S = 0$}.
+
+In general, we consider a cycle consists of both reversible and 
+irreversible process. According to Clausius theorem, we have:
+\begin{equation}
+    \oint \frac{\dbar Q}{T} = \int_A^B \frac{\dbar Q}{T} + \int_B^A \frac{\dbar Q_{rev}}{T} \le 0
+\end{equation}
+so that we have:
+\begin{equation}
+    \int_A^B \frac{\dbar Q}{T} \le \int_A^B \frac{\dbar Q_{rev}}{T} = \int_A^B \dnor S  \label{entropy_increase}
+\end{equation}
+taking the process from $A$ to $B$ infinitsemial, we thus find:
+\begin{equation}
+    \frac{\dbar Q}{T} \le \dnor S
+\end{equation}
+and the equality only happens for reversible process.
+
+In thermally isolated system, $\dbar Q = 0$, and we reach an
+important conclusion that for such isolated system, the entropy
+of the system can only increase: $ \dnor S \ge 0$.
+
+We take note that in this example, we entropy increase from process A to process B, 
+as indicated by the integral in Eq.\ref{entropy_increase}. If we choose the direction
+to be B $\to$ A, then we will have  $ \dnor S \le 0$. However, for a irreversible process,
+the direction is fixed and only the direction that lead to an increase of entropy
+will be naturally occuring (A $\to$ B). 
+
+For a reversible process, $\dbar Q = T \dnor S$ and the first law gives:
+\begin{align}
+    \dnor U & = T \dnor S + \dbar W \\
+            & = T \dnor S - p \dnor V \label{internal energy}
+\end{align}
+Since value $U, T, S, p, V$ are all function of state. This 
+result is independent of the process and also holds for 
+irreversible process.
+For an irreversible process, $\dnor U = \dbar Q + \dbar W$
+but:
+\begin{gather}
+    \dbar Q \neq  T \dnor S \\
+    \dbar W \neq  - p \dnor V 
+\end{gather}
+but 
+\begin{equation}
+    \dbar Q + \dbar W = \dbar Q_{rev} - p \dnor V = T \dnor S - p \dnor V
+\end{equation}
+
+Equation.\ref{internal energy} also give the result:
+\begin{gather}
+    p = - \left(\frac{\dnor U}{\dnor V}\right)_S \\
+    T = \left(\frac{\dnor U}{\dnor S}\right)_V
+\end{gather}
+
+\subsection{Joule Expansion}
+We consider a process of Joule expansion as an example of irreversible process:
+suppose a container is separate into half, each with volume $V_0$. The gas is 
+initially confined one side of the container with pressure $p_i$. The other side
+of the container is vacuum. Now we remove the separation and let the 
+gas take up the volume of the whole container.
+
+We have the equation of states:
+\begin{gather}
+    p_i V_0 = RT_i \\
+    p_f 2V_0 = RT_f
+\end{gather}
+since the internal energy of the gas does not change, $\Delta U = 0$ and therefore 
+for ideal gas, its temperature remain the same: $T_i = T_f$. We thus have:
+$p_f = \frac{1}{2} p_i$. and
+\begin{gather}
+    \dnor U = T \dnor S - p \dnor V = 0 \\
+    \dnor S = \frac{p}{T} \dnor V \\ 
+    \Delta S = \int_i^f \dnor S = \int_i^f \frac{p}{T} \dnor V = \int_i^f \frac{R}{V} \dnor V = R \ln2
+\end{gather}
+where we consider the process as a reversible isothermal expansion, but is since $S$ is function
+of state, the result is true for any process
+\footnote{
+Joule expansion is associated with Maxwell's Demon, which is an interesting read at page 149 of the book
+}.
+
+\subsection{Entropy of macrostates and total entropy}
+Since we have the statistical definition of temperature
+\begin{equation}
+    \frac{1}{k_BT} = \frac{\dnor \ln\Omega}{\dnor E}
+\end{equation}
+where $\Omega$ is the number of microstates with energy $E$. 
+Assume a microcanonical ensemble (each microstates have the same energy
+and are equally probably), then the internal energy coinside 
+with energy $E$. Using the relation:
+\begin{equation}
+    T = \left( \pfrac{U}{S} \right)_V
+\end{equation}
+We find the result:
+\begin{equation}
+    S = k_B \ln \Omega
+\end{equation}
+which we call the \textbf{Boltzmann's definition of entropy}.
+\footnote{\url{https://physics.stackexchange.com/questions/141321/what-is-the-conceptual-difference-between-gibbs-and-boltzmann-entropies}}.
+The entropy increase of the joule expansion can be obtained from the Boltzmann's entropy formula
+by considering the number of phase space before and after the expansion: The phase space of 
+velocity remain the same while the phase space of possible particle position is doubled. Giving the 
+result: $\Delta S = R \ln2$.
+
+The above case correspond to an isolated system with fixed energy (microcanonical ensemble). We now
+consider the case where the system of interest is connected to a reservior. 
+The number of states microstate of the whole system is $N$, We have:
+\begin{equation}
+    S_{tot} = S_{sys} + S_{res} = k_B \ln N
+\end{equation}
+suppose that the $i^{th}$ microstate of our system correspond to $n_i$ microstate of the reservior,
+then the probability of our system to be in the $i^{th}$ microstate is then $P_i = n_i / N$
+with corresponding entropy of the reservior $S_{res,i} = k_B \ln n_i$. The average entropy 
+of the reservior can then be calculated:
+\begin{equation}
+    S_{res} = \langle S_{res} \rangle = \sum_i P_i S_{res,i} = \sum_i P_i k_B\ln n_i
+\end{equation}
+We have than the entropy of our system:
+\begin{align}
+    S & = k_B \left(\sum_i p_i\right) \ln N - \sum_i P_i k_B\ln n_i \\
+    & = - k_B \sum_i p_i \ln p_i
+\end{align}
+where we used the result $\sum_i p_i = 1$. This is known as the \textbf{Gibb expression of entropy}.
+The reasoning applied here is the same as finding the probability of an canonical system. 
+The probability here can be given, for example, by canonical distribution function $p_i = e^{-\beta E_i} / Z$
+
+Gibbs entropy formula is useful because most of the system we consider are connected to some 
+heat bath at some tmperature $T$. Similar to why canonical ensemble is more useful than microcanonical 
+ensemble. 
+Also, Gibb's formula only contain probability, which can be measured, compared to number of microstates
+in Boltzmann formula, which cannot be measured.
+
+\footnote{
+This is original expression given by the book, which seems to express a slightly different concept
+related to the macroscopic properties. So I kept it here in the footnote. But I think the reasoning 
+is the same.
+
+Suppose the system 
+have in total N possible microstates of equal probability, 
+which can be divided into $i$ macrostates that we can distinguish by experimental measurement.
+Each of those macrostates contain $n_i$ microstates. We define the Gibb's entropy:
+\begin{equation}
+    S_{tot} = S + S_{micro}
+\end{equation}
+where $ S_{tot} = k_B \ln N$. The microscopic entropy is given by:
+\begin{equation}
+    S_{micro} = \langle S \rangle = \sum_i P_i S_i = \sum_i P_i k_B\ln n_i
+\end{equation}
+where the probability $p_i = n_i / N$ and $\sum_i p_i = 1$. We have:
+\begin{align}
+    S & = k_B \left(\sum_i p_i\right) \ln N - \sum_i P_i k_B\ln n_i \\
+    & = - k_B \sum_i p_i \ln p_i
+\end{align}
+}
+
+\section{Third Law}
+We can measure the change of entropy of a system by measuring its heat capacitiy:
+\begin{gather}
+    C_p = T\left(\pfrac{S}{T}\right)_p \label{thirdlawcp}\\
+    S = \int \frac{C_p}{T} \dnor T
+\end{gather}
+so that we have:
+\begin{equation}
+    S(T) = S(T_0) + \int_{T_0}^{T} \frac{C_p}{T} \dnor T
+\end{equation}
+
+The third law states that the entropy of a system at absolute zero will be zero:
+
+\textbf{Planck's statement of the third law} The entropy of all systems in internal
+equilibrium is the same at absolute zero and may be taken to be zero.
+
+It is noted that the system should be in a relaxed internal equilibrium for the third law
+to hold, it is possible,
+for example, to freeze a metastable glass phase instead of a crystalline phase and go down
+o $T \to 0$ with non zero entropy.
+
+As a consequence of the third law, Heat capacitiy, given by Eq.\ref{thirdlawcp} will
+necessarily go to zero as $T\to0$.
+
+As another implication, Using the statistical definition of the entropy $S = k_B \ln \Omega$
+implies that the ground states of a system at absolute zero, is necessary non-degenerate with
+$\Omega = 1$ so that the entropy will be zero. Such non-degeneracy would be enforced by the 
+third law for real systems, as well as the requirement for $C_pto 0$. 
+As an example, the curie's law gives a susceptibility $\chi \to \infty$ as $T \to 0$. But with
+the third law, we require $\partial \chi / \partial T \to 0$. This problem is caused because
+for Curie law, we assumed a mean field interaction where the interaction of magnetic
+moment is ignored\footnote{See discussion in page 204-205}. 
+
 \section{Thermodynamic potentials}
+We call \textbf{Thermodynamic potentials} functions that are constructed from 
+the functions of state. 
+We define the following Thermodynamic potentials, The first being the internal 
+energy, the following are the Enthalpy, Helmholtz function and the Gibbs 
+function.
+
+\begin{table*}[h]
+    \centering
+    \begin{tabular}{rrrr}
+     $U(S,V)$ &   $U$          & $\dnor U =   T \dnor S - p \dnor V$ & $T = \left(\pfrac{U}{S}\right)_V$, $p = -\left(\pfrac{U}{V}\right)_S$ \\
+     $H(S,p)$ &   $H = U + PV$ & $\dnor H =   T \dnor S + p \dnor V$ & $T = \left(\pfrac{H}{S}\right)_V$, $V = \left(\pfrac{H}{p}\right)_S$ \\
+     $F(T,V)$ &   $F = U - TS$ & $\dnor F = - S \dnor T - p \dnor V$ & $S = -\left(\pfrac{F}{T}\right)_V$, $p = -\left(\pfrac{F}{V}\right)_T$ \\
+     $G(T,p)$ &   $G = H - TS$ & $\dnor G = - S \dnor T + V \dnor p$ & $S = -\left(\pfrac{G}{T}\right)_p$, $V = \left(\pfrac{G}{p}\right)_T$ \\
+     \end{tabular}
+\end{table*}
+
+Regarding the thermodynamic potentials, we have the following comments:
+\begin{itemize}
+    \item Different thermodynamic potentials are expressed in different \textbf{natural variables} because 
+            their differential form. For example, because $\dnor F = - S \dnor T - p \dnor V$, the natural variables for $F$ are $U, V$. 
+            The differential form implies that the change in $F$ is related to the change in $T$ or $V$. if $\dnor V = 0$, then the change
+            in $F$ is independent of pressure $p$. 
+    \item Each form of the thermodynamic potential gives different formula of thermodynamic quantities, which can be easier to access. For 
+            example, $S = -\left(\partial{F}/\partial{T}\right)_V$ gives the value of entropy with easily accessible quantities $F, T$.
+    \item Each thermodynamic potentials describe the system subject to different constrains: For a system with fixed pressure and fixed temperature
+            in a process, its Gibbs function will remain the same through the process. While for a system with fixed volume and temperature, 
+            it's free energy $F$ will be fixed over the process.
+\end{itemize}
+
+\subsection{Maxwell's relationship}
+Maxwell's relationship can be derived from the above  definition of the thermodynamic
+potential function, and they are stated as below:
+\begin{gather}
+    \left(\pfrac{T}{V}\right)_S = - \left(\pfrac{p}{S}\right)_V \\
+    \left(\pfrac{T}{p}\right)_S = \left(\pfrac{V}{S}\right)_p \\
+    \left(\pfrac{S}{V}\right)_T = - \left(\pfrac{p}{T}\right)_V \\
+    \left(\pfrac{S}{p}\right)_T = - \left(\pfrac{V}{T}\right)_V 
+\end{gather}
+
+\subsection{Legendre transformation}
+In general, Legendre transformation is a transformation on the real valued convex functions
+of one of the variable and is usually used to convert functions of one quantity (position, pressure) into function of
+the conjugate quantity (momentum, volume)
+Consider function $F(x)$ with $dF/dx = s(x)$, we can write a function
+$G(s)$ with property $dG/ds = x(s)$. They are related by:
+\begin{equation}
+    d(F+G) = sdx + xds = d(xs)
+\end{equation}
+so that $F(x) + G(s) = xs$. One property of Legendre transformation that the result of the transformation 
+is also convex function. For details of the geometry meaning and convex requirement, see Morin's chapter.
+
+For thermodynamic potentials, we use a \emph{non-standard definition} $dG/ds = -x(s)$, 
+so that the transformation agree with the thermal dynamic variables.
+leading to 
+\begin{equation}
+    d(F-G) = sdx + xds = d(xs)
+\end{equation}
+and therefore $F-G = xs$
+\footnote{
+    Both is obviously correct. An example of the standard usage is Legendre transformation 
+    for Lagrangian and Hamiltonian is given by $F+G = xs$. see "Understanding the transformation in terms of derivatives"
+    section in \url{https://en.wikipedia.org/wiki/Legendre_transformation}.
+}.
+
+We have seem that intensity and extensity properties would come in pairs, such as $(T,S)$, $(\mu,N)$
+and $(P,V)$ due to their definition. We have also see that by defining different ensemble, we can
+write down different potential function for each ensemble:
+\begin{align}
+    \text{NVT ensemble} &\Rightarrow dA(N,V,T) = -SdT - pdV + \mu dN\notag \\
+    \text{$\mu$VT ensemble} &\Rightarrow d\Omega(\mu,V,T) = -SdT - pdV - Nd\mu \notag \\
+    (Gibbs)\ \text{NPT ensemble} &\Rightarrow dG(N,p,T) = -SdT + Vdp + \mu dN \notag \\
+    &\cdots \notag
+\end{align}
+The relationship between different potential function can be expressed with \textbf{Legendre transformation}.
+
+Writting $x$ for an intensive property and $S$ as the conjugating extensive property. For a potential $F(x)$
+with the thermodynamic relationship $dF = Sdx$, if another potential $G$ is related to $F(x)$ by $F(x) - G(S) = xS$,
+then, we can find $dG(S) = -xdS$.
+
+As an example, to find the Legendre transformation of the free energy in canonical ensemble $A(N,V,T)$ in terms of 
+variable $V$, we have:
+\begin{equation}
+    dA = -pdV \notag
+\end{equation} 
+The transformed potential is thus:
+\begin{equation}
+    dG(N,p,T) = Vdp \notag
+\end{equation} 
+corresponding to the 
+Gibbs potential. 
+
+\subsection{Isothermal magnetization and adiabatic demagnetization}
+To generalize the above treatment in general system, we can write:
+\begin{equation}
+    \dbar W = X dx
+\end{equation}
+where $X$ is some intensive generalized force and $x$ is some 
+extensive generalized displacement.
+
+Consider a system of magnetic moments arranged in a lattice. We 
+assume paramagnetic system with no interaction between the magnetic moments. 
+The first law of Thermodynamic for such system is 
+\begin{equation}
+    \dnor U = T \dnor S - m \dnor B
+\end{equation}
+We define the magnetic susceptibility as:
+\begin{equation}
+    \chi = \lim_{H\to0} \frac{M}{H} \approx \frac{\mu_0 M}{B}
+\end{equation}
+since $B = \mu_0(H+M)$ and $M \ll H$.
+Curie's law states $\chi \propto 1/T$ and therefore
+\begin{equation}
+    \left(\pfrac{\chi}{T}\right)_B < 0
+\end{equation}
+
+Consider the Helmholtz function:
+\begin{equation}
+    \dnor F = - S \dnor T - m \dnor B
+\end{equation}
+which gives the Maxwell relation:
+\begin{equation}
+    \left(\pfrac{S}{B}\right)_T = \left(\pfrac{m}{T}\right)_B 
+    \approx \frac{VB}{\mu_0} \left(\pfrac{\chi}{T}\right)_B
+\end{equation}
+The heat absorbed in an isothermal change of $B$ is:
+\begin{equation}
+    \Delta Q = T \left(\pfrac{S}{B}\right)_T \Delta B
+    = \frac{TVB}{\mu_0} \left(\pfrac{\chi}{T}\right)_B \Delta B < 0
+\end{equation}
+So that an isothermal increase of $B$ will 
+release heat to the environment.
+
+The change in temperature in an adiabatic change of $B$ is 
+\begin{equation}
+    \left( \pfrac{T}{B} \right)_S = - \left( \pfrac{T}{S} \right)_B \left( \pfrac{S}{B} \right)_T
+\end{equation}
+using 
+\begin{equation}
+    C_B = T \left( \pfrac{S}{T} \right)_B    
+\end{equation}
+we have:
+\begin{equation}
+    \left( \pfrac{T}{B} \right)_S = - \frac{TVB}{\mu_0 C_B} \left(\pfrac{\chi}{T}\right)_B > 0
+\end{equation}
+So that in an adiabatic process, the temperature will decrease with the decrease of magnetization,
+which is called \textbf{adiabatic demagnetization}
+
+\section{Equipartition of energy}
+To derive the equipartition theorem, we first consider a system
+whose energy is given by a quadratic form:
+\begin{equation}
+    E = \alpha x^2
+\end{equation}
+where $\alpha$ is some positive constant and $x$ is a variable
+that descript the microscopic configuration of the system. The 
+probability of the system taking configuration $x$ is then 
+given by the canonical distribution:
+\begin{equation}
+    P(x) = \frac{e^{-\beta \alpha x^2}}{\int_{-\infty}^{\infty} e^{-\beta \alpha x^2 dx}}
+\end{equation}
+The mean energy of the system is then:
+\begin{align}
+    \langle E \rangle &= \int_{-\infty}^{\infty} E P(x) dx \\
+        & = \frac{\int_{-\infty}^{\infty} \alpha x^2 e^{-\beta \alpha x^2} dx}{\int_{-\infty}^{\infty} e^{-\beta \alpha x^2 dx}} \\
+        & = \frac{1}{2} k_B T
+\end{align}
+
+For a system with multiple variables, we similarly have:
+\begin{equation}
+    E = \sum_{i=1}^n \alpha_i x_i^2
+\end{equation}
+The total energy is then:
+\begin{align}
+    \langle E \rangle 
+        & = \frac{\int_{-\infty}^{\infty}\cdots\int_{-\infty}^{\infty} \sum_{i=1}^n \alpha_i x_i^2 e^{-\beta \sum_{j=1}^n \alpha_j x_j^2} dx_1 \cdots dx_n}{\int_{-\infty}^{\infty}\cdots\int_{-\infty}^{\infty} e^{-\beta \sum_{i=1} \alpha_i x_i^2} dx_1 \cdots dx_n} \\
+        & = \sum_{i=1}^n \frac{\int_{-\infty}^{\infty}\cdots\int_{-\infty}^{\infty} \alpha_i x_i^2 e^{-\beta \sum_{j=1}^n \alpha_j x_j^2} dx_1 \cdots dx_n}{\int_{-\infty}^{\infty}\cdots\int_{-\infty}^{\infty} e^{-\beta \sum_{i=1} \alpha_i x_i^2} dx_1 \cdots dx_n} \\
+        & = \sum_{i=1}^n \frac{\int_{-\infty}^{\infty} \alpha_i x_i^2 e^{-\beta \alpha_i x_i^2}  dx_i }{\int_{-\infty}^{\infty} e^{-\beta \alpha_i x_i^2}  dx_i } \\
+        & = \sum_{i=1}^n  \frac{1}{2} k_B T = \frac{n}{2} k_B T
+\end{align}
+where $n$ the number of variable of the system ( microscope variable that determine the energy of the system), which we can call degree of freedom.
+
+The formal equipartition theorem states: \emph{ If the energy of a classic system is the sum
+of the $n$ quadratic variables and the system is in contact with a thermal reservior at temperature $T$, 
+then its average energy is $n\times \frac{1}{2}k_B T$}
+
+\subsection{Application of equipartition theorem to heat capacitiy of crystals}
+We consider each atom in the crystal are kept at their respective equilibrium positions
+by a spring. Each atom is therefore described by 6 variables: their kinetic energy
+is given by their velocity $\mathbf{v}$ and their potential energy by their 
+position $\mathbf{r}$. Therefore, there are $6N$ degree of freedom in a solid 
+with $N$ numbers of atoms. The total energy of the crystal at temperature $T$
+is then:
+\begin{equation}
+    \langle E \rangle = 3N k_B T
+\end{equation}
+and the Molar heat capacitiy of a solid is then $3N_A k_B = 3R$, known as the Dulong-Petit rule.
+
+\subsection{Assumption and limitation of equipartition theorem}
+The critical assumption we made in deriving the equipartition theorem is 
+as follows:
+\begin{enumerate}
+    \item We have assumed that the system variable $x$ is continuous through the intergration $\int_{-\infty}^{\infty} E(x) P(x) dx$.
+            However, for quantum system, the system are found to take distinct states with quantized energy levels. For example, at low temperature,
+            thermal energy may not be enough to excite the system to the next energy level and the system will be in the ground state with $P = 1$.
+            A classical system in this case assumes that there are always levels for system to distribute to even at low temperature and the above 
+            integral is valid. 
+    \item We assume that that the energy of the system can be written in a quadratic form. In most case this is valid, since the system will 
+            minimize its energy in equilibrium and the energy can therefore be written as an expansion to second order: $ E = E_0 + \alpha (x - x_0)^2$ 
+            around $x =x_0$. However, when temperature is high and $x$ start to deviate largely from $x_0$, 
+            higher order terms become important and quadratic form is no longer valid.
+\end{enumerate}
+As a conclusion, we learned that the equipartition theorem is valid in a temperature range high enough so that states are almost continuous ($\Delta E \ll k_B T$ with
+$\Delta E$ the energy difference between states) but 
+low enough that the quadratic form of the energy is valid.
+
+\section{The partition function}
+We define the partition function as:
+\begin{equation}
+    Z = \sum_{\alpha} e^{-\beta E_{\alpha}}
+\end{equation}
+which allow us to derive all the important thermodynamic quantities. 
+
+The internal energy is given by:
+\begin{equation}
+    U = \langle E \rangle = \frac{\sum_{i} E_i e^{-\beta E_i}}{\sum_{i} e^{-\beta E_i}} = -\frac{\dnor \ln Z}{\dnor\beta} = k_BT^2\frac{\dnor \ln Z}{\dnor T}
+\end{equation}
+
+The entropy is found by:
+\begin{align}
+    S = -k_B \sum_i P_i \ln P_i = k_B \sum_i P_i (\beta E_i + \ln Z) = k_B (\beta U + \ln Z)
+\end{align}
+or we can write:
+\begin{equation}
+    S = U/T + k_B \ln Z
+\end{equation}
+
+Helmholtz function can be written by $F = U - TS$, using the above result, we have:
+\begin{gather}
+    F = -k_B T \ln Z \\
+    Z = e^{-\beta F}
+\end{gather}
+
+Other derived quantities can also be found:
+\begin{gather}
+    C_V = \left(\pfrac{U}{T}\right)_V = k_B T \left[ 2\left(\pfrac{\ln Z}{T}\right)_V + T \left( \frac{\partial^2\ln Z}{\partial T^2} \right)_V \right] \\
+    p = - \left(\pfrac{F}{V}\right)_T = k_B T \left( \pfrac{\ln Z}{V} \right)_T \\
+    H = U + pV =  k_B T \left[ \left( T\pfrac{\ln Z}{T}\right)_V + V \left( \pfrac{\ln Z}{V} \right)_T \right] \\
+    G = F + pV =  k_B T \left[ -\ln Z + V \left( \pfrac{\ln Z}{V} \right)_T \right]
+\end{gather}
+
+It should be noted that the value of the partition function itself
+is not uniquely defined, because the zero of the energy is arbitrary,
+so that partitiona function can be defined up to an arbitrary multiplicative constant.
+However, In terms of the thermodynamic quantities calculated in the above equations,
+The result not on $Z$ but on $\ln Z$ and its derivative, so the 
+those quantities are up to a additive constants or show no dependence on the 
+arbitrarness of the partition function.
+
+\section{Chemical potential and Grand potential}
+We consider adding particles to a system, then the internal energy of the system will
+increase by an amount, which we denote \textbf{chemical potential}. For a large system
+with $\mu$ not changing significantly by adding or removing a particle, we have
+\begin{equation}
+    \dnor U = T \dnor S - p \dnor V + \mu \dnor N \label{du_dmu}
+\end{equation}
+with $N$ the particle number and $\mu$ can be written:
+\begin{equation}
+    \mu = \left( \pfrac{U}{N} \right)_{S,V}
+\end{equation}
+In terms of other constrains, we have:
+\begin{gather}
+    \dnor F = -p \dnor V - S \dnor T + \mu \dnor N \\
+    \dnor G = V \dnor p - S \dnor T + \mu \dnor N
+\end{gather}
+and we have the expression for chemical potential as:
+\begin{equation}
+    \mu = \left( \pfrac{F}{N} \right)_{T,V} = \left( \pfrac{G}{N} \right)_{T,p}
+\end{equation}
+
+For an isolated system, the entrope will increase as system go to equilibrium. 
+We write:
+\begin{align}
+    \dnor S &= \left( \pfrac{S}{U} \right)_{N,V} \dnor U + 
+              \left( \pfrac{S}{V} \right)_{N,U} \dnor V + 
+              \left( \pfrac{S}{N} \right)_{U,V} \dnor N \\
+            &= \frac{\dnor U}{T} + \frac{p \dnor V}{T} - \frac{\mu \dnor N}{T}
+\end{align}
+where the second equality follow from Eq.\ref{du_dmu}. 
+Therefore, we identify:
+\begin{equation}
+    \left( \pfrac{S}{U} \right)_{N,V} = \frac{1}{T}; \ \ \
+    \left( \pfrac{S}{V} \right)_{N,U} = \frac{p}{T}; \ \ \
+    \left( \pfrac{S}{N} \right)_{U,V} =-\frac{\mu}{T}
+\end{equation}
+
+We consider two system connected to each other and isolated from 
+from the environment, If heat is allowed to follow, we have:
+\begin{align}
+    \dnor S &= \left( \pfrac{S_1}{U_1} \right)_{N,V} \dnor U_1 + \left( \pfrac{S_2}{U_2} \right)_{N,V} \dnor U_2 \\
+        &= \left( \frac{1}{T_1} - \frac{1}{T_2} \right) \dnor U_1 \ge 0
+\end{align}
+Therefore, the equilibrium can be found at $T_1 = T_2$.
+
+Similarly, if the system are allowed to exchange particle, we have:
+\begin{align}
+    \dnor S = \left( \frac{\mu_1}{T_1} - \frac{\mu_2}{T_2} \right) \dnor N_1 \ge 0
+\end{align}
+the equilibrium can be found at $\mu_1 = \mu_2$, if the two subsystem have 
+already the same temperature.
+
+\subsection{Grand partition function}
+For a grand canonical ensemble, The probability that a system
+will be in a state with energy $E_i$ and particle number $N_i$ are 
+given by
+\begin{equation}
+    P_i = \frac{e^{\beta(\mu N_i - E_i)}}{\mathcal{Z}}
+\end{equation}
+and the grand partition function $\mathcal{Z}$ is given by:
+\begin{equation}
+    \mathcal{Z} = \sum_i e^{\beta(\mu N_i - E_i)}
+\end{equation}
+
+We can find the thermodynamic quantities using $\mathcal{Z}$ in 
+a similar way as with $Z$, with the result:
+\begin{gather}
+   \langle N \rangle = \sum_i N_i P_i = k_B T \left( \pfrac{\ln \mathcal{Z}}{\mu} \right)_T \\
+    U = - \left( \pfrac{\ln \mathcal{Z}}{\beta} \right)_{\mu} + \mu N \\
+    S = -k_B \sum_i P_i \ln P_i = \frac{U - \mu N + k_B T\ln \mathcal{Z}}{T} \label{grand_entropy}
+\end{gather}
+
+We further define the grand potential:
+\begin{equation}
+    \Phi_G = -k_B T \ln \mathcal{Z}
+\end{equation}
+which is a function of state. We have, using Eq.\ref{grand_entropy}:
+\begin{gather}
+    \Phi_G = -k_B T \ln \mathcal{Z} = U - TS - \mu N = F - \mu N \\
+    \dnor \Phi_G = \dnor F - \mu \dnor N - N \dnor \mu
+\end{gather}
+
+\subsection{Different types of particles}
+If there are different types of particle, we can write:
+\begin{gather}
+    \dnor U = T \dnor S - p \dnor V + \sum_i \mu_i \dnor N_i \\
+    \dnor F = -p \dnor V - S \dnor T + \sum_i \mu_i \dnor N_i \\
+    \dnor G = V \dnor p - S \dnor T + \sum_i \mu_i \dnor N_i 
+\end{gather}
+
+\pagebreak
+\section{Quantum Statistical Mechanics}
+For a quantum \textbf{ensemble} $|\Psi\rangle$ expressed in a complete set of basis $|\phi_i\rangle$ (state of system)as 
+% both \Phi and \phi_i are the state of the whole system
+\begin{equation}
+    |\Psi\rangle = \sum_i c_i |\phi_i\rangle
+\end{equation}
+we define the density matrix 
+\begin{equation}
+    \rho = |\Psi\rangle \langle \Psi | = \sum_{ij} |\phi_i\rangle \langle \phi_i| \Psi\rangle \langle \Psi |\phi_j\rangle \langle \phi_j|
+    = \sum_{ij} c_i c_j^* |\phi_i\rangle \langle \phi_j| \label{density1}
+\end{equation}
+and therefore
+\begin{equation}
+    \langle \phi_i | \rho | \phi_j \rangle = c_i c_j^*
+\end{equation}
+So that the expectation value of observables $A$ is then:
+\begin{equation}
+    \langle A \rangle = \langle \Psi | A | \Psi \rangle
+    = \sum_{ij} \langle \Psi |\phi_i\rangle \langle \phi_i| A | \phi_j\rangle \langle \phi_j|\Psi \rangle
+    = \sum_{ij} c_i^* c_j \langle \phi_i| A | \phi_j\rangle
+\end{equation}
+while we also have:
+\begin{equation}
+    \text{Tr}[\rho A] = \sum_i \langle \phi_i | \rho A | \phi_i \rangle
+        = \sum_{ij} \langle \phi_i | \rho | \phi_j \rangle \langle \phi_j | A | \phi_i \rangle
+        = \sum_{ij} c_i c_j^* \langle \phi_j | A | \phi_i \rangle = \langle A \rangle
+\end{equation}
+So that we find the relationship
+\begin{equation}
+    \langle A \rangle = \text{Tr}[\rho A]
+\end{equation}
+
+Now, we consider the time dependence of the trace operator, using the time evolution operator:
+\begin{align}
+    -ih\frac{\partial}{\partial t} \rho &= -ih \frac{\partial}{\partial t}  \sum_{ij} c_i c_j^* |\phi_i\rangle \langle \phi_j| \notag \\
+        &= \sum_{ij} c_i c_j^* \left( -ih\frac{\partial}{\partial t} |\phi_i\rangle \langle \phi_j| - |\phi_i\rangle ih\frac{\partial}{\partial t} \langle \phi_j|  \right) \notag \\
+        &= \sum_{ij} c_i c_j^* \left(  H|\phi_i\rangle \langle \phi_j| - |\phi_i\rangle \langle \phi_j| H \right) \notag \\
+        &= [H\rho  - \rho H] = [H,\rho]
+\end{align}
+In an equilibrium, the density operator will be time dependent: $\partial \rho / \partial t = 0$, suggesting that 
+$H$ and $\rho$ commute:
+$[H,\rho] = 0$. The eigenstates of the Hamiltonian thus are also the eigenstates of the density operator.
+Therefore, the density operator in Eq.\ref{density1} can be written in this form:
+\begin{equation}
+    \rho = \sum_n w_n | n \rangle \langle n | \label{density2}
+\end{equation}
+where $|n\rangle$ are the eigenstates of the Hamiltonian, and $w_n = c_n^* c_n = |c_n|^2$ is the probability for the 
+system $|\Psi\rangle$ to be in the energy eigenstate $|n\rangle$
+For Microcanonical ensemble with $\Omega$ accessible states, we simply have:
+\begin{equation}
+    w_n = \frac{1}{\Omega}
+\end{equation}
+For Canonical ensemble, we have:
+\begin{equation}
+    w_n = \frac{e^{-\beta E_n}}{\sum_{n'} e^{-\beta E_{n'}}}
+\end{equation}
+and the partition function $Q = \text{Tr}e^{-\beta H}$ (an observables).
+For Grand Canonical ensemble, taking account of the particle number in 
+an system state $|n\rangle$, we have:
+\begin{equation}
+    w_n = \frac{e^{-\beta (E_n-\mu N_n)}}{\sum_{n'} e^{-\beta (E_{n'}-\mu N_{n'})}}
+\end{equation}
+and partition function $Q =  \text{Tr}e^{-\beta (H-\mu N}$, where $N$ is the operator for 
+particle density.
+
+\subsection{Distribution function}
+Suppose the Hamiltonian can be written as a function of particle number
+$H = \sum_p \varepsilon_p n_p$ with $\varepsilon_p$, $n_p$ denoting 
+the energy and occupation number of a single particle state $p$.
+We start by calculating the partition function of a quantum ensemble, since we wish 
+to study the probability of system containing different particle number, we 
+use the grand canonical potential:
+\begin{align}
+    Q(\mu,V,T) = \sum_{N=0}^{\infty} \sum_{\{n_p\}_N} e^{-\beta\sum_p (\varepsilon_p - \mu) n_p}
+               = \sum_{\{n_p\}} e^{-\beta\sum_p (\varepsilon_p - \mu) n_p}
+\end{align}
+where in the first expression, $\{n_p\}_N$ denotes a many body state with occupation $\{n_{p_1},n_{p_2}, \cdots, n_{p_i}\}$
+in each of the single particle with the constraint that the total number of particles sum up to $N$. In the second 
+expression, the two summation in the first expression are combined.
+We now take the summation $p$ in the exponential out:
+\begin{equation}
+    Q(\mu,V,T) = \sum_{\{n_p\}} e^{-\beta\sum_p (\varepsilon_p - \mu) n_p} = \prod_p \sum_{n_p} e^{-\beta(\varepsilon_p - \mu) n_p} = \prod_p Q_p
+\end{equation}
+We can now study the sum of $e^{-\beta(\varepsilon_p - \mu) n_p}$ over all possible occupation number:
+\textbf{Fermion}
+we can only take $n_p = 0$ or $1$, so that 
+\begin{gather}
+    Q_p = 1 + e^{-\beta(\varepsilon_p - \mu)} \\
+    \Omega_p = -k_BT\ln Q_p
+\end{gather}
+and 
+\begin{equation}
+    N_p = -\left(\frac{\partial \Omega}{\partial \mu}\right)_{T,V} = \frac{1}{e^{\beta(\varepsilon_p - \mu)}+1}
+\end{equation}
+\textbf{Boson}
+the sum of $n_p$ is from $0$ to $\infty$, thus:
+\begin{equation}
+    \sum_{n_p=0}^{\infty} e^{-\beta(\varepsilon_p - \mu) n_p} 
+    =\frac{1}{1-e^{-\beta(\varepsilon_p - \mu)}} 
+\end{equation}
+giving
+\begin{equation}
+    N_p =  \frac{1}{e^{\beta(\varepsilon_p - \mu)}-1}
+\end{equation}
+The partition function and total particle number can be summarized by given by:
+\begin{gather}
+    \Omega = -ak_BT\sum_p\ln(1 + ae^{-\beta(\varepsilon_p - \mu)}) \\
+    N = \sum_p \frac{1}{e^{\beta(\varepsilon_p - \mu)} + a}
+\end{gather}
+with $a = 1$ for fermion and $-1 $ for boson.
+
+\subsection{Boson gas}
+For an ideal gas of spinless bosons \footnote{for spin $S$, each momentum eigenstate $k$ will have $(2S+1)$ fold degeneracy}, 
+the single particle state will be the momentum eigenstate given by 
+$k$ and kinetic energy $\varepsilon_k = \frac{\hbar^2k^2}{2m}$. The chemical potential $\mu$ will be negative otherwise 
+the state with energy smaller than $\mu$ will have negative occupation.
+We calculate the grand potential:
+\begin{align}
+    \Omega &= k_BT \sum_k \ln(1-e^{-\beta(\varepsilon_p - \mu)}) \notag \\
+            &= k_BT \int_0^{\infty} \ln(1-e^{-\beta(\varepsilon_p - \mu)}) g(\varepsilon) d\varepsilon \notag \\
+            &= k_BT \int_0^{\infty} \ln(1-e^{-\beta(\varepsilon_p - \mu)}) \frac{V\varepsilon^{1/2}}{(2\pi)^2}\left(\frac{2m}{\hbar^2}\right)^{3/2} d\varepsilon \notag \\
+            &= -\frac{2}{3} \frac{V}{(2\pi)^2}\left(\frac{2m}{\hbar^2}\right)^{3/2} \int_0^{\infty} \frac{\varepsilon^{3/2}d\varepsilon}{e^{\beta(\varepsilon_p - \mu)}-1} \label{todos}
+\end{align}
+define $z = e^{\beta\mu}$, the particle number and internal energy can be written as:
+\begin{align}
+    N = \frac{V}{(2\pi)^2}\left(\frac{2m}{\hbar^2}\right)^{3/2} \int_0^{\infty} \frac{\varepsilon^{1/2}d\varepsilon}{e^{\beta\varepsilon_p}/z-1} \\
+    U = \frac{V}{(2\pi)^2}\left(\frac{2m}{\hbar^2}\right)^{3/2} \int_0^{\infty} \frac{\varepsilon^{3/2}d\varepsilon}{e^{\beta\varepsilon_p}/z-1}
+\end{align}
+The integral we can write in terms of \textbf{polylogarithm} function:
+\begin{align}
+    \int_0^{\infty} \frac{\varepsilon^{n-1}d\varepsilon}{e^{\beta\varepsilon_p}/z-1} = (k_BT)^n (n-1)! L_n(z)
+\end{align}
+with $n/2! = n/2 \times (n-2)/2 \times \cdots \times 1/2$ with n an odd number.
+So that 
+\begin{align}
+    N &= \frac{V}{(2\pi)^2}\left(\frac{2m}{\hbar^2}\right)^{3/2} (k_BT)^{3/2} (1/2)! L_{3/2}(z) = \frac{V}{\lambda^3} L_{3/2}(z) \label{eqbosonN} \\
+    U &= \frac{V}{(2\pi)^2}\left(\frac{2m}{\hbar^2}\right)^{3/2} (k_BT)^{5/2} (3/2)! L_{5/2}(z) = \frac{3}{2}\frac{Vk_BT}{\lambda^3} L_{5/2}(z)
+\end{align}
+$\lambda$ is defined to absorbed all the numerical factor in Eq.\ref{eqbosonN} and $\lambda \propto T^{-1/2}$. 
+Let's now consider Eq.\ref{eqbosonN}
+\begin{equation}
+    n \lambda^3 = L_{3/2}(z) \label{conflict}
+\end{equation}
+since $\mu$ need to be negative, the value of $z$ is bound to $(0,1)$, the function $L_{3/2}$ is monoclinically increaing with $z$ and bound
+between $(0,L_{3/2}(1)) \approx (0,2.612)$, however, as we decrease temperature and $z \to 1$, 
+$\lambda$ will increase without bound, which conflict with Eq.\ref{conflict}. 
+
+This inconsistency come from the fact that when we convert the summation of $k$ into integral of energy $\varepsilon$, we essentially omitted 
+a single state $(k=0,\varepsilon=0)$ since $g(\varepsilon=0)=0$. Its density of state $g(\varepsilon)$ is ignorable compared to other states but
+at low temperature, it's occupation maybe very large. Including the occupation of this ground state explicitly in Eq.\ref{eqbosonN}:
+\begin{equation}
+    N = N_0 + N_1 = \frac{1}{1/z-1} + \frac{V}{\lambda^3} L_{3/2}(z)
+\end{equation}
+if we define 
+\begin{equation}
+    n \lambda(T_c)^3 = L_{3/2}(z=1)
+\end{equation}
+then
+\begin{equation}
+    \frac{N_0}{N} = \frac{N-N_1}{N} = 1-\left(\frac{T}{T_c}\right)^{3/2}
+\end{equation}
+if the temperature is low enough so that $N_0/N \approx 1$, then almost all particles are condensed in the ground state. $T_c$ for an ideal boson gas can be calculated:
+\begin{equation}
+    k_B T_c \approx 0.061 \frac{\hbar^2}{m} n^{2/3}
+\end{equation}
+For example, liquid Helium$^4$ with a density of $1.5e22 cm^{-3}$ gives a $T_c \approx 3K$. Expreiment observed a phase transition to a 
+new phase with superfluid properties around this temperature, associated with the condensation.
+
+
+
+\newpage
+
+\section*{Appendix A. Intensive and extensive properties (previous version)}
+
+\subsection{Heat}
+We provide a definition of heat as \emph{The thermal energy in transit}, denoted as $Q$\footnote{Blundell, p14}. We define the heat capacity
+$C$ of an object as the amount of heat that is needed to increase its temperature:
+\begin{equation}
+    C = \frac{dQ}{dT}
+\end{equation}
+thus $C$ has the unit $J/K$. The specific heat is defined to be the heat capacity per unit mass, having the unit $J/(kg\cdot K)$
+
+\subsection{Entropy}
+We define entropy $S$ for an isolated macroscopic system of $N$ particles in volume $V$ and energy $E$ to be:
+\begin{equation}
+    S(E,N,V,x) = k_B \ln\Omega(E,N,V,x)
+\end{equation}
+where $\Omega(E,N,V,x)$ is the number of accessible states at a given value of $E, N, V$, and $x$ is some constraints which 
+influence the number of accessible states.
+As a non-equilibrium isolated system allow to relax to equilibrium, entropy will increase monotonically and eventually maximize 
+at equilibrium.
+%imagine that the system will attempt to visit as many configurations as possible. 
+
+\textbf{Temperature} 
+consider an isolated system with two subsystem in weak contact but heat is allowed to follw between the two subsystem.
+The total number of accessible states (configurations) are given by the product of the number of configurations of the 
+two subsystem. Entropy will be additive. Consider the energy of one of the subsystem $E_1$
+as the constrain for the configurations.
+\begin{align}
+    \Omega(E,E_1) = \Omega_1(E_1) \Omega_2(E_2) \\
+    S(E,E_1) = S_1(E_1) S_2(E_2)   
+\end{align}
+Relaxation process will increase entropy by changing $E_1$, towards a macroscopic that correspond to 
+more configurations. At equilibrium (heat no longer exchange), we have:
+\begin{gather}
+    \frac{\partial S}{\partial E_1} = 0 \ \Rightarrow \ 
+    \left. \frac{\partial S_1(E_1)}{\partial E_1} \right|_{N_1,V_1} = \left. \frac{\partial S_2(E_2)}{\partial E_2}\right|_{N_2,V_2} = \frac{1}{T} \label{defineT}
+\end{gather}
+where the final equality gives the definition of temperature, thus if two subsystem reaches equilibrium in terms of energy flow, their 
+temperature will be equal. This process is irreversible and thus define a arrow of time.
+
+\textbf{Chemical potential}
+now, we fix only volume $V$ of each subsystem and allow both energy and particles to exchange, then:
+\begin{equation}
+    \left. \frac{\partial S_1(N_1)}{\partial N_1} \right|_{E_1,V_1} = \left. \frac{\partial S_2(N_2)}{\partial N_2}\right|_{E_2,V_2} = -\frac{\mu}{T}
+\end{equation}
+the last equality defines the chemical potential $\mu$. 
+% minus sign the divide by temperature is because of the tradition
+
+\textbf{Pressure}
+finally, we allow the volume of the system to exchange, and we can similar define pressure:
+\begin{equation}
+    \left. \frac{\partial S_1(V_1)}{\partial V_1} \right|_{E_1,N_1} = \left. \frac{\partial S_2(V_2)}{\partial V_2}\right|_{E_2,N_2} = \frac{P}{T}
+\end{equation}
+
+Thus, we can see that if we set an initial system not in equilibrium, the two subsystem will
+start to exchange energy, particles and volume until $T$, $P$ and $\mu$ become the same 
+for the two subsystem. 
+
+We can separate the macroscopic properties of a system into two different catagory:
+\begin{itemize}
+    \item \textbf{Extensive properties} that will increase proportional to the system size, such as $N,E,V$
+    \item \textbf{Intensive properties} that will be same for any of the subsystem, such as  $P,\mu,T$
+\end{itemize}
+
+\newpage
+\section*{Appendix B. Thermodynamic potentials(previous version)}
 
 It follows from the definition of  $T$, $P$ and $\mu$ that 
 \begin{gather}
@@ -375,58 +1300,6 @@ and
     P = -\left(\frac{\partial \Omega}{\partial V}\right)_{T,\mu}
 \end{equation}
 
-\subsection*{Legendre transformation}
-In general, Legendre transformation is a transformation on the real valued convex functions
-of one of the variable and is usually used to convert functions of one quantity (position, pressure) into function of
-the conjugate quantity (momentum, volume)
-Consider function $F(x)$ with $dF/dx = s(x)$, we can write a function
-$G(s)$ with property $dG/ds = x(s)$. They are related by:
-\begin{equation}
-    d(F+G) = sdx + xds = d(xs)
-\end{equation}
-so that $F(x) + G(s) = xs$. One property of Legendre transformation that the result of the transformation 
-is also convex function. For details of the geometry meaning and convex requirement, see Morin's chapter.
-
-For thermodynamic potentials, we use a \emph{non-standard definition} $dG/ds = -x(s)$, 
-so that the transformation agree with the thermal dynamic variables.
-leading to 
-\begin{equation}
-    d(F-G) = sdx + xds = d(xs)
-\end{equation}
-and therefore $F-G = xs$
-\footnote{
-    Both is obviously correct. An example of the standard usage is Legendre transformation 
-    for Lagrangian and Hamiltonian is given by $F+G = xs$. see "Understanding the transformation in terms of derivatives"
-    section in \url{https://en.wikipedia.org/wiki/Legendre_transformation}.
-}.
-
-We have seem that intensity and extensity properties would come in pairs, such as $(T,S)$, $(\mu,N)$
-and $(P,V)$ due to their definition. We have also see that by defining different ensemble, we can
-write down different potential function for each ensemble:
-\begin{align}
-    \text{NVT ensemble} &\Rightarrow dA(N,V,T) = -SdT - pdV + \mu dN\notag \\
-    \text{$\mu$VT ensemble} &\Rightarrow d\Omega(\mu,V,T) = -SdT - pdV - Nd\mu \notag \\
-    (Gibbs)\ \text{NPT ensemble} &\Rightarrow dG(N,p,T) = -SdT + Vdp + \mu dN \notag \\
-    &\cdots \notag
-\end{align}
-The relationship between different potential function can be expressed with \textbf{Legendre transformation}.
-
-Writting $x$ for an intensive property and $S$ as the conjugating extensive property. For a potential $F(x)$
-with the thermodynamic relationship $dF = Sdx$, if another potential $G$ is related to $F(x)$ by $F(x) - G(S) = xS$,
-then, we can find $dG(S) = -xdS$.
-
-As an example, to find the Legendre transformation of the free energy in canonical ensemble $A(N,V,T)$ in terms of 
-variable $V$, we have:
-\begin{equation}
-    dA = -pdV \notag
-\end{equation} 
-The transformed potential is thus:
-\begin{equation}
-    dG(N,p,T) = Vdp \notag
-\end{equation} 
-corresponding to the 
-Gibbs potential. 
-
 \subsection{Gibbs expression of entropy}
 For the canonical ensemble, we have:
 \begin{gather}
@@ -439,174 +1312,7 @@ This lead to the relationship:
 \end{equation}
 This is the Gibbs' form of entropy in terms of probability.
 
-\pagebreak
-\section{Quantum Statistical Mechanics}
-For a quantum \textbf{ensemble} $|\Psi\rangle$ expressed in a complete set of basis $|\phi_i\rangle$ (state of system)as 
-% both \Phi and \phi_i are the state of the whole system
-\begin{equation}
-    |\Psi\rangle = \sum_i c_i |\phi_i\rangle
-\end{equation}
-we define the density matrix 
-\begin{equation}
-    \rho = |\Psi\rangle \langle \Psi | = \sum_{ij} |\phi_i\rangle \langle \phi_i| \Psi\rangle \langle \Psi |\phi_j\rangle \langle \phi_j|
-    = \sum_{ij} c_i c_j^* |\phi_i\rangle \langle \phi_j| \label{density1}
-\end{equation}
-and therefore
-\begin{equation}
-    \langle \phi_i | \rho | \phi_j \rangle = c_i c_j^*
-\end{equation}
-So that the expectation value of observables $A$ is then:
-\begin{equation}
-    \langle A \rangle = \langle \Psi | A | \Psi \rangle
-    = \sum_{ij} \langle \Psi |\phi_i\rangle \langle \phi_i| A | \phi_j\rangle \langle \phi_j|\Psi \rangle
-    = \sum_{ij} c_i^* c_j \langle \phi_i| A | \phi_j\rangle
-\end{equation}
-while we also have:
-\begin{equation}
-    \text{Tr}[\rho A] = \sum_i \langle \phi_i | \rho A | \phi_i \rangle
-        = \sum_{ij} \langle \phi_i | \rho | \phi_j \rangle \langle \phi_j | A | \phi_i \rangle
-        = \sum_{ij} c_i c_j^* \langle \phi_j | A | \phi_i \rangle = \langle A \rangle
-\end{equation}
-So that we find the relationship
-\begin{equation}
-    \langle A \rangle = \text{Tr}[\rho A]
-\end{equation}
-
-Now, we consider the time dependence of the trace operator, using the time evolution operator:
-\begin{align}
-    -ih\frac{\partial}{\partial t} \rho &= -ih \frac{\partial}{\partial t}  \sum_{ij} c_i c_j^* |\phi_i\rangle \langle \phi_j| \notag \\
-        &= \sum_{ij} c_i c_j^* \left( -ih\frac{\partial}{\partial t} |\phi_i\rangle \langle \phi_j| - |\phi_i\rangle ih\frac{\partial}{\partial t} \langle \phi_j|  \right) \notag \\
-        &= \sum_{ij} c_i c_j^* \left(  H|\phi_i\rangle \langle \phi_j| - |\phi_i\rangle \langle \phi_j| H \right) \notag \\
-        &= [H\rho  - \rho H] = [H,\rho]
-\end{align}
-In an equilibrium, the density operator will be time dependent: $\partial \rho / \partial t = 0$, suggesting that 
-$H$ and $\rho$ commute:
-$[H,\rho] = 0$. The eigenstates of the Hamiltonian thus are also the eigenstates of the density operator.
-Therefore, the density operator in Eq.\ref{density1} can be written in this form:
-\begin{equation}
-    \rho = \sum_n w_n | n \rangle \langle n | \label{density2}
-\end{equation}
-where $|n\rangle$ are the eigenstates of the Hamiltonian, and $w_n = c_n^* c_n = |c_n|^2$ is the probability for the 
-system $|\Psi\rangle$ to be in the energy eigenstate $|n\rangle$
-For Microcanonical ensemble with $\Omega$ accessible states, we simply have:
-\begin{equation}
-    w_n = \frac{1}{\Omega}
-\end{equation}
-For Canonical ensemble, we have:
-\begin{equation}
-    w_n = \frac{e^{-\beta E_n}}{\sum_{n'} e^{-\beta E_{n'}}}
-\end{equation}
-and the partition function $Q = \text{Tr}e^{-\beta H}$ (an observables).
-For Grand Canonical ensemble, taking account of the particle number in 
-an system state $|n\rangle$, we have:
-\begin{equation}
-    w_n = \frac{e^{-\beta (E_n-\mu N_n)}}{\sum_{n'} e^{-\beta (E_{n'}-\mu N_{n'})}}
-\end{equation}
-and partition function $Q =  \text{Tr}e^{-\beta (H-\mu N}$, where $N$ is the operator for 
-particle density.
-
-\subsection*{Distribution function}
-Suppose the Hamiltonian can be written as a function of particle number
-$H = \sum_p \varepsilon_p n_p$ with $\varepsilon_p$, $n_p$ denoting 
-the energy and occupation number of a single particle state $p$.
-We start by calculating the partition function of a quantum ensemble, since we wish 
-to study the probability of system containing different particle number, we 
-use the grand canonical potential:
-\begin{align}
-    Q(\mu,V,T) = \sum_{N=0}^{\infty} \sum_{\{n_p\}_N} e^{-\beta\sum_p (\varepsilon_p - \mu) n_p}
-               = \sum_{\{n_p\}} e^{-\beta\sum_p (\varepsilon_p - \mu) n_p}
-\end{align}
-where in the first expression, $\{n_p\}_N$ denotes a many body state with occupation $\{n_{p_1},n_{p_2}, \cdots, n_{p_i}\}$
-in each of the single particle with the constraint that the total number of particles sum up to $N$. In the second 
-expression, the two summation in the first expression are combined.
-We now take the summation $p$ in the exponential out:
-\begin{equation}
-    Q(\mu,V,T) = \sum_{\{n_p\}} e^{-\beta\sum_p (\varepsilon_p - \mu) n_p} = \prod_p \sum_{n_p} e^{-\beta(\varepsilon_p - \mu) n_p} = \prod_p Q_p
-\end{equation}
-We can now study the sum of $e^{-\beta(\varepsilon_p - \mu) n_p}$ over all possible occupation number:
-\textbf{Fermion}
-we can only take $n_p = 0$ or $1$, so that 
-\begin{gather}
-    Q_p = 1 + e^{-\beta(\varepsilon_p - \mu)} \\
-    \Omega_p = -k_BT\ln Q_p
-\end{gather}
-and 
-\begin{equation}
-    N_p = -\left(\frac{\partial \Omega}{\partial \mu}\right)_{T,V} = \frac{1}{e^{\beta(\varepsilon_p - \mu)}+1}
-\end{equation}
-\textbf{Boson}
-the sum of $n_p$ is from $0$ to $\infty$, thus:
-\begin{equation}
-    \sum_{n_p=0}^{\infty} e^{-\beta(\varepsilon_p - \mu) n_p} 
-    =\frac{1}{1-e^{-\beta(\varepsilon_p - \mu)}} 
-\end{equation}
-giving
-\begin{equation}
-    N_p =  \frac{1}{e^{\beta(\varepsilon_p - \mu)}-1}
-\end{equation}
-The partition function and total particle number can be summarized by given by:
-\begin{gather}
-    \Omega = -ak_BT\sum_p\ln(1 + ae^{-\beta(\varepsilon_p - \mu)}) \\
-    N = \sum_p \frac{1}{e^{\beta(\varepsilon_p - \mu)} + a}
-\end{gather}
-with $a = 1$ for fermion and $-1 $ for boson.
-
-\subsection*{Boson gas}
-For an ideal gas of spinless bosons \footnote{for spin $S$, each momentum eigenstate $k$ will have $(2S+1)$ fold degeneracy}, 
-the single particle state will be the momentum eigenstate given by 
-$k$ and kinetic energy $\varepsilon_k = \frac{\hbar^2k^2}{2m}$. The chemical potential $\mu$ will be negative otherwise 
-the state with energy smaller than $\mu$ will have negative occupation.
-We calculate the grand potential:
-\begin{align}
-    \Omega &= k_BT \sum_k \ln(1-e^{-\beta(\varepsilon_p - \mu)}) \notag \\
-            &= k_BT \int_0^{\infty} \ln(1-e^{-\beta(\varepsilon_p - \mu)}) g(\varepsilon) d\varepsilon \notag \\
-            &= k_BT \int_0^{\infty} \ln(1-e^{-\beta(\varepsilon_p - \mu)}) \frac{V\varepsilon^{1/2}}{(2\pi)^2}\left(\frac{2m}{\hbar^2}\right)^{3/2} d\varepsilon \notag \\
-            &= -\frac{2}{3} \frac{V}{(2\pi)^2}\left(\frac{2m}{\hbar^2}\right)^{3/2} \int_0^{\infty} \frac{\varepsilon^{3/2}d\varepsilon}{e^{\beta(\varepsilon_p - \mu)}-1} \label{todos}
-\end{align}
-define $z = e^{\beta\mu}$, the particle number and internal energy can be written as:
-\begin{align}
-    N = \frac{V}{(2\pi)^2}\left(\frac{2m}{\hbar^2}\right)^{3/2} \int_0^{\infty} \frac{\varepsilon^{1/2}d\varepsilon}{e^{\beta\varepsilon_p}/z-1} \\
-    U = \frac{V}{(2\pi)^2}\left(\frac{2m}{\hbar^2}\right)^{3/2} \int_0^{\infty} \frac{\varepsilon^{3/2}d\varepsilon}{e^{\beta\varepsilon_p}/z-1}
-\end{align}
-The integral we can write in terms of \textbf{polylogarithm} function:
-\begin{align}
-    \int_0^{\infty} \frac{\varepsilon^{n-1}d\varepsilon}{e^{\beta\varepsilon_p}/z-1} = (k_BT)^n (n-1)! L_n(z)
-\end{align}
-with $n/2! = n/2 \times (n-2)/2 \times \cdots \times 1/2$ with n an odd number.
-So that 
-\begin{align}
-    N &= \frac{V}{(2\pi)^2}\left(\frac{2m}{\hbar^2}\right)^{3/2} (k_BT)^{3/2} (1/2)! L_{3/2}(z) = \frac{V}{\lambda^3} L_{3/2}(z) \label{eqbosonN} \\
-    U &= \frac{V}{(2\pi)^2}\left(\frac{2m}{\hbar^2}\right)^{3/2} (k_BT)^{5/2} (3/2)! L_{5/2}(z) = \frac{3}{2}\frac{Vk_BT}{\lambda^3} L_{5/2}(z)
-\end{align}
-$\lambda$ is defined to absorbed all the numerical factor in Eq.\ref{eqbosonN} and $\lambda \propto T^{-1/2}$. 
-Let's now consider Eq.\ref{eqbosonN}
-\begin{equation}
-    n \lambda^3 = L_{3/2}(z) \label{conflict}
-\end{equation}
-since $\mu$ need to be negative, the value of $z$ is bound to $(0,1)$, the function $L_{3/2}$ is monoclinically increaing with $z$ and bound
-between $(0,L_{3/2}(1)) \approx (0,2.612)$, however, as we decrease temperature and $z \to 1$, 
-$\lambda$ will increase without bound, which conflict with Eq.\ref{conflict}. 
-
-This inconsistency come from the fact that when we convert the summation of $k$ into integral of energy $\varepsilon$, we essentially omitted 
-a single state $(k=0,\varepsilon=0)$ since $g(\varepsilon=0)=0$. Its density of state $g(\varepsilon)$ is ignorable compared to other states but
-at low temperature, it's occupation maybe very large. Including the occupation of this ground state explicitly in Eq.\ref{eqbosonN}:
-\begin{equation}
-    N = N_0 + N_1 = \frac{1}{1/z-1} + \frac{V}{\lambda^3} L_{3/2}(z)
-\end{equation}
-if we define 
-\begin{equation}
-    n \lambda(T_c)^3 = L_{3/2}(z=1)
-\end{equation}
-then
-\begin{equation}
-    \frac{N_0}{N} = \frac{N-N_1}{N} = 1-\left(\frac{T}{T_c}\right)^{3/2}
-\end{equation}
-if the temperature is low enough so that $N_0/N \approx 1$, then almost all particles are condensed in the ground state. $T_c$ for an ideal boson gas can be calculated:
-\begin{equation}
-    k_B T_c \approx 0.061 \frac{\hbar^2}{m} n^{2/3}
-\end{equation}
-For example, liquid Helium$^4$ with a density of $1.5e22 cm^{-3}$ gives a $T_c \approx 3K$. Expreiment observed a phase transition to a 
-new phase with superfluid properties around this temperature, associated with the condensation.
-
 
 \end{document}
+
+
