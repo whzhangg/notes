@@ -1132,7 +1132,116 @@ if the temperature is low enough so that $N_0/N \approx 1$, then almost all part
 For example, liquid Helium$^4$ with a density of $1.5e22 cm^{-3}$ gives a $T_c \approx 3K$. Expreiment observed a phase transition to a 
 new phase with superfluid properties around this temperature, associated with the condensation.
 
+\section{Thermodynamic Properties of magnetic system}
+We write the internal energy of an magnetic system as:
+\begin{equation}
+    \dnor U = \dbar Q + \mu_0 H \dnor M
+\end{equation}
+where $H$ is the external field. For reversible process, we have:
+\begin{equation}
+    \dnor U = T \dnor S + \mu_0 H \dnor M
+\end{equation}
+and we can express the temperature $T$ and field $H$ by:
+\begin{align}
+    T = \left(\pfrac{U}{S}\right)_M \ \text{ and }\ \ H = \frac{1}{\mu_0} \left(\pfrac{U}{M}\right)_S
+\end{align}
+and we obtain the Maxwell relationship with internal energy:
+\begin{equation}
+    \left( \pfrac{T}{M} \right)_S = \mu_0 \left( \pfrac{H}{S} \right)_M
+\end{equation}
+Heat absorbed can be written as:
+\begin{align}
+    \dbar Q &= \left(\pfrac{U}{T}\right)_M \dnor T + \left[ \left(\pfrac{U}{M}\right)_T -\mu_0 H \right] \dnor M \\
+            &= C_M \dnor T + l \dnor M \label{q_cm}
+\end{align}
+where we identify $C_M$ to be the specific heat at constant magnetization: when $\dnor M = 0$, we have $\dbar Q = C_M \dnor T$, and
+\begin{equation}
+    C_M = \left(\pfrac{U}{T}\right)_M = \left(\frac{\dbar Q}{\dnor T}\right)_M = T \left(\pfrac{S}{T}\right)_M
+\end{equation}
+where we have used $\dbar Q = T \dnor S$. For $l$, we can find, using Maxwell relation:
+\begin{equation}
+    l = \left( \frac{\dbar Q}{\dnor M} \right)_T = T \left(\pfrac{S}{M}\right)_T = - \mu_0 T \left(\pfrac{H}{T}\right)_M
+\end{equation}
 
+We introduce thermodynamic quantities called magnetic enthalpy:
+\begin{gather}
+    \mathcal{H} = U - \mu_0 H M \\
+    \dnor \mathcal{H} = T \dnor S - \mu_0 M \dnor H
+\end{gather}
+which gives the Maxwell relationship:
+\begin{equation}
+    \left( \pfrac{T}{H} \right)_S = - \mu_0 \left( \pfrac{M}{S} \right)_H
+\end{equation}
+Similar to above, we have the heat absorbed:
+\begin{align}
+    \dbar Q &= \left(\pfrac{\mathcal{H}}{T}\right)_H \dnor T + \left[ \left(\pfrac{\mathcal{H}}{H}\right)_T + \mu_0 H \right] \dnor M \\
+            &= C_H \dnor T + h \dnor M \label{q_ch}
+\end{align}
+where
+\begin{equation}
+    C_H = \left(\pfrac{\mathcal{H}}{T}\right)_H = T \left(\pfrac{S}{T}\right)_H
+\end{equation}
+and similar to the calculation of $l$, we have:
+\begin{eqnarray}
+    h = T \left(\pfrac{S}{H}\right)_T = \mu_0 T \left(\pfrac{M}{T}\right)_H
+\end{eqnarray}
+
+We can obtain the relationship between $C_M$ and $C_H$ that is similar between $C_V$ and $C_p$. 
+Substructing Eq.\ref{q_cm} and Eq.\ref{q_ch}, we obtain:
+\begin{equation}
+    (C_H - C_M) \dnor T = -T\mu_0 \left[ \left(\pfrac{H}{T}\right)_M \dnor M + \left(\pfrac{M}{T}\right)_H \dnor H \right]
+\end{equation}
+since $M$, $T$ and $H$ are all function of state, we can express the relation:
+\begin{equation}
+    \dnor T = \left(\pfrac{M}{T}\right)_H \dnor M + \left(\pfrac{T}{H}\right)_M \dnor H
+\end{equation}
+So that we have the result:
+\begin{equation}
+    C_H - C_M = - T\mu_0 \left(\pfrac{H}{T}\right)_M \left(\pfrac{M}{T}\right)_H 
+    = T\mu_0 \left(\pfrac{M}{T}\right)_H^2 \left(\pfrac{H}{M}\right)_T 
+\end{equation}
+where we used the relation:
+\begin{equation}
+    \left(\pfrac{H}{T}\right)_M = - \left(\pfrac{M}{T}\right)_H \left(\pfrac{H}{M}\right)_T 
+\end{equation}
+
+For system with fixed energy, we maximize the entropy to find the equilibrium
+\footnote{That is to say, for microcanonical system, the equilibrium is found 
+at states that correspond to the most number of microstates}.
+However, for system in contact with the reservior, we need to minimize the free 
+energy, defined by:
+\begin{gather}
+    F = U - TS = -\frac{1}{\beta} \ln Z \\
+    \dnor F = \mu_0 H \dnor M - S \dnor T
+\end{gather}
+which gives the Maxwell relationship:
+\begin{equation}
+    \mu_0 \left( \pfrac{H}{T} \right)_M = - \left( \pfrac{S}{M} \right)_T
+\end{equation} 
+
+When the system is fixed at temperature $T$ and external field $H$, The 
+Gibbs potential should be minimized:
+\begin{equation}
+    \dnor G = - \mu_0 M \dnor H - S \dnor T
+\end{equation}
+with the corresponding Maxwell relationship:
+\begin{eqnarray}
+    \mu_0 \left( \pfrac{M}{T} \right)_H = - \left( \pfrac{S}{H} \right)_T
+\end{eqnarray}
+
+Finally, if the number of particle in the system is not fixed:
+we define extra thermodynamic potentials:
+\begin{table*}[h]
+    \centering
+    \begin{tabular}{rr}
+     $\Omega_F = F - \mu N$ & $ \dnor \Omega_F = \mu_0 H \dnor M - S\dnor T - N \dnor \mu $ \\
+     $\Omega_G = G - \mu N$ & $ \dnor \Omega_G = \mu_0 M \dnor H - S\dnor T - N \dnor \mu $ \\
+     \end{tabular}
+\end{table*}
+The particle number $N$ is given by:
+\begin{equation}
+    N = - \left( \pfrac{\Omega_F}{\mu} \right)_{T,M} = - \left( \pfrac{\Omega_G}{\mu} \right)_{T,M} 
+\end{equation}
 
 \newpage
 

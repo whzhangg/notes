@@ -1,0 +1,12 @@
+#!/bin/bash
+
+for f in $(ls)
+do
+  if [ -d $f ]
+  then
+    rm $f/*.out
+    rm $f/*.log
+    rm $f/*.toc
+    rm $f/*.aux
+  fi
+done

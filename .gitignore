@@ -1,10 +1,5 @@
-phonon/*.aux
-phonon/*.log
-phonondrag/*.aux
-phonondrag/*.log
-statistic/*.log
-statistic/*.aux
-electron/*.log
-electron/*.aux
-electron/*.out
+*/*.aux
+*/*.log
+*/*.out
+*/*.toc
 .DS_Store
