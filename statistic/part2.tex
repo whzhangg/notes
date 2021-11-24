@@ -1,6 +1,6 @@
 \documentclass{article}
 \usepackage{amsmath}
-\usepackage[margin=0.8in]{geometry}
+\usepackage[margin=1in]{geometry}
 \usepackage{verbatim}
 \usepackage{graphicx}
 \usepackage{hyperref} % \url \href
@@ -12,10 +12,12 @@
 
 \begin{document}
 
-\title{Kinetic theory}
+\title{Kinetic theory of Gas}
 \author{Wenhao}
 \date{\today}
 \maketitle
+
+\tableofcontents
 
 \section{Kinetic theory of ideal gas}
 We describe here the problem of motion of molecules in a gas, 
@@ -39,7 +41,7 @@ can interact with other molecules. The motion of the molecule after the collisio
 independent of their motion before the collision, therefore, the motion after the 
 collision is entirely determined by the heat bath.}.
 
-\subsection*{Velocity distribution}
+\subsection{Velocity distribution}
 The velocity distribution $g(\mathbf{v})$ is defined to the fraction of molecules with 
 velocity $\mathbf{v}$ 
 ($\mathbf{v}$ is the vector velocity while $v$ is the absulote value). 
@@ -86,7 +88,7 @@ The mean kinetic energy of a gas molecule is then:
     \langle E_k \rangle = \frac{1}{2}m \langle v^2 \rangle = \frac{3}{2}k_BT
 \end{equation}
 
-\subsection*{Pressure}
+\subsection{Pressure}
 Since all molecules are equally likely to travel in any direction, the fraction of these 
 whose velocity lie in solid angle $d\Omega$ is therefore $d\Omega/4\pi$. We consider the 
 molecules traveling at angle between $\theta$ and $\theta + d\theta$ with some specific direction ($z$),
@@ -135,7 +137,7 @@ sum of pressures of each component:
 \end{gather}
 where $n_i = N_i / V$
 
-\subsection*{Effusion}
+\subsection{Effusion}
 Effusion is the process in which gas escape from a small hole\footnote{Blundell, p64}. we define 
 the flux $\Phi$ as the number of molecules going through unit area per unit time,
 therefore, $\Phi$ has the unit of $m^{-2}s^{-1}$. we use the above result of particles 
@@ -166,7 +168,7 @@ hole depend on velocity $v$ (in Eq.\ref{flux}), therefore the speed distribution
 of those that go through the hole as an extra factor $v$, compare to the speed 
 distribution of gas molecules inside the box.
 
-\subsection*{Average lifetime}
+\subsection{Average lifetime}
 We first considering a molecule moving at speed $v$ with other molecules in
 the gas stationary. Within a time $dt$, the molecule sweep through an area $\sigma v dt$,
 where $\sigma$ is the collision cross-section of the molecule. We denote $P(t)$ as 
@@ -220,7 +222,7 @@ is:
 
 \section{Transport properties in Ideal gas}
 
-\subsection*{Viscosity}
+\subsection{Viscosity}
 Viscosity $\eta$ measures th resistance of a liquid (gas) to deform by shear stress. Suppose we sandwich fluid between 
 two infinitly large plate. We fix the bottom plate and apply some force $F$ to the top plate. The fraction between the fluid and 
 the top plate will accelerate the fluid near it, the the momentum is passed down inside the liquid through internal interaction (collision)
@@ -272,7 +274,7 @@ We have the following observations:
     \item For the above approximation of momentum transfer to be correct, we require $ L \ll \lambda \ll d $, where $d$ is the size of the molecule and $L$ is the size scale of the container.
 \end{enumerate}
 
-\subsection*{Thermal conductivity}
+\subsection{Thermal conductivity}
 We define the heat flux in the $z$ direction
 \begin{gather}
     J_z = -\kappa \left( \frac{\partial T}{\partial z} \right) \\
@@ -295,7 +297,7 @@ We observe that Eq.\ref{heat_transfer} is very similar to Eq.\ref{momentum_trans
     \frac{\kappa}{\eta} = \frac{C}{m}
 \end{equation} 
 
-\subsection*{Particle Diffusion}
+\subsection{Particle Diffusion}
 We consider a gas of molecules in which some of them is labelled, if those labelled molecules are initially confined in 
 certain area and the confinement is removed, they will start to diffuse (Self-diffuse). Suppose that the diffusion is 
 along $z$ direction and we use $n^*(z)$ to denote the density of those labelled particles, we can define the 
@@ -320,7 +322,7 @@ We have the following relationship:
     \item $D \rho = \eta $, where $rho$ is the density $\rho = nm$
 \end{enumerate}
 
-\subsection*{Heat diffusion equation}
+\subsection{Heat diffusion equation}
 Given the heat flux $J = - \kappa \nabla T$, the total heat flow out of a closed surface $S$ is $\int_S J \cdot dS$.
 This value should equal to the loss of total thermal energy $\int_V CT dV$, where $C$ here is the volume heat capacity. 
 We have the Result:
@@ -489,7 +491,7 @@ with propogating velocity:
     v_s = \frac{\omega}{k} = \sqrt{\frac{B}{\rho}}
 \end{equation}
 
-\subsection*{Sound velocity under isothermal and adiabatic conditions}
+\subsection{Sound velocity under isothermal and adiabatic conditions}
 The difference between isothermal and adiabatic condition is whether temperature
 or entropy (no relaxation process) is fixed during the transmission of the 
 sound wave. In isothermal condition, we have:
@@ -521,7 +523,7 @@ The isothermal process is realized if there are enough time for thermal equilibr
 In the real case, the compression process is generally fast and the sound waves are almost always adiabatic.
 
 \section{Brownian motion and fluctuations}
-\subsection*{Brownian motion}
+\subsection{Brownian motion}
 To study the Brownian
 \footnote{Blundell, P390, we use the notion $\bar{x}$ for time average here, 
 different from $\langle x \rangle$ used in the book}, 
@@ -586,7 +588,7 @@ constant $D$ as $ \langle x^2 \rangle = 2 D t $, we have: $ D = k_B T /\alpha $.
 a example of fluctuation-dissipation theorem. Since $\alpha$ (dissipation) and $\langle x^2 \rangle$ 
 (fluctuations) are inversely related.
 
-\subsection*{Fluctuations}
+\subsection{Fluctuations}
 We consider how a macroscopic properties $x$ deviate from the average
 value. If a system is fixed at a given energy in a microcanonical ensemble, 
 We write number of microstates by $\Omega(x,E)$. The entropy of the system
@@ -768,7 +770,7 @@ This is the statement of the fluctuations dissipation theorem, connecting the
 fluctuation (autocorrelation function) to the imaginary part of the response function.
 
 \section{Non-equilibrium thermodynamics}
-\subsection*{Irreversibility of transport process}
+\subsection{Irreversibility of transport process}
 We have the following relationship between local entropy density, local energy $u$, particle density and 
 charge density:
 \begin{gather}
@@ -818,7 +820,7 @@ Using Eq.\ref{linearresponse}, we obtain the entropy generation rate:
 For the local entropy, we require it to increase monotonically in an irreversible process. Therefore,
 $\Sigma > 0$ and $L$ is positive definitive.
 
-\subsection*{Onsager's reciprocal relation}
+\subsection{Onsager's reciprocal relation}
 We consider a system that is near an equilibrium state, we define the 
 variable $\alpha_k = \rho_k - \rho_k^0$ the departure of the $k^{th}$ density
 variable. Writing $\alpha = (\alpha_1, \cdots, \alpha_m)$, we can write 
@@ -916,7 +918,7 @@ Using Eq.\ref{derive}, we have:
 we obtain the \textbf{Onsager reciprocal relations}, which gives the symmetry of the 
 kinetic coefficients.
 
-\subsection*{Connection between response function and kinetic coefficients}
+\subsection{Connection between response function and kinetic coefficients}
 From fluctuation dissipation theory, we have the relationship between statistic response 
 and fluctuation, as given by Eq.\ref{fdt}, generalizing to multivariable:
 \begin{equation}

@@ -138,7 +138,7 @@ thus proving the Liouville's theorem.
 \section{Ensembles}
 We can define an ensemble as a collection of possible configurations that satisfy a given macroscopic 
 property\footnote{Blundell, p38}.
-We have already seem an ensemble containing possible configurations of an isolated system where energy
+We have already seen an ensemble containing possible configurations of \textbf{an isolated} system where energy
 is known and all configurations are of equal probability. 
 This ensemble is known as the \textbf{Microcanonical ensemble}. For a microcanonical ensemble, particle 
 number, volume and energy are specified at the same time, thus it is also called \textbf{NVE ensemble}.
@@ -159,10 +159,15 @@ of possible configurations of the coordinates in the reservior, i.e. the number 
 microstate of the combined system in which $(q_1,\cdots, q_n,p_1,\cdots, p_n) = (q_1',\cdots, q_n',p_1',\cdots, p_n')$.
 
 We have, with $E^r_i$ denote the energy of the reservior for 
-the microstate $i$ of system, and $\Delta E = E_j - E_i$
+the microstate $i$ of system, and $\Delta E = E_j - E_i$, the relative probability of two 
+distinct microstates of the system(which actually depend on the number of corresponding states in the reservior):
 \begin{equation}
-    \frac{P_j}{P_i} = \frac{\Omega_r(E^r_i - \Delta E)}{\Omega_r(E^r_i)} = \exp\left( \frac{S_r(E^r_i-\Delta E)-S_r(E^r_i)}{k_B} \right)
+    \frac{P_j}{P_i} = \frac{\Omega_r(E^r_i - \Delta E)}{\Omega_r(E^r_i)} = \exp\left( \ln \Omega_r(E^r_i - \ln\Delta E)-\Omega_r(E^r_i) \right)
     \approx \exp\left( -\frac{E_j-E_i}{k_BT} \right)
+\end{equation}
+Where we introduced the statistic definition of temperature
+\begin{equation}
+    \frac{\dnor \ln\Omega}{\dnor E} = \frac{1}{k_B T}
 \end{equation}
 This give the result, with $\beta = 1/k_BT$
 \begin{equation}
@@ -184,37 +189,37 @@ The probability of finding a given microstate of the system is then
 To specific a canconical potential, we need to specify $V, N, T$, therefore, canonical potential 
 is also known as the \textbf{NVT ensemble}
 
-Finally, let's consider a system that can exchange both energy and particle with 
-a reservior. The equilibrium will be given by equal $T$ and $\mu$ between the 
-two part. This ensemble is named \textbf{Grand Canonical Ensemble}.
-We can derive the probability of the microstate of the system similar to the 
-case of the canconical ensemble, but now we need to consider the microstates with 
-different number of particles. 
-\begin{equation}
-    \frac{P_j}{P_i} = \frac{\Omega_r(E^r_i - \Delta E, N^r_i - \Delta N)}{\Omega_r(E^r_i,N^r_i)} = \exp\left( \frac{S_r(E^r_i - \Delta E, N^r_i - \Delta N)-S_r(E^r_i,N^r_i)}{k_B} \right)
-\end{equation}
-with $\Delta E = E_j - E_i, \Delta N = N_j - N_i$, to linear in $\Delta N, \Delta E$, we have:
-\begin{equation}
-    \frac{P_j}{P_i} = \exp\left( -\frac{1}{k_B} \frac{\partial S}{\partial E} \Delta E - \frac{1}{k_B} \frac{\partial S}{\partial N} \Delta N \right)
-    = \exp\left( -\frac{1}{k_BT} (E_j - E_i) + \frac{\mu}{k_BT} (N_j - N_i) \right)
-\end{equation}
-giving
-\begin{equation}
-    P_i \propto e^{-\beta (E_i - \mu N)}
-\end{equation}
-Define the grand canonical partition function 
-\begin{equation}
-    Q(\mu,T,V) = \sum_N\sum_j e^{-\beta (E_j - \mu N)}
-\end{equation}
-and the grand potential 
-\begin{eqnarray}
-    \Omega(\mu,T,V) = -k_BT\ln Q
-\end{eqnarray}
-we have the probability to find a microstate:
-\begin{equation}
-    P_{i,N} = \frac{1}{Q} e^{-\beta (E_i - \mu N)} = e^{\beta(\Omega - E_i + \mu N)}
-\end{equation}
-The grand canonical ensemble is known as the \textbf{$\mu$VT ensemble}
+%Finally, let's consider a system that can exchange both energy and particle with 
+%a reservior. The equilibrium will be given by equal $T$ and $\mu$ between the 
+%two part. This ensemble is named \textbf{Grand Canonical Ensemble}.
+%We can derive the probability of the microstate of the system similar to the 
+%case of the canconical ensemble, but now we need to consider the microstates with 
+%different number of particles. 
+%\begin{equation}
+%    \frac{P_j}{P_i} = \frac{\Omega_r(E^r_i - \Delta E, N^r_i - \Delta N)}{\Omega_r(E^r_i,N^r_i)} = \exp\left( \frac{S_r(E^r_i - \Delta E, N^r_i - \Delta N)-S_r(E^r_i,N^r_i)}{k_B} \right)
+%\end{equation}
+%with $\Delta E = E_j - E_i, \Delta N = N_j - N_i$, to linear in $\Delta N, \Delta E$, we have:
+%\begin{equation}
+%    \frac{P_j}{P_i} = \exp\left( -\frac{1}{k_B} \frac{\partial S}{\partial E} \Delta E - \frac{1}{k_B} \frac{\partial S}{\partial N} \Delta N \right)
+%    = \exp\left( -\frac{1}{k_BT} (E_j - E_i) + \frac{\mu}{k_BT} (N_j - N_i) \right)
+%\end{equation}
+%giving
+%\begin{equation}
+%    P_i \propto e^{-\beta (E_i - \mu N)}
+%\end{equation}
+%Define the grand canonical partition function 
+%\begin{equation}
+%    Q(\mu,T,V) = \sum_N\sum_j e^{-\beta (E_j - \mu N)}
+%\end{equation}
+%and the grand potential 
+%\begin{eqnarray}
+%    \Omega(\mu,T,V) = -k_BT\ln Q
+%\end{eqnarray}
+%we have the probability to find a microstate:
+%\begin{equation}
+%    P_{i,N} = \frac{1}{Q} e^{-\beta (E_i - \mu N)} = e^{\beta(\Omega - E_i + \mu N)}
+%\end{equation}
+%The grand canonical ensemble is known as the \textbf{$\mu$VT ensemble}
 
 
 \section{First Law}
@@ -322,7 +327,7 @@ The second law can be stated in the following two equivalent form:
 
 \textbf{Kelvin statement} No process is possible whose sole effect is to convert heat into work
 
-It is important to note the work "sole effect". For example, in an isothermal process of ideal gas, 
+It is important to note the word "sole effect". For example, in an isothermal process of ideal gas, 
 $\dbar Q + \dbar W = 0$ so all the heat is converted into work done by the system. However, the 
 accompanying effect is that the volume of the gas expanded. 
 Therefore, To study the ability to convert heat into work, we should consider process which has no 
@@ -463,14 +468,14 @@ For a reversible process, $\dbar Q = T \dnor S$ and the first law gives:
 \end{align}
 Since value $U, T, S, p, V$ are all function of state. This 
 result is independent of the process and also holds for 
-irreversible process.
-For an irreversible process, $\dnor U = \dbar Q + \dbar W$
+irreversible process: 
+for an irreversible process, $\dnor U = \dbar Q + \dbar W$
 but:
 \begin{gather}
     \dbar Q \neq  T \dnor S \\
     \dbar W \neq  - p \dnor V 
 \end{gather}
-but 
+and Eq.\ref{internal energy} still holds
 \begin{equation}
     \dbar Q + \dbar W = \dbar Q_{rev} - p \dnor V = T \dnor S - p \dnor V
 \end{equation}
@@ -557,7 +562,6 @@ heat bath at some tmperature $T$. Similar to why canonical ensemble is more usef
 ensemble. 
 Also, Gibb's formula only contain probability, which can be measured, compared to number of microstates
 in Boltzmann formula, which cannot be measured.
-
 \footnote{
 This is original expression given by the book, which seems to express a slightly different concept
 related to the macroscopic properties. So I kept it here in the footnote. But I think the reasoning 
@@ -580,6 +584,55 @@ where the probability $p_i = n_i / N$ and $\sum_i p_i = 1$. We have:
     & = - k_B \sum_i p_i \ln p_i
 \end{align}
 }
+
+\subsection{Entropy of information}
+In information theory, we define the information content $Q$ of 
+a statement (or a prediction) by:
+\begin{equation}
+    Q = - k \log P
+\end{equation}
+where $P$ is the probability that the statement turn out to be true, and
+$k$ is a positive scaling constants. 
+
+If we take $k = 1$, and take $\log_2$ for logarithm, then
+the information content is then measured in bits. As an example, consider the 
+following statement: \emph{a single coin toss give a result of "face up"}. The 
+information content is:
+\begin{equation}
+    Q = - \log_2 P = 1
+\end{equation}
+Therefore, this information is 1 bit long: to store the above statement, we only require 1 bit
+to store whether the result is face up.
+
+To describe a probability distribution, we can use a series of statements. For example, 
+to describe the probability distribution of weather (sunny, cloudy and rainy) in a day, we 
+have a series of statements:
+\begin{itemize}
+    \item the probability of a rainy day is $20\%$
+    \item the probability of a sunny day is $40\%$
+    \item the probability of a cloudy day is $40\%$
+\end{itemize}
+We associate each statement with its information content and define the \textbf{average information content}
+as:
+\begin{equation}
+    S = \langle Q \rangle = -k \sum_i P_i \log P_i
+\end{equation}
+information content $S$ is called \textbf{Shannon entropy}. We can consider Shannon entropy 
+as measuring how much information we can gain by performing a measurement on the system.
+
+Consider a Bernoulli trial with outcome probability $p$. Using $k=1$, the 
+Shannon entropy is calculated by:
+\begin{equation}
+    S = - \sum_i P_i \log_2 P_i = -p \log_2 p - (1-p) \log_2 (1-p)
+\end{equation}
+$S$ is maximum when $p = 0.5$, showing that the information content of a distribution is greatest
+when the uncertainty of output is greatest: we gain the most information when we can determine 
+the outcome.
+When $p$ deviates from $0.5$, the outcome become biased and it is very likely that most measurement
+give the same result, then what we gain from measuring the outcome is relatively less important and 
+the information entropy contained in this distribution is little. In the extreme, if the event is 
+deterministic, than we will gain no information after measurement of the result, thus the information 
+contained any statement regarding to the result is simply $0$.
 
 \section{Third Law}
 We can measure the change of entropy of a system by measuring its heat capacitiy:

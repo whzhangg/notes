@@ -6,6 +6,7 @@ if [ ! -d ${ONEDRIVE}Notes/electron ]
 then
   mkdir ${ONEDRIVE}Notes/electron
 fi
+rm ${ONEDRIVE}Notes/electron/*
 cp electron/*.pdf ${ONEDRIVE}Notes/electron/
 
 
@@ -13,12 +14,14 @@ if [ ! -d ${ONEDRIVE}Notes/phonon ]
 then
   mkdir ${ONEDRIVE}Notes/phonon
 fi
+rm ${ONEDRIVE}Notes/phonon/*
 cp phonon/*.pdf ${ONEDRIVE}Notes/phonon/
 
 if [ ! -d ${ONEDRIVE}Notes/statistic ] 
 then
   mkdir ${ONEDRIVE}Notes/statistic
 fi
+rm ${ONEDRIVE}Notes/statistic/*
 cp statistic/*.pdf ${ONEDRIVE}Notes/statistic/
 
 echo "Done"
