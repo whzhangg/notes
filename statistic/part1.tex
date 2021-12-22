@@ -377,7 +377,7 @@ during the adiabatic process, and dump heat $Q_h$ into the the hot side
 with an isothermal compression process. The result for such a refrigerator is:
 \begin{gather}
     Q_l + W = Q_h \\
-    \frac{Q_h}{T_h} = \frac{Q_l}{Q_l} \\
+    \frac{Q_h}{T_h} = \frac{Q_l}{T_l} \\
     \eta = \frac{Q_l}{W} = \frac{T_l}{T_h - T_l}
 \end{gather} 
 
@@ -592,21 +592,21 @@ a statement (or a prediction) by:
     Q = - k \log P
 \end{equation}
 where $P$ is the probability that the statement turn out to be true, and
-$k$ is a positive scaling constants. 
+$k$ is a positive scaling constants. If we take $k = 1$, and take $\log_2$ for logarithm, then
+the information content is measured in bits. 
 
-If we take $k = 1$, and take $\log_2$ for logarithm, then
-the information content is then measured in bits. As an example, consider the 
+As an example, consider the 
 following statement: \emph{a single coin toss give a result of "face up"}. The 
 information content is:
 \begin{equation}
     Q = - \log_2 P = 1
 \end{equation}
 Therefore, this information is 1 bit long: to store the above statement, we only require 1 bit
-to store whether the result is face up.
+to store whether the result is face up with ${0, 1}$.
 
-To describe a probability distribution, we can use a series of statements. For example, 
+Now, to describe(transmit) a probability distribution, we can use(transmit) a series of statements. For example, 
 to describe the probability distribution of weather (sunny, cloudy and rainy) in a day, we 
-have a series of statements:
+have different events with different probabilities and information contents:
 \begin{itemize}
     \item the probability of a rainy day is $20\%$
     \item the probability of a sunny day is $40\%$
@@ -617,22 +617,45 @@ as:
 \begin{equation}
     S = \langle Q \rangle = -k \sum_i P_i \log P_i
 \end{equation}
-information content $S$ is called \textbf{Shannon entropy}. We can consider Shannon entropy 
-as measuring how much information we can gain by performing a measurement on the system.
+information content $S$ is called \textbf{Shannon entropy}. Shannon entropy therefore give the average information
+content of succesive measurements.
 
-Consider a Bernoulli trial with outcome probability $p$. Using $k=1$, the 
+As an example, consider a Bernoulli trial with outcome probability $p$. Using $k=1$, the 
 Shannon entropy is calculated by:
 \begin{equation}
     S = - \sum_i P_i \log_2 P_i = -p \log_2 p - (1-p) \log_2 (1-p)
 \end{equation}
-$S$ is maximum when $p = 0.5$, showing that the information content of a distribution is greatest
-when the uncertainty of output is greatest: we gain the most information when we can determine 
-the outcome.
+$S$ is maximum when $p = 0.5$, showing that the information content of a Bernoulli distribution is greatest
+when the uncertainty of output is greatest.
 When $p$ deviates from $0.5$, the outcome become biased and it is very likely that most measurement
-give the same result, then what we gain from measuring the outcome is relatively less important and 
-the information entropy contained in this distribution is little. In the extreme, if the event is 
-deterministic, than we will gain no information after measurement of the result, thus the information 
-contained any statement regarding to the result is simply $0$.
+give the same result. The information content with this probability distribution decrease. In the extreme case, if the event is 
+deterministic with single outcome, than we will gain no information after measurement of the result.
+
+\subsection{Entropy and encoding}
+The Shannon entropy measures the average information content, which can be interpreted as the \textbf{average bits needed} to
+transit the measurement, when measured in bits. Consider the following two case:
+
+\textbf{Case 1.} Suppose an event have 8 possible outcomes with equal probability, 
+the Shannon entropy is then:
+\begin{equation}
+    S = - 8 \times \frac{1}{8} \log_2\frac{1}{8} = 3\ bits
+\end{equation}
+the distribution is random, so we need to use 3 bits to store each outcome and there is no way to compress the informations.
+
+\textbf{Case 2.} Suppose now that we have different probability of the outcome given by the following distribution:
+\begin{equation*}
+    {1/2, 1/4, 1/8, 1/16, 1/64, 1/64, 1/64, 1/64}
+\end{equation*}
+Now, the Shannon entropy is:
+\begin{equation}
+    S = - \sum_i P_i \log_2 P_i = 2\ bits
+\end{equation}
+It is now possible to compress the result by the following code: $0, 10, 110, 1110, 111100, 111101, 111110, 111111$ and the average length
+of the code we need to transmit is:
+\begin{equation}
+    L = 1/2 \times 1 + 1/4 \times 2 + 1/8 \times 3 + 1/16 \times 4 + 4 \times 1/64 \times 6= 3\ bits
+\end{equation}
+which agree with the value of the Shannon entropy where the length required to store one result is given by $Q = - \log_2 P$.
 
 \section{Third Law}
 We can measure the change of entropy of a system by measuring its heat capacitiy:
