@@ -1,20 +1,27 @@
-VPATH = electron phonon physics
+# make file for all the notes that I have created over the time
 
-default: group_theory.pdf
+all: grouptheory statistical mechanics
+
+statistical: part1.pdf part2.pdf
+grouptheory: group_theory.pdf
+mechanics: classic_mechanics.pdf linear_response_theory.pdf quantum_condition.pdf
 
 %.pdf: %.tex
-	cd $(<D)
-	pdflatex $(<F)
-	pdflatex $(<F)
+	cd $(<D); \
+	pdflatex $(<F); \
+	pdflatex $(<F); \
+	$(clean); \
 	cd -
-	$(clean)
 
-
+# -f does not produce error message if file does not exist
 define clean
-	rm $*.out
-    rm $*.log
-    rm $*.aux
+	rm -f *.aux;\
+	rm -f *.out;\
+	rm -f *.log;\
+	rm -f *.toc
 endef
 
-#pdflatex $*.tex
-#pdflatex $*.tex
+VPATH = electron phonon physics mathematics
+ 
+VPATH += physics/statistical_physics
+VPATH += physics/mechanics
