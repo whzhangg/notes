@@ -139,7 +139,7 @@ The interpretion of cyclic notation is as follows:
 \begin{itemize}
     \item a cyclic is a permutation of a subset without affecting other elements,
     \item fixed point can be omitted,
-    \item $(153)$ is read as $1\to 5, 5\to 3, 3\to 1$. 
+    \item $(153)$ is read as $1\to 5, 5\to 3, 3\to 1$. $1\to5$ reads 'object in position 1 become object in position 5'.
 \end{itemize}
 We can generate the two-line notation from the cyclic notation as follows:
 \begin{equation*}
@@ -153,7 +153,31 @@ We can generate the two-line notation from the cyclic notation as follows:
                 & 5 & 4 & 1 & 2 & 3
     \end{matrix}
 \end{equation*}
-Using cyclic notation, we can write $S_3 = \{ e, (1,2), (2,3), (1,3), (1,2,3), (3,2,1) \}$. We have $|S_3| = 6$. 
+
+The following arrow form of permutation is also convenient to keep track of the operation, especially for successive 
+application of permutations. Note that the arrow $5\to1$ reads 'the object in position 5 is moved to position 1'.
+\begin{figure*}[!h]
+    \centering
+    \includegraphics[width=2in]{figures/permutation_arrow.png}
+\end{figure*}
+
+Using cyclic notation, we can write $S_3 = \{ e, (1,2), (2,3), (1,3), (1,2,3), (3,2,1) \}$. We have $|S_3| = 6$. The group table of $S_3$ can be calculated 
+and tabulated to be:
+\begin{table}[h]
+    \centering
+    \caption{Multiplication table of $S_3$}
+    \begin{tabular}{|c|ccc|ccc|}
+        \hline
+                & e     & (123) & (321) & (12)  & (13)  & (23)  \\ \hline
+           e    & e     & (123) & (321) & (12)  & (13)  & (23)  \\ 
+          (123) & (123) & (321) & e     & (13)  & (23)  & (12)  \\
+          (321) & (321) & e     & (321) & (23)  & (12)  & (13)  \\ \hline
+          (12)  & (12)  & (23)  & (13)  &     e & (321) & (123) \\
+          (13)  & (13)  & (12)  & (23)  & (123) & e     & (321) \\
+          (23)  & (23)  & (13)  & (12)  & (321) & (123) & e     \\ \hline
+    \end{tabular}
+    \label{T:s3}
+\end{table}
 
 \section{Multiplication of group} 
 
@@ -171,13 +195,9 @@ and $sT \equiv \{s\}T $ and $Ts \equiv T\{s\} $ for $s \in S$.
     The set $\{gH \mid g \in G, H\ \text{is subgroup of}\ G\}$ is written as $G\setminus H$
 \end{definition}
 
-For example, for $S_3 = \{e, (12), (23), (13), (123), (132)\}$ 
-and $H = \{e,(123),(132)\}$, We can work out the following relationship:
-\begin{align*}
-    (123)(123) &= (132) &  (132)(123) &= e \\
-    (132)(132) &= (123) &  (123)(132) &= e 
-\end{align*}
-i.e.\,, $H$ is a subset of $S_4$. Applying element $g \in \{(12), (23), (13)\}$ on $H$
+For example, for $S_3$ and its subgroup $H = \{e,(123),(132)\}$, 
+Using the multiplication table \ref{T:s3}, we can find that
+applying element $g \in \{(12), (23), (13)\}$ on $H$
 give the set $\{(12), (23), (13)\}$. Therefore, the left cosets of $H$ is:
 \[
     \left\{\, \{e,(123),(132)\}, \{(12), (23), (13)\}\, \right\}    
