@@ -1,0 +1,62 @@
+\documentclass{article}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=1in]{geometry}
+\usepackage{verbatim}
+\usepackage{graphicx}
+\usepackage{hyperref} % \url \href
+
+\newcommand{\bbz}{\mathbb{Z}}
+\newcommand{\bbr}{\mathbb{R}}
+\newcommand{\calf}{\mathcal{F}}
+
+
+\begin{document}
+
+\title{Summary for graphy neural network in chemistry}
+\author{Wenhao Zhang\\National Institute of Materials Science}
+\date{\today}
+\maketitle
+
+\section{Introduction}
+A graph is represented as $G = (V,E)$ where $V$ is a set of nodes and $E$ is the set of edges\cite{wu_2021}, we can
+write a node as $v_i$ with node index $i$ and edge $e_{ij}$ between node $i$ and $j$. 
+We can put features vectors (attributes) $x_i$ and $x^e_{ij}$ on nodes and edges. 
+In general, the edges can have directions. the undirected graph correspond to the special case when edge of both
+direction exist between node $i$ and $j$.
+
+For chemistry application, we in general need to present a crystal structure. 
+It seems very natural that we represent a crystal structure using a graph, with atoms as nodes and bonds between atoms 
+as edges. 
+Since a transformation that perserve distances and angles (isometry) do not change the representation of a graph 
+(if a nodes' absolute location is not included in the features), isometric transformation on the crystal structure
+leave the its graph representation invariant. This is a desirable property for strcture representation. 
+However, such invariance comes at a cost that some informations about the crystal structure at lost: for example, if two 
+components of a molecular is connected by a single edge, then rotating only one part of the molecular while keeping the 
+other part still will not change the graph representation, while it may change the molecular properties. 
+Furthermore, in most cases, angular informations are not included, until \cite{directional_klicpera}. 
+
+We describe some of the most cited graph network used in material chemistry. Sometime they are also called 
+'message passing network', where informations of nodes are passed throught edges. But in general, graph network 
+have more flavors, such as graph convolutions that envolve pooling, or recurrent ones. 
+
+\section{Review of related works}
+The difference between different works are mainly:
+\begin{enumerate}
+    \item How the graph is constructed.
+    \item How the nodes and edges' feature are created
+    \item How the hidden layers are updated
+    \item How the result is output
+\end{enumerate}
+\subsection{Gilmer's message passing network}
+
+
+
+%Cohen and Welling 2016, Weiler et al. 2018a and 2018b
+\begin{thebibliography}{99}
+    \bibitem{wu_2021} 
+    Z. Wu, S. Pan, F. Chen, G. Long, C. Zhang, and P. S. Yu, “A Comprehensive Survey on Graph Neural Networks,” IEEE Trans. Neural Netw. Learning Syst., vol. 32, no. 1, pp. 4–24, Jan. 2021, doi: 10.1109/TNNLS.2020.2978386.
+    \bibitem{directional_klicpera}
+    J. Klicpera, J. Groß, and S. Günnemann, “Directional Message Passing for Molecular Graphs,” arXiv:2003.03123 [physics, stat], Mar. 2020, Accessed: Jan. 25, 2022. [Online]. Available: http://arxiv.org/abs/2003.03123
+\end{thebibliography}
+
+\end{document}

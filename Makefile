@@ -2,7 +2,7 @@
 
 all: grouptheory statistical mechanics general electrons phonon
 
-general: steerable_cnn.pdf atomicunits.pdf
+general: steerable_cnn.pdf atomicunits.pdf graph_nn.tex
 statistical: part1.pdf part2.pdf
 grouptheory: group_theory.pdf
 mechanics: classic_mechanics.pdf linear_response_theory.pdf quantum_condition.pdf

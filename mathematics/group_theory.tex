@@ -1,6 +1,6 @@
 \documentclass{amsart}
 %\usepackage{amssymb, amsmath, amsthm}
-%\usepackage[margin=1in]{geometry}
+\usepackage[margin=1in]{geometry}
 \usepackage{verbatim}
 \usepackage{graphicx}
 \usepackage{hyperref} % \url \href
@@ -29,6 +29,8 @@
 \DeclareMathOperator{\GL}{GL}
 \DeclareMathOperator{\Hom}{Hom}
 \DeclareMathOperator{\Tr}{trace}
+\DeclareMathOperator{\Bij}{Bij}
+\DeclareMathOperator{\Orb}{Orb}
 
 % the highest level is part
 % in each part, different section give different topics that are lossly connected
@@ -475,26 +477,27 @@ According to definition, $\Phi_g \in \Aut(G)$
 \end{definition}
 where $\alpha(g,m)$ means action of a group element $g$ on a set element in $\setM$
 
-For an action $\alpha$, we have a homomorphism that map group $G$ to permutation group on $\setM$, 
-given by:
-\[g\to (m\to \alpha(g,m))\]
-$m\to \alpha(g,m)$ being a permutation. 
+\begin{remark}
+For an action of the group $\alpha$, 
+we have a group homomorphism that map the the group actions to permutations on $\setM$. 
+(Recall that permutations on $\setM$ is all the bijection that map $\setM$ to itself.) 
+The homomorphism $\theta\colon G \to \Bij(\setM)$ is given by:
+\begin{equation*}
+    g\to (m\to \alpha(g,m))
+\end{equation*}
+$m\to \alpha(g,m)$ being a permutation.     
+\end{remark}
 
+\begin{definition}
+    [Symmetry]
+    A group element $g\in G$ is called a symmetry on set $\setM$ if it leave the set invariant:
+    $\setM = \{gm \mid \text{for all }\ m \in \setM\}$. 
+\end{definition}
+
+\begin{comment}
 \subsection*{Group action on itself}
 For a group $G$, $G$ can act on itself by conjugation: $\alpha\colon G\times G \to G$ given by
 $\alpha(h,g) = hgh^{-1}$
-
-\vspace{10pt}
-
-\begin{definition}
-    [Orbit under $G$]
-    For $G$ acting on $\setM$, the sets $Gm = \{gm\mid g\in G\}$ partition the set $\setM$. 
-    \[\setM = Gm_1 + Gm_2 + \dots + Gm_n\]
-    Each set $Gm$ is called the orbit of $m$ under $G$.
-\end{definition}
-
-\subsection*{Transitive}
-An action is called transitive if it has only one orbit
 
 \begin{definition}
     [Symmetry]
@@ -503,15 +506,28 @@ An action is called transitive if it has only one orbit
     The elements in $S$ are called 'symmetry'.
 \end{definition}
 
+\end{comment}
 \vspace{10pt}
+
+\begin{definition}
+    [Orbit under $G$]
+    For $G$ acting on $\setM$, the sets $\Orb(m) = \{gm\mid g\in G\}$ partition the set $\setM$. 
+    \[\setM = \Orb(m_1) + \Orb(m_2) + \dots + \Orb(m_n)\]
+    Each set $\Orb(m)$ is called the orbit of $m$ under $G$.
+\end{definition}
+
+\subsection*{Transitive}
+A group action, of $G$ on $\setM$, is called transitive if it has only one orbit, i.e., 
+$\setM = \{gm \mid g \in G\}$ for some choice of $m$. A group is called transitive if 
+its group action is transitive. 
+The set $\setM$ of a transitive group action is called \emph{homogeneous space} if the group 
+is a lie group.
 
 \subsection*{Stabilizer}
 For group $G$ acting on $\setM$ and $m \in \setM$, the set 
 \[G_m = \{ g\in G\mid gm = m \}\]
 are called the stabilizer of $m$. $G_m \subset G$
-\begin{remark}
-    stabilizer $G_m$ is not necessarily a normal subgroup of $G$
-\end{remark}
+\footnote{stabilizer $G_m$ is not necessarily a normal subgroup of $G$}
 
 \begin{lemma}
     Stabilizer $G_m$ is only normal if $G_m$ is also the stabilizer of every orbits of $m$: 
@@ -520,40 +536,139 @@ are called the stabilizer of $m$. $G_m \subset G$
     % https://proofwiki.org/wiki/Stabilizer_is_Normal_iff_Stabilizer_of_Each_Element_of_Orbit
 \end{lemma}
 
-\begin{lemma}
-    $G_m$ is a subgroup of $G$, $|G_m|$ divide $G$. Further more, $G_m$ is a normal subgroup. 
-    The mapping $f\colon Gm \to G/G_m$ is a bijection and $|G|=|G_m||Gm|$
-\end{lemma}
+\begin{theorem}
+    [Orbit-Stabilizer theorem]
+    The stabilizer $G_m$ is a subgroup of $G$, therefore, $|G_m|$ divide $G$. 
+    Further more, $G_m$ is a normal subgroup. It's left cosets form a quotinet group $G/G_m$. 
+    The mapping $f\colon \Orb(m) \to G/G_m$ is a bijection and $|G|=|G_m||\Orb(m)|$
+\end{theorem}
+\begin{remark}
+    We call a
+    subset of $\setM$ \emph{fundamental set} if it contain exactly one element from each orbit.
+\end{remark}
 
-\begin{comment}
+\vspace{10pt}
 \section*{Isometry}
+The distance in euclidean space is given by 
+\[
+    d(x,y) = \|x-y\| = \sqrt{\sum_i(x_i-y_i)^2}    
+\]
 
 \begin{definition}
     [Isometry]
-    The distance in euclidean space is given by 
-    \[
-        d(x,y) = \sqrt{\sum_i(x_i-y_i)^2}    
-    \]
-    A mapping $g\colon \mathbb{R}^n \to \mathbb{R}^n$ satisfying 
-    \[
-        d(g(x),g(y)) = d(x,y)    
-    \] is called an isometry, the transformation that keep the distance. We denote them as $\AO(n)$ or $\E(n)$
+    A invertible mapping $g\colon \mathbb{E}^n \to \mathbb{E}^n$ satisfying 
+    \begin{equation*}
+        d(g(x),g(y)) = d(x,y)
+    \end{equation*}    
+    is called an isometry, i.e., the transformation that keep the distance. 
+    We denote them $\E(n)$
 \end{definition}
-The group of all isometries is a subgroup of permutation between points in n-dimensional space $\Sym(\mathbb{R}^n)$
+\begin{remark}
+    See definition below, isometry is an affine transformation, can be written as AO(3).
+    % http://math.soimeme.org/~arunram/Notes/afforth.html
+\end{remark}
 
-\subsection*{Translation}
-with $x, a \in \mathbb{R}^n$, transformation $t_a\colon x \to x+a$ is called translation.
+\begin{lemma}
+All isometries of euclidean space that fix the origin are orthogonal linear map $O(N)$
+\end{lemma}
+A linear map is orthogonal if it perserves the inner product $x^T\cdot y$, therefore, linear 
+orthogonal transformation satisfy:
+\begin{equation*}
+    (Mx)^T(My) = x^T M^{T}My = x^T y
+\end{equation*}
+therefore, an orthogonal transformation satisfy $M^{T}M = I$. 
+We call $M$ \emph{orientation preserving} if it has determinant 1 (rotations) and 
+\emph{orientation reversing} if it has determinant -1. The subgroup of O(N) with 
+determinant 1 is denoted as special orthogonal group $SO(N)$
 
-\subsection*{Orthogonal linear map}
-An orthogonal linear map is a linear transformation that perserve the inner product, the group of all
-orthogonal linear map is denoted as O($3$)
+\begin{remark}
+    We have a group homomorphism: $\epsilon\colon G \to \{-1, 1\}$ where the mapping is 
+    given by the determinant. It is equivalent to the quotinet group $\{N, iN\}$ where 
+    $N$ is the set of orientation preserving elements. $N$ is a normal subset of $G$ with 
+    index 2, i.e., the number of elements in $N$ is half of in $G$. 
+\end{remark}
+
+
+\vspace{10pt}
+All the translations $t_a\colon x \to x+a$ are also isometries of euclidean space. 
+The following list gives all the possible isometries of $\mathbb{E}^3$: 
+\begin{enumerate}
+    \item Identity,
+    \item a translation,
+    \item a rotation around a rotation axis,
+    \item a screw rotation,
+    \item a reflection in some plane, 
+    \item a glide reflection, and, 
+    \item rotatory reflection (rotation followed by reflection in the plane perpendicular to rotation axis)
+\end{enumerate}
+\begin{remark}
+Inversion is implicitly included in the list as a rotation refection of 180 degree:
+\begin{equation*}
+    i=C_2 \cdot m = \left(\begin{matrix}
+        -1 & 0 & 0\\
+        0  & -1 & 0\\
+        0 & 0 & 1
+    \end{matrix}\right) \cdot \left(\begin{matrix}
+        1 & 0 & 0\\
+        0  & 1 & 0\\
+        0 & 0 & -1
+    \end{matrix}\right)
+\end{equation*}
+\end{remark}
+
+\vspace{10pt}
 
 \begin{theorem}
-    For any group element $g\in \AO(n)$ (isometry), there exist a unique pair $(a,r)$ such that 
-    \[g = t_a \cdot r\]
-    with $r\in \AO(n)$ that fix the point at origin (rotation). $r$ is a anorthogonal linear map
+    For an isometry $A$, there exist a vector $v$ and an orthogonal matrix $B$ so that 
+    \begin{equation*}
+        A(x) = B(x) + v 
+    \end{equation*}
+    i.e., any isometry is an orthogonal linear map followed by translation.
 \end{theorem}
-As a result, any isometry is an orthogonal linear map followed by translation.
+
+We can therefore define a group homomorphism: $\phi\colon E(N)\to O(N)$ given by $A\to B$. 
+The group of translation is the kernel. Translation is also a normal subgroup.
+
+\vspace{10pt}
+\section*{Lattice}
+\begin{definition}
+    [Metric space]
+    A set $\setM$ is a metric\footnote{metric means measureable} space if the distance (metrix function) 
+    is defined to satisfying:
+    \begin{enumerate}
+        \item The distance between $a, b \in \setM$ $d(a,b)$ is positive if $a$ and $b$ is distinct, otherwise it is zero,
+        \item The distance $d(a,b)$ is equal to that of $d(b,a)$, and 
+        \item $d(a,b) \leq d(a,c) + d(c,b)$ with $c$ a third point.
+    \end{enumerate}
+\end{definition}
+
+In point $x$ in a metric space is isolated if there is no other point in $\setM$ in its 
+neighbourhood. $d(x,y)> \delta \quad \text{for all } y\in\setM \text{ except x itself}$.
+A metric space is called \emph{discrete} if all its point is isolated. A group $G$ is called 
+a discrete group if it act on discrete metric space. 
+
+\begin{definition}
+    [Lattice]
+    We call a discrete additive subgroup of $\mathbb{R}^N$ a lattice in $\mathbb{R}^N$
+\end{definition}
+\begin{remark}
+Lattice defined above is a subgroup of $\mathbb{R}^N$, 
+i.e., lattice is a set of vectors in $\mathbb{R}^N$
+\end{remark}
+
+\begin{definition}
+    [Crystallographic group]
+    Crystallographic group $G$ is a subgroup of the group of all isometries, that has group 
+    homomorphism:
+    \begin{equation*}
+        \phi\colon G \to O(N)
+    \end{equation*}
+    with kernel of discrete group of translations. The image of the homomorphism $\Image(\phi)$
+    is called the \emph{Crystallographic point group}. 
+    The discrete group of translation gives a lattice.
+\end{definition}
+
+\begin{comment}
 
 \vspace{10pt} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
