@@ -12,7 +12,7 @@
 
 \begin{document}
 
-\title{Summary for graphy neural network in chemistry}
+\title{Summary for graph neural network in chemistry}
 \author{Wenhao Zhang\\National Institute of Materials Science}
 \date{\today}
 \maketitle
@@ -47,8 +47,66 @@ The difference between different works are mainly:
     \item How the hidden layers are updated
     \item How the result is output
 \end{enumerate}
-\subsection{Gilmer's message passing network}
 
+\subsection{Jargon used and basic structures}
+As noted above, the input to message passing network is a molecular graph with nodes as atoms and edges as 
+connection between atoms, that usually is interpreted as bonds. 
+The message passing network operates for $T$ iterations. 
+Using $x_v$ as node feature on node $v$ and $e_{vw}$ edge feature between nodes $v$ and $w$, we call
+\begin{equation}
+    m_{v}^{t+1} = \sum_{w\in neig(v)} M_t(h^t_v, h^t_w, e_{vw})
+\end{equation}
+a message. $M_t$ is a \emph{message function} that extract information from the edges and connect neighbors of atom $v$ and 
+$h$ are called hidden states on the nodes, which usually initialized by $h^0_v = x_v$, i.e., the node features. 
+Hidden states are main information that are updated during the iterations and get passed around:
+\begin{equation}
+    h^{t+1}_v = U_t(h_v^t, m_{v}^{t+1})
+\end{equation}
+function $U_t$ defines how the hidden states are updated depending on the information it received and we call it 
+\emph{update function}
+
+After $T$ iterations, we obtain 'refined information on atoms' $h_v^T$. To make prediction for global properties 
+such as band gap and formation energies, we define a \emph{readout function} that take the set of nodes as input:
+\begin{equation}
+    y = R(\{h_v^T\mid v\in G\})
+\end{equation}
+
+\subsection{Gilmer's message passing network}
+Gilmer et al. built MPNN (Gilmer-MPNN) upon the previous work and achieve state of the art performance in all predicting all properties 
+in QM9 dataset. 
+
+Their network use use a set of atom features, for exampke, atom type, atomic number, binary value for acceptor and donor etc. as  
+initial node feature $x_v$. Edges $e_{vw}$ contain both distances feature by bining and bond types (single, double, etc.). 
+Message function is choosen to be 
+\begin{equation}
+    M_t(h^t_v, h^t_w, e_{vw}) = A(e_{vw}) h_w
+\end{equation}
+where $A\colon e_{vw} \to \mathbb{R}^{d\times d}$ ($d$ is the feature size of the hidden state $h$) is a neural network. 
+The edges in their graph representation are directional. This means that the output $A(e_{vw})$ will be different from that 
+in $A(e_{wv})$. 
+The weight update use \emph{Gated Recurrent Unit} $U_t = GRU(h_v^t, m_v^{t+1})$ (Cho et al. 2014)
+Finally, the readout function used is a set to set operation (Vinyals et al. 2015).
+
+They achieved accuracy of prediction on the chemical accuracy level (supplementary table)
+
+\subsection{Sch\"{u}tt's deep tensor neural network and related networks}
+In Sch\"{u}tt's work, the input atomic feature are simply one-hot-encoding of their
+respective atomic numbers and edge features are binned distances. 
+As in Gilmer's work, the initial hidden states are the same as node features.
+Using the same formulation as above, the message function is defined to be:
+\begin{align}
+    m_i^{t+1} &= \sum_{j\neq i} v_{ij} \\
+            &= \sum_{j\neq i} \tanh \left( W^{fc}[ (W^{cf} h_j^t + b^{f_1}) \circ (W^{df} e_{ij} + b^{f_2}) ] \right)
+\end{align}
+where $[\ \circ\ ]$ is a element-wise product (Hadamard product) and $W$ and $b$ are the weights and bias with appropriate shape. 
+Note that the summation is not restricted to the neighbors. 
+
+To update the hidden states, a simple summation is used $h_i^{t+1} = h_i^t + m_i^{t+1}$. 
+The network of the original work output total energies, which is a summation over atomic energies:
+\begin{equation}
+    E = \sum_i E_i = \sum_i E(h_i^T)
+\end{equation}
+where $E$ is a multi-layer perceptron that convert atomic feature into atomic energies.
 
 
 %Cohen and Welling 2016, Weiler et al. 2018a and 2018b
