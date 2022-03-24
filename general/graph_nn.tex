@@ -40,18 +40,18 @@ We describe some of the most cited graph network used in material chemistry. Som
 have more flavors, such as graph convolutions that envolve pooling, or recurrent ones. 
 
 \section{Review of related works}
-The difference between different works are mainly:
-\begin{enumerate}
-    \item How the graph is constructed.
-    \item How the nodes and edges' feature are created
-    \item How the hidden layers are updated
-    \item How the result is output
-\end{enumerate}
+The difference between different message passing networks are mainly described by:
+a) how the graph is constructed, 
+b) how the nodes and edges' feature are created,
+c) how the hidden layers are updated, and
+d) how the result is output
+We review some of the works using message passing networks:
 
 \subsection{Jargon used and basic structures}
 As noted above, the input to message passing network is a molecular graph with nodes as atoms and edges as 
 connection between atoms, that usually is interpreted as bonds. 
-The message passing network operates for $T$ iterations. 
+Following Gilmer et al. \cite{Gilmer}, 
+the message passing network operates for $T$ iterations. 
 Using $x_v$ as node feature on node $v$ and $e_{vw}$ edge feature between nodes $v$ and $w$, we call
 \begin{equation}
     m_{v}^{t+1} = \sum_{w\in neig(v)} M_t(h^t_v, h^t_w, e_{vw})
@@ -90,31 +90,134 @@ Finally, the readout function used is a set to set operation (Vinyals et al. 201
 They achieved accuracy of prediction on the chemical accuracy level (supplementary table)
 
 \subsection{Sch\"{u}tt's deep tensor neural network and related networks}
-In Sch\"{u}tt's work, the input atomic feature are simply one-hot-encoding of their
+In Sch\"{u}tt's work\cite{DTNN}, the input atomic feature are simply one-hot-encoding of their
 respective atomic numbers and edge features are binned distances. 
 As in Gilmer's work, the initial hidden states are the same as node features.
 Using the same formulation as above, the message function is defined to be:
 \begin{align}
+    \label{E:DTNN_message}
     m_i^{t+1} &= \sum_{j\neq i} v_{ij} \\
             &= \sum_{j\neq i} \tanh \left( W^{fc}[ (W^{cf} h_j^t + b^{f_1}) \circ (W^{df} e_{ij} + b^{f_2}) ] \right)
 \end{align}
 where $[\ \circ\ ]$ is a element-wise product (Hadamard product) and $W$ and $b$ are the weights and bias with appropriate shape. 
 Note that the summation is not restricted to the neighbors. 
 
-To update the hidden states, a simple summation is used $h_i^{t+1} = h_i^t + m_i^{t+1}$. 
+To update the hidden states, a simple summation is used 
+\begin{equation}
+    \label{E:DTNN_update}
+    h_i^{t+1} = h_i^t + m_i^{t+1}
+\end{equation} 
+This summation is similar to a skipping connection that helps back propagation process. 
 The network of the original work output total energies, which is a summation over atomic energies:
 \begin{equation}
     E = \sum_i E_i = \sum_i E(h_i^T)
 \end{equation}
 where $E$ is a multi-layer perceptron that convert atomic feature into atomic energies.
 
+Later, Sch\"{u}tt et al.\cite{SchNet} developed so called SchNet as a variant of the DTNN. 
+It's main feature is that it can treat crystal structure with periodic boundary condition.
+SchNet take the same input as that of DTNN and the main difference is how the hidden states 
+on the node is updated. In DTNN, the update is done according to Equation \eqref{E:DTNN_message}
+and \eqref{E:DTNN_update} but in SchNet, it is updated by 
+\begin{equation}
+    \label{E:schnet_filter}
+    h_i^{t+1} = \frac{1}{n_{neighbors}} \sum_j h^t_j \circ W^l(\mathbf{r}_j - \mathbf{r}_i)
+\end{equation}
+where $W^l\colon \mathbb{R}^3\to \mathbb{d}$ with $d$ the dimension of atomic feature $h$. We 
+note that the summation also include the atom $i$ and all atoms $i,j$ are located in a 
+unit cell, that we denote 0.
 
-%Cohen and Welling 2016, Weiler et al. 2018a and 2018b
+In their work, $W^l$ is called a \emph{continuous filter} and operation given by 
+equation \eqref{E:schnet_filter} is called a continuous filter convolution. Indeed, this is a 
+one dimension correlation on the features. 
+
+The filter $W^l$ is generated from the vector $\mathbf{r}_j - \mathbf{r}_i$ as following 
+with respect to periodic boundary conditions:
+\begin{equation}
+    \label{E:pbc_filter}
+    W^l(\mathbf{r}_j - \mathbf{r}_i) 
+    = \sum_{m, \|\mathbf{r}_{jm} - \mathbf{r}_{i0}\|<r_{cut}} \tilde{W}^l(\mathbf{r}_{jm} - \mathbf{r}_{i0})
+\end{equation}
+where $m$ index unit cell,
+and with $\tilde{W}^l(\mathbf{r}_{jm} - \mathbf{r}_{i0})$ mapping an arbitrary vector to features. 
+Function $\tilde{W}^l$ take the relative distance between node $jm$ and $i0$ and encode them 
+using some radial base function, and pass them through a MLP. 
+
+Because the form of equation \eqref{E:pbc_filter}, the continuous filter $W^l$ has the same 
+symmetry of the lattice.
+
+Furthermore, their work also defined an atomic interation 
+\begin{equation}
+    h^t_{i} = w^t h_i^t + b^t
+\end{equation}
+that operate on atoms. The weight and bias $w^t$ and $b^t$ are shared across atoms.
+
+\subsection{Xie and Grossman's CGCNN}
+Xie and Grossman purposed crystal graph convolution neural network\cite{CGCNN} that operate with 
+crystal structure input. A crystal graph is undirected and contain one edge between 
+atom $i$ and $j$ in the unit cell if any of their periodic image is connected. 
+Consider a BCC structure KCl with one K and one Cl atom in the unit cell. We find 
+that there are 8 edges between these two atoms: one K is connected to 8 Cl atom,
+generated from a single Cl in the unit cell by periodic image. The possible multiply edges 
+between two nodes is therefore a result of periodicity of crystal.
+The initial atomic properties and bond properties are hand-crafted: 
+for example, valence electrons or covalent radius are used as atomic features, and 
+binned atomic distance is used as bond features.
+
+Denoting $i,j$ as atom index and $(i,j)_k$ as the $k^{th}$ bond
+between in the crystal graph. 
+After obtaining the crystal graph, The message function are obtained as:
+\begin{equation}
+    m_i^{t+1} = \sum_{j,k} \sigma(z^t_{(i,j)_k}W_f^{t} + b_f^t) \circ g(z^t_{(i,j)_k}W_s^{t} + b_s^t)
+\end{equation}
+where $z_{(i,j)_k} = h_i \oplus h_j \oplus e_{(i,j)_k}$ and $\sigma$, $g$ are 
+non-linear functions. 
+Hidden states are updated by convolution addition:
+\begin{equation}
+    h_i^{t+1} = h_i^t + m_i^{t+1}
+\end{equation}
+
+A pooling operation is used to produce the overall feature vector for the whole crystal:
+\begin{equation}
+    v_c = \text{Pool}(v_0, v_1, \dots, v_N)
+\end{equation}
+This feature vector is passed to a MLP to output the target property. In Xie and Grossman's work,
+the pooling function is a weighted sum. 
+
+\subsection{Directional message passing}
+All the previous network use only distance between two atoms as edge feature, 
+but directional feature are unutilized. 
+Here we shortly mention the work by Klicpera et al.\cite{directional_klicpera} (DimeNet) 
+that attempt to use the directional information by using spherical basis functions. 
+
+Their work is based on directed molecular graph and focus on the messages $m_{ji}$ passing from 
+atom $j$ to $i$: $h_i^{t+1} = \sum_j m^{t+1}_{ji}$. The messages are updated by:
+\begin{equation}
+    m_{ji}^{t+1} 
+    = F_{update}\left( m_{ji}^t, \sum_{k \in neig(j)} F_{int}(m_{kj}^{t}, e_{ji}^{RBF}, a^{SBF}_{kji}) \right)
+\end{equation}
+where atom $k$ is an atom in the neighbor of $j$ except $i$ itself. $e_{ji}^{RBF}$ is a 
+embedding of distance and $a^{SBF}_{kji}$ embedding the angle $\angle kji$ as well as distance 
+$\|\mathbf{r_{kj}}\|$ using spherical functions. 
+$F_{update}$ and $F_{int}$ are update functions and interaction functions, made of blocks 
+of linear layers.
+
+DimeNet achieve one of the best performance on QM9 dataset, superior to SchNet.
+
+%Cohen and Welling 2016, Weiler et al. 2018a and 2018b 
 \begin{thebibliography}{99}
     \bibitem{wu_2021} 
     Z. Wu, S. Pan, F. Chen, G. Long, C. Zhang, and P. S. Yu, “A Comprehensive Survey on Graph Neural Networks,” IEEE Trans. Neural Netw. Learning Syst., vol. 32, no. 1, pp. 4–24, Jan. 2021, doi: 10.1109/TNNLS.2020.2978386.
     \bibitem{directional_klicpera}
     J. Klicpera, J. Groß, and S. Günnemann, “Directional Message Passing for Molecular Graphs,” arXiv:2003.03123 [physics, stat], Mar. 2020, Accessed: Jan. 25, 2022. [Online]. Available: http://arxiv.org/abs/2003.03123
+    \bibitem{Gilmer}
+    J. Gilmer, S. S. Schoenholz, P. F. Riley, O. Vinyals, and G. E. Dahl, “Neural Message Passing for Quantum Chemistry,” arXiv:1704.01212 [cs], Jun. 2017, Accessed: Feb. 15, 2022. [Online]. Available: http://arxiv.org/abs/1704.01212
+    \bibitem{DTNN}
+    K. T. Schütt, F. Arbabzadah, S. Chmiela, K. R. Müller, and A. Tkatchenko, “Quantum-chemical insights from deep tensor neural networks,” Nat Commun, vol. 8, no. 1, p. 13890, Apr. 2017, doi: 10.1038/ncomms13890.
+    \bibitem{SchNet}
+    K. T. Schütt, H. E. Sauceda, P.-J. Kindermans, A. Tkatchenko, and K.-R. Müller, “SchNet – A deep learning architecture for molecules and materials,” The Journal of Chemical Physics, vol. 148, no. 24, p. 241722, Jun. 2018, doi: 10.1063/1.5019779.
+    \bibitem{CGCNN}
+    T. Xie and J. C. Grossman, “Crystal Graph Convolutional Neural Networks for an Accurate and Interpretable Prediction of Material Properties,” Phys. Rev. Lett., vol. 120, no. 14, p. 145301, Apr. 2018, doi: 10.1103/PhysRevLett.120.145301.
 \end{thebibliography}
 
 \end{document}

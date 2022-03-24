@@ -1,0 +1,93 @@
+\documentclass{article}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=1in]{geometry}
+\usepackage{verbatim}
+\usepackage{graphicx}
+\usepackage{hyperref} % \url \href
+
+\DeclareMathOperator{\rank}{rank}
+\newcommand{\pfrac}[2]{\frac{\partial #1}{\partial #2}}
+% \renewcommand{\H}{\mathcal{H}}
+
+\begin{document}
+
+\title{Solution to Linear System of Equations}
+\author{Wenhao}
+\date{\today}
+\maketitle
+
+\section{Basic concepts}
+A system of $m$ linear equations with $n$ unknowns consists of a set of alegbraic relations
+\[\sum_{j=1}^n a_{ij}x_j = b_i,\qquad i = 1, \dots, m\]
+or in matrix form:
+\[\mathbf{A}\mathbf{x} = \mathbf{b}\]
+If $\mathbf{A}\in \mathbb{R}^{n\times n}$ and $\mathbf{b}\in \mathbb{R}^{n}$, the 
+existance and uniqueness of the solution is ensured if the any of the following equivalent 
+condition holds:
+\begin{enumerate}
+    \item $\mathbf{A}$ is invertible
+    \item $\rank(A) = n$
+    \item $\mathbf{A}\mathbf{x} =0$ only has null solution
+\end{enumerate}
+
+\section{Cramer's rule}
+The solution of the linear equation can be formally obtained using \emph{Cramer's rule}:
+\[x_j = \frac{\Delta_j}{\det(A)},\qquad j = 1, \dots, m\]
+where $\Delta_j$ is the determinant of the matrix obtained by substituting the $j$-th 
+column of $\mathbf{A}$ with the right hand side $\mathbf{b}$
+\footnote{https://www.math.purdue.edu/~shao92/documents/Proof_Cramer_rule.pdf provide a short proof}.
+
+However, the evaluation of the determinant is computational expensive (summing over all 
+permutations) and impractice for application. Numerical methods that are alternative to 
+Cramer's rule can be classified into two types:
+they are called \emph{direct} if they yield solution of the system in a finite number of 
+steps, and \emph{iterative} if they require, in principle, infinite number of steps.
+
+\section{Direct methods}
+\subsection{Substitution methods}
+For a non-singular lower triangular system, such as:
+\begin{equation}
+    \left(\begin{matrix}
+        l_{11} & 0 & 0 \\
+        l_{21} & l_{22} & 0 \\
+        l_{31} & l_{32} & l_{33} 
+    \end{matrix}\right)
+    \left(\begin{matrix}
+        x_1 \\ x_2 \\ x_3
+    \end{matrix}\right) = 
+    \left(\begin{matrix}
+        b_1 \\ b_2 \\ b_3
+    \end{matrix}\right)
+\end{equation}
+the solution can be obtained as:
+\begin{align*}
+    x_1 &= b_1 / l_{11} \\
+    x_2 &= (b_2 - l_{21} x_1 ) / l_{22} 
+    x_3 &= (b_3 - l_{31} x_1 - l_{32} x_2) / l_{33}
+\end{align*}
+Such algorithm can be extended to $n\times n$ systems 
+$\mathbf{L}\mathbf{x} = \mathbf{b}$ ($\mathbf{L}$ for lower)
+and is called \emph{forward substitution}
+and it takes the general form:
+\begin{align*}
+    x_1 = \frac{b_1}{l_{11}}
+    x_i = \frac{1}{l_{ii}} \left(b_i - \sum_{j = 1}^{i-1} l_{ij}x_j\right) 
+\end{align*}
+for $i = 2, \dots, n$. The number of multiplication needed is $1, \dots, n$ for each 
+equation and the number of substraction needed is $0, \dots, n-1$. Therefore, the total 
+number of operation needed is $n^2$. 
+For upper triangular matrix ($\mathbf{U}\mathbf{x} = \mathbf{b}$), we can use similar procedure but now called 
+\emph{backward substitution} method.
+
+\subsection{Gaussian elimination method}
+The \emph{Gaussian elimiation} method reduce the linear equation 
+$\mathbf{A}\mathbf{x} = \mathbf{b}$ to an equivalent equation 
+of the form $\mathbf{U}\mathbf{x} = \tilde{\mathbf{b}}$ where $\tilde{\mathbf{b}}$
+is the updated right hand side.
+
+
+\pagebreak
+\section*{Appendix A}
+
+
+\end{document}
