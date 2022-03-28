@@ -7,6 +7,7 @@
 
 \DeclareMathOperator{\rank}{rank}
 \DeclareMathOperator{\range}{range}
+\DeclareMathOperator{\spn}{span}
 \newcommand{\pfrac}[2]{\frac{\partial #1}{\partial #2}}
 \newtheorem*{theorem}{Theorem}
 \newtheorem*{definition}{Definition}
@@ -258,7 +259,7 @@ preconditioning matrix. We update the solution by:
 We can verify that the above equation can be equivalently written as:
 \[\mathbf{x}^{(k+1)} = \mathbf{x}^{(k)} + \mathbf{P}^{-1}\mathbf{r}^{(k)}\]
 where $\mathbf{r}^{k} = \mathbf{b} - \mathbf{A}\mathbf{x}^{(k)}$, which is called 
-the \emph{residual vector} at step $k$. $\mathbf{P}$ should be choosen to be easily invertible
+the \emph{residual vector} at step $k$. $\mathbf{P}$ should be chosen to be easily invertible
 and to keep the computational cost low, for example, diagonal preconditioner
 \footnote{section 4.3.2}. 
 
@@ -419,13 +420,148 @@ we have:
     = \mathbf{p}^T \left( \mathbf{r}^{(k)} - \mathbf{A}\mathbf{q} \right)
     = - \mathbf{p}^T \mathbf{A}\mathbf{q} = 0
 \end{align*}
-Therefore, the descent direction $\mathbf{q}$ must be \emph{$\mathbf{A}$ orthogonal} to 
+Therefore, the descent direction $\mathbf{q}$ must be \emph{$\mathbf{A}$-orthogonal} to 
 $\mathbf{p}$. 
 
+The process of conjugate gradient method start by choosing $\mathbf{x}^{(0)}$ and 
+we obtain $\mathbf{r}^{(0)}$. We let the initial direction $\mathbf{p}^{(0)}$ to be 
+\[\mathbf{p}^{(0)} = \mathbf{r}^{(0)}\]
+and update the solution using
+\begin{equation}
+    \mathbf{x}^{(k+1)} = \mathbf{x}^{(k)} + \alpha_k \mathbf{p}^{(k)}
+\end{equation}
+where $\alpha_k$ is chosen so that $\mathbf{x}^{(k+1)}$ \emph{is} optimal to the 
+direction $\mathbf{p}^{(k)}$, i.e., $\left.\mathbf{r}^{(k+1)}\right.^T \mathbf{p}^{(k)} = 0$.
+After the next $\mathbf{x}^{(k+1)}$ is chosen, we evalulate the residual $\mathbf{r}^{(k+1)}$
+and update the direction so that
+\begin{equation}
+    \mathbf{p}^{(k+1)} = \mathbf{r}^{(k+1)} - \beta_k \mathbf{p}^{(k)}
+\end{equation}
+where $\beta$ is determined so that $\mathbf{p}^{(k+1)}$ and $\mathbf{p}^{(k)}$
+is $\mathbf{A}$-orthogonal:
+\begin{gather}
+    \left(\mathbf{A} \mathbf{p}^{(k)} \right)^T \mathbf{p}^{(k+1)} = 0 \\
+    \beta_k = \frac{\left(\mathbf{A} \mathbf{p}^{(k)} \right)^T \mathbf{r}^{(k+1)}}{\left(\mathbf{A} \mathbf{p}^{(k)} \right)^T \mathbf{p}^{(k)}}
+\end{gather}
+so that $\mathbf{x}^{(k+2)}$ is still optimal with respect to $\mathbf{p}^{(k)}$. 
 
+The updates of the conjugate gradient method can be summarized by the above equation:
+\begin{align*}
+    & \alpha_k = 
+    \frac{\left.\mathbf{p}^{(k)}\right.^T \mathbf{r}^{(k)}}
+    {\left.\mathbf{p}^{(k)}\right.^T \mathbf{A} \mathbf{p}^{(k)}} \\
+    & \mathbf{x}^{(k+1)} = \mathbf{x}^{(k)} + \alpha_k \mathbf{p}^{(k)} \\
+    & \mathbf{r}^{(k+1)} = \mathbf{r}^{(k)} - \alpha_k \mathbf{A}\mathbf{p}^{(k)} \\
+    & \beta_k = \frac{\left(\mathbf{A} \mathbf{p}^{(k)} \right)^T \mathbf{r}^{(k+1)}}{\left(\mathbf{A} \mathbf{p}^{(k)} \right)^T \mathbf{p}^{(k)}} \\
+    & \mathbf{p}^{(k+1)} = \mathbf{r}^{(k+1)} - \beta_k \mathbf{p}^{(k)}
+\end{align*}
 
-\pagebreak
-\section*{Appendix A}
+We can show that in fact, using this update strategy, $\mathbf{p}^{(k+1)}$ is $\mathbf{A}$-orthogonal
+to all the previous $\mathbf{p}^{(j)}$ for $j = 0,1,\dots,k$.
+This can be proven by induction: 
+$\mathbf{p}^{(1)}$ is by design $\mathbf{A}$-orthogonal to $\mathbf{p}^{(0)}$. 
+If the directions $\mathbf{p}^{(0)}, \dots, \mathbf{p}^{(k-1)}$ are mutually $\mathbf{A}$-orthogonal
+and $\mathbf{x}^{(k)}$ is optimal to all these directions, we have, for 
+$j = 0, 1, \dots, k-1$:
+\begin{align*}
+    \left(\mathbf{A} \mathbf{p}^{(j)} \right)^T \mathbf{p}^{(k+1)} 
+    &= \left(\mathbf{A} \mathbf{p}^{(j)} \right)^T 
+            \left( \mathbf{r}^{(k+1)} - \beta_k \mathbf{p}^{(k)} \right) \\ 
+    &= \left(\mathbf{A} \mathbf{p}^{(j)} \right)^T \mathbf{r}^{(k+1)} 
+\end{align*}
+On the other hand, we have:
+\begin{align*}
+    \left(\mathbf{p}^{(j)} \right)^T \mathbf{r}^{(k+1)} 
+    &= \left(\mathbf{p}^{(j)} \right)^T 
+        \left( \mathbf{r}^{(k)} - \alpha_k \mathbf{A}\mathbf{p}^{(k)}\right)  \\
+    &= \left(\mathbf{p}^{(j)} \right)^T \mathbf{r}^{(k)} 
+       - \alpha_k  \left(\mathbf{p}^{(j)} \right)^T \mathbf{A}\mathbf{p}^{(k)} = 0
+\end{align*}
+for all $j = 0, 1, \dots, k-1$ because of the assumption of optimal and mutual $\mathbf{A}$-orthogonality.
+$\left.\mathbf{p}^{(j)} \right.^T \mathbf{r}^{(k+1)} = 0$ shows that $\mathbf{r}^{(k+1)}$ is 
+orthogonal to all the vectors $\mathbf{p}^{(j)}$ and therefore to the vector space 
+$V_k = \spn(\mathbf{p}^{(0)}, \dots, \mathbf{p}^{(k-1)})$. 
+Since we update $\mathbf{p}$ by:
+\begin{align*}
+    & \mathbf{p}^{(0)} = \mathbf{r}^{(0)} \\
+    & \mathbf{r}^{(k+1)} = \mathbf{r}^{(k)} - \alpha_k \mathbf{A}\mathbf{p}^{(k)} \\
+    & \mathbf{p}^{(k+1)} = \mathbf{r}^{(k+1)} - \beta_k \mathbf{p}^{(k)}
+\end{align*}
+we can see that $\spn(\mathbf{p}^{(0)}, \dots, \mathbf{p}^{(k-1)})$ is equal to 
+$\spn(\mathbf{r}^{(0)}, \dots, \mathbf{r}^{(k-1)})$ and $\mathbf{A}\mathbf{p}^{(j)} \in V_{j+1}$.
+As a result, if $\mathbf{r}^{(k+1)}$ is orthogonal to $V_k$, 
+$\mathbf{r}^{(k+1)}$ is also orthogonal to all the vectors $\mathbf{A} \mathbf{p}^{(j)}$:
+\begin{equation}
+    \left(\mathbf{A} \mathbf{p}^{(j)} \right)^T \mathbf{r}^{(k+1)} = 0
+\end{equation}
+which proves that 
+\begin{equation}
+    \left(\mathbf{A} \mathbf{p}^{(j)} \right)^T \mathbf{p}^{(k+1)} = 0
+\end{equation}
+Therefore, if $\mathbf{p}^{(0)}, \dots, \mathbf{p}^{(k-1)}$ are mutually $\mathbf{A}$-orthogonal
+and $\mathbf{x}^{(k)}$ is optimal to all these directions, $\mathbf{p}^{(k)}$ is also mutually
+$\mathbf{A}$-orthogonal.
 
+Therefore, conjugate gradient method gives a optimal path to obtain the solution to the linear equation.
+Regarding conjugate gradient method, we have the following theorem 
+\begin{theorem}
+If $\mathbf{A}$ is a symmetric and positive definite matrix, any method that use 
+conjugate directions to find solution terminate at most $n$ steps, yielding the exact solution.    
+\end{theorem}
+
+\subsection{Methods based on Krylov Subspace}
+Starting from Richardson method (i.e., we do not require symmetric or positive definit matrix), 
+we have the generalization of iteration method:
+\begin{align*}
+    \mathbf{x}^{(k+1)} &= \mathbf{x}^{(k)} + \alpha_k \mathbf{P}^{-1}\mathbf{r}^{(k)} \\
+    \mathbf{r}^{(k+1)} &= \mathbf{r}^{(k)} - \alpha_k \mathbf{A} \mathbf{P}^{-1}\mathbf{r}^{(k)}
+\end{align*}
+letting $\mathbf{P} = \mathbf{I}$, we have, for the residual:
+\begin{equation}
+    \mathbf{r}^{(k)} = \prod_{j=0}^{k-1} \left(\mathbf{I} - \alpha_j \mathbf{A}\right) \mathbf{r}^{(0)} 
+    = p_k(\mathbf{A}) \mathbf{r}^{(0)}
+\end{equation}
+where $p_k(\mathbf{A})$ is the polynomial in $\mathbf{A}$ of degree $k$. Similarly, the iteration 
+in Richardson method is given by:
+\begin{equation}
+    \mathbf{x}^{(k+1)} = \mathbf{x}^{(0)} + \sum_{j=0}^{k-1} \alpha_j \mathbf{r}^{(j)}
+\end{equation}
+Define the \emph{Krylov subspace}
+$K_m(\mathbf{A},\mathbf{v}) = \spn( \mathbf{v}, \mathbf{A}\mathbf{v}, \dots, \mathbf{A}^{m-1}\mathbf{v} )$,
+we have $p_{k-1}(\mathbf{A}) \mathbf{v} \in K_m(\mathbf{A},\mathbf{v})$ for any polynomial in $\mathbf{A}$.
+So that 
+\begin{align*}
+    \mathbf{r}^{(k+1)} &\in K_{k+1}(\mathbf{A},\mathbf{r}^{(0)}) \\
+    \mathbf{x}^{(k)} &\in \{\mathbf{v}\mid \mathbf{v} = \mathbf{x}^{(0)} + \mathbf{y}, \mathbf{y} \in K_{k}(\mathbf{A},\mathbf{r}^{(0)})\}
+\end{align*}
+and we denote the vector space:
+\begin{equation}
+    W_k = \{\mathbf{v}\mid \mathbf{v} = \mathbf{x}^{(0)} + \mathbf{y}, \mathbf{y} \in K_{k}(\mathbf{A},\mathbf{r}^{(0)})\}
+\end{equation}
+so that $\mathbf{x}^{(k)} \in W_k$
+
+Therefore, generally, we can search for an solution of $\mathbf{x}^{(k)}$ in the form:
+\begin{equation}
+    \mathbf{x}^{(k)} = \mathbf{x}^{(0)} + p_{k-1}(\mathbf{A}) \mathbf{r}^{(0)}
+\end{equation}
+Methods that look for solution in this form is known as the \emph{Krylov method}. 
+To search for a candidate for $\mathbf{x}^{(k)}$, two approach can be used:
+
+The first method computes $\mathbf{x}^{(k)}\in W_k$ by enforcing that the residual $\mathbf{r}^{(k)}$
+to be orthogonal to any vector in $K_{k}(\mathbf{A},\mathbf{r}^{(0)})$, i.e, 
+\begin{equation}
+    \mathbf{v}^T \left( \mathbf{b} - \mathbf{A} \mathbf{x}^{(k)} \right) = 0
+    ,\quad \text{for all}\ \mathbf{v} \in K_{k}
+\end{equation}
+This method is known as the \emph{Arnoldi} method (or full orthogonalization method) for linear system.
+
+The second method require that $\mathbf{x}^{(k)}$ to be the 
+vector that minimize the euclidean norm of the residual:
+\begin{equation}
+    \|\mathbf{b} - \mathbf{A} \mathbf{x}^{(k)}\|_2 
+    = \min_{v\in W_k} \|\mathbf{b} - \mathbf{A} \mathbf{v}\|_2
+\end{equation}
+This method is known as the generalized minimum residual method (GMRES). Both method should converge after 
+finite steps.
 
 \end{document}
