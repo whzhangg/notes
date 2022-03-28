@@ -6,7 +6,10 @@
 \usepackage{hyperref} % \url \href
 
 \DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\range}{range}
 \newcommand{\pfrac}[2]{\frac{\partial #1}{\partial #2}}
+\newtheorem*{theorem}{Theorem}
+\newtheorem*{definition}{Definition}
 % \renewcommand{\H}{\mathcal{H}}
 
 \begin{document}
@@ -34,8 +37,8 @@ condition holds:
 The solution of the linear equation can be formally obtained using \emph{Cramer's rule}:
 \[x_j = \frac{\Delta_j}{\det(A)},\qquad j = 1, \dots, m\]
 where $\Delta_j$ is the determinant of the matrix obtained by substituting the $j$-th 
-column of $\mathbf{A}$ with the right hand side $\mathbf{b}$
-\footnote{https://www.math.purdue.edu/~shao92/documents/Proof_Cramer_rule.pdf provide a short proof}.
+column of $\mathbf{A}$ with the right hand side $\mathbf{b}$.
+\footnote{\url{https://www.math.purdue.edu/~shao92/documents/Proof_Cramer_rule.pdf} provide a short proof}.
 
 However, the evaluation of the determinant is computational expensive (summing over all 
 permutations) and impractice for application. Numerical methods that are alternative to 
@@ -80,10 +83,345 @@ For upper triangular matrix ($\mathbf{U}\mathbf{x} = \mathbf{b}$), we can use si
 \emph{backward substitution} method.
 
 \subsection{Gaussian elimination method}
-The \emph{Gaussian elimiation} method reduce the linear equation 
+The \emph{Gaussian elimiation} (GE) method reduce the linear equation 
 $\mathbf{A}\mathbf{x} = \mathbf{b}$ to an equivalent equation 
 of the form $\mathbf{U}\mathbf{x} = \tilde{\mathbf{b}}$ where $\tilde{\mathbf{b}}$
-is the updated right hand side.
+is the updated right hand side. 
+This is done by eliminating the leading columns to zero by adding appropriately multiplied 
+previous row to the current row, for example:
+\begin{align*}
+    \left(\begin{matrix}
+        a_{11} & a_{12} \\
+        a_{21} & a_{22} 
+    \end{matrix}\right)
+    \left(\begin{matrix}
+        x_1 \\ x_2
+    \end{matrix}\right) &= 
+    \left(\begin{matrix}
+        b_1 \\ b_2
+    \end{matrix}\right) \\
+    \left(\begin{matrix}
+        a_{11} & a_{12} \\
+        0 & a_{22} - \frac{a_{21}}{a_{11}} a_{12}
+    \end{matrix}\right)
+    \left(\begin{matrix}
+        x_1 \\ x_2
+    \end{matrix}\right) &= 
+    \left(\begin{matrix}
+        b_1 \\ b_2 - \frac{a_{21}}{a_{11}} b_1
+    \end{matrix}\right)
+\end{align*}
+Formally, we denote $\mathbf{A}^{(k)}$ and $\mathbf{b}^{(k)}$ as updates of the 
+original matrix $\mathbf{A}$ and $\mathbf{b}$. Assuming that $a_{kk}^{(k)}\neq 0$ and 
+we can define the multiplier:
+\begin{equation}
+    m_{ik} = \frac{a_{ik}^{(k)}}{a_{kk}^{(k)}} 
+    ,\qquad i = k+1, \dots, n
+\end{equation}
+so that the updates can be written as
+\begin{align*}
+    a_{ij}^{(k+1)} &= a_{ij}^{(k)} - m_{ik}a_{kj}^{(k)}
+    ,\qquad i,j = k+1, \dots, n \\
+    b_{i}^{(k+1)} &= b_{i}^{(k)} - m_{ik}a_{k}^{(k)}
+    ,\qquad i = k+1, \dots, n \\
+\end{align*}
+the term $a_{kk}^{(k)}$ is called pivots. Matrix $\mathbf{A}$ may have non-zero pivots so 
+that the elimination process is interrupted following the above form. In this case, a 
+permutation can be applied to the matrix (Pivoting technique Section 3.5).
+
+Gaussian elmiination process is equivalent to performing a matrix factorization of $\mathbf{A}$
+into the product of two matrices, lower and upper triangular matrix:
+\[\mathbf{A} = \mathbf{L} \mathbf{U}\]
+in a similar process as in GE. 
+Once the matrices $\mathbf{A}$ and $\mathbf{A}$ have been computed, we can solve the linear 
+system as:
+\begin{align*}
+    \mathbf{L}\mathbf{y} = \mathbf{b} \\
+    \mathbf{U}\mathbf{x} = \mathbf{y}
+\end{align*}
+i.e., by solving two triangular system.
+
+\subsection{$\mathbf{L} \mathbf{D} \mathbf{M}^T$ factorization}
+A square matrix $\mathbf{A}$ can be factorized in the form of:
+\begin{equation}
+    \mathbf{A} = \mathbf{L} \mathbf{D} \mathbf{M}^T
+\end{equation}
+where $\mathbf{L}, \mathbf{D}, \mathbf{M}^T$ are lower trianglular, diagonal and 
+upper diagonal matrix. The solution of this system can be carried out by 
+\begin{align*}
+    \mathbf{L}  \mathbf{y} = \mathbf{b} \\
+    \mathbf{D}  \mathbf{z} = \mathbf{y} \\
+    \mathbf{M}^T\mathbf{x} = \mathbf{z} \\
+\end{align*}
+
+\subsection{Cholesky factorization}
+If $\mathbf{A}$ is symmetric and positive definit, then there exists a unique 
+\emph{upper triangular} matrix $\mathbf{H}$ with positive diagonal entries so 
+that 
+\[ \mathbf{A} = \mathbf{H}^T \mathbf{H} \]
+This is called \emph{Cholesky factorization} and the entries can be computed as:
+\begin{align*}
+    h_{11} &= \sqrt{a_{11}} \\
+    h_{ij} &= \left( a_{ij} - \sum_{k=1}^{j-1} h_{ik}h_{jk} \right) / h_{jj}, \qquad j = 1,\dots,i-1 \\
+    h_{ii} &= \left( a_{ii} - \sum_{k=1}^{i-1} h_{ik}^2 \right)^{1/2}
+\end{align*}
+and the solution of the linear system can be obtained by substitution method.
+
+\subsection{Undetermined systems}
+When matrix $\mathbf{A}^{m\times n}$ is not a square matrix, we say that 
+the solution of $\mathbf{A}\mathbf{x} = \mathbf{b}$ is \emph{overdetermined} if $m>n$ 
+or \emph{underdetermined} if $m < n$. 
+If a system is underdetermined, therre is generally no solution unless 
+$\mathbf{b}\in \range(\mathbf{A})$
+
+If a system is overdetermined $m \leq n$, we say that $\mathbf{x}^*$ is a solution
+of the linear system $\mathbf{A}\mathbf{x} = \mathbf{b}$ \emph{in the least squares sense}
+if 
+\begin{equation}
+    \Phi(\mathbf{x}^*) = \|\mathbf{A}\mathbf{x}^* - \mathbf{b}\|_2^2 
+    \leq \min_{\mathbf{x}} \|\mathbf{A}\mathbf{x} - \mathbf{b}\|_2^2 
+    = \min_{\mathbf{x}} \Phi(\mathbf{x})
+\end{equation}
+i.e, the $\mathbf{x}^*$ closet to satisfy the linear system. Now the problem 
+become a minimization problem and can be found by:
+\begin{gather*}
+    \Phi(\mathbf{x}) 
+    = (\mathbf{A}\mathbf{x} - \mathbf{b})^T (\mathbf{A}\mathbf{x} - \mathbf{b})
+    = \mathbf{x}^T \mathbf{A}^T \mathbf{A} \mathbf{x} - 2 \mathbf{x}^T \mathbf{A}^T \mathbf{b} 
+      +  \mathbf{b}^T \mathbf{b} \\
+    \nabla \Phi(\mathbf{x}^*) 
+    = 2 \mathbf{A}^T \mathbf{A} \mathbf{x}^* - 2 \mathbf{A}^T \mathbf{b} = 0 \\
+    \mathbf{A}^T \mathbf{A} \mathbf{x}^* = \mathbf{A}^T \mathbf{b}
+\end{gather*}
+where the last equation is known as \emph{normal equations}. If $\mathbf{A}$ is full rank, the 
+least-squares solution exists and is unique. 
+Since $\mathbf{B} = \mathbf{A}^T \mathbf{A}$ is symmetry and positive definite, we can use 
+Cholesky factorization to solve the normal equation to obtain the solution
+\footnote{another method is QR factorization, which is not covered here}.
+
+If $\mathbf{A}$ is not full rank, than the solution is not unique, since if $\mathbf{x}^*$ 
+is a solution, than $\mathbf{x}^* + \mathbf{z}$ is also a solution. To make solution unique,
+we need to introduce a further constraint. Typically, we can require that $\mathbf{x}^*$
+has a minimal euclidean norm $\|\mathbf{x}^*\|$.
+This is consistent with the full rank case where only one unique solution that has the 
+minimal euclidean norm. 
+
+\subsection{Solution using SVD}
+The above problem with the minimal norm requirement can be solved using SVD.
+Let $\mathbf{A}\in \mathbb{R}^{m\times n}$ with SVD given by 
+$\mathbf{A} = \mathbf{U}\Sigma \mathbf{V}^T$, then the unique solution is 
+given by
+\[\mathbf{x}^* = \tilde{\mathbf{A}} \mathbf{b}\]
+where $\tilde{\mathbf{A}}$ is the \emph{Pseudo-inverse} of $\mathbf{A}$.
+
+\section{Iterative solution}
+\subsection{Convergence of iterative methods}
+The basic idea of iterative methods is to construct a sequence of vectors 
+$\mathbf{x}^{(k)}$:
+\[\mathbf{x} = \lim_{k\to \infty} \mathbf{x}^{(k)}\]
+
+We consider the iterative methods of the form 
+\[\mathbf{x}^{(k+1)} = \mathbf{B}\mathbf{x}^{(k)} + \mathbf{f}\]
+with $\mathbf{x}^{(0)}$ (initial guess) given. $\mathbf{B}$ is called the iteration matrix.
+
+An iterative method is called \emph{consistent} if 
+$\mathbf{x} = \mathbf{B}\mathbf{x} + \mathbf{f}$, but the consistency does not necessary lead
+to convergence. 
+\begin{theorem}
+    For a consistent iterative method, the sequence of $x^{(k)}$ converge to the solution 
+    of the linear system for any choice of $\mathbf{x}^{(0)}$ if and only if 
+    $\rho(\mathbf{B}) < 1$. $\rho(\mathbf{B})$ is the spectral radius of $\mathbf{B}$ 
+    denoted by
+    \[\rho(\mathbf{B}) = \max_{\lambda} |\lambda|\] 
+    the maximum modules of the eigenvalue.
+\end{theorem}
+
+In the most general form, we can write an iteration method as:
+\begin{align*}
+    \mathbf{x}^{(0)} &= f_0(\mathbf{A}, \mathbf{b}) \\
+    \mathbf{x}^{(n+1)} &= f_{n+1}(\mathbf{x}^{(n)}, \mathbf{x}^{(n-1)}, \dots,  \mathbf{x}^{(n-m)}, \mathbf{A}, \mathbf{b}) \\
+\end{align*}
+where $f$ are functions that take both the problem, as well as results of the previous 
+$m$ iterations. We call $m$ the \emph{order of the method}. 
+A method is called \emph{stationary} if the function $f_i$ is independent of the step index $i$, 
+otherwise it is called \emph{nonstationary}. If the function $f$ depend linearly on previous steps 
+$\mathbf{x}^{(n)}, \mathbf{x}^{(n-1)}, \dots,  \mathbf{x}^{(n-m)}$, it is called a 
+\emph{linear} method. Otherwise it is called \emph{nonlinear}. 
+
+\subsection{Stationary linear iterative methods}
+The general technique of linear iterative method is to split the matrix $\mathbf{A}$
+into form 
+\[\mathbf{A} = \mathbf{P} - \mathbf{N}\]
+and $\mathbf{P}$ is non-singular (invertible). We call $\mathbf{P}$ the 
+preconditioning matrix. We update the solution by:
+\[\mathbf{P}\mathbf{x}^{(k+1)} = \mathbf{N}\mathbf{x}^{(k)} + \mathbf{b}\]
+We can verify that the above equation can be equivalently written as:
+\[\mathbf{x}^{(k+1)} = \mathbf{x}^{(k)} + \mathbf{P}^{-1}\mathbf{r}^{(k)}\]
+where $\mathbf{r}^{k} = \mathbf{b} - \mathbf{A}\mathbf{x}^{(k)}$, which is called 
+the \emph{residual vector} at step $k$. $\mathbf{P}$ should be choosen to be easily invertible
+and to keep the computational cost low, for example, diagonal preconditioner
+\footnote{section 4.3.2}. 
+
+\subsubsection{Jacobi method}
+If the diagonal entries of matrix $\mathbf{A}$ are non-zero, we can rewrite the 
+original linear equations as:
+\begin{equation}
+    x_i = \frac{1}{a_{ii}}\left[
+        b_i - \sum_{j=1, j\neq i}^n a_{ij}x_j
+    \right], \quad i = 1, \dots, n
+\end{equation}
+The \emph{Jacobi method} updates the solution according to this form:
+\begin{equation}
+    x_i^{(k+1)} = \frac{1}{a_{ii}}\left[
+        b_i - \sum_{j=1, j\neq i}^n a_{ij}x_j^{(k)}
+    \right], \quad i = 1, \dots, n
+\end{equation}
+The Jacobi method can be equivalently formulated as 
+$\mathbf{A} = \mathbf{D} - \mathbf{N}$ where $\mathbf{D}$ is a diagonal matrix.
+
+\subsubsection{Over-relaxation}
+Based on Jacobi method, we introduce a relaxation parameter $\omega$, so that 
+the iteration is now:
+\begin{equation}
+    x_i^{(k+1)} = \frac{\omega}{a_{ii}}\left[
+        b_i - \sum_{j=1, j\neq i}^n a_{ij}x_j^{(k)}
+    \right] + (1-\omega)x_j^{(k)}
+\end{equation}
+
+\subsubsection{Gauss-Seidel method}
+The \emph{Gauss-Seidel method} differ from the Jacobi method in that the $(k+1)$
+step uses the available values of $x_i^{(k+1)}$ to update the solution, so that 
+we have:
+\begin{equation}
+    x_i^{(k+1)} = \frac{1}{a_{ii}}\left[
+        b_i - \sum_{j=1}^{i-1}a_{ij}x_j^{(k+1)} - \sum_{j = i+1}^n a_{ij}x_j^{(k)}
+    \right], \quad i = 1, \dots, n
+\end{equation}
+which is equivalent to splitting $\mathbf{A}$ as 
+\[\mathbf{A} = (\mathbf{D}-\mathbf{E}) - \mathbf{F}\] where $\mathbf{E}$ is a 
+lower triangular matrix and $\mathbf{F}$ is a upper triangular matrix. 
+The relaxation parameter can also be applied to the Gauss-Seidel method.
+
+\subsection{Non-stationary Richardson method}
+The above iterative method can be written as 
+\begin{align*}
+    \mathbf{x}^{(k+1)} &= \mathbf{x}^{(k)} + \mathbf{P}^{-1}\mathbf{r}^{(k)} \\
+    &= \mathbf{x}^{(k)} + \mathbf{P}^{-1} \left(\mathbf{b} - \mathbf{A}\mathbf{x}^{(k)} \right) \\
+    &= \left( \mathbf{I} - \mathbf{P}^{-1}\mathbf{A}  \right) \mathbf{x}^{(k)} + \mathbf{P}^{-1} \mathbf{b} 
+\end{align*}
+Denoting $\mathbf{I} - \mathbf{P}^{-1}\mathbf{A} = \mathbf{R_p}$ as the 
+iteration matrix. 
+In \emph{Richardson method}, we let
+\begin{equation}
+    \mathbf{x}^{(k+1)} = \mathbf{x}^{(k)} + \alpha_k \mathbf{P}^{-1}\mathbf{r}^{(k)}
+\end{equation}
+where $\alpha_k$ is a number depend on the current state and is 
+called \emph{acceleration parameter}. Computationally, the solution can be computed 
+by the following steps:
+\begin{enumerate}
+    \item We first find $\mathbf{z}^{k} = \mathbf{P}^{-1}\mathbf{r}^{(k)}$
+    \item compute the acceleration parameter $\alpha_k$
+    \item update the solution $\mathbf{x}^{(k+1)} = \mathbf{x}^{(k)} + \alpha_k \mathbf{z}^{k}$
+    \item update the residual $\mathbf{r}^{(k+1)} = \mathbf{r}^{(k)} - \alpha_k \mathbf{A} \mathbf{z}^{k}$ 
+\end{enumerate}
+
+\subsection{Gradient method}
+In the case that $\mathbf{A}$ is symmetric and positive definite, we can use gradient
+to compute the optimal acceleration parameter. This is called the 
+\emph{gradient method}. 
+Solution to the linear equation $\mathbf{A}\mathbf{x} = \mathbf{b}$ is equivalent 
+to finding the minimizer $\mathbf{x}$ of the \emph{energy of system}
+\begin{equation}
+    \Phi(\mathbf{y}) 
+    = \frac{1}{2}\mathbf{y}^T \mathbf{A} \mathbf{y} - \mathbf{y}^T \mathbf{b}
+\end{equation}
+We can verify that the gradient of energy is given by the expression
+\begin{equation}
+    \nabla \Phi(\mathbf{y}) = \frac{1}{2} (\mathbf{A}^T + \mathbf{A}) \mathbf{y} - \mathbf{b}
+     = \mathbf{A} \mathbf{y} - \mathbf{b}
+\end{equation}
+which is 0 when the solution is found, and
+\begin{equation}
+    \Phi(\mathbf{y}) = \Phi(\mathbf{x} + (\mathbf{y} - \mathbf{x}))
+    = \Phi(\mathbf{x}) + \frac{1}{2} (\mathbf{y} - \mathbf{x}) ^T \mathbf{A} (\mathbf{y} - \mathbf{x})
+\end{equation}
+we call $(\mathbf{y} - \mathbf{x}) ^T \mathbf{A} (\mathbf{y} - \mathbf{x})$ 
+the $\mathbf{A}$-norm: 
+\begin{equation}
+    \|\mathbf{y} - \mathbf{x}\|^2_{\mathbf{A}} 
+    = (\mathbf{y} - \mathbf{x}) ^T \mathbf{A} (\mathbf{y} - \mathbf{x})
+\end{equation} 
+The gradient of the energy norm at iteration $\mathbf{x}^{(k)}$ is found by to be:
+\begin{equation}
+    \nabla \Phi(\mathbf{x}^{(k)}) = \mathbf{A} \mathbf{x}^{(k)} - \mathbf{b} = -\mathbf{r}^{(k)}
+\end{equation}
+Therefore, the residual give the direction of the gradient of $\Phi$ and the 
+update is thus given by
+\begin{equation}
+    \mathbf{x}^{(k+1)} = \mathbf{x}^{(k)} + \alpha_k \mathbf{r}^{(k)}
+\end{equation}
+where the acceleration parameter $\alpha_k$ gives the distance. 
+To obtain a value for $\alpha_k$, 
+we hope that the updated solution $\mathbf{x}^{(k+1)}$ lie approximately at the minimum. So we 
+differential 
+\begin{equation}
+    \Phi(\mathbf{x}^{(k+1)}) 
+    = \frac{1}{2}(\mathbf{x}^{(k)} + \alpha_k \mathbf{r}^{(k)})^T 
+    \mathbf{A} (\mathbf{x}^{(k)} + \alpha_k \mathbf{r}^{(k)}) 
+    - (\mathbf{x}^{(k)} + \alpha_k \mathbf{r}^{(k)})^T \mathbf{b}
+\end{equation}
+with respect to $\alpha_k$ and letting it equal 0. The result for $\alpha_k$ is:
+\begin{equation}
+    \label{alpha_k}
+    \alpha_k = 
+    \frac{\left.\mathbf{r}^{(k)}\right.^T \mathbf{r}^{(k)}}
+    {\left.\mathbf{r}^{(k)}\right.^T \mathbf{A} \mathbf{r}^{(k)}}
+\end{equation}
+
+In summary, the computation procedure for gradient method is:
+\begin{enumerate}
+    \item given $\mathbf{x}^{(0)}$, we compute the residual 
+        $\mathbf{r}^{(k)} = \mathbf{b} - \mathbf{A}\mathbf{x}^{(k)}$
+    \item compute the acceleration parameter according to Equation \eqref{alpha_k}
+    \item update the result using $\mathbf{x}^{(k+1)} = \mathbf{x}^{(k)} + \alpha_k \mathbf{r}^{(k)}$
+\end{enumerate}
+
+\subsection{Conjugate gradient method}
+Although gradient method follow the gradient at each point of the solution $\mathbf{x}^{(k)}$,
+the solution path may not be the most optimal. In conjugate gradient method, we try to find 
+the optimal path of updates with:
+\begin{equation}
+    \mathbf{x}^{(k+1)} = \mathbf{x}^{(k)} + \alpha_k \mathbf{p}^{(k)}
+\end{equation}
+with $\alpha_k$ still given by minimizing the energy of system with respect to $\alpha$:
+\begin{equation}
+    \alpha_k = 
+    \frac{\left.\mathbf{p}^{(k)}\right.^T \mathbf{r}^{(k)}}
+    {\left.\mathbf{p}^{(k)}\right.^T \mathbf{A} \mathbf{p}^{(k)}}
+\end{equation}
+But now we want the updates to be on optmial steps, so we have to determine the 
+direction $\mathbf{p}^{(k)}$.
+\begin{definition}
+    $\mathbf{x}^{(k)}$ is said to be \emph{optimal} with respect to a direction $\mathbf{p}\neq 0$
+    if \[\Phi(\mathbf{x}^{(k)})\leq \Phi(\mathbf{x}^{(k)} + \lambda \mathbf{p})\]
+    for any $\lambda$. If $\mathbf{x}^{(k)}$ is optimal with respect to any direction in a vector 
+    space $V$, then we call $\mathbf{x}^{(k)}$ \emph{optimal with respect to} V
+\end{definition}
+For $\mathbf{x}^{(k)}$ to be optimal with respect to $\mathbf{p}$, it is necessary that 
+the residual (gradient) $\mathbf{r}^{(k)}$ is perpendicular to the direction $\mathbf{p}$.
+
+Suppose $\mathbf{x}^{(k)}$ is optimal w.r.t $\mathbf{p}$ and we update by 
+\[\mathbf{x}^{(k+1)} = \mathbf{x}^{(k)} + \mathbf{q}\]
+If we require that $\mathbf{x}^{(k+1)}$ is still optimal to $\mathbf{p}$, then 
+we have:
+\begin{align*}
+    \mathbf{p}^T \mathbf{r}^{(k+1)} 
+    = \mathbf{p}^T \left( \mathbf{r}^{(k)} - \mathbf{A}\mathbf{q} \right)
+    = - \mathbf{p}^T \mathbf{A}\mathbf{q} = 0
+\end{align*}
+Therefore, the descent direction $\mathbf{q}$ must be \emph{$\mathbf{A}$ orthogonal} to 
+$\mathbf{p}$. 
+
 
 
 \pagebreak
