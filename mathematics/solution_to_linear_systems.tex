@@ -66,7 +66,7 @@ For a non-singular lower triangular system, such as:
 the solution can be obtained as:
 \begin{align*}
     x_1 &= b_1 / l_{11} \\
-    x_2 &= (b_2 - l_{21} x_1 ) / l_{22} 
+    x_2 &= (b_2 - l_{21} x_1 ) / l_{22} \\
     x_3 &= (b_3 - l_{31} x_1 - l_{32} x_2) / l_{33}
 \end{align*}
 Such algorithm can be extended to $n\times n$ systems 
@@ -126,7 +126,7 @@ so that the updates can be written as
     b_{i}^{(k+1)} &= b_{i}^{(k)} - m_{ik}a_{k}^{(k)}
     ,\qquad i = k+1, \dots, n \\
 \end{align*}
-the term $a_{kk}^{(k)}$ is called pivots. Matrix $\mathbf{A}$ may have non-zero pivots so 
+the term $a_{kk}^{(k)}$ is called pivots. Matrix $\mathbf{A}$ may have zero-valued pivots so 
 that the elimination process is interrupted following the above form. In this case, a 
 permutation can be applied to the matrix (Pivoting technique Section 3.5).
 
@@ -134,7 +134,7 @@ Gaussian elmiination process is equivalent to performing a matrix factorization 
 into the product of two matrices, lower and upper triangular matrix:
 \[\mathbf{A} = \mathbf{L} \mathbf{U}\]
 in a similar process as in GE. 
-Once the matrices $\mathbf{A}$ and $\mathbf{A}$ have been computed, we can solve the linear 
+Once the matrices $\mathbf{L}$ and $\mathbf{U}$ have been computed, we can solve the linear 
 system as:
 \begin{align*}
     \mathbf{L}\mathbf{y} = \mathbf{b} \\
@@ -143,6 +143,7 @@ system as:
 i.e., by solving two triangular system.
 
 \subsection{$\mathbf{L} \mathbf{D} \mathbf{M}^T$ factorization}
+There are other factorization method to solve the linear equation.
 A square matrix $\mathbf{A}$ can be factorized in the form of:
 \begin{equation}
     \mathbf{A} = \mathbf{L} \mathbf{D} \mathbf{M}^T
@@ -172,7 +173,7 @@ and the solution of the linear system can be obtained by substitution method.
 When matrix $\mathbf{A}^{m\times n}$ is not a square matrix, we say that 
 the solution of $\mathbf{A}\mathbf{x} = \mathbf{b}$ is \emph{overdetermined} if $m>n$ 
 or \emph{underdetermined} if $m < n$. 
-If a system is underdetermined, therre is generally no solution unless 
+If a system is underdetermined, there is generally no solution unless 
 $\mathbf{b}\in \range(\mathbf{A})$
 
 If a system is overdetermined $m \leq n$, we say that $\mathbf{x}^*$ is a solution
@@ -215,7 +216,24 @@ given by
 \[\mathbf{x}^* = \tilde{\mathbf{A}} \mathbf{b}\]
 where $\tilde{\mathbf{A}}$ is the \emph{Pseudo-inverse} of $\mathbf{A}$.
 
+\newpage
 \section{Iterative solution}
+\subsection{Definitions}
+let $\|\cdot\|$ denote a norm on $\mathbb{R}^N$ vector space,
+we call the induced matrix 
+norm of a square matrix $\mathbf{A}$:
+\begin{equation}
+    \|\mathbf{A}\|=\max_{\|x\|=1} \|\mathbf{A}\mathbf{x}\|
+\end{equation}
+which has the property
+\begin{equation}
+    \|\mathbf{A}\mathbf{x}\| \leq \|\mathbf{A}\| \|\mathbf{x}\|
+\end{equation}
+\begin{definition}
+    We define the condition number of a matrix $\mathbf{A}$ as:
+    \[\kappa(A) = \|\mathbf{A}\| \|\mathbf{A^{-1}}\|\] 
+\end{definition}
+
 \subsection{Convergence of iterative methods}
 The basic idea of iterative methods is to construct a sequence of vectors 
 $\mathbf{x}^{(k)}$:
