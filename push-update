@@ -1,0 +1,8 @@
+#!/bin/bash
+
+commit_message="Regular Updates"
+
+git commit -m "$commit_message"; git push
+
+
+
