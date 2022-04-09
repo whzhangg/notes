@@ -1,0 +1,12 @@
+{
+  "blue-topaz-theme@@background-image-settings-switch": true,
+  "blue-topaz-theme@@font-family-change-to-default": false,
+  "blue-topaz-theme@@font-family-vault": "var(--default-font)",
+  "blue-topaz-theme@@fix-right-ribbon": true,
+  "blue-topaz-theme@@hide-left-ribbon": false,
+  "blue-topaz-theme@@color-scheme-options": "color-scheme-options-default",
+  "blue-topaz-theme@@default-icons": true,
+  "blue-topaz-theme@@hide-vault-name": true,
+  "blue-topaz-theme@@accent-em@@light": "#097A3D",
+  "blue-topaz-theme@@list-style-change-options": "list-bracket-left"
+}

@@ -1,6 +1,10 @@
+**/.DS_Store
+# latex ignore
 **/*.aux
 **/*.log
 **/*.out
 **/*.toc
 **/*.pdf
-.DS_Store
+
+# obsidian ignore:
+obsidian_vaults/*/.obsidian/workspace*
