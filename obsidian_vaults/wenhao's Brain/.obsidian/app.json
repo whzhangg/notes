@@ -6,5 +6,6 @@
     "downscalePercent": 100
   },
   "trashOption": "local",
-  "smartIndentList": true
+  "smartIndentList": true,
+  "alwaysUpdateLinks": true
 }
