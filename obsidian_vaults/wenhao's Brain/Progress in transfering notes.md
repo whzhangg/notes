@@ -1,0 +1,5 @@
+- [x] Pro Git
+- [x] GNU make 
+- [x] Practice of the Python Pro
+- [ ] Robust Python
+- [ ] Fluent python
