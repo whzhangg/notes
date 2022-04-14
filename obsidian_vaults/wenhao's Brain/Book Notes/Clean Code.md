@@ -7,3 +7,5 @@ Robert C. Martin, started reading at April, 7th, 2022
 [[CC comments|Chapter 4: Comments]]
 [[CC formatting|Chapter 5. Formatting]]
 [[CC objects|Chapter 6. Objects]]
+[[CC Error handling|Chapter 7. Error handling]]
+[[CC Boundaries|Chapter 8. Boundary]]
