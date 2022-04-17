@@ -11,7 +11,7 @@ Return a regular expression object
 Find the first location where the RE give a match, and return a matchobject
 `re.findall(pattern, string)`
 Return all match of pattern in string, as a list of strings
-`re.finditer(pattern, string)`
+`re.finditer(pattern, string)`[[Practice Latex]]
 Return the matched string in an iterator
 `re.sub(pattern, replace, string, count=0)`
 Replace the pattern in the string by "replace"
