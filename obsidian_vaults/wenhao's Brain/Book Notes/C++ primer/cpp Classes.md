@@ -134,7 +134,7 @@ The only difference between struct and class is the default access level:
 We use struct when we are intending for all its members to be public.
 
 ##### friend
-A class can allow other class or function to access its nonpublic member by making them a *friend*, by including a declaration for that function preceded by the keyword friend. Friend declaration can only appear (anywhere) inside a class definition.
+A class can allow other class or function to access its nonpublic member by making them a *friend*, by including a declaration for that function preceded by the keyword friend. Friend declaration can only appear (anywhere) inside a class definition, and are not affected by access control.
 
 A friend declaration only specifies access, *it is not a declaration of the function*. If we want to use the function, we must also declaration it separately from the friend declaration.
 ```cpp
@@ -175,23 +175,24 @@ private:
 ##### class declaration
 We can declare a class without defining it, called "forward declaration". For example: `class screen;`. after declaration and before a definition, the class is an incomplete type. A type must be defined before we can write code that create objects of that type
     
-##### making a member function as friend
-We can make a class a friend 
+##### making class or class member function as friend
+We can make a class a friend, or declare specific member functions of another class as friends.
 ```cpp
 class screen {
     friend class window_mgr;
 }
 ```
-    
+The member functions of a friend class can access all the members, including the non-public members, of a class granting friendship. In the above example, `window_mgr` class can access non-public members of `screen`
+
 We can also make only a member function a friend
 ```cpp
 class screen {
     friend void window_mgr::clear(index);
 }
 ```
-    
+
 Function overload and friendship:
-Overload are different functions that share a same name. if we want to declare a overload function, we must declare each function in a set of overloaded functions
+Since overloading functions are different functions that share a same name. if we want to declare a overload function as friend, we must declare each function in a set of overloaded functions
     
 
 ### Class scope
