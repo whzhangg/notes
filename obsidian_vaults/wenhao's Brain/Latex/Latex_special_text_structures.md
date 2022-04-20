@@ -3,7 +3,7 @@
 ##### Allowed command names and arguments
 The name of a command is either single non-alphabetic character or a string of letters, terminated by the first nonletter, The name is case senstive and allow modification with \*, which are referred to as \*-ed commands. Command arguments are enclosed by { }, while optional arguments are enclosed by [ ]
 
-To include a space after a command, explicitly use `\_` 
+To include a space after a command, explicitly use `\ `(space) 
 
 ##### Types of commands
 - *Command declaration*: they are commands that have no argument and declare a change for the following text.

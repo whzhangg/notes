@@ -17,7 +17,7 @@ The following commands are often used to adjust horizontal space:
 | --- | --- |
 |  `\!` | negative thin space
 |  `\,` | thin space
-| `\-`   | interword space
+| `\ ` (space)   | interword space
 | `\quad`  | larger space
 | `\qquad`   | even larger space
 | `\hspace{npt}` | take length as argument, but is ignored at the beginning of the line. `\hspace*{}` is the version that is not ignored at the begining of the line
@@ -26,7 +26,7 @@ The following commands are often used to adjust horizontal space:
 ##### Space after a period symbol
 a period (`.`) after a capital letter are recognized as abbreviation or an initial, every other period signifies the end of a sentence.
 
-If abbreviation does not end with a capital letter and is not at the end of a sentense, we should follow the period with a interword space \_ or tilt ~. Otherwise, latex will use intersentence space, which is larger. For initial, use thin space or no space, instead of interword space. For example, use: `W.H.Lampstone` or `W.\,H.\,Lampstone` instead of `W. H. Lampstone`.
+If abbreviation does not end with a capital letter and is not at the end of a sentense, we should follow the period with a interword space `\ ` or tilt `~`([[Latex_character_symbol_comments#Special Symbols#Nonbreak spaces|unbreakable space]]). Otherwise, latex will use intersentence space, which is larger. For initial, use thin space or no space, instead of interword space. For example, use: `W.H.Lampstone` or `W.\,H.\,Lampstone` instead of `W. H. Lampstone`.
     
 If a capital letter followed by period is at the end of the sentence, precede that period with \@, which will require latex to use intersentence space.
 

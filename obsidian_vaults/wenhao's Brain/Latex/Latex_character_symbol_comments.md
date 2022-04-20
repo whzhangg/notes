@@ -17,12 +17,19 @@ To number the lines of the typeset file, we can use: `\usepackage{lineno}` and c
 
 ### Special Symbols
 The following characters are usually used and can be typed as follows:
+##### Quotes
 - *Double quotes* is obtained by typing the single quote key twice. not by using the double quote key
+
+##### Hypenation
 - *Word hypenation* can be declared to be Hyphenation and hyphened correctly by using `\hypenation{data-base set-up}` in the preamble. [Hypenation are different from a dash](https://www.grammarly.com/blog/hyphens-and-dashes/)
 - a *Dash* “-” is used to connect words.
 - an *En dash* ”—” is used to indicate ranges and is typed as “--”, For example pages 23--25 as 23—25
 - an *Em dash* (longer dash) is typed as “---” and is used to mark a change or to add emphasis, usuall used as `database---that contain data---is not a base for anything`
+
+##### Nonbreakable spaces
 - *Nonbreakable spaces* is a tile `~` gives a interword non-breakable space that will not be separated by line break. For example, `Figure~\ref{}`
+
+##### Others
 - *Ellipses* (...) are typed as \dots to have correct spacing, instead of three periods
 - *Ligatures* are certain groups of characters are joined together when typeset automatically by latex. See [this](https://en.wikipedia.org/wiki/Ligature_(writing))
 - `\today`, `\day`, `\month`, `\year` give the numbers related to current time
