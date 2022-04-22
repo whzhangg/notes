@@ -37,6 +37,17 @@ A number of options can be passed to data classes, For example([library referenc
 - `eq`: If true (the default), an `__eq__()` method will be generated. This method compares the class as if it were a tuple of its fields, in order. Both instances in the comparison must be of the identical type. If the class already defines `__eq__()`, this parameter is ignored.   
 - `order`: If true (the default is `False`), `__lt__()`, `__le__()`, `__gt__()`, and `__ge__()` methods will be generated. These compare the class as if it were a tuple of its fields, in order. Both instances in the comparison must be of the identical type. If `order` is true and `eq` is false, a value error is raised.
 
+##### dataclass to dictionary
+It's easy to convert dataclass object to dictionary. This is achieved by importing the `asdict()` method. 
+```python
+from dataclass import asdict
+dictionary = asdict(InventoryItem)
+```
+To load a dataclass object from dictionary, we can use expansion, [ref](https://1kara-hajimeru.com/2021/02/1691/):
+```python
+item = InventoryItem(**dictionary)
+```
+
 ### Classes
 It helps to define the characteristic of class and when to use class by thinking about it’s difference with just a gathering of relational data:
 - the data in a class depend on each other

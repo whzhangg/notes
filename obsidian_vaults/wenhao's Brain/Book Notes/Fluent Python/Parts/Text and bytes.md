@@ -1,4 +1,12 @@
 # Text vs. Byte
+### String methods
+##### Concatenate strings
+`str.join(List[str])`: concatenate a list of string using the separator given:
+```python
+"_".join(["A","B","C"])
+>>> "A_B_C"
+```
+
 ### String and encoding
 ##### Unicode
 `str` in Python 3 store Unicode characters. A *character* is defined by its code point according to the unicode standard U+Num, where num is a 4 - 6 hexadecimal digits reranging from 0 to 1114111. For example, the letter A has a Unicode U+0041 (hexadecimal)
