@@ -10,3 +10,7 @@ Robert C. Martin, started reading at April, 7th, 2022
 [[Error handling|Chapter 7. Error handling]]
 [[Boundaries|Chapter 8. Boundary]]
 [[Tests|Chapter 9. Unit tests]]
+[[Clean classes|Chapter 10. Classes]]
+[[Clean system#Systems|Chapter 11. System]]
+[[Clean system#Emergence|Chapter 12. Emergence]]
+

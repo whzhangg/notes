@@ -27,9 +27,9 @@ A *dictcomp* builds a dictionary instance by producing `{key:value}` pair from i
 
 ##### Missing keys with setdefault()
 There are several methods to get default value from a dictionary
-1. `dict.get(key, default)` is a method to obtain values with an default values, however, **it does not give this default value to key if the key does not exist**
-2. `dict.setdefault(key, default)`: if key in dict, return dict[key], otherwise, set dict[key] = default and return it
-3. `defaultdict`: we can **instantiate a defaultdict by provide a callable** that will produce a default value as default value, whenever `__getitem__()` is passed a non-existent key (similar to an implicit `getdefault()` method)
+1. `dict.get(key, default)` is a method to obtain values with an default values, however, *it does not give this default value to key if the key does not exist*.
+2. `dict.setdefault(key, default)`: if key in dict, return dict[key], otherwise, set dict[key] = default and return it.
+3. `defaultdict`: we can *instantiate a defaultdict by provide a callable* that will produce a default value as default value, whenever `__getitem__()` is passed a non-existent key (similar to an implicit `getdefault()` method)
     ```python
     from collections import defaultdict
     
