@@ -8,5 +8,6 @@
   "trashOption": "local",
   "smartIndentList": true,
   "alwaysUpdateLinks": true,
-  "promptDelete": false
+  "promptDelete": false,
+  "vimMode": false
 }
