@@ -13,4 +13,9 @@ Robert C. Martin, started reading at April, 7th, 2022
 [[Clean classes|Chapter 10. Classes]]
 [[Clean system#Systems|Chapter 11. System]]
 [[Clean system#Emergence|Chapter 12. Emergence]]
+Chapter 13. Concurrency  (the following 4 chapters work on Java details, which I ignored)
+Chapter 14. Successive refinement
+Chapter 15. JUnit Internals
+Chapter 16. Refactoring SerialDate
+[[Smells of Code|Chapter 17. Smells and Heuristics]]
 

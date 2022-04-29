@@ -4,6 +4,10 @@ Chapter 9 Unit Tests
 
 ##### Test driven design (TDD)
 Tests should be written in a timely fashion, Unit tests should be written *just before* the production code that is going to make them pass. Furthermore, we may not write more production code than is sufficient to pass the test.
+>One of the best ways to ruin a program is to make massive changes to its structure in the name of improvement. Some programs never recover from such "improvement". The problem is that it's very hard to get the program working the same way it worked before the "improvement"
+>--Chapter 14. Successive refinement
+
+We should keep the system working all the time. It is not allowed to make a change to the system that breaks that system. Every change I make must keep the system working as it worked before. To do this, it is important use tests.
 
 Also, see [The three laws of TDD](http://butunclebob.com/ArticleS.UncleBob.TheThreeRulesOfTdd)
 
