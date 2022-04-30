@@ -3,6 +3,7 @@ Records following the format: **Book title**, *author*, (status), finished date
 
 ##### Reading 
 - [ ] **Will My Cat Eat My Eyeballs**, *Caitlin Doughty*
+- [ ] **The Rebel**, *Albert Camus*
 - [ ] **Clean code**, *Robert C. Martin*, [[Clean Code|Notes]]
 - [ ] **Beginner's Guide to Flux Crystal Growth**, *Makoto Tachibana*
 - [ ] **Introduction to Quantum Computing**, *Phillip Kaye*, (ready to start)
