@@ -2,9 +2,7 @@
 Records following the format: **Book title**, *author*, (status), finished date
 
 ##### Reading 
-- [ ] **Will My Cat Eat My Eyeballs**, *Caitlin Doughty*
 - [ ] **The Rebel**, *Albert Camus*
-- [ ] **Clean code**, *Robert C. Martin*, [[Clean Code|Notes]]
 - [ ] **Beginner's Guide to Flux Crystal Growth**, *Makoto Tachibana*
 - [ ] **Introduction to Quantum Computing**, *Phillip Kaye*, (ready to start)
 - [ ] **Cognitive Load Theory**, *John Sweller*, (ready to start)
@@ -25,6 +23,8 @@ Records following the format: **Book title**, *author*, (status), finished date
 - [x] **Deep Learning**, *Ian Goodfellow*, 2021
 - [x] **The City and the Stars**, *Arthur C. Clarke*, Jan. 2022
 - [x] **A Life on Our Planet**, *David Attenborough*, Mar. 2022, [[Life on our planet|Notes]]
+- [x] **Will My Cat Eat My Eyeballs**, *Caitlin Doughty*, April, 2022
+- [x] **Clean code**, *Robert C. Martin*, [[Clean Code|Notes]], April, 2022
 
 ##### Finished Essays
 - [x] **The Cathedral and the Bazaar**, *Eric S. Raymond*, 2022, [[The Cathedral and the Bazaar|Notes]]
