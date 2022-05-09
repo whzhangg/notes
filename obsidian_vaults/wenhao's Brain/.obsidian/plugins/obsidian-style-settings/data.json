@@ -8,5 +8,5 @@
   "blue-topaz-theme@@default-icons": true,
   "blue-topaz-theme@@hide-vault-name": true,
   "blue-topaz-theme@@accent-em@@light": "#097A3D",
-  "blue-topaz-theme@@list-style-change-options": "list-bracket-left"
+  "blue-topaz-theme@@list-style-change-options": "list-no-border"
 }
