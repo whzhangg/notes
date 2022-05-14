@@ -1,8 +1,6 @@
 # Pandas
 
 
-# (Less than) 10 minutes to pandas
-
 This is taken from [https://pandas.pydata.org/pandas-docs/stable/user_guide/10min.html](https://pandas.pydata.org/pandas-docs/stable/user_guide/10min.html)
 
 while dropping some not so relevant part

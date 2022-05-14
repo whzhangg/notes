@@ -1,74 +1,40 @@
 # Powershell
-
 Created: October 3, 2021 2:42 PM
-Description: Power shell notes that I wrote before
-Tags: Powershell
-Type: software
 
-## Powershell notes
+### Basics
+Some basic points of powershell language is summarized here:
+- Powershell is not case sensitive
+- We separate command in the same line using " `;` ", same as bash
 
-powershell is not case sensitive
+##### General utility method
+Some of the general commands are listed as follows:
 
-We separate command in the same line using " `;` ", same as bash
+```powershell
+Get-Help [command]
+```
+Get the help for the following command, we can also use `Update-Help` to download the help documents.
 
-**`Get-Help [command]`**
+```powershell
+Get-Member [[-Name] <string[]>] [-InputObject <psobject>] 
+           [-MemberType <PSMemberTypes>] [-View <PSMemberViewTypes>] 
+		   [-Static] [-Force] [<CommonParameters>]
+```
+All the return in powershell is *objects*, `get-member` *list what we can do with them*. For example, the command `(ls) | Get-Member` takes the output of the command "ls" and return the properties of the object.
 
-- get the help for the following command
-- use `Update-Help` to download the help documents
+```powershell
+Get-Command [[-Name] <string[]>] [-CommandType <CommandTypes>] 
+            [-TotalCount <int>] [-Syntax] [-ShowCommandInfo] [-All]
+```
+Return the details of the available commands
 
-**`Get-Member [[-Name] <string[]>] [-InputObject <psobject>] [-MemberType <PSMemberTypes>] [-View <PSMemberViewTypes>] [-Static] [-Force] [<CommonParameters>]`**
+`-syntax` option shows the syntax of the specified command, for example `get-command get-childitem -syntax`
 
-All the return in powershell is objects, get-member list what we can do with them
+```powershell
+().GetType()
+```
+Get the type of the object, For example: `(ls)[0].GetType()` returns "system.IO.FileSystemInfo"
 
-Example: `(ls) | Get-Member`, which takes the output of the command "ls" and return the properties of the object
-
-**`Get-Command [[-Name] <string[]>] [-CommandType <CommandTypes>] [-TotalCount <int>] [-Syntax] [-ShowCommandInfo] [-All]`**
-
-return the details of the available commands
-
-- `-syntax` option shows the syntax of the specified command, for example `get-command get-childitem -syntax`
-
-**`().GetType()`**
-
-get the type of the object
-
-- For example: `(ls)[0].GetType()` returns "system.IO.FileSystemInfo"
-
-**`-WhatIf / -Confirm` option**
-
-They are switch parameters of a command, meaning that they are used as a parameters that most commands support
-
-- `-WhatIf`: shows the consequence of a command, without actually carrying out the action
-    
-    For example: `Stop-Process -id 100 -Whatif`
-    
-- `-Confirm`: shows what if, and further let you choose if you want to continue or not
-    
-    ```powershell
-    # For example 
-    Stop-Process -id 100 -Confirm 
-    PS> Confirm: are you sure [Y] yes  [A] Yes to All  [N] No ...
-    ```
-    
-
-**`-ErrorAction (-ea)` option**
-
-- command parameter that specify what to do when there is error
-- Choices:
-    
-    ```
-    Ignore           - 4
-    Inquire          - 3
-    Continue         - 2
-    Stop             - 1
-    SilentlyContinue - 0
-    ```
-    
-
-**`Get-Process / Stop-Process`**
-
-as the name implies, get the process information and can stop process by specifing `-id`
-
+`Get-Process / Stop-Process` as the name implies, get the process information and can stop process by specifing `-id`
 ```powershell
 Get-Process n*     
 PS> 239      16    11192      22896       0.42   9676   1 notepad++
@@ -77,9 +43,28 @@ Stop-Process -id 9676
 PS> stop the notepad++ process
 ```
 
-**`Get-Alias`** get the alias
+`Get-Alias` get the alias
 
-**`clear-host (cls)`** clean screen
+`clear-host (cls)` clean screen
+
+### General Options
+##### `-WhatIf/-Confirm` option
+They are switch parameters of a command, meaning that they are used as a parameters that most commands support. 
+- `-WhatIf`: shows the consequence of a command, without actually carrying out the action. For example: `Stop-Process -id 100 -Whatif`
+- `-Confirm`: shows WhatIf, and *further let you choose if you want to continue or not*.
+
+```powershell
+# For example 
+Stop-Process -id 100 -Confirm 
+PS> Confirm: are you sure [Y] yes  [A] Yes to All  [N] No ...
+```
+
+##### `-ErrorAction (-ea)` option
+This command parameter that specify what to do when there is error, We have the following choices:
+```
+Ignore - 4, Inquire - 3, Continue - 2, Stop - 1, SilentlyContinue - 0
+```
+
 
 **variables**
 
