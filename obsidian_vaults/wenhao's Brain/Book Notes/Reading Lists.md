@@ -3,6 +3,7 @@ Records following the format: **Book title**, *author*, (status), finished date
 
 ##### Reading 
 - [ ] **Eichmann in Jerusalem**, *Hannah Arendt*, [[Eichmann in Jerusalem|Notes]]
+- [ ] **The Doctrine of Fascism**, *Benito Mussolini*
 - [ ] **The Rebel**, *Albert Camus*
 - [ ] **Introduction to Quantum Computing**, *Phillip Kaye*, (ready to start)
 - [ ] **Cognitive Load Theory**, *John Sweller*, (ready to start)
