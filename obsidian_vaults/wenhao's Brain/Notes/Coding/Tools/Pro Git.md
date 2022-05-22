@@ -244,6 +244,8 @@ we can either:
 **Pulling**
 `git pull` is just a combination of `git fetch` followed by `git merge`
 
+**Creating remote branch**
+`git push --set-upstream origin <newbranch>` creates a remote branch at origin called `<newbranch>` and set the current branch to track the newly created branch.
 
 **Create tracking branch**
 Tracking branch are *local branches* that is linked to a remote branch. On a tracking branch, git pull will automatically where to fetch and which branch to merge 
