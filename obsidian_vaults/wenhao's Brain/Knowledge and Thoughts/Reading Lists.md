@@ -1,8 +1,7 @@
 ### My Reading lists
 Records following the format: **Book title**, *author*, (status), finished date
 ##### Currently reading
-- [ ] **The Doctrine of Fascism**, *Benito Mussolini*
-- [x] **Eichmann in Jerusalem**, *Hannah Arendt*, May, 2022, [[Eichmann in Jerusalem|Notes]]
+
 
 ##### Books
 - [ ] **The Rebel**, *Albert Camus*
@@ -16,6 +15,7 @@ Records following the format: **Book title**, *author*, (status), finished date
 - [ ] **Myth of Sisyphus**, *Albert Camus*, [[Myth Of Sisyphus|Notes]]
 
 ##### Finished books
+- [x] **Eichmann in Jerusalem**, *Hannah Arendt*, May, 2022, [[Eichmann in Jerusalem|Notes]]
 - [x] **Practices of the Python Pro**, *Dane Hillard*, 2021
 - [x] **Fluent Python**, *Luciano Ramalho*, 2021
 - [x] **The Fountains of Paradis**, *Arthur C. Clarke*, 2021
@@ -32,5 +32,6 @@ Records following the format: **Book title**, *author*, (status), finished date
 - [x] **Beginner's Guide to Flux Crystal Growth**, *Makoto Tachibana*, May, 2022 [[Guide to flux growth|Notes]]
 
 ##### Finished Essays
+- [x] **The Doctrine of Fascism**, *Benito Mussolini* [[Doctrine of Fascism]]
 - [x] **The Cathedral and the Bazaar**, *Eric S. Raymond*, 2022, [[The Cathedral and the Bazaar|Notes]]
 - [x] **The World, the Flesh and the Devail**, *JD Bernal*, 2022, [[The World, the Flesh and the Devil|Notes]]
