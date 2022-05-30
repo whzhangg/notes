@@ -270,3 +270,17 @@ To rename a remote branch, we basically duplicate the old branch with the new na
 If remote branches are deleted, but still showing in `git branch -a`, it indicates that we still have local copy of the deleted remote branch. 
 In this case, we can use `git remote prune <remote>`. See reference [here](https://stackoverflow.com/questions/5094293/git-remote-branch-deleted-but-still-it-appears-in-branch-a)
 
+### Repository on external drive
+Setting up a repository on hard drive is the same as setting up a repository in general, as long as *git can access the local of the repository `/.git`*. It is simplier to set up a repository in this way because we do not need to figure out remote connections.
+##### Setups
+We follow the suggestions in [this post](https://www.mobilefish.com/developer/git/git_quickguide_create_remote_repository_external_harddrive.html) Basically, it is as simple as:
+>Create the repository on the external drive: `mkdir rep.git` and initialize `git init --bare`
+##### Usages
+Then, the repository on disk can be treated just as remote repository, we can push the current project to that repository by:
+```bash
+git push --set-upstream external branch1:branch1
+```
+or 
+```bash
+git clone \Volumne\external\**\*.git
+```
