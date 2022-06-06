@@ -1,0 +1,5 @@
+### Part 1
+Author trace the history of the Jews to Arbaham and his accqusition of the land in the bilble. Author goes on to discuss whether the account of the bilble are to be trusted as historical facts and concluded that although not entirely an objective account, evidences are found that correspond to some of the events, so that it *contains at least of germ of truth* and *these historical record, however obscure* make the Jews the only people in the world who can trace back their origin into the begining.
+
+Author focus on Arbaham himself and compared the accounts from the bilble with the historical documents, to show that there is high possibility that "we can place Abraham and his descendants in their true historical context". Arbaham is *a deeply human and realistic personality, sometimes afraid, doubtful, even sceptical, though ultimately always faithful and carrying out God's instruction* and is provide, in bilble, as the earlest example for the relationship between man and God. For this reason, he can be regarded as the founder of Hebrew religious culture with two salient characteristics: *covenant with God* and *donation of the land*. 
+

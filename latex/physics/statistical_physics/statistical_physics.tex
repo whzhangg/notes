@@ -1,0 +1,36 @@
+\documentclass{article}
+
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=1in]{geometry}
+\usepackage{verbatim}
+\usepackage{graphicx}
+\usepackage{hyperref} % \url \href
+\usepackage{docmute}
+
+\newcommand{\pfrac}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\dbar}{\mathbf{\tilde{d}}}
+\newcommand{\dnor}{\text{d}}
+\newcommand{\rms}{\text{rms}}
+
+\begin{document}
+
+\title{Notes for Thermodynamics}
+\author{Wenhao}
+\date{\today}
+\maketitle
+
+\tableofcontents
+
+\newpage
+
+\input{part1.tex}
+\input{part2.tex}
+
+\newpage
+\appendix
+
+\include{A_intensive_extensive_properties.tex}
+\include{A_thermodynamic_potentials.tex}
+\include{A_time_average_ensemble_average.tex}
+
+\end{document}

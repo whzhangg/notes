@@ -4,6 +4,7 @@
 \usepackage{verbatim}
 \usepackage{graphicx}
 \usepackage{hyperref} % \url \href
+\usepackage{docmute}
 
 \newcommand{\pfrac}[2]{\frac{\partial #1}{\partial #2}}
 \newcommand{\dbar}{\mathbf{\tilde{d}}}
@@ -12,12 +13,6 @@
 
 \begin{document}
 
-\title{Law of Thermodynamics}
-\author{Wenhao}
-\date{\today}
-\maketitle
-
-\tableofcontents
 
 \section{The fundamental postulation and Liouville's theorem}
 
@@ -1318,184 +1313,6 @@ The particle number $N$ is given by:
 \begin{equation}
     N = - \left( \pfrac{\Omega_F}{\mu} \right)_{T,M} = - \left( \pfrac{\Omega_G}{\mu} \right)_{T,M} 
 \end{equation}
-
-\newpage
-
-\section*{Appendix A. Intensive and extensive properties (previous version)}
-
-\subsection{Heat}
-We provide a definition of heat as \emph{The thermal energy in transit}, denoted as $Q$\footnote{Blundell, p14}. We define the heat capacity
-$C$ of an object as the amount of heat that is needed to increase its temperature:
-\begin{equation}
-    C = \frac{dQ}{dT}
-\end{equation}
-thus $C$ has the unit $J/K$. The specific heat is defined to be the heat capacity per unit mass, having the unit $J/(kg\cdot K)$
-
-\subsection{Entropy}
-We define entropy $S$ for an isolated macroscopic system of $N$ particles in volume $V$ and energy $E$ to be:
-\begin{equation}
-    S(E,N,V,x) = k_B \ln\Omega(E,N,V,x)
-\end{equation}
-where $\Omega(E,N,V,x)$ is the number of accessible states at a given value of $E, N, V$, and $x$ is some constraints which 
-influence the number of accessible states.
-As a non-equilibrium isolated system allow to relax to equilibrium, entropy will increase monotonically and eventually maximize 
-at equilibrium.
-%imagine that the system will attempt to visit as many configurations as possible. 
-
-\textbf{Temperature} 
-consider an isolated system with two subsystem in weak contact but heat is allowed to follw between the two subsystem.
-The total number of accessible states (configurations) are given by the product of the number of configurations of the 
-two subsystem. Entropy will be additive. Consider the energy of one of the subsystem $E_1$
-as the constrain for the configurations.
-\begin{align}
-    \Omega(E,E_1) = \Omega_1(E_1) \Omega_2(E_2) \\
-    S(E,E_1) = S_1(E_1) S_2(E_2)   
-\end{align}
-Relaxation process will increase entropy by changing $E_1$, towards a macroscopic that correspond to 
-more configurations. At equilibrium (heat no longer exchange), we have:
-\begin{gather}
-    \frac{\partial S}{\partial E_1} = 0 \ \Rightarrow \ 
-    \left. \frac{\partial S_1(E_1)}{\partial E_1} \right|_{N_1,V_1} = \left. \frac{\partial S_2(E_2)}{\partial E_2}\right|_{N_2,V_2} = \frac{1}{T} \label{defineT}
-\end{gather}
-where the final equality gives the definition of temperature, thus if two subsystem reaches equilibrium in terms of energy flow, their 
-temperature will be equal. This process is irreversible and thus define a arrow of time.
-
-\textbf{Chemical potential}
-now, we fix only volume $V$ of each subsystem and allow both energy and particles to exchange, then:
-\begin{equation}
-    \left. \frac{\partial S_1(N_1)}{\partial N_1} \right|_{E_1,V_1} = \left. \frac{\partial S_2(N_2)}{\partial N_2}\right|_{E_2,V_2} = -\frac{\mu}{T}
-\end{equation}
-the last equality defines the chemical potential $\mu$. 
-% minus sign the divide by temperature is because of the tradition
-
-\textbf{Pressure}
-finally, we allow the volume of the system to exchange, and we can similar define pressure:
-\begin{equation}
-    \left. \frac{\partial S_1(V_1)}{\partial V_1} \right|_{E_1,N_1} = \left. \frac{\partial S_2(V_2)}{\partial V_2}\right|_{E_2,N_2} = \frac{P}{T}
-\end{equation}
-
-Thus, we can see that if we set an initial system not in equilibrium, the two subsystem will
-start to exchange energy, particles and volume until $T$, $P$ and $\mu$ become the same 
-for the two subsystem. 
-
-We can separate the macroscopic properties of a system into two different catagory:
-\begin{itemize}
-    \item \textbf{Extensive properties} that will increase proportional to the system size, such as $N,E,V$
-    \item \textbf{Intensive properties} that will be same for any of the subsystem, such as  $P,\mu,T$
-\end{itemize}
-
-\newpage
-\section*{Appendix B. Thermodynamic potentials(previous version)}
-
-It follows from the definition of  $T$, $P$ and $\mu$ that 
-\begin{gather}
-    \frac{1}{T} = \left(\frac{\partial S}{\partial E}\right)_{N,V};\  
-    \frac{\mu}{T} = \left(\frac{\partial S}{\partial N}\right)_{E,V};\ 
-    \frac{P}{T} = \left(\frac{\partial S}{\partial V}\right)_{E,N}
-\end{gather}
-we can organize:
-\begin{align}
-    dS &= \frac{1}{T} dE - \frac{\mu}{T}dN + \frac{P}{T}dV \\
-    dE &= TdS + \mu dN - P dV \label{partial_extensive}
-\end{align}
-leading to:
-\begin{align}
-    T = \left(\frac{\partial E}{\partial S}\right)_{N,V};\  
-    \mu = \left(\frac{\partial E}{\partial N}\right)_{S,V};\ 
-    P = -\left(\frac{\partial E}{\partial V}\right)_{S,N}
-\end{align}
-For the Eq.\ref{partial_extensive}, we can integrate the subsystems parts by parts into 
-the whole system ($S$, $N$ and $V$ are extensive parts), 
-since $T, \mu$ and $P$ will be the same for all subsystems, the integration
-gives:
-\begin{equation}
-    E = TS + \mu N - PV \label{energy}
-\end{equation}
-
-Now, let's consider the canonical ensemble. The energy of the system
-is no longer fixed, as opposed to microcanonical ensemble in which all the 
-microstates in the ensemble have fixed energy. 
-However, for each energy, it is associated with a 
-probability and thus we only consider the average energy, which we define
-as \textbf{internal energy}:
-\begin{equation}
-    U \equiv \langle E \rangle = \sum_j P_j E_j = \frac{\sum_j E_j e^{-\beta E_j}}{\sum_j e^{-\beta E_j}} = -\frac{1}{Q_N} \frac{\partial Q_N}{\partial \beta}
-\end{equation}
-The internal energy is now the macroscopic observable instead of energy, as
-in the microcanonical case.
-We wish to establish an relationship between the internal energy and 
-the free energy $Q_N = \exp(-\beta A)$
-
-Let's write
-\begin{equation}
-    Q_N = \sum_j e^{-\beta E_j} = \sum_{E_j} \Omega(E_j) e^{-\beta E_j}
-\end{equation}
-with $\Omega(E_j)$ gives the number of microstates that have energy $E_j$. With the definition of entropy $S(E) = k_B \ln \Omega(E)$, we have:
-\begin{eqnarray}
-    Q_N = \sum_{E_j} e^{-\beta (E_j - S(E_j)T)} \simeq e^{-\beta (E' - S(E')T)} \label{approx}
-\end{eqnarray}
-with $E'$ be the value that minimize the function $E - S(E)T$. If the fluctuation is small, we can consider only
-the term $e^{-\beta (E' - S(E')T)}$ in the summation is not ignorable, which gives the approximation.
-The requirement that $E'$ minimize function $E - S(E)T$ is:
-\begin{equation}
-    \left. \frac{\partial (E-S(E)T)}{\partial E}\right|_{E'} = \left. 1 - T\frac{\partial S(E)}{\partial E}\right|_{E'} = 0
-\end{equation}
-therefore, $E'$ is the energy in which:
-\begin{equation}
-    \left. \frac{\partial S(E)}{\partial E}\right|_{E'} = \frac{1}{T}
-\end{equation}
-that is to say, $E'$ is the energy where the 
-system's temperature defined by Eq.\ref{defineT} is equal to
-the temperature of the heat bath, which is the equilibrium condition. 
-This motivate us to equal $E' = \langle E \rangle = U$
-leading to the result that 
-\begin{equation}
-    A = U - TS(U) \label{eqA}
-\end{equation}
-$U$ minimize $U - TS(U)$ at equilibrium, therefore, the equilibrium condition of 
-a canonical potential is the minimization of free energy $A$.
-
-With Eq.\ref{eqA}, Eq.\ref{partial_extensive} and $U = \langle E \rangle$,  we have
-\begin{equation}
-    dA(N,V,T) = dU - TdS - SdT = -SdT - pdV + \mu dN
-\end{equation}
-and 
-\begin{equation}
-    S = -\left(\frac{\partial A}{\partial T}\right)_{N,V};\  
-    \mu = \left(\frac{\partial A}{\partial N}\right)_{T,V};\ 
-    P = -\left(\frac{\partial A}{\partial V}\right)_{T,N}
-\end{equation}
-
-For Grand canonical ensemble, we can apply similar method as in the canonical ensemble, but 
-this time adding the particle number as a summation variable in the calculation of 
-partition function, we can obtain:
-\begin{equation}
-    \Omega(\mu,T,V) = U - TS - \mu \bar{N}
-\end{equation}
-with $\bar{N}$ being the average particle number. The equilibrium 
-condition of a grand canonical ensemble is then the minimization of $\Omega$. 
-We also have the following relationship:
-\begin{equation}
-    d\Omega(\mu,T,V) = -SdT - Nd\mu - PdV
-\end{equation}
-and
-\begin{equation}
-    S = -\left(\frac{\partial \Omega}{\partial T}\right)_{\mu,V};\  
-    N = -\left(\frac{\partial \Omega}{\partial \mu}\right)_{T,V};\ 
-    P = -\left(\frac{\partial \Omega}{\partial V}\right)_{T,\mu}
-\end{equation}
-
-\subsection{Gibbs expression of entropy}
-For the canonical ensemble, we have:
-\begin{gather}
-    P_i = \frac{1}{Q} e^{-\beta E_i} \notag \\
-    A = -k_B T\ln Q = U - TS \notag
-\end{gather}
-This lead to the relationship:
-\begin{equation}
-    S = -k_B \sum_i P_i \ln P_i
-\end{equation}
-This is the Gibbs' form of entropy in terms of probability.
 
 
 \end{document}

@@ -4,6 +4,7 @@
 \usepackage{verbatim}
 \usepackage{graphicx}
 \usepackage{hyperref} % \url \href
+\usepackage{docmute}
 
 \newcommand{\pfrac}[2]{\frac{\partial #1}{\partial #2}}
 \newcommand{\rms}{\text{rms}}
@@ -12,12 +13,6 @@
 
 \begin{document}
 
-\title{Kinetic theory of Gas}
-\author{Wenhao}
-\date{\today}
-\maketitle
-
-\tableofcontents
 
 \section{Kinetic theory of ideal gas}
 We describe here the problem of motion of molecules in a gas, 
@@ -945,103 +940,5 @@ when the response function is the transport function $L_{ij}$, we have:
 \begin{equation}
     L_{ij} = L_{ji}
 \end{equation}
-
-\pagebreak
-\section*{Appendix A: Time average and ensemble average}
-\subsection*{Definition}
-In a system with random fluctuations
-\footnote{This content is from \url{https://www.nii.ac.jp/qis/first-quantum/e/forStudents/lecture/pdf/noise/chapter1.pdf}}, 
-one can only discuss the averaged quantity of a single system over a certain
-time (space) interval or averaged quantity of many identical systems at certain 
-time instance (spatial positions). The former is called \textbf{time average} and 
-the later is called \textbf{ensemble average} (or, as called in Landau's book, statistical average) . 
-
-Let's consider N systems which have time dependent observable $x^{i}(t)$, where
-i index the system. We can define the following averages: \\
-First-order time average: 
-\begin{equation}
-    \overline{x^i(t)} = \lim_{T\to\infty} \frac{1}{T} \int_{-T/2}^{T/2} x^i(t) dt
-\end{equation}
-Second-order time average:
-\begin{equation}
-    \overline{x^i(t)^2} = \lim_{T\to\infty} \frac{1}{T} \int_{-T/2}^{T/2} \left( x^i(t) \right)^2 dt
-\end{equation}
-Autocorrelation function:
-\begin{equation}
-    \phi_x^i(\tau) = \overline{x^i(t)x^i(t+\tau)} 
-    = \lim_{T\to\infty} \frac{1}{T} \int_{-T/2}^{T/2} x^i(t) x^i(t+\tau) dt
-\end{equation}
-First-oder ensemble average:
-\begin{equation}
-    \langle x(t_1) \rangle = \lim_{N\to\infty} \frac{1}{N} \sum_{i=1}^{N} x^i(t_1) 
-        = \int_{-\infty}^{\infty} x_1 p_1(x_1, t_1) dx_1
-\end{equation}
-Second-order ensemble average:
-\begin{equation}
-    \langle x(t_1)^2 \rangle = \lim_{N\to\infty} \frac{1}{N} \sum_{i=1}^{N} \left( x^i(t_1) \right)^2  
-        = \int_{-\infty}^{\infty} \left( x_1(t) \right)^2  p_1(x_1, t_1) dx_1
-\end{equation}
-Covariance:
-\begin{equation}
-    \langle x(t_1)x(t_2) \rangle = \lim_{N\to\infty} \frac{1}{N} \sum_{i=1}^{N}  x^i(t_1) x^i(t_2)
-        = \int_{-\infty}^{\infty} x_1 x_2 p_2(x_1, t1; x_2, t_2) dx_1 dx_2
-\end{equation}
-where for esemble average, $t_1$ and $t_2$ refer to a certain time. $p(x,t)$ is the 
-probability density function so that $p_1(x_1,t_1)dx_1$ is the 
-first-order probability that $x$ is found between $x_1$ and $x_1 + dx_1$ at time $t_1$. 
-$p_2(x_1, t_1; x_2, t_2)dx_1 dx_2$ is the probability that $x$ is between $x_1$ and $x_1 + dx_1$
-at time $t_1$ and between $x_2$ and $x_2 + dx_2$ at a different time $t_2$.
-
-\subsection*{Statistically stationary and nonstationary process}
-A "process" refers to the trajectory of a system as it evolve through time. If the 
-statistics of the process of a system do not change in time, we call such 
-process stationary. The ensemble average of system with stationary process 
-are identical to its time average. Such process is called \textbf{ergodic}.
-When a process is ergodic, any one system can represent the entire ensemble. 
-
-We make the following definition:
-\emph{A stochastic process is stationary of order $k$ if the $k$-th order 
-joint probability density function satisfies:}
-\begin{equation}
-    P(\alpha_1,t_1; \cdots; \alpha_k, t_k) = P(\alpha_1,t_1+\epsilon; \cdots; \alpha_k, t_k+\epsilon)
-\end{equation}
-for all $\epsilon$, where $\alpha$ denote some observables.
-For example, if $P_1(x,t_1) = P_1(x,t_1+\epsilon)$, the process is stationary of order 1.
-if $P_2(x_1,t_1;x_2,t_2) = P_2(x_1,t_1+\epsilon;x_2,t_2+\epsilon)$, 
-the process is stationary of order 2.
-
-A process of the system is called "strictly stationary" if it is stationary for any order.
-A process is called "wide-sense stationary" if its mean value is constant and its 
-autocorrelation function depends only on $\tau = t_2 - t_1$. 
-
-/subsection*{Ergodicity}
-
-Ergodicity can also have different levels: We call a process "ergodic in the mean" if
-\begin{equation}
-    \overline{x(t)} = \lim_{T\to\infty} \frac{1}{T} \int_{-T/2}^{T/2} x(t) dt
-     = \langle x(t) \rangle
-\end{equation}
-since $\overline{x(t)}$ is independent of time, $\langle x(t) \rangle$ is also independent of time.
-which is ensured by the probability density function requirement of stationary process
-$P_1(x,t_1) = P_1(x,t_1+\epsilon)$. 
-A process is called ergodic in the autocorrelation if 
-\begin{equation}
-    \phi_x(\tau) = \overline{x(t)x(t+\tau)} 
-    = \lim_{T\to\infty} \frac{1}{T} \int_{-T/2}^{T/2} x(t) x(t+\tau) dt
-     = \langle x(t)x(t+\tau) \rangle \label{autocorrelation_requirement}
-\end{equation}
-
-As an example, consider some observable of a system that can be written as a 
-function of time by $x(t) = sin(\omega t + \theta)$. $\theta$ is a random variable 
-distributed over $0 < \theta < 2\pi$. 
-This process is ergodic in both mean and autocorrelation. The time average $\overline{x(t)}$
-is 0, the ensemble average at any time is also 0, averaged over system with different 
-choice of $\theta$. Eq.\ref{autocorrelation_requirement} is also satisfied since both 
-$\overline{x(t)x(t+\tau)}$ and $\langle x(t)x(t+\tau) \rangle$ vanish, since $x$ depend
-on time through a $\sin$ function and can increase or decrease after a time interval $\tau$
-(time average) and from the choice of $\theta$,
-both case average to 0. 
-However, if we limit the variable $\theta$ to other distribution, this process will no longer 
-be ergodic.
 
 \end{document}

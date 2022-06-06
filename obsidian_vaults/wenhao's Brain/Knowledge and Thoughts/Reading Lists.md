@@ -1,6 +1,8 @@
 ### My Reading lists
 Records following the format: **Book title**, *author*, (status), finished date
 ##### Currently reading
+- [x] **Myth of Sisyphus**, *Albert Camus*, [[Myth Of Sisyphus|Notes]]
+- [ ] **History of the Jews**, *Paul Johnnson*, [[History of the Jews]]
 
 
 ##### Books
@@ -8,11 +10,10 @@ Records following the format: **Book title**, *author*, (status), finished date
 - [ ] **Introduction to Quantum Computing**, *Phillip Kaye*, (ready to start)
 - [ ] **Cognitive Load Theory**, *John Sweller*, (ready to start)
 - [ ] **Solid State Chemistry and Its Applications**, *Anthony R. West*, (ready to start)
-- [ ] **History of the Jews**, *Paul Johnnson*
 - [ ] **The Critique of Pure Reason**, *Immanuel Kant*
+- [ ] **Operating System, Design and Implementation**, *Andrew S. Tanenbaum*
 
 ##### Essays
-- [ ] **Myth of Sisyphus**, *Albert Camus*, [[Myth Of Sisyphus|Notes]]
 
 ##### Finished books
 - [x] **Eichmann in Jerusalem**, *Hannah Arendt*, May, 2022, [[Eichmann in Jerusalem|Notes]]
