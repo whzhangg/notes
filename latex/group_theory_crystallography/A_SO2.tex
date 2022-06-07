@@ -1,0 +1,223 @@
+\documentclass{amsart}
+%\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=1in]{geometry}
+\usepackage{verbatim}
+\usepackage{graphicx}
+\usepackage{hyperref} % \url \href
+\usepackage{docmute}
+
+\newcommand{\pfrac}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\setM}{\mathcal{M}}
+\newcommand{\bfx}{\mathbf{x}}
+\newcommand{\bft}{\mathbf{t}}
+
+\newtheorem*{theorem}{Theorem}
+\newtheorem*{lemma}{Lemma}
+
+\theoremstyle{remark}
+\newtheorem*{remark}{remark}
+\theoremstyle{remark}
+\newtheorem*{example}{example}
+
+\theoremstyle{definition}
+\newtheorem*{definition}{Definition}
+
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\Image}{Im}
+\DeclareMathOperator{\AO}{AO}
+\DeclareMathOperator{\E}{E}
+\DeclareMathOperator{\Sym}{Sym}
+\DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\Tr}{trace}
+\DeclareMathOperator{\Bij}{Bij}
+\DeclareMathOperator{\Orb}{Orb}
+
+% the highest level is part
+% in each part, different section give different topics that are lossly connected
+% subsection* should be used for giving subsequent definitions that are less important
+\begin{document}
+
+\section{SO(2)}
+
+\subsection{Special Orthogonal group}
+\begin{definition}
+    [SO(2)] the special orthogonal group in two dimension is defined by the 
+    set of real and orthogonal $2\times 2$ matrices with determinant 1
+\end{definition}
+A general real matrix can be written as:
+\begin{equation*}
+    A = \left(\begin{matrix}
+        a & c \\ b & d
+    \end{matrix}\right)
+\end{equation*}
+definition of special orthogonal matrix require:
+\begin{equation*}
+    \det A = \mathbf{I}\quad \text{and} \quad A^T = A^{-1}
+\end{equation*}
+We have the following requirements for matrix elements $a,b,c,d$:
+\begin{gather*}
+    \ \ \ ad - bc = 1\\
+    \begin{cases}
+        ac + bd &= 0\\
+        a^2 + b^2 &= 1\\
+        c^2 + d^2 &= 1
+    \end{cases}
+\end{gather*}
+the later three requirements come from $A^{T}A = \mathbf{I}$. 
+The later two requirements lead to the following substitution:
+\begin{align*}
+    a &= \cos\alpha &  b &= \sin\alpha \\
+    c &= \cos\beta &  d &= \sin\beta 
+\end{align*}
+putting them into $ad - bc = 1$ and $ac + bd = 0$, we find the result:
+\begin{equation*}
+    \beta = \alpha + \frac{\pi}{2}
+\end{equation*}
+and therefore $a = d$ and $c = -b$. We can finally write the matrices in SO(2) as:
+\begin{equation*}
+    A = \left(\begin{matrix}
+        \cos\alpha & -\sin\alpha \\ \sin\alpha & \cos\alpha
+    \end{matrix}\right)
+\end{equation*}
+We denote such matrice as $R(\alpha)$
+
+\vspace{10pt}
+\subsection{Irreducible representations}
+
+We find that the product of two matrices in SO(2) belong to SO(2):
+\begin{align*}
+    R(\alpha) R(\beta) &= \left(\begin{matrix}
+        \cos\alpha\cos\beta - \sin\alpha\sin\beta & -\cos\alpha\sin\beta - \sin\alpha\cos\beta \\ 
+        \cos\alpha\sin\beta + \sin\alpha\cos\beta & \cos\alpha\cos\beta - \sin\alpha\sin\beta
+    \end{matrix}\right) \\
+    &= \left(\begin{matrix}
+        \cos(\alpha + \beta) & -\sin(\alpha + \beta) \\ \sin(\alpha + \beta) & \cos(\alpha + \beta)
+    \end{matrix}\right) \\
+    &= R(\alpha + \beta)
+\end{align*}
+Therefore, the matrices in SO(2) form a group. Furthermore, we find that:
+\begin{equation*}
+    R(\alpha) R(\beta) = R(\alpha + \beta) = R(\beta)R(\alpha) 
+\end{equation*}
+for any $\alpha$ and $\beta$. Therefore, SO(2) is abelian and all its irreducible presentation 
+is one dimensional: any representation can be brought into diagonal form by a change 
+of basis(diagonalization).
+
+\vspace{10pt}
+
+For a matrix $R(\alpha)$, we can show that two vector:
+\begin{equation*}
+    u_1 = \frac{1}{\sqrt{2}}\left(\begin{matrix} 1 \\ i \end{matrix} \right) 
+    \qquad u_{-1} = \frac{1}{\sqrt{2}}\left( \begin{matrix} i \\ 1 \end{matrix} \right)
+\end{equation*}
+are eigenvector of $R(\alpha)$, for example:
+\begin{equation*}
+    \frac{1}{\sqrt{2}} 
+    \left(\begin{matrix}
+        \cos\alpha & -\sin\alpha \\ \sin\alpha & \cos\alpha
+    \end{matrix}\right)  \left(\begin{matrix} 1 \\ i \end{matrix} \right) 
+     = \frac{1}{\sqrt{2}} 
+     \left(\begin{matrix}
+         \cos\alpha  -\sin\alpha i \\ (\cos\alpha -\sin\alpha i) i
+     \end{matrix}\right)  
+     = \frac{1}{\sqrt{2}} e^{-\alpha i} \left(\begin{matrix} 1 \\ i \end{matrix} \right) 
+\end{equation*}
+
+\vspace{10pt}
+
+Now, we try to find other irreducible representation. Writting the one dimensional representation as
+$c(\alpha)$, for $\alpha = 2\pi / m$, we require:
+\begin{equation*}
+    [c(\alpha)]^m = 1
+\end{equation*}
+This equation gives the solution of $c(\alpha)$ as:
+\begin{equation*}
+    c(\alpha) = e^{-ik\frac{2\pi}{m}} = e^{-ik\alpha} \quad k \in \mathbb{Z}
+\end{equation*}
+This gives the form of irreducible representation and each $k$ gives an 
+irreducible representation that is not equivalent to others.
+
+\vspace{10pt}
+\subsection{Rotations in two dimension}
+We call a rotation with angle $\alpha$ of a two-dimensional plane \emph{active} 
+if it rotates each vector of the plane over angle $\alpha$. 
+Suppose vector $v = (v_1, v_2)$ is rotated to $w = (w_1, w_2)$ by angle $\alpha$ (coordinate system is fixed ), 
+we have the relationship:
+\begin{equation*}
+    \left(\begin{matrix}
+        w_1 \\ w_2
+    \end{matrix}\right) = \left(\begin{matrix}
+        \cos\alpha & -\sin\alpha \\ \sin\alpha & \cos\alpha
+    \end{matrix}\right) \left(\begin{matrix}
+        v_1 \\ v_2
+    \end{matrix}\right)
+\end{equation*}
+Therefore, $R(\alpha)$ correspond to such an active rotation. 
+For a function defined on a two dimensional plane. We apply rotation 
+on the function as $f\to D(R(\alpha))f$
+\begin{equation*}
+    D(R(\alpha))f (r) = f([R(\alpha)]^{-1}r)
+\end{equation*}
+
+\vspace{10pt}
+\subsection{Basis functions for irreducible representations of SO(2)}
+
+A set of orthonormal basis functions defined on an interval $(-\pi, \pi]$ is:
+\begin{equation*}
+    \psi_m (\theta) = e^{im\theta} \quad m \in \mathbb{Z}
+\end{equation*}
+and any function defined on this interval can be expanded by the combination
+of the basis:
+\begin{equation*}
+    f(\theta) = \sum_{m=-\infty}^{\infty} a_m \psi_m(\theta)
+\end{equation*}
+with the coefficients given by:
+\begin{equation*}
+    a_m = \int_{-\pi}^{\pi} \frac{d\theta}{2\pi} f(\theta) e^{-im\theta}
+\end{equation*}
+
+Consider the functions $\psi_m (\theta)$ as basis, function $f$ can than be considered 
+as a vector in the vector space span by these basis functions. 
+\begin{equation*}
+    f = \left(\begin{matrix}
+        \vdots \\ a_{-1} \\ a_0 \\ a_1 \\ \vdots
+    \end{matrix}\right)
+\end{equation*}
+
+For a rotation $R(\alpha)$ on the function $f$, we have: $f(\theta) \to f'(\theta) = f(\theta - \alpha)$,
+we have:
+\begin{align*}
+    a'_m &= \int_{-\pi}^{\pi} \frac{d\theta}{2\pi} f(\theta - \alpha) e^{-im\theta} \\
+    &= \int_{-\pi}^{\pi} \frac{d\theta'}{2\pi} f(\theta') e^{-im(\theta' + \alpha)} \\
+    &= a_m e^{-im\alpha}
+\end{align*}
+Therefore, we find that in the space span by functions $\psi_m(\theta)$, the matrix of the 
+rotation is:
+\begin{equation*}
+    D^{\psi}(\alpha)f = 
+    \left(
+        \begin{matrix}
+            \ddots & & & & & \\
+                   & e^{i\alpha} & & & &\\
+                                &  & 1& & &\\
+                                 & & &     & e^{-i\alpha} & \\
+                                 & & & & & \ddots
+        \end{matrix}
+    \right)\left(\begin{matrix}
+        \vdots \\ a_{-1} \\ a_0 \\ a_1 \\ \vdots
+    \end{matrix}\right) = \left(\begin{matrix}
+        \vdots \\ a'_{-1} \\ a'_0 \\ a'_1 \\ \vdots
+    \end{matrix}\right)
+\end{equation*}
+The represnetion is just the direct sum of the irreducible representations. Therefore, the functions $\psi_m(\theta)$
+are the basis functions of the irreducible one dimensional representation $e^{-im\alpha}$
+
+\section*{Peter-Weyl theorem}
+For a continuous group with elements $g$, we have a function that maps $g$ to a matrix $D$ of irreducible 
+representation. Each matrix element $d_{ij}$ is also a function of $g$. 
+Very roughly, Peter-Weyl theorem states that all the matrix elements provides an orthonormal basis 
+for functions defined on domain $G$.
+We can see that this is true for the group $SO(2)$. 
+
+\end{document}
