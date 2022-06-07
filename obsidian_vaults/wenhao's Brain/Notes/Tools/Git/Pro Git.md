@@ -284,3 +284,13 @@ or
 ```bash
 git clone \Volumne\external\**\*.git
 ```
+##### Head
+I encountered this problem previously, when cloning a respository from one created using the mentioned method:
+```bash
+Cloning into 'electronic_configuration'...
+done.
+warning: remote HEAD refers to nonexistent ref, unable to checkout.
+```
+
+The cause of this problem is that the remote head is default to `master` but the only branch is named as other. See [this post](https://stackoverflow.com/questions/11893678/warning-remote-head-refers-to-nonexistent-ref-unable-to-checkout):
+>When you create a bare repo using `git init --bare`, it set `ref:refs/heads/master` in `HEAD` file but when you clone this bare repo its default branch is `main`. So you need to change `HEAD` file and put `main` instead of `master` i.e. `ref: refs/heads/main`

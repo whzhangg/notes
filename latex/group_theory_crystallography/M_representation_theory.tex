@@ -1,0 +1,473 @@
+\documentclass{amsart}
+%\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=1in]{geometry}
+\usepackage{verbatim}
+\usepackage{graphicx}
+\usepackage{hyperref} % \url \href
+\usepackage{docmute}
+
+\newcommand{\pfrac}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\setM}{\mathcal{M}}
+\newcommand{\bfx}{\mathbf{x}}
+\newcommand{\bft}{\mathbf{t}}
+
+\newtheorem*{theorem}{Theorem}
+\newtheorem*{lemma}{Lemma}
+
+\theoremstyle{remark}
+\newtheorem*{remark}{remark}
+\theoremstyle{remark}
+\newtheorem*{example}{example}
+
+\theoremstyle{definition}
+\newtheorem*{definition}{Definition}
+
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\Image}{Im}
+\DeclareMathOperator{\AO}{AO}
+\DeclareMathOperator{\E}{E}
+\DeclareMathOperator{\Sym}{Sym}
+\DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\Tr}{trace}
+\DeclareMathOperator{\Bij}{Bij}
+\DeclareMathOperator{\Orb}{Orb}
+
+% the highest level is part
+% in each part, different section give different topics that are lossly connected
+% subsection* should be used for giving subsequent definitions that are less important
+\begin{document}
+
+\part{Representation Theory}
+
+\section*{Matrices}
+The expansion of matrix is given by:
+\begin{equation*}
+    \exp(A) = 1+ A + \frac{A^2}{2!} + \frac{A^3}{3!} + \cdots 
+\end{equation*}
+Related to the exponential of matrix, we have two following properties:
+\begin{equation*}
+    \det(\exp(A)) = \exp(\Tr A)
+\end{equation*}
+
+\subsection*{Baker-Campbell-Hausdorff formula}
+If matrices $A$, $B$ and $C$ satisfying
+\begin{equation*}
+    e^{A} e^{B} = e^{C}
+\end{equation*}
+then, $C$ can be written as:
+\begin{equation*}
+    C = A + B + \frac{1}{2}[A,B] + \frac{1}{12}\left( [A,[A,b]] + [[A,B],B] \right) + \cdots
+\end{equation*}
+
+\vspace{10pt}
+
+\subsection*{Hermitian matrics}
+Hermition matrices are difined by $A^{\dagger} = A$, where $A^{\dagger}$ means
+the complex conjugate of the matrice transpose: $A^{\dagger} = (A^*)^{T}$
+
+\subsection*{Unitary matrices}
+Unitary matrices are defined as $A^{\dagger} = A^{-1}$. 
+For real matrix, we simply have: $A^T = A^{-1}$.
+
+\subsection*{Orthogonal matrices}
+Orthogonal matrices are given by $A^T = A^{-1}$, the determinant of orthogonal
+matrix equals $\pm 1$. 
+
+If $M = \exp A$ is an orthogonal matrix, then $A$ is traceless: $\Tr A = 0$ and 
+anti-symmetic: $A^T = -A$
+
+\vspace{10pt}
+
+\begin{definition}
+    [Kronecker product]
+    The kronecker product of two matrices is given by:
+    \begin{equation*}
+        A \otimes B = \left( \begin{matrix}
+            a_{11}B & \cdots & a_{1n}B \\
+            \vdots &   & \vdots \\
+            a_{m1}B & \cdots & a_{mn}B \\
+        \end{matrix} \right)
+    \end{equation*}
+    which has dimension $m_Am_B\times n_An_B$
+\end{definition}
+
+We have the following properties for kronecker product:
+\begin{equation*}
+    (A\otimes B) \otimes (C \otimes D) = (AC) \otimes (BD)
+\end{equation*}
+and $(A\otimes B)^{-1} = A^{-1} \otimes B^{-1}$
+which follow from the first properties
+
+\section*{Representation}
+
+\begin{definition}
+    [Representation]
+    A linear representation of a group $G$ on vector space $V$ is a homomorphism:
+    \[\rho\colon G\to \GL(V)\]
+\end{definition}
+We define the following terms:
+\begin{itemize}
+    \item $G$ \emph{act linearly} on $V$,
+    \item $V$ is called a \emph{G-module},
+    \item Dimension of the representation is the dimension of the vector space $V$, and
+    \item $(g,v)=\rho(g)v$ is an action of $g\in G$ on $v\in V$ 
+\end{itemize}
+If the homomorphism $\rho$ from group elements to linear transformation is a injective, 
+it is called \emph{faithful}. We use $D(g)$ in the following to represent the matrix 
+of group element $g$.
+
+\begin{remark}
+Every group has a trival one dimensional representation $\mathbb{I}$, the identity. 
+Another common one dimensional representation is $\{1, -1\}$, which occur for permutation 
+groups and inversion of space.
+\end{remark}
+
+\begin{definition}
+    [Interwine]
+    If $r$ and $s$ are representation of $G$ on vector space $V$ and $W$, then a map
+    $T\colon V\to W$ interwine $r$ and $s$ if:
+    \[s(g)T = Tr(g) \qquad g\in G\]
+\end{definition}
+We call the mapping $T$ as a \emph{homomorphism of G-module} $V\to W$. The set of all such homomorphism of G-module 
+between $V$ and $W$ are denoted as $\Hom_G(v,W)$
+
+\vspace{10pt}
+
+\subsection*{Equivalent representation}
+Representation $r$ and $s$ are called equivalent if there is a linear isomorphism $T\colon V\to W$ that 
+interwine $r$ and $s$. We further call all such linear isomorphism \emph{isomorphism of G-modules} 
+
+\begin{remark}
+    Two representations are said to be equivalent if there is an invertible square matrix $S$
+    so that:
+    \begin{equation*}
+        D^{\alpha}_g = S^{-1} D^{\beta}_g S \qquad \text{for all $g\in G$}
+    \end{equation*}
+\end{remark}
+
+\begin{theorem}
+    [Maschke theorem]
+    Every representation is equivalent to an unitary representation. A unitary representation 
+    is given by unitary matrices $A^{\dagger}A = 1$. 
+\end{theorem}
+\begin{proof}
+We define a matrix $T$ as:
+\begin{equation*}
+    T = \sum_{k=1}^{n} D^{\dagger}_{g_k} D_{g_k}
+\end{equation*}
+We find:
+\begin{equation*}
+    D^{\dagger}_{g_i} T D_{g_i} = \sum_{k=1}^{n} D^{\dagger}_{g_i} D^{\dagger}_{g_k} D_{g_k} D_{g_i}
+    = \sum_{k=1}^{n} D^{\dagger}_{g_kg_i} D_{g_kg_i} = T
+\end{equation*}
+the final equality is given by changing the summation index to $j$: $g_j = g_k g_i$.
+Now, we define the transformation matrix $S$ as:
+\begin{equation*}
+    S^{\dagger} = S\qquad S^2 = T^{-1}
+\end{equation*}
+We have:
+\begin{align*}
+    D^{\dagger}_{g_i}S^{-2}D_{g_i} &= S^{-2} \\
+    S D^{\dagger}_{g_i}S^{-1} &= S^{-1} D_{g_i}^{-1} S \\
+    (S^{-1}D_{g_i}S)^{\dagger} &= (S^{-1}D_{g_i}S)^{-1}
+\end{align*}
+thus showing that the transformed representation is indeed unitary. In the second equation, 
+we multiplied $S$ on the left and $D_{g_i}^{-1} S$ on the right.
+
+\end{proof}
+
+Representation are not unique, this is shown as follows:
+\begin{enumerate}
+    \item Any invertible $S$ leads to an equivalent representation: $S^{-1}D(g)S$
+    \item The 'direct sum' of two matrix of $g$ from two representations is still a representation of $G$
+            \[\left( \begin{matrix}
+                D(g) & 0 \\
+                0 & D'(g)
+            \end{matrix} \right)\]
+\end{enumerate}
+This motivates us to find the unique representations of the group $G$
+
+\vspace{10pt}
+\section*{Irreducible representation}
+
+\subsection*{Sub-G-Module}
+For $r$ a representation of $G$ on $V$, $W\subseteq V$, a subspace of $V$ is invariant if 
+$r(g)w \in W$ for all $g\in G$. 
+In this case, we have a \emph{subrepresentation} of $G\to \GL(W)$ and $W$ is called 
+\emph{sub-G-module of V}
+
+Suppose $G$ is finite and $\rho$ is a representation of $G$ on $V$ and $U$ is a sub-G-module of $V$,
+then, there exist a sub-G-module $W$ of $V$ so that $V$ is given by a direct sum of $U$ and $W$:
+\[V = U \oplus W\]
+
+\begin{definition}
+    [Reducible]
+    A G-module $V$ is reducible if it has sub-G-module other than $0$ (the origin) and itself. 
+    Otherwise, it is called \emph{irreducible}.
+\end{definition}
+If $V$ is the direct sum of irreducible sub-G-modules, then $V$ is called \emph{completely reducible}.
+(A representation is reducible if its matrix representation can be written in block diagonal form.)
+
+\begin{remark}
+A representation is said to be reducible if its vector space can be written as a direct sum
+of two vector space and the matrix of the representation transform each subspace without affecting 
+the other one. 
+
+Therefore, for a representation of $G$ in vector space $V$ to be irreducible, we require that, choosing 
+a vector $v \in V$, the set $\{D_{g_1}v, D_{g_1}v,\dots, D_{g_n}v\}$ span $V$
+\end{remark}
+
+\begin{lemma}
+    For a finite group $G$, every finite-dimensional G-modules is completely reducible.
+\end{lemma}
+
+\vspace{10pt}
+\section*{Schur's Lemma}
+\begin{lemma}
+    [Schur's lemma 1]
+    A matrix that commutes with all the matrices of an irreducible representation 
+    is a constant matrix ($c\mathbf{I}$).
+\end{lemma}
+\begin{proof}
+Suppose a matrix $A$ commute with all the matrices of the irreducible representation and $A$ has 
+eigenvector $v$. For an irreducible representation, $D_{g_i}v$ for all $g_i \in G$ span $V$,
+as remarked previously. 
+Now, if $A$ commute with $D$:
+\begin{equation*}
+    AD_{g_i}v = D_{g_i}Av = \lambda D_{g_i} v
+\end{equation*}
+thus the vectors $D_{g_i}v$ for all $g\in G$ are also an eigenvector of $A$. Since eigenvector of $A$ span 
+the whole vector space, $A$ need to be a constant matrix.
+\end{proof}
+Therefore, if a non-constant matrix exist that commutes with matrices of an representation, 
+then, the representation is reducible.
+
+\vspace{10pt}
+
+\begin{lemma}
+    [Schur's lemma 2]
+    For two irreducible representation $D_1$ and $D_2$ with dimension $l_1$ and $l_2$,
+    suppose there is a matrix $M$ such as:
+    \begin{equation*}
+        MD_1(g) = D_2(g)M\quad \text{for all}\ g \in G
+    \end{equation*}
+    then, $M$ can only be either zero or equivalent transformation if $l_1 = l_2$
+\end{lemma}
+\begin{proof}
+we consider $l_1 \leq l_2$. let $v_1$ and $v_2$ be vector in vector space of the representation $V_1$ and $V_2$,
+then $M$ can be thought as a linear mapping between $V_1$ and $V_2$: $M\colon V_1 \to V_2$
+\begin{equation*}
+    MD_1(g)v_1 = D_2(g)(Mv_1)
+\end{equation*}
+The dimension of the vector space $V' = \{v\mid v = Mv_1, v_1\in V_1 \}$ is smaller or equal to $v_2$. 
+
+Since $D_1$ is irreducible in vector space $V_1$, the set $D_1(g)v$ span the $V_1$ for a chosen $v$
+\begin{equation*}
+    A\{D^1(g_1)v,\dots, D^1(g_n)v\} = \{D^2(g_1)Av,\dots, D^2(g_n)Av\}
+    = \{D^2(g_1)v',\dots, D^2(g_n)v'\}
+\end{equation*}
+so that the vector set $\{D^2(g_1)v',\dots, D^2(g_n)v'\}$ span $V'$ with dimension $l_1$. 
+But since $D_2$ as a irreducible
+representation in $V_2$ and $v'\in V_2$, this set also span $V_2$, 
+therefore, we have $|V_1|=|V_2|=|V'|$ thus prove the lemma.
+\end{proof}
+
+\begin{theorem}
+    [The orthogonality relation]
+    For all inequivalent, irreducible representations of a group, we have the following relationship:
+    \begin{equation*}
+        \sum_g D^{\Gamma_i}_{uv}(g)D^{\Gamma_j}_{v'u'}(g^{-1}) = \frac{h}{l_j} \delta_{i,j}\delta_{uu'}\delta_{vv'}
+    \end{equation*}
+    where $u$, $v$, $u'$ and $v'$ are matrix element index, $h$ is the order of $G$, $l_j$ is the dimension of 
+    the representation and $\Gamma_i$, $\Gamma_j$ denote two irreducible.
+\end{theorem}
+\begin{proof}
+We define a matrix $A$ as:
+\begin{equation*}
+    A = \sum_{g} D^{\Gamma_i}(g) X D^{\Gamma_j}(g^{-1})
+\end{equation*}
+We can verify that $D^{\Gamma_j}(g')A = A D^{\Gamma_i}(g')$. Using Schur's lemma part 2, 
+either $A=0$ or the representation $\Gamma_i$ and $\Gamma_j$ are equivalent. When two representation 
+are equivalent, we only consider they are equal. 
+Now, we can use Schur's first lemma and write $A = \lambda \mathbf{I}$:
+\begin{equation*}
+    A = \delta_{ij} \lambda \mathbf{I}
+\end{equation*}
+
+Now, we choose the matric $X$ so that only at $(x,y)$, now:
+\begin{align*}
+    A_{u,v} = \delta_{u,v} \delta_{ij} \lambda 
+    &= \sum_{g} D^{\Gamma_i}(g) X D^{\Gamma_j}(g^{-1}) \\
+    &= \sum_{g} \sum_{mn} D^{\Gamma_i}_{u,m}(g) X_{m,n} D^{\Gamma_j}_{n,v}(g^{-1}) \\
+    &= \sum_{g}  D^{\Gamma_i}_{u,m}(g) \delta_{mx}\delta_{ny} D^{\Gamma_j}_{n,v}(g^{-1}) \\
+    &= \sum_{g}  D^{\Gamma_i}_{u,x}(g) D^{\Gamma_j}_{y,v}(g^{-1}) \\
+\intertext{and}
+    \lambda &= \sum_{g}  D^{\Gamma_i}_{u,x}(g) D^{\Gamma_i}_{y,u}(g^{-1}) \\ 
+    \sum_u \lambda &= \sum_u \sum_{g}  D^{\Gamma_i}_{u,x}(g) D^{\Gamma_i}_{y,u}(g^{-1}) \\
+    l\lambda &= \sum_u \sum_{g} D^{\Gamma_i}_{y,u}(g^{-1}) D^{\Gamma_i}_{u,x}(g) \\
+    l\lambda &= \sum_{g} D^{\Gamma_i}_{y,x}(I) \\
+    l\lambda &= h\delta_{xy} \\
+\end{align*}
+combining the two result, we have:
+\begin{equation*}
+    \sum_{g}  D^{\Gamma_i}_{u,x}(g) D^{\Gamma_j}_{y,v}(g^{-1}) 
+    = \frac{h}{l} \delta_{u,v} \delta_{ij} \delta_{xy} \qedhere
+\end{equation*}
+\end{proof}
+
+\begin{remark}
+    If the representation is unitary, then $D^{\dagger} = D^{-1}$ and we have:
+    \begin{equation*}
+        \sum_g D^{\Gamma_i}_{uv}(g)\left[D^{\Gamma_j}_{u'v'}(g)\right]^* = \frac{h}{l_j} \delta_{i,j}\delta_{uu'}\delta_{vv'}
+    \end{equation*}
+\end{remark}
+
+\vspace{10pt}
+\section*{Characters}
+\begin{definition}
+    [Characters]
+    The character of a matrix representation of a group element $g$ is its trace: $\Tr D(g)$
+\end{definition}
+\begin{remark}
+We have the following properties of character:
+\begin{itemize}
+    \item Equivalent representations have the same character for all $g \in G$. this is shown by the 
+        invariance of trace under cyclic permutation:
+        \begin{equation*}
+            \Tr\{ D^{\alpha}_g \} = \Tr \{S^{-1}D^{\beta}_gS\} = \Tr \{D^{\beta}_g S S^{-1} \}
+        \end{equation*}
+    \item Character of identity equal to the dimension of the representation
+    \item Group elements in an equivalent class has the same character, for $g' = h^{-1}gh$:
+    \begin{equation*}
+        \Tr\{ D_{g'} \} = \Tr \{D_{h^{-1}} D_{g} D_{h}\} = \Tr \{D_{g} D_{h}D_{h^{-1}} \}
+    \end{equation*}
+\end{itemize}
+\end{remark}
+
+\vspace{10pt}
+
+\begin{theorem}
+    [Orthogonality theorem for characters]
+    The characters of an irreducible representation obey the following orthogonaliy relation:
+    \begin{equation*}
+        \sum_g \chi^{\Gamma_i}(g) \chi^{\Gamma_j}(g^{-1}) = h \delta_{i,j} 
+    \end{equation*}
+    or equivalently
+    \begin{equation*}
+        \sum_g \chi^{\Gamma_i}(g) \left[\chi^{\Gamma_j}(g)\right]^* = h \delta_{i,j} 
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+This theorem directly follow the previous theorem:
+\begin{align*}
+    \sum_g \chi^{\Gamma_i}(g) \chi^{\Gamma_j}(g^{-1})
+    &= \sum_g \sum_{u,v} D^{\Gamma_i}_{uu}(g) D^{\Gamma_j}_{vv}(g^{-1}) \\
+    &= \sum_{u,v} \sum_g D^{\Gamma_i}_{uu}(g) D^{\Gamma_j}_{vv}(g^{-1}) \\
+    &= \sum_{u,v} \frac{h}{l_i} \delta_{ij} \delta{uv} \\
+    &= h \delta_{ij} \qedhere
+\end{align*}
+\end{proof}
+\begin{remark}
+    If a representation is not orthogonal, its characters will generally not obey this relationship
+\end{remark}
+Since the characters of each elements in an equivalent classes is the same, the above relationship can be 
+further written as:
+\begin{equation*}
+    \sum_{C_k} N_k\chi^{\Gamma_i}(C_k) \left[\chi^{\Gamma_j}(C_k)\right]^* = h \delta_{i,j} 
+\end{equation*}
+where $N_k$ denote the number of elements in a equivalent class $C_k$
+
+\begin{lemma}
+    Two irreducible representations are equivalent if and only if their characters are the same.
+\end{lemma}
+
+\vspace{10pt}
+\section*{Character of irreducible representation}
+\begin{theorem}
+    The reduction of any reducible representation into its irreducible parts is unique
+\end{theorem}
+Furthermore, we can write the character of a reducible representation as a linear combination
+of the characters of the irreducible representations.
+\begin{equation*}
+    \chi(C_k) = \sum_{\Gamma_i} a_i \chi^{\Gamma_i}(C_k)
+\end{equation*}
+and $a_i$ are unique.
+
+\begin{lemma}
+    The number of irreducible representation of a group is equal to the number of its
+    equivalent classes
+\end{lemma}
+\begin{remark}
+Since for abelian group, each group elements is only conjugate (equivalent) to itself, 
+The number of irreducible representation is therefore equal to the order of the group. 
+Further, using the relationship $\sum_j l_j^2 = h$ summed over all representation, we 
+find that each irreducible representation of abelian group is one dimension.
+\end{remark}
+\begin{comment}
+    The character of equivalent classes are orthogonal, They form a basis for characters 
+    of any representations of the group. Similarly, irreducible representation also form 
+    a basis 
+\end{comment}
+
+\begin{theorem}
+    [Second orthogonaliy relationship for characters]
+    The characters of irreducible representation satisfies:
+    \begin{equation*}
+        \sum_{\Gamma_i} N_k \chi^{\Gamma_i}(C_k) \left[\chi^{\Gamma_i}(C_{k'})\right]^* = h\delta_{kk'}
+    \end{equation*}
+\end{theorem}
+
+\vspace{10pt}
+\section*{Regular representation}
+
+\begin{definition}
+    [Regular representation]
+    For a group $G$ of order $n$ and an $n$-dimensional vector space with corresponding basis vector 
+    $\{e_{g_1},\dots,e_{g_n}\}$ (each group element correspond to a basis vector), then, 
+    we call a representation $\rho\colon G\to \GL(V)$ with $\rho(g_i) e_{g_j} = e_{g_i g_j}$
+    a \emph{regular representation}
+\end{definition}
+\begin{example}
+For the subgroup $\{e, (123), (321)\}$ of $S_3$, we have the relationship:
+\begin{alignat*}{2}
+    &D_{(123)} e_e &&= e_{(123)} \\
+    &D_{(123)} e_{(123)} &&= e_{(321)} \\
+    &D_{(123)} e_{(321)} &&= e_{e}
+\end{alignat*}
+Therefore, writing the basis vector as $(e, (123), (321))^T$, we have the matrix of the subgroup
+in regular presentation:
+\begin{equation*}
+    D_{e} = \left(\begin{matrix}
+        1 & 0 & 0 \\
+        0 & 1 & 0 \\
+        0 & 0 & 1 
+    \end{matrix}\right);\quad D_{(123)} = \left(\begin{matrix}
+        0 & 1 & 0 \\
+        0 & 0 & 1 \\
+        1 & 0 & 0 
+    \end{matrix}\right);\quad D_{(321)} = \left(\begin{matrix}
+        0 & 0 & 1 \\
+        1 & 0 & 0 \\
+        0 & 1 & 0 
+    \end{matrix}\right)
+\end{equation*}
+In general, we have the matrix elements: $\left[D_{g_k}\right]_{ij} = \delta_{g_k g_j, g_i}$.
+\end{example}
+
+\begin{theorem}
+    Regular representation contains each irreducible representation a number of times equal
+    to the dimensionality of the representation.
+\end{theorem}
+\begin{remark}
+    The dimension of the regular representation is the order of the group $h$, therefore, we obtain 
+    the following result:
+    \begin{equation*}
+        \sum_j l_j^2 = h
+    \end{equation*}
+    where $l_j$ is the dimensionality of the representation $\Gamma_j$
+\end{remark}
+
+\newpage
+
+\end{document}

@@ -1,0 +1,57 @@
+\documentclass{article}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=1in]{geometry}
+\usepackage{verbatim}
+\usepackage{graphicx}
+\usepackage{hyperref} % \url \href
+\usepackage{docmute}
+
+\newcommand{\pfrac}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\setM}{\mathcal{M}}
+\newcommand{\bfx}{\mathbf{x}}
+\newcommand{\bft}{\mathbf{t}}
+
+\newtheorem*{theorem}{Theorem}
+\newtheorem*{lemma}{Lemma}
+
+\theoremstyle{remark}
+\newtheorem*{remark}{remark}
+\theoremstyle{remark}
+\newtheorem*{example}{example}
+
+\theoremstyle{definition}
+\newtheorem*{definition}{Definition}
+
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\Image}{Im}
+\DeclareMathOperator{\AO}{AO}
+\DeclareMathOperator{\E}{E}
+\DeclareMathOperator{\Sym}{Sym}
+\DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\Tr}{trace}
+\DeclareMathOperator{\Bij}{Bij}
+\DeclareMathOperator{\Orb}{Orb}
+
+% the highest level is part
+% in each part, different section give different topics that are lossly connected
+% subsection* should be used for giving subsequent definitions that are less important
+\begin{document}
+
+\title{Group Theory and Representation}
+\author{Wenhao}
+\date{\today}
+\maketitle
+
+\tableofcontents
+
+\include{M_group.tex}
+\include{M_crystalstructure.tex}
+\include{M_representation_theory.tex}
+
+\newpage
+\appendix
+
+\include{A_SO2.tex}
+
+\end{document}
