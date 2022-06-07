@@ -57,7 +57,7 @@ so that we obtain the \emph{secular equation}:
     \sum_{\nu} \left[ H_{\mu\nu} - \varepsilon_i S_{\mu\nu} \right] c_{\nu i} = 0
 \end{equation}
 Secular equation \eqref{E:secular} as well as the normalization condition \eqref{E:MO_Sij} give the solution 
-for the linear combination coefficients $\c_{\mu i}$.
+for the linear combination coefficients $c_{\mu i}$.
 
 \section{Two-orbital solution}
 We illustrate the application of the direct solution method using the two (atomic) orbital problem. Suppose the 
@@ -80,7 +80,7 @@ therefore given by a second order equation:
     (\varepsilon_1^0 - \varepsilon_i)(\varepsilon_2^0 - \varepsilon_i) - (H_{12} - \varepsilon_i S_{12})^2 = 0
 \end{equation}
 
-\subsection*{Degenerate case}
+\subsection{Degenerate case}
 When $\varepsilon_1^0 = \varepsilon_2^0 = \varepsilon^0$, the solution for the energy can be found to be:
 \begin{align}
     \varepsilon_1 = \frac{\varepsilon^0 + H_{12}}{1 + S_{12}} \approx \varepsilon^0 + (H_{12} - \varepsilon^0 S_{12}) - S_{12} (H_{12} - \varepsilon_i^0 S_{12}) \\
@@ -88,10 +88,38 @@ When $\varepsilon_1^0 = \varepsilon_2^0 = \varepsilon^0$, the solution for the e
 \end{align}
 $S_{12} > 0$ and $H_{12} < 0$, we have thus $H_{12} - \varepsilon^0 S_{12} < 0$ so that $\varepsilon_1 < \varepsilon_2$, which are further shifted down by a small amount 
 given by the second term.
-The normalization coefficient can be solved using the secular relationship:
+The normalization coefficient can be solved using the secular relationship. We have:
 \begin{equation}
-    
+    \frac{c_{21}}{c_{11}} = 1; \quad \frac{c_{22}}{c_{12}} = -1
 \end{equation}
+and the wave functios are:
+\begin{align}
+    \psi_1 = \frac{1}{\sqrt{2 + 2 S_{12}}} (\chi_1 + \chi_2) \\
+    \psi_2 = \frac{1}{\sqrt{2 - 2 S_{12}}} (\chi_1 - \chi_2)
+\end{align}
+
+\section{Nondegenerate case}
+Approximate results can be given for non-degenerate cases, with the solution for energies:
+\begin{align}
+    \varepsilon_1 \approx \varepsilon_1^0 + \frac{(H_{12} - \varepsilon_1^0 S_{12})^2}{\varepsilon_1^0 - \varepsilon_2^0} < \varepsilon_1^0 \\
+    \varepsilon_2 \approx \varepsilon_2^0 + \frac{(H_{12} - \varepsilon_1^0 S_{12})^2}{\varepsilon_2^0 - \varepsilon_1^0} > \varepsilon_2^0
+\end{align}
+since we take $\varepsilon_2^0 > \varepsilon_1^0$. Furthermore, we have:
+\begin{equation}
+    \varepsilon_2^0 - \varepsilon_2 < \varepsilon_1 - \varepsilon_1^0
+\end{equation}
+The solution for the coefficients are given for $\psi_1$:
+\begin{gather}
+    \psi_1 \approx \left(1 - tS_{12} - \frac{1}{2}t^2\right) \chi_1 + t \chi_2 \\
+    t = \frac{H_{12}-\varepsilon_1^0S_{12}}{\varepsilon_1^0 - \varepsilon_2^0} > 0
+\end{gather}
+so that $\psi_1$ is obtained by combining $\chi_1$ and $\chi_2$ in phase. 
+The solution for $\psi_2$ is:
+\begin{gather}
+    \psi_2 \approx t' \chi_1 + \left( 1 - t' S_{12} - \frac{1}{2}t'^2 \right) \chi_2 \\
+    t' = \frac{H_{12}-\varepsilon_2^0S_{12}}{\varepsilon_2^0 - \varepsilon_1^0} < 0
+\end{gather}
+$\psi_2$ is obtained by mixing $\chi_1$ out of phase with $\chi_2$.
 
 
 \end{document}
