@@ -11,8 +11,100 @@
 \newcommand{\heff}{\mathbb{H}^{\text{eff}}}
 \newcommand{\pfrac}[2]{\frac{\partial #1}{\partial #2}}
 
+\newcommand{\huptb}{\text{H}_0}
+\newcommand{\order}[2]{#1^{(#2)}}
+\newcommand{\statebra}[1]{\langle #1 |}
+\newcommand{\stateket}[1]{| #1 \rangle}
+
 \begin{document}
 
-\section{}
+\section{Perturbation Theory}
+Suppose in the un-perturbed case, we have:
+\begin{gather}
+    \huptb \stateket{\order{n}{0}} = E_0 \stateket{\order{n}{0}} \quad \text{and} \quad
+    \sum_n \stateket{\order{n}{0}}\statebra{\order{n}{0}} = 1
+\end{gather}
+and introduce perturbation $\text{H} = \huptb + \lambda V$ and solve the 
+perturbed eigenequation:
+\begin{equation}
+    (\huptb + \lambda V) \stateket{n} = E \stateket{n}
+\end{equation}
+The parameter $\lambda$ switches on the perturbation and setting $\lambda = 1$ 
+recovers the actual perturbed Hamiltonian. 
+Introduce $\Delta_n = E_n - \order{E_n}{0}$, we 
+can write:
+\begin{align}
+    (\huptb + \lambda V) \stateket{\order{n}{\lambda}} = (\Delta_n + \order{E_n}{0}) \stateket{\order{n}{\lambda}} \\
+    (\huptb - \order{E_n}{0}) \stateket{\order{n}{\lambda}} = (\Delta_n - \lambda V) \stateket{\order{n}{\lambda}}
+\end{align}
+since $(\huptb - \order{E_n}{0})\stateket{\order{n}{0}} = 0$, we have:
+\begin{equation}
+    \label{E:result1}
+    \statebra{\order{n}{0}} \Delta_n - \lambda V \stateket{n}
+    = \statebra{\order{n}{0}} \huptb - \order{E_n}{0} \stateket{n} 
+    = 0
+\end{equation} 
+
+Define a projection operator which exclude unperturbed states $|\order{n}{0}\langle$:
+$\Phi_n = 1 - \stateket{\order{n}{0}}\statebra{\order{n}{0}} = \sum_{k\neq n} \stateket{\order{k}{0}}\statebra{\order{k}{0}}$. 
+The projection operator commutes with the unperturbed Hamiltonian $\huptb$:
+\begin{equation}
+    ( 1 - \stateket{\order{n}{0}}\statebra{\order{n}{0}} ) \huptb
+    = \huptb - \order{E_n}{0} \stateket{\order{n}{0}}\statebra{\order{n}{0}} 
+    = \huptb ( 1 - \stateket{\order{n}{0}}\statebra{\order{n}{0}} )
+\end{equation}
+using the projection operator, we have:
+\begin{equation}
+    (\Delta_n - \lambda V) \stateket{n}
+    = (\stateket{\order{n}{0}}\statebra{\order{n}{0}} + \Phi_n) (\Delta_n - \lambda V) \stateket{n} 
+    = \Phi_n (\Delta_n - \lambda V) \stateket{n}
+\end{equation}
+On the other hand, we are free to add:
+\begin{equation}
+    (\huptb - \order{E_n}{0}) \stateket{n} = 
+    (\huptb - \order{E_n}{0}) (-c\stateket{\order{n}{0}} + \stateket{n} )
+\end{equation}
+where $c$ is some arbitrary constants, gathering the results, we have equation:
+\begin{gather}
+    (\huptb - \order{E_n}{0}) (-c\stateket{\order{n}{0}} + \stateket{n} ) 
+    = \Phi_n (\Delta_n - \lambda V) \stateket{n} \\
+    \label{E:main2}
+    \stateket{n} = \stateket{\order{n}{0}} 
+    + \underbrace{\frac{1}{\huptb - \order{E_n}{0}} \Phi_n (\Delta_n - \lambda V) \stateket{n}}_{\text{orthogonal to } \stateket{\order{n}{0}}}
+\end{gather}
+where $c$ is set to $1$ so that 
+when $\lambda = 0$, the second term will be zero since both $\Delta_n$ and $\lambda V$ are zero. 
+At this moment, the perturbed states are not normalized. \eqref{E:main2}
+We also note that the entire second term on the right hand side is orthogonal to state $\stateket{\order{n}{0}}$
+because of the projection operator can also be written explicitly to be:
+\begin{align}
+    \frac{1}{\huptb - \order{E_n}{0}} \Phi_n (\Delta_n - \lambda V) \stateket{n}
+    = \sum_{k\neq n} \ \frac{1}{\order{E_k}{0} - \order{E_n}{0}} \stateket{\order{k}{0}} \statebra{\order{k}{0}} (\Delta_n - \lambda V) \stateket{n}
+\end{align}
+Suppose we write $\stateket{n} = \stateket{\order{n}{0}} + \stateket{\delta  n}$, we find that equation
+\eqref{E:result1} can be reduced to 
+\begin{equation}
+    \label{E:main1}
+    \Delta_n = \statebra{\order{n}{0}} \lambda V \stateket{n}
+\end{equation}
+since $\statebra{\order{n}{0}} \Delta_n \stateket{\delta n} = 0$
+
+Now, we write out the approximate expansion in orders of $\lambda$:
+\begin{align}
+    \Delta_n &= \lambda \order{\Delta_n}{1} + \lambda^2 \order{\Delta_n}{2} + \lambda^3 \order{\Delta_n}{3} + \cdots \\
+    \stateket{n} &= \stateket{\order{n}{0}} + \lambda \stateket{\order{n}{1}} + 
+                    \lambda^2 \stateket{\order{n}{2}} + \lambda^3 \stateket{\order{n}{3}} + \cdots
+\end{align}
+Substituting $\stateket{n}$ and $\Delta_n$ into equation \eqref{E:main1} and equating the terms in the same order,
+we have the relationship:
+\begin{gather}
+    \order{\Delta_n}{1} = \statebra{\order{n}{0}} V \stateket{\order{n}{0}} \\
+    \order{\Delta_n}{2} = \statebra{\order{n}{0}} V \stateket{\order{n}{1}} \\
+    \cdots \\
+    \order{\Delta_n}{i+1} = \statebra{\order{n}{0}} V \stateket{\order{n}{i}} \\
+\end{gather}
+Where we find that the $(i+1)$th perturbation energy depend on the $i$th perturbed states, 
+now we can simply work up the order using equation \eqref{E:main2}:
+
 
 \end{document}
