@@ -18,7 +18,7 @@
 
 \begin{document}
 
-\section{Perturbation Theory}
+\section{Perturbation Theory (Nondegenerate case)}
 Suppose in the un-perturbed case, we have:
 \begin{gather}
     \huptb \stateket{\order{n}{0}} = E_0 \stateket{\order{n}{0}} \quad \text{and} \quad
@@ -104,7 +104,36 @@ we have the relationship:
     \order{\Delta_n}{i+1} = \statebra{\order{n}{0}} V \stateket{\order{n}{i}} \\
 \end{gather}
 Where we find that the $(i+1)$th perturbation energy depend on the $i$th perturbed states, 
-now we can simply work up the order using equation \eqref{E:main2}:
+now we can simply work up the order using equation \eqref{E:main2}, for example, we can expand to 
+the first few orders:
+\begin{equation}
+    \lambda \stateket{\order{n}{1}} + \lambda^2 \stateket{\order{n}{2}} + \cdots 
+    = \frac{1}{\huptb - \order{E_n}{0}} \Phi_n (\lambda \order{\Delta_n}{1} + \lambda^2 \order{\Delta_n}{2} - \lambda V) 
+    \left( 
+        \stateket{\order{n}{0}} + \lambda \stateket{\order{n}{1}} + \cdots
+    \right)
+\end{equation}
+We have:
+\begin{align}
+    \lambda \stateket{\order{n}{1}} &= \frac{\Phi_n}{\huptb - \order{E_n}{0}} \lambda (\order{\Delta_n}{1} - V) \stateket{\order{n}{0}} \\ 
+    \lambda^2 \stateket{\order{n}{2}} &= 
+    \frac{\Phi_n}{\huptb - \order{E_n}{0}} \lambda^2 
+        \left[ \order{\Delta_n}{2} \stateket{\order{n}{0}} +  (\order{\Delta_n}{1} - V) \stateket{\order{n}{1}}  \right]
+\end{align}
+clean up the results and setting $\lambda = 1$, we have:
+\begin{equation}
+    O(\lambda^2): \Delta_n = V_{nn} - \sum_{k\neq n}\frac{V_{nk}V_{kn}}{\order{E_k}{0} - \order{E_n}{0}}
+\end{equation}
+where we find $\Phi_n \order{\Delta_n}{1} \stateket{\order{n}{0}} = \order{\Delta_n}{1} \Phi_n \stateket{\order{n}{0}} = 0$. 
+For perturbed states, we have:
+\begin{align}
+    O(\lambda^2): \stateket{n} = \stateket{\order{n}{0}} &- \sum_{k\neq n} \frac{V_{kn}}{\order{E_k}{0} - \order{E_n}{0}} \stateket{\order{k}{0}} \\ 
+    & - \left( \sum_{m\neq n}\sum_{k\neq n} \frac{V_{mk}}{\order{E_m}{0} - \order{E_n}{0}} \frac{V_{kn}}{\order{E_k}{0} - \order{E_n}{0}} \stateket{\order{m}{0}} \right.
+    \left. + \sum_{k\neq n} \frac{V_{nn}V_{kn}}{(\order{E_k}{0} - \order{E_n}{0})^2} \stateket{\order{k}{0}} \right)
+\end{align}
+
+
+\section{Perturbation Theory (Degenerate case)}
 
 
 \end{document}
