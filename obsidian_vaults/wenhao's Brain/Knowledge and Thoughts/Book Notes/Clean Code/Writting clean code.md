@@ -8,13 +8,15 @@ Clean code emphasis on *maintenance* rather than one *production*. The roots of 
 
 >A Poem is never done and bears continual rework, and to stop working on it is adandonment. Such preoccupation with detail is common to all endeavors of excellence. 
 
-Style distinguishes excellence from mere competence. Quanlity is the result of a million selfless acts of care--not just of any great method that descends from heavens. That these acts are simple doesn't mean that they are simplistic, and it hardly means that they are easy. The are nonetheless the fabric of  greatness and of beauty in any human endeavor. 
+*Style distinguishes excellence from mere competence*. Quanlity is the result of a million selfless acts of care--not just of any great method that descends from heavens. That these acts are simple doesn't mean that they are simplistic, and it hardly means that they are easy. The are nonetheless the fabric of  greatness and of beauty in any human endeavor. 
 
 >Neither architecture nor clean clean code insist on perfection, only on honesty and doing the best we can.
 
+**Boy Scout Rule**
+Leave the campground cleaner than you found it.
+
 **Attitude**
 This paragraph discussed the attitude towards writing clean code
-
 >Have you ever waded through a mess so grave that it took weeks to do what should have taken hours? Have you seen what should have been a one-line change, made instead in hundreds of different modules? These symptoms are all too common.
 >
 >Why does this happen to code? Why does good code rot so quickly into bad code? We have lots of explanations for it. We complain that the requirements changed in ways that thwart the original design. We bemoan the schedules that were too tight to do things right. We blather about stupid managers and intolerant customers and useless marketing types and telephone sanitizers. *But the fault, dear Dilbert, is not in our stars, but in ourselves. We are unprofessional.*
@@ -29,5 +31,3 @@ This paragraph discussed the attitude towards writing clean code
 >
 >So too it is unprofessional for programmers to bend to the will of managers who don’t understand the risks of making messes.
 
-**Boy Scout Rule**
-Leave the campground cleaner than you found it.

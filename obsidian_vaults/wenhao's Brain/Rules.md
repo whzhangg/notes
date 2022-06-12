@@ -22,3 +22,4 @@ Let's think about what should be placed here first: I don't want to store useles
 2. *Notes* Facts I want to come back to again and again.
 3. *Collections* Interesting things I read but I don't want to keep them in my mind all the times.
 For other types of things, notebooks application is perhaps more suitable.
+

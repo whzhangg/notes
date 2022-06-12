@@ -16,5 +16,8 @@
 ##### Materials Chemistry
 - [[Chemistry Table of Contents]]
 - [[Cell parameters restrictions]], [[Symmetry direction]]
+- [[Point Group Identification]]
 ### Readings
 - [[Reading Lists]]
+
+[[group_theory.pdf]]
