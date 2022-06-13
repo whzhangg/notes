@@ -13,52 +13,6 @@
 
 \begin{document}
 
-\section{Solution of the Molecular Orbitals}
-Let's denote the atomic orbitals as $|\chi_{\mu}\rangle$ which are normalized for the orbitals on the same atoms:
-\[ \langle \chi_{\mu} | \chi_{\nu} \rangle =  S_{\mu\nu} = 1\]
-where we used $S$ for the overlap integral between two orbitals. We define molecular orbitals as:
-\begin{equation}
-    | \psi_i \rangle = \sum_{\mu} c_{\mu i} | \chi_{\mu} \rangle
-\end{equation}
-of which the normalization is written as:
-\begin{equation}
-    \label{E:MO_Sij}
-    S_{ij} = \left( \sum_{\mu} c_{\mu i}^* \langle \chi_{\mu} | \right) \cdot \left( \sum_{\nu} c_{\nu i} | \chi_{\nu} \rangle \right) = \sum_{\mu\nu} c_{\mu i}^* c_{\nu i} S_{\mu \nu} = \delta_{ij}
-\end{equation}
-
-Let's suppose the eigenstates (as a molecular orbital) of the system are given by the eigenequation:
-\begin{equation}
-    \heff | \psi_i \rangle = \varepsilon_i | \psi_i \rangle
-\end{equation}
-and $| \psi_i \rangle$ is given as a linear combination of atomic orbitals with yet unknown coefficients. 
-We define for convenience:
-\[H_{\mu\nu} = \langle \chi_{\mu} | \heff | \chi_{\nu} \rangle\]
-so that we have:
-\begin{equation}
-    \label{E:MO_Hij}
-    H_{ij}  = \sum_{\mu\nu} c_{\mu i}^* c_{\nu i} H_{\mu \nu}
-\end{equation}
-When coefficients are real, complex conjugate can be ignored. The energies can be solved by minimizing the value of $\varepsilon_i$
-\begin{equation}
-    \varepsilon_i = \frac{\langle \psi_i | H | \psi_j \rangle}{\langle \psi_i | \psi_j \rangle} = \frac{B}{A}
-\end{equation}
-with respect to the coefficients $c_{\mu i}$:
-\begin{equation}
-    \pfrac{\varepsilon_i}{c_{\mu i}} = \pfrac{(B/A)}{c_{\mu i}} = \frac{1}{A} \pfrac{B}{c_{\mu i}} - \frac{B}{A^2} \pfrac{A}{c_{\mu i}} = 0
-\end{equation}
-The terms are given:
-\begin{align}
-    \pfrac{B}{c_{\mu i}} &= 2 \sum_{\nu} c_{\nu i} H_{\mu \nu} \\
-    \pfrac{A}{c_{\mu i}} &= 2 \sum_{\nu} c_{\nu i} S_{\mu \nu} \\
-\end{align}
-so that we obtain the \emph{secular equation}:
-\begin{equation}
-    \label{E:secular}
-    \sum_{\nu} \left[ H_{\mu\nu} - \varepsilon_i S_{\mu\nu} \right] c_{\nu i} = 0
-\end{equation}
-Secular equation \eqref{E:secular} as well as the normalization condition \eqref{E:MO_Sij} give the solution 
-for the linear combination coefficients $c_{\mu i}$.
-
 \section{Two-orbital solution}
 We illustrate the application of the direct solution method using the two (atomic) orbital problem. Suppose the 
 value of the parameters $H_{11} = \varepsilon_1^0$, $H_{22} = \varepsilon_2^0$, $H_{12}$ are known, as well as 
@@ -98,7 +52,7 @@ and the wave functios are:
     \psi_2 = \frac{1}{\sqrt{2 - 2 S_{12}}} (\chi_1 - \chi_2)
 \end{align}
 
-\section{Nondegenerate case}
+\subsection{Nondegenerate case}
 Approximate results can be given for non-degenerate cases, with the solution for energies:
 \begin{align}
     \varepsilon_1 \approx \varepsilon_1^0 + \frac{(H_{12} - \varepsilon_1^0 S_{12})^2}{\varepsilon_1^0 - \varepsilon_2^0} < \varepsilon_1^0 \\

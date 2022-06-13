@@ -1,0 +1,45 @@
+\documentclass{article}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=1in]{geometry}
+\usepackage{verbatim}
+\usepackage{graphicx}
+\usepackage{hyperref} % \url \href
+\usepackage{docmute}
+
+\newtheorem{definition}{Definition}
+\newtheorem{theorem}{Theorem}
+\newcommand{\heff}{\mathbb{H}^{\text{eff}}}
+\newcommand{\pfrac}[2]{\frac{\partial #1}{\partial #2}}
+
+\begin{document}
+
+\section{Another approach to obtain the Secular Equation}
+Following the notation 
+\begin{equation}
+    \psi_i = \mathbf{\chi}\cdot \mathbf{C}_i = \sum_{\mu} C_{\mu i} \chi_{\mu}
+\end{equation}
+where the coefficients are assumed to be real and unknown. We denote:
+\begin{align}
+    H_{ij} &= \sum_{\mu\nu} c_{\mu i} c_{\nu i} H_{\mu \nu} \\ 
+    S_{ij} &= \sum_{\mu\nu} c_{\mu i} c_{\nu i} S_{\mu \nu} 
+\end{align}
+let's seek to minimize the orbital energies:
+\begin{equation}
+    \varepsilon_i = \frac{\langle \psi_i | H | \psi_j \rangle}{\langle \psi_i | \psi_j \rangle} = \frac{B}{A}
+\end{equation}
+with respect to the coefficients $c_{\mu i}$:
+\begin{equation}
+    \pfrac{\varepsilon_i}{c_{\mu i}} = \pfrac{(B/A)}{c_{\mu i}} = \frac{1}{A} \pfrac{B}{c_{\mu i}} - \frac{B}{A^2} \pfrac{A}{c_{\mu i}} = 0
+\end{equation}
+The terms are given:
+\begin{align}
+    \pfrac{B}{c_{\mu i}} &= 2 \sum_{\nu} c_{\nu i} H_{\mu \nu} \\
+    \pfrac{A}{c_{\mu i}} &= 2 \sum_{\nu} c_{\nu i} S_{\mu \nu} \\
+\end{align}
+so that we obtain the \emph{secular equation}:
+\begin{equation}
+    \label{E:secular}
+    \sum_{\nu} \left[ H_{\mu\nu} - \varepsilon_i S_{\mu\nu} \right] c_{\nu i} = 0
+\end{equation}
+
+\end{document}

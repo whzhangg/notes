@@ -1,0 +1,187 @@
+\documentclass{article}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=1in]{geometry}
+\usepackage{verbatim}
+\usepackage{graphicx}
+\usepackage{hyperref} % \url \href
+\usepackage{docmute}
+
+\newtheorem{definition}{Definition}
+\newtheorem{theorem}{Theorem}
+\newcommand{\heff}{\mathbb{H}^{\text{eff}}}
+\newcommand{\pfrac}[2]{\frac{\partial #1}{\partial #2}}
+
+\newcommand{\MO}{\textbf{MO}}
+\newcommand{\AO}{\textbf{AO}}
+
+\newcommand{\huptb}{\text{H}_0}
+\newcommand{\order}[2]{#1^{(#2)}}
+\newcommand{\statebra}[1]{\langle #1 |}
+\newcommand{\stateket}[1]{| #1 \rangle}
+
+\begin{document}
+
+\section{Solution to the Molecular Orbtials}
+In this section, we write out explicitly the solution of the molecular orbitals. In the next section,
+we will focus on the perturbation treatment. 
+Let's write the 
+\begin{align}
+    &\mathbf{\chi} = \left( \begin{matrix}
+        \chi_1& \chi_2& \chi_3& \cdots& \chi_m
+    \end{matrix} \right) \\
+    &\mathbf{C}_i = \left( \begin{matrix}
+        C_{1i} \\ C_{2i} \\ \vdots \\ C_{mi}
+    \end{matrix} \right)
+\end{align}
+so that the \MO wavefunction can be written as dot product:
+\begin{equation}
+    \psi_i = \mathbf{\chi}\cdot \mathbf{C}_i = \sum_{\mu} C_{\mu i} \chi_{\mu}
+\end{equation}
+\MO s satisfy the eigenequation 
+\begin{gather}
+    \text{H}^{MO} \stateket{\psi_i} = \varepsilon_i \stateket{\psi_i} \\ 
+    \sum_{\mu} \statebra{\chi_{\nu}}\text{H}\stateket{\chi_{\mu}}\statebra{\chi_{\mu}} \psi_i \rangle  = \sum_{\mu'} \varepsilon_i \statebra{\chi_{\nu}} \chi_{\mu'} \rangle \statebra{\chi_{\mu'}} \psi_i \rangle \\ 
+    \sum_{\mu} \text{H}_{\nu\mu} C_{\mu i} =  \varepsilon_i S_{\nu \mu'} C_{\mu' i} \\ 
+    \text{H}^{AO} \mathbf{C}_i = \varepsilon_i \mathbf{S}^{AO} \mathbf{C}_i
+\end{gather}
+in matrix form, we have:
+\begin{equation}
+    \mathbf{C} = \left( \begin{matrix} \mathbf{C}_1 & \mathbf{C}_2 & \cdots & \mathbf{C}_m \end{matrix} \right) 
+    = \left( \begin{matrix}
+        C_{11} & \cdots & C_{1m} \\
+        \vdots & & \vdots \\ 
+        C_{m1} & \cdots & C_{mm}  
+    \end{matrix}\right)
+\end{equation}
+so that we can discard the index $i$:
+\begin{equation}
+    \textbf{H}^{AO} \mathbf{C} = \varepsilon \mathbf{S}^{AO} \mathbf{C}
+\end{equation}
+which is similar to an ordinary eigenequation except that the Hamiltonian 
+is in a set of basis that are not orthogonal. The normalization of $\mathbf{C}$
+is given with respect to overlap matrix $S$:
+\begin{equation}
+    \statebra{ \psi_i } \psi_j \rangle = \left( \sum_{\mu} C_{\mu i} \statebra{\chi_{\mu}} \right)  \left( \sum_{\nu} C_{\nu i} \stateket{\chi_{\nu}} \right) = \sum_{\mu\nu} c_{\mu i} c_{\nu i} S_{\mu \nu} = \delta_{ij}
+\end{equation}
+with real coefficients $\mathbf{C}$
+
+
+\section{Molecular Perturbation Theory}
+Let's consider the effect of perturbation on the molecular orbitals and their energies. The 
+treatment is similar to that of the ordinary perturbation theory except that the basis functions 
+are no longer orthogonal when the perturbation is introduced. For example, the change in geometry
+by bringing two structure fragment together necessary introduce change in overlap so that the 
+original wavefunctions are no longer orthogonal. This can be compared to text book perturbation
+theory in quantum mechanics where only perturbation in Hamiltonian are introduced. As an example, 
+let's consider the case of bringing the isolated molecular fragments $A$ and $B$ together to 
+form molecular $AB$. In the original system, suppose we already solved the molecular orbitals on
+each fragment. We can write down the system as
+$H^0 C^0 = S^0 C^0 \varepsilon^0$ where
+\begin{align}
+    C^0 &= \left( \begin{matrix} C_A^0 & \mathbf{0} \\ \mathbf{0} & C_B^0 \end{matrix} \right) &
+    S^0 &= \left( \begin{matrix} S_A^0 & \mathbf{0} \\ \mathbf{0} & S_B^0 \end{matrix} \right) \\
+    H^0 &= \left( \begin{matrix} H_A^0 & \mathbf{0} \\ \mathbf{0} & H_B^0 \end{matrix} \right) &
+    \varepsilon^0 &= \left( \begin{matrix} \varepsilon_A^0 & \mathbf{0} \\ \mathbf{0} & \varepsilon_B^0 \end{matrix} \right) \\
+\end{align}
+This is the block diagonal form composed of solutions of the molecular orbital coefficients $C_A^0$ and $C_B^0$
+for each isolated fragments. In the case of the solution, the Hamiltonian is diagonalized and 
+the overlap matrix is simply identity matrix. 
+
+Now, the molecular orbital coefficients solved on the perturbed Hamiltonian can be written as 
+\begin{equation}
+    \label{perturbation_coefficients}
+    \stateket{\psi_i} = \sum_j T_{ji} \stateket{\psi^0_j}
+\end{equation}
+we write down the perturbation as:
+\begin{align}
+    H = H^0 + \delta H \\
+    S = S^0 + \delta S
+\end{align}
+We have the secular equation:
+\begin{equation}
+    (H - \varepsilon_i S) C_i = \left[ (H^0 + \delta H) - \varepsilon_i (S^0 + \delta S) \right] C_i = 0
+\end{equation}
+Using equation \eqref{perturbation_coefficients} and the fact that $\stateket{\psi^0_j}$ diagonalize $S^0$ and $H^0$
+\footnote{is the solution of the secular equation spontaneously diagonalize H and S?},
+we have:
+\begin{align}
+    (\varepsilon^0 + \delta H) T_i = \varepsilon_i (1 + \delta S) T_i
+\end{align} 
+which we simplify to $(h - \varepsilon_i S) T_i = 0$, where:
+\begin{align}
+    h &= \order{h}{0} + \lambda \order{h}{1} \\ 
+    s &= \order{s}{0} + \lambda \order{s}{1} \\ 
+    \varepsilon_i &= \order{\varepsilon_i}{0} + \lambda \order{\varepsilon_i}{1} + \lambda^2 \order{\varepsilon_i}{2} + \cdots \\
+    T_i &= \order{T_i}{0} + \lambda \order{T_i}{1} + \lambda^2 \order{T_i}{2} + \cdots \\ 
+\end{align}
+Substituting these quantity into $(h - \varepsilon_i S) T_i = 0$ and matching the order up to second order, we find:
+\begin{align}
+    \left[(\order{h}{0} - \order{\varepsilon_i}{0}\order{S}{0}) + \lambda (\order{h}{1} - \order{\varepsilon_i}{1} \order{S}{0} - \order{\varepsilon_i}{0} \order{S}{1}) - \lambda^2 (\order{\varepsilon_i}{2} \order{S}{0} + \order{\varepsilon_i}{1} \order{S}{1})\right] \\ 
+    \times \left( \order{T_i}{0} + \lambda \order{T_i}{1} + \lambda^2 \order{T_i}{2} \right) = 0
+\end{align}
+The zeroth order simply is the unperturbed solution, to first order, writting $\order{T_i}{1} = \sum_{j} a_{ji} \order{T_j}{0}$, we have:
+\begin{equation}
+    \label{E:mop_firstorder}
+    (\order{h}{1} - \order{\varepsilon_i}{1} \order{S}{0} - \order{\varepsilon_i}{0} \order{S}{1}) \order{T_i}{0} + (\order{h}{0} - \order{\varepsilon_i}{0}\order{S}{0}) \sum_{k} a_{ki} \order{T_k}{0} = 0
+\end{equation}
+We use the following relationship:
+\begin{align}
+    (\order{T_j}{0})^T \order{T_i}{0} &= \delta_{ij}  & &\\ 
+    (\order{T_j}{0})^T \order{h}{1} \order{T_i}{0} &= \tilde{H}_{ij} & (\order{T_j}{0})^T \order{h}{0} \order{T_i}{0} &= \varepsilon_i \delta_{ij}\\ 
+    (\order{T_j}{0})^T \order{S}{1} \order{T_i}{0} &= \tilde{S}_{ij} & (\order{T_j}{0})^T \order{S}{0} \order{T_i}{0} &= \delta_{ij}\\
+\end{align}
+we multiply equation \eqref{E:mop_firstorder} with $(\order{T_i}{0})^T$ on the left to obtain:
+\begin{gather}
+    ( \tilde{H}_{ii} - \order{\varepsilon_i}{1} - \order{\varepsilon_i}{0} \tilde{S}_{ii} ) + a_{ii} (\order{\varepsilon_i}{0} - \order{\varepsilon_i}{0}) = 0 \\ 
+    \order{\varepsilon_i}{1} = \tilde{H}_{ii} - \order{\varepsilon_i}{0} \tilde{S}_{ii}
+\end{gather}
+multiply \eqref{E:mop_firstorder} with $(\order{T_j}{0})^T; (j\neq i)$ on the left, we obtain:
+\begin{gather}
+    ( \tilde{H}_{ij}- \order{\varepsilon_i}{0} \tilde{S}_{ij} ) + \sum_k \delta_{jk} a_{ki} (\order{\varepsilon_j}{0} - \order{\varepsilon_i}{0}) = 0 \\ 
+    a_{ji}(j\neq i) = \frac{\tilde{H}_{ij}- \order{\varepsilon_i}{0} \tilde{S}_{ij}}{\order{\varepsilon_i}{0} - \order{\varepsilon_j}{0}}
+\end{gather}
+For second order, we have:
+\begin{equation}
+    (\order{h}{0} - \order{\varepsilon_i}{0}\order{S}{0}) \order{T_i}{2} + (\order{h}{1} - \order{\varepsilon_i}{1} \order{S}{0} - \order{\varepsilon_i}{0} \order{S}{1}) \order{T_i}{1} 
+    - (\order{\varepsilon_i}{2} \order{S}{0} + \order{\varepsilon_i}{1} \order{S}{1}) \order{T_i}{0} = 0
+\end{equation} 
+using the results for the first order perturbation and multiplying $(\order{T_i}{0})^T$ or  $(\order{T_j}{0})^T; (j\neq i)$ on the left, we find the 
+result:
+\begin{align}
+    \order{\varepsilon_i}{2} &= - \order{\varepsilon_i}{0} \tilde{S}_{ii} + \sum_{j\neq i} \frac{(\tilde{H}_{ij}- \order{\varepsilon_i}{0} \tilde{S}_{ij})^2}{\order{\varepsilon_i}{0} - \order{\varepsilon_j}{0}} \\ 
+    b_{ji} (j\neq i) &= - \frac{(\tilde{H}_{ii}- \order{\varepsilon_i}{0}\tilde{S}_{ii} )\tilde{S}_{ij}}{\order{\varepsilon_i}{0} - \order{\varepsilon_j}{0}}
+    + \sum_{k\neq i} \frac{(\tilde{H}_{ik}- \order{\varepsilon_i}{0} \tilde{S}_{ik})(\tilde{H}_{kj}- \order{\varepsilon_i}{0} \tilde{S}_{kj})}{(\order{\varepsilon_i}{0} - \order{\varepsilon_j}{0})(\order{\varepsilon_i}{0} - \order{\varepsilon_k}{0})}
+\end{align}
+so that $\order{T_i}{2} = \sum_j b_{ji} \order{T_j}{0}$.
+
+Now, we note that the coefficient $a_{ii}$ and $b_{ii}$ are not yet obtained. They are given by the normalization condition as well as to the previous results, we have:
+\begin{align}
+    \order{T_{ii}}{1} &= - \frac{1}{2} \tilde{S}_{ii} \\ 
+    \order{T_{ii}}{2} &= 
+    - \sum_{j\neq i} \frac{(\tilde{H}_{ij} - \order{\varepsilon_i}{0}\tilde{S}_{ij})\tilde{S}_{ij}}{\order{\varepsilon_i}{0} - \order{\varepsilon_j}{0}}
+    - \frac{1}{2} \sum_{j\neq i} \left(\frac{\tilde{H}_{ij} - \order{\varepsilon_i}{0}\tilde{S}_{ij}}{\order{\varepsilon_i}{0} - \order{\varepsilon_j}{0}} \right)^2
+\end{align}
+
+Finally, we obtain the complete result up to second order:
+\begin{align}
+    \varepsilon_i &= \order{\varepsilon_i}{0} + \underbrace{(\tilde{H}_{ii} - \order{\varepsilon_i}{0} \tilde{S}_{ii})}_{1^{th} order} 
+    - \underbrace{\order{\varepsilon_i}{0} \tilde{S}_{ii} + \sum_{j\neq i} \frac{(\tilde{H}_{ij}- \order{\varepsilon_i}{0} \tilde{S}_{ij})^2}{\order{\varepsilon_i}{0} - \order{\varepsilon_j}{0}} }_{2^{nd} order}  \\ 
+    T_{ii} &= 1 - \underbrace{\frac{1}{2} \tilde{S}_{ii}}_{1^{th} order} - \underbrace{\sum_{j\neq i} \frac{(\tilde{H}_{ij} - \order{\varepsilon_i}{0}\tilde{S}_{ij})\tilde{S}_{ij}}{\order{\varepsilon_i}{0} - \order{\varepsilon_j}{0}}
+    - \frac{1}{2} \sum_{j\neq i} \left(\frac{\tilde{H}_{ij} - \order{\varepsilon_i}{0}\tilde{S}_{ij}}{\order{\varepsilon_i}{0} - \order{\varepsilon_j}{0}} \right)^2}_{2^{nd} order} \\ 
+    T_{ji} &= \underbrace{\frac{\tilde{H}_{ij}- \order{\varepsilon_i}{0} \tilde{S}_{ij}}{\order{\varepsilon_i}{0} - \order{\varepsilon_j}{0}} }_{1^{th} order}
+    - \underbrace{\frac{(\tilde{H}_{ii}- \order{\varepsilon_i}{0}\tilde{S}_{ii} )\tilde{S}_{ij}}{\order{\varepsilon_i}{0} - \order{\varepsilon_j}{0}}
+    + \sum_{k\neq i} \frac{(\tilde{H}_{ik}- \order{\varepsilon_i}{0} \tilde{S}_{ik})(\tilde{H}_{kj}- \order{\varepsilon_i}{0} \tilde{S}_{kj})}{(\order{\varepsilon_i}{0} - \order{\varepsilon_j}{0})(\order{\varepsilon_i}{0} - \order{\varepsilon_k}{0})} }_{2^{nd} order}
+\end{align}
+
+Slight simplification can be given if we assume that $\delta H$ and $\delta S$ separately for the two fragments are zero:
+\begin{align}
+    \delta H = \left( \begin{matrix} \mathbf{0} & \delta H_{AB} \\ \delta H_{BA}  & \mathbf{0} \end{matrix} \right); \quad
+    \delta S = \left( \begin{matrix} \mathbf{0} & \delta S_{AB} \\ \delta S_{BA}  & \mathbf{0} \end{matrix} \right)
+\end{align}
+in which case, the terms in the expansion like $(\tilde{H}_{ii} - \order{\varepsilon_i}{0} \tilde{S}_{ii})$ will be zero, and the summation 
+are restricted with respect to the fragments where those states come from. 
+The degenerate case can proceed similar to the non-degenerate theory, with the coefficients $T_{ji}^0$ no longer simply given by $\delta_{ji}$. 
+We omit the degenerate treatment here.
+
+
+\end{document}

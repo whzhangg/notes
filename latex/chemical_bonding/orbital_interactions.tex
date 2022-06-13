@@ -1,13 +1,23 @@
 \documentclass{article}
+
 \usepackage{amssymb, amsmath, amsthm}
 \usepackage[margin=1in]{geometry}
 \usepackage{verbatim}
 \usepackage{graphicx}
 \usepackage{hyperref} % \url \href
 \usepackage{docmute}
+\usepackage[title]{appendix}
 
 \newtheorem{definition}{Definition}
 \newtheorem{theorem}{Theorem}
+\newcommand{\heff}{\mathbb{H}^{\text{eff}}}
+\newcommand{\pfrac}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\huptb}{\text{H}_0}
+\newcommand{\order}[2]{#1^{(#2)}}
+\newcommand{\statebra}[1]{\langle #1 |}
+\newcommand{\stateket}[1]{| #1 \rangle}
+\newcommand{\MO}{\textbf{MO}}
+\newcommand{\AO}{\textbf{AO}}
 
 \begin{document}
 
@@ -16,10 +26,20 @@
 \date{\today}
 \maketitle
 
+\tableofcontents
 
-\appendix 
+\input{perturbation_molecular.tex}
+\input{two_orbital_theory.tex}
+\input{three_orbital_perturbation.tex}
+\input{symmetry.tex}
+
+\begin{appendices}
+    
 % on the same page, section is numberd with A, B automatically
-\section{}
+\include{secular_alternative_approach.tex}
+\include{perturbation.tex}
+
+\end{appendices}
 
 
 \end{document}

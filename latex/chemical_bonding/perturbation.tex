@@ -18,7 +18,10 @@
 
 \begin{document}
 
-\section{Perturbation Theory (Nondegenerate case)}
+\section{Perturbation Theory}
+Here we review the time independent perturbation theory following the treatment 
+given in Sakurai's book.
+\subsection{Nondegenerate case}
 Suppose in the un-perturbed case, we have:
 \begin{gather}
     \huptb \stateket{\order{n}{0}} = E_0 \stateket{\order{n}{0}} \quad \text{and} \quad
@@ -133,7 +136,142 @@ For perturbed states, we have:
 \end{align}
 
 
-\section{Perturbation Theory (Degenerate case)}
+\subsection{Degenerate case}
+We now consider the degenerate case where a set of eigenstates are degenerate in 
+energy. We denote those states to be $\stateket{m}\in D$ with energy $\order{E_D}{0}$. 
+However, instead of using $\stateket{\order{m}{0}}$ as starting points for the
+degenerate set, we use $\stateket{\order{l}{0}}$ which are a linear combination of $\stateket{\order{m}{0}}$
+with:
+\begin{equation}
+    \stateket{\order{l}{0}} = \sum_m c_m^l \stateket{\order{m}{0}}
+\end{equation} 
+We define the projector:
+\begin{align}
+    P_0 = \sum_{m\in D} \stateket{\order{m}{0}} \statebra{ \order{m}{0} } \\
+    P_1 = \sum_{k\notin D} \stateket{\order{k}{0}} \statebra{ \order{k}{0} }
+\end{align}
+The perturbation equation can be written as:
+\begin{align}
+    (E_l - \huptb - \lambda V) \stateket{l} = 
+    (E_l - \order{E_D}{0} - \lambda V) P_0 \stateket{l} + (E_l - \huptb - \lambda V) P_1 \stateket{l} = 0
+\end{align}
+again, we write the expansion:
+\begin{align}    
+    \Delta_l &= \lambda \order{\Delta_l}{1} + \lambda^2 \order{\Delta_l}{2} + \lambda^3 \order{\Delta_l}{3} + \cdots \\
+    \stateket{l} &= \stateket{\order{l}{0}} + \lambda \stateket{\order{l}{1}} + 
+                    \lambda^2 \stateket{\order{l}{2}} + \lambda^3 \stateket{\order{l}{3}} + \cdots
+\end{align}
+Multiplying $\statebra{\order{l}{0}}$ to the left, we find:
+\begin{gather}
+    \statebra{\order{l}{0}} (E_l - \huptb - \lambda V) \stateket{l} 
+    = \delta_l \statebra{\order{l}{0}} l \rangle - \lambda \statebra{\order{l}{0}} V \stateket{l} = 0 \\ 
+    \Delta_l = \lambda \statebra{\order{l}{0}} V \stateket{l}
+\end{gather}
+which is similar to the non-degenerate case with:
+\begin{equation}
+    \label{E:Delta_l}
+    \order{\Delta_l}{i+1} = \statebra{\order{l}{0}} V \stateket{\order{l}{i}} 
+\end{equation}
+But now, the coefficients of $\order{l}{0}$ is not known at this moment.
 
+We multiply projector $P_0$ and $P_1$ to the above equation using:
+\begin{align}
+    (E_l - \order{E_D}{0} - \lambda P_0 V) P_0 \stateket{l} - \lambda P_0 V P_1 \stateket{l} = 0 \\
+    - \lambda P_1 V P_0 \stateket{l} + \underbrace{(E_l - \huptb - \lambda P_1 V)}_{\text{can be inverted}} P_1 \stateket{l} = 0
+\end{align}
+where we used $P_0 \huptb P_1 = 0$ to arrive at the first equation.
+In the second equation, since we have projector $P_1$ in the second term, we can safely invert 
+to arrive at:
+\begin{equation}
+    \label{E:inverted}
+    P_1 \stateket{l} = \frac{\lambda }{E_l - \huptb - \lambda P_1 V} P_1 V P_0 \stateket{l}
+\end{equation}
+Using the relationship $\frac{1}{1-x} \approx 1 + x + x^2 + \cdots$, we can expand the fractional 
+terms to be:
+\begin{equation}
+    \frac{1}{\order{E_l}{0} - \huptb + \lambda \order{\Delta_l}{1} - \lambda P_1 V} \approx 
+    \frac{1}{\order{E_l}{0} - \huptb} + \frac{\lambda P_1 V - \lambda \order{\Delta_l}{1}}{(\order{E_l}{0} - \huptb)^2}
+    + \frac{(\lambda P_1 V - \lambda \order{\Delta_l}{1})^2}{(\order{E_l}{0} - \huptb)^3} + \cdots
+\end{equation}
+Therefore, to first order, with $P_1 \stateket{\order{l}{0}} = 0$ 
+and $P_0 \stateket{\order{l}{0}} = \stateket{\order{l}{0}}$ we have:
+\begin{align}
+    P_1 \stateket{\order{l}{1}} &= \frac{1}{\order{E_l}{0} - \huptb} P_1 V P_0 \stateket{\order{l}{0}} \\ 
+    &= \sum_{m\in D}\sum_{ k\notin D} \frac{1}{\order{E_l}{0} - \huptb} 
+    \stateket{\order{k}{0}} \statebra{ \order{k}{0} } V \stateket{\order{l}{0}} \\ 
+    &= \sum_{k\notin D} \frac{V_{kl}}{\order{E_l}{0} - \order{E_k}{0}} \stateket{\order{k}{0}}
+\end{align}
+Putting equation \eqref{E:inverted} into the first equation, we have:
+\begin{equation}
+    \label{E:degenerate_main}
+    \left[ (E_l - \order{E_D}{0} - \lambda P_0 V) - \lambda^2 P_0 V \frac{1}{E_l - \huptb - \lambda P_1 V} P_1 V \right] P_0 \stateket{l} = 0
+\end{equation}
+Keeping up to first order, we have:
+\begin{equation}
+    \left( \order{\Delta_l}{1} - P_0 V P_0 \right) \stateket{\order{l}{0}} = 0
+\end{equation}
+The part $P_0 V P_0$ is simplily a matrix:
+\begin{equation}
+    P_0 V P_0 = \sum_m \sum_n \statebra{m} V_{mn} \stateket{n}
+\end{equation}
+so that we have an eigenequation whose solution gives the coefficients $c_m^l$ and 
+therefore the desired starting basis for $\stateket{\order{l}{0}}$, as well as the 
+eigenvalues of $\order{\Delta_l}{1}$, which is just $\statebra{\order{l}{0}} V \stateket{\order{l}{0}}$
+once $\stateket{\order{l}{0}}$ are eigenvectors.
+
+Now we try to solve $P_0 \stateket{\order{l}{0}}$. We go back to equation \eqref{E:degenerate_main}.
+However, since we know the coefficients for $\stateket{\order{l}{0}}$, we redefine the projection 
+operator to be:
+\begin{equation}
+    P_0 = \sum_{i\in D} \stateket{\order{l_i}{0}} \statebra{\order{l_i}{0}}; \quad P_1 = 1 - P_0
+\end{equation}
+Furthermore, define:
+\begin{align}    
+    \Delta_{l_i} &= \lambda \order{\Delta_{l_i}}{1} + \lambda^2 \order{\Delta_{l_i}}{2} + \cdots \\
+    \stateket{l_i} &= \stateket{\order{l_i}{0}} + \lambda \stateket{\order{l_i}{1}} + 
+                    \lambda^2 \stateket{\order{l_i}{2}} + \cdots
+\end{align}
+Write out major terms from \eqref{E:degenerate_main}, we have:
+\begin{align}
+    \left[ (\lambda \order{\Delta_{l_i}}{1} - \lambda P_0 V ) - \lambda^2 P_0 V \frac{1}{\order{E_D}{0} - \huptb} P_1 V \right] \\ 
+    \times P_0 \left[ \stateket{\order{l_i}{0}} + \lambda \stateket{\order{l_i}{1}} \right] = 0
+\end{align}
+We have the relationship:
+\begin{equation}
+    \lambda^2 P_0 V \frac{1}{\order{E_D}{0} - \huptb} P_1 V P_0 \stateket{\order{l_i}{0}} 
+    = \lambda^2 (\order{\Delta_{l_i}}{1} - P_0 V ) P_0 \stateket{\order{l_i}{1}} 
+\end{equation}
+For the left hand side, with $P_0 \stateket{\order{l_i}{0}} = \stateket{\order{l_i}{0}}$ we have:
+\begin{align}
+    & P_0 V \frac{1}{\order{E_D}{0} - \huptb} P_1 V P_0 \stateket{\order{l_i}{0}} \\
+    &= \sum_{j\in D} \stateket{ \order{l_j}{0} } \statebra{\order{l_j}{0}} V \frac{1}{\order{E_D}{0} - \huptb} 
+    \sum_{k\notin D} \stateket{ \order{k}{0} } \statebra{\order{k}{0}} V \stateket{\order{l_i}{0}} \\ 
+    &= \sum_{j\in D} 
+        \sum_{k\notin D} \frac{V_{jk}V_{ki}}{\order{E_D}{0} - \order{E_k}{0}} \stateket{ \order{l_j}{0} }
+\end{align}
+For the term on the right, we have:
+\begin{align}
+    (\order{\Delta_{l_i}}{1} - P_0 V ) P_0 \stateket{\order{l_i}{1}}  
+    &= \sum_{j\in D} \order{\Delta_{l_i}}{1} \stateket{ \order{l_j}{0} } \statebra{\order{l_j}{0}} \order{l_i}{1} \rangle
+    - \sum_{j\in D} \order{\Delta_{l_j}}{1} \stateket{ \order{l_j}{0} } \statebra{\order{l_j}{0}} \order{l_i}{1} \rangle \\ 
+    &= \sum_{j\in D} (\order{\Delta_{l_i}}{1} - \order{\Delta_{l_j}}{1}) \stateket{ \order{l_j}{0} } \statebra{\order{l_j}{0}} \order{l_i}{1} \rangle
+\end{align}
+so that we have:
+\begin{equation}
+    \sum_{j\in D} (\order{\Delta_{l_i}}{1} - \order{\Delta_{l_j}}{1}) \stateket{ \order{l_j}{0} } \statebra{\order{l_j}{0}} \order{l_i}{1} \rangle
+    = \sum_{j\in D} \sum_{k\notin D} \frac{V_{jk}V_{ki}}{\order{E_D}{0} - \order{E_k}{0}} \stateket{ \order{l_j}{0} }
+\end{equation}
+if $j = i$, we find the term on the left become zero. So that we can ignore $i$ in the summation and 
+invert, obtaining\footnote{This result has a different sign compared to the one given in Equation 5.2.14, but I cannot see the problem}:
+\begin{equation}
+    P_0 \stateket{ \order{l_i}{1}} = \sum_{j\neq i} \sum_{k\notin D} \frac{V_{jk}V_{ki}}{(\order{\Delta_{l_i}}{1} - \order{\Delta_{l_j}}{1})(\order{E_D}{0} - \order{E_k}{0})} \stateket{ \order{l_j}{0} }
+\end{equation}
+Finally, we can obtain the first order correction to the eigenstates:
+\begin{equation}
+    \stateket{\order{l_i}{1}} = P_0 \stateket{\order{l_i}{1}} + P_1 \stateket{\order{l_i}{1}}
+\end{equation}
+and subsequently the second order energy correction using 
+$\order{\Delta_l}{2} = \statebra{\order{l}{0}} V \stateket{\order{l}{1}}$. Higher order corrections 
+can be worked up similarly as in the non-degenerate case. 
 
 \end{document}

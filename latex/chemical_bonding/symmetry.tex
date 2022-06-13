@@ -1,0 +1,51 @@
+\documentclass{article}
+
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=1in]{geometry}
+\usepackage{verbatim}
+\usepackage{graphicx}
+\usepackage{hyperref} % \url \href
+\usepackage{docmute}
+\usepackage[title]{appendix}
+
+\newtheorem{definition}{Definition}
+\newtheorem{theorem}{Theorem}
+\newcommand{\heff}{\mathbb{H}^{\text{eff}}}
+\newcommand{\pfrac}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\huptb}{\text{H}_0}
+\newcommand{\order}[2]{#1^{(#2)}}
+\newcommand{\statebra}[1]{\langle #1 |}
+\newcommand{\stateket}[1]{| #1 \rangle}
+\newcommand{\MO}{\textbf{MO}}
+\newcommand{\AO}{\textbf{AO}}
+
+\begin{document}
+
+\section{Symmetry Consideration}
+The detailed treatment of symmetry consideration can be found in other books. Here I only
+collect some notation and points important for our purpose. 
+\subsection{Notation for Irreducible representation}
+The notation for irreducible representation are usually used as follows:
+\begin{enumerate}
+    \item $A$ singly degenerate, symmetrical with respect to rotation about the principle axis (characters of these rotation are 1)
+    \item $B$ singly degenerate, but antisymmetrical with repect to rotation about the principle axis (characters of these rotation are -1)
+    \item $E$ doubly and $T$ triply degenerate representations.
+    \item If there are more than one representation with the same label, we can use subscript: $A_1$, $A_2$ and so on.
+    \item The representation with $\chi(i) = 1$ (symmetry under inversion) are given subscript $g$ (German \emph{gerade} = even)
+    \item The representation that is antisymmetrical under inversion are given subscript $u$ (\emph{ungerade})
+    \item The representation that is symmetrical with respect to $\sigma_h$ ($\chi(\sigma_h) = 1$) are given $'$, the representation 
+            that is antisymmetrical with respect to $\sigma_h$ are given $''$ superscript.
+\end{enumerate}
+For a full description of the symbol, refer to \emph{Point Group Theory Table, Altmann, 1994, Page 63}. 
+Usually, uppercase characters for the representation are used to denote electronic states. For 
+atomic and molecular orbitals, as well as molecular vibrations, lowercase notation is used, e.g. 
+$a_1, e, t_g$.
+
+\subsection{Symmetry Consideration in Integrals} 
+Symmetry require all integrals of the overlap $\statebra{\psi_a} \psi_b \rangle$ or 
+interaction $\statebra{\psi_a} H \stateket{\psi_b}$ to vanish unless the wavefunction
+$\stateket{\psi_a}$ and $\stateket{\psi_b}$ transform as the same irreducible 
+representation of the molecular point group. Therefore, only the orbitals of the 
+same symmetry may interact with each other. 
+
+\end{document}
