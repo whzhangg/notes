@@ -1,0 +1,82 @@
+\documentclass{article}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=1in]{geometry}
+\usepackage{verbatim}
+\usepackage{graphicx}
+\usepackage{hyperref} % \url \href
+\usepackage{docmute}
+
+\newcommand{\pfrac}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\dbar}{\mathbf{\tilde{d}}}
+\newcommand{\dnor}{\text{d}}
+% \renewcommand{\H}{\mathcal{H}}
+
+\begin{document}
+
+\section{Intensive and extensive properties (previous version)}
+
+\subsection{Heat}
+We provide a definition of heat as \emph{The thermal energy in transit}, denoted as $Q$\footnote{Blundell, p14}. We define the heat capacity
+$C$ of an object as the amount of heat that is needed to increase its temperature:
+\begin{equation}
+    C = \frac{dQ}{dT}
+\end{equation}
+thus $C$ has the unit $J/K$. The specific heat is defined to be the heat capacity per unit mass, having the unit $J/(kg\cdot K)$
+
+\subsection{Entropy}
+We define entropy $S$ for an isolated macroscopic system of $N$ particles in volume $V$ and energy $E$ to be:
+\begin{equation}
+    S(E,N,V,x) = k_B \ln\Omega(E,N,V,x)
+\end{equation}
+where $\Omega(E,N,V,x)$ is the number of accessible states at a given value of $E, N, V$, and $x$ is some constraints which 
+influence the number of accessible states.
+As a non-equilibrium isolated system allow to relax to equilibrium, entropy will increase monotonically and eventually maximize 
+at equilibrium.
+%imagine that the system will attempt to visit as many configurations as possible. 
+
+\textbf{Temperature} 
+consider an isolated system with two subsystem in weak contact but heat is allowed to follw between the two subsystem.
+The total number of accessible states (configurations) are given by the product of the number of configurations of the 
+two subsystem. Entropy will be additive. Consider the energy of one of the subsystem $E_1$
+as the constrain for the configurations.
+\begin{align}
+    \Omega(E,E_1) = \Omega_1(E_1) \Omega_2(E_2) \\
+    S(E,E_1) = S_1(E_1) S_2(E_2)   
+\end{align}
+Relaxation process will increase entropy by changing $E_1$, towards a macroscopic that correspond to 
+more configurations. At equilibrium (heat no longer exchange), we have:
+\begin{gather}
+    \frac{\partial S}{\partial E_1} = 0 \ \Rightarrow \ 
+    \left. \frac{\partial S_1(E_1)}{\partial E_1} \right|_{N_1,V_1} = \left. \frac{\partial S_2(E_2)}{\partial E_2}\right|_{N_2,V_2} = \frac{1}{T} \label{defineT}
+\end{gather}
+where the final equality gives the definition of temperature, thus if two subsystem reaches equilibrium in terms of energy flow, their 
+temperature will be equal. This process is irreversible and thus define a arrow of time.
+
+\textbf{Chemical potential}
+now, we fix only volume $V$ of each subsystem and allow both energy and particles to exchange, then:
+\begin{equation}
+    \left. \frac{\partial S_1(N_1)}{\partial N_1} \right|_{E_1,V_1} = \left. \frac{\partial S_2(N_2)}{\partial N_2}\right|_{E_2,V_2} = -\frac{\mu}{T}
+\end{equation}
+the last equality defines the chemical potential $\mu$. 
+% minus sign the divide by temperature is because of the tradition
+
+\textbf{Pressure}
+finally, we allow the volume of the system to exchange, and we can similar define pressure:
+\begin{equation}
+    \left. \frac{\partial S_1(V_1)}{\partial V_1} \right|_{E_1,N_1} = \left. \frac{\partial S_2(V_2)}{\partial V_2}\right|_{E_2,N_2} = \frac{P}{T}
+\end{equation}
+
+Thus, we can see that if we set an initial system not in equilibrium, the two subsystem will
+start to exchange energy, particles and volume until $T$, $P$ and $\mu$ become the same 
+for the two subsystem. 
+
+We can separate the macroscopic properties of a system into two different catagory:
+\begin{itemize}
+    \item \textbf{Extensive properties} that will increase proportional to the system size, such as $N,E,V$
+    \item \textbf{Intensive properties} that will be same for any of the subsystem, such as  $P,\mu,T$
+\end{itemize}
+
+
+\end{document}
+
+

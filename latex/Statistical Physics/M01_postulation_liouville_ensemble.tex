@@ -1,0 +1,222 @@
+\documentclass{article}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=1in]{geometry}
+\usepackage{verbatim}
+\usepackage{graphicx}
+\usepackage{hyperref} % \url \href
+\usepackage{docmute}
+
+\newcommand{\pfrac}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\dbar}{\mathbf{\tilde{d}}}
+\newcommand{\dnor}{\text{d}}
+% \renewcommand{\H}{\mathcal{H}}
+
+\begin{document}
+
+
+\section{The fundamental postulation and Liouville's theorem}
+
+\subsection{The Fundamental postulate}
+An isolated system in equilibrium is equally likely to be found in any
+of the microstates accessible to it.
+
+\begin{itemize}
+    \item \textbf{System} an part of universe that is only weakly coupled to the rest of the universe 
+    so that its dynamic is dominated by internal interactions.
+    \item \textbf{Equilibrium} the measurement of quantities are time independent.
+    \item \textbf{Microstate} a complete microscope specification of coordinates of every particles (position and velocity).
+    \item \textbf{Ensemble} a collection of the system that are macroscopically the same but microscopically different. 
+\end{itemize}
+
+\subsection{Motivation for the fundamental postulation}
+From the above fundamental postulation and use the ergodic hypothesis, we can relate the macroscopic properties of a system that we can measure 
+to the statistic (probabilistic) description of microstate. 
+
+\textbf{Ergodic hypothesis} assumes that 1) the system's internal dynamics are such that the microstates of the system are 
+constantly changing and 2) the system will visit all possible microstate and spend an equal time in each of them. 
+As a result, as we carry out measurement, the system will likely to be found in a configuration (macroscopic properties) that 
+is represented by the most microstates\footnote{Blundell, p35-37}. 
+
+The following example illustrate this notation: consider a box of 100 identical coins, shaked hard and we measure the number 
+of the coins facing up as we open the box (macroscopic result). We do not really care the actual configuration of the outcome 
+(coin 1 face up, $\cdots$ coin N face down)
+which is a microscopic property since we know each of these configurations is equally possible. 
+It's easy to see that the most probable result is 50 up and 50 down, but let's see the possibility of 
+outcome that deviate from this average value:
+\begin{align}
+    \text{50 up and 50 down}\ &= \frac{100!}{(50!)^2} \approx 4 \times 10^{27} \notag \\ 
+    \text{53 up and 47 down}\ &= \frac{100!}{53! 47!} \approx 3 \times 10^{27} \notag \\
+    \text{90 up and 10 down}\ &= \frac{100!}{90! 10!} \approx 10^{13} \notag \\
+    \text{100 up and 0 down}\ &= 1
+\end{align}
+where each result is determined by counting their configurations. We see that the probability that result deviate far from the 
+average decay exponentially. For actual physic system, the number of particles are $\propto 10^{23}$, which essentially 
+mean that the possibility of deviation is ignorable and when we measure the macroscopic properties of physical system, we almostly
+certainly obtain the value given from probabilistic calculation.
+
+The macroscopic propertie of the system can thus be calculated as following:
+For $N$ particles we have in total $6N$ coordinates $(q_1, q_2, \cdots , q_{3N}, p_1, p_2, \cdots , p_{3N})$ which completely
+define a microscope state. We define the "phase density" as:
+\begin{align}
+    &\rho(q_1, q_2, \cdots , q_{3N}, p_1, p_2, \cdots , p_{3N}, t) \\
+     &\ \ \   \to \text{Probability of finding a system near}\ (q_1, q_2, \cdots , q_{3N}, p_1, p_2, \cdots , p_{3N}) \text{at time}\ t
+\end{align}
+If property of this system is given by a function $f(q,p)$, then the ensemble average of $f$ at time $t$ will be 
+given as:
+\begin{align}
+    \langle f(t) \rangle = \frac{\int\int\cdots\int f(q,p)\rho(q,p,t)dq^{3N}dp^{3N}}{\int\int\cdots\int \rho(q,p,t)dq^{3N}dp^{3N}}
+\end{align}
+With the above definition, $\rho(q,p,t)dq^{3N}dp^{3N}$ gives the number of states (points) that are included in the phase space 
+volume $dq^{3N}dp^{3N}$ near $(q,p)$.
+
+\subsection{Liouville's theorem}
+Liouville's theorem states that the evolution of $\rho$ is given by:
+\begin{equation}
+    \frac{d\rho}{dt} = 0
+\end{equation}
+which is to say that if we follow the trajectory of a state $(q,p)$ as it 
+evolve over time, its phase space density will not change (total derivative): $\rho(q(0),p(0),t=0) = \rho(q(t'),p(t'), t = t')$. 
+
+\textbf{Proof 1} In this proof, we consider the phase space points inclosed by a volume at $t = 0$ at $(q_1,p_1)$, at a later time $\delta t$, 
+we locate those phase space points agian and we show that the volume of phase space that enclose these points are the same. This will
+thus mean the phase (point) density do not change following the trajectory.
+
+let's consider an area in a two dimensional phase space that is a rectangle specified by its 2 diagonal points $(q_1,p_1),(q_2,p_2)$ at some 
+initial time $t$, then at time $t+\delta t$, the points changed to $(q_1 + \dot{q_1}\delta t, p_1 + \dot{p_1}\delta t)$ and 
+$(q_2 + \dot{q_2}\delta t, p_2 + \dot{p_2}\delta t)$. The volume difference, to first order in $\delta t$ is:
+\begin{align}
+    \Delta V &= (q_2 + \dot{q_2}\delta t - q_1 - \dot{q_1}\delta t)(p_2 + \dot{p_2}\delta t - p_1 - \dot{p_1}\delta t) - (q_2 - q_1)(p_2 - p_1) \notag \\
+             &= (\dot{q_2} - \dot{q_1}) (p_2 - p_1) + (\dot{p_2} - \dot{p_1}) (q_2 - q_1) \notag \\
+             &= \frac{1}{V} \left( \frac{\dot{q_2} - \dot{q_1}}{q_2-q_1} + \frac{\dot{p_2} - \dot{p_1}}{p_2-p_1} \right) \notag \\
+             &= \frac{1}{V} \left( \frac{\partial \dot{q}}{\partial q} + \frac{\partial \dot{p}}{\partial p} \right) \delta t
+\end{align} 
+If a system envolve under Hamiltonian dynamics:
+\begin{align}
+    \dot{q_i} &= \frac{\partial H}{\partial p_i} ; \ \ \dot{p_i} = -\frac{\partial H}{\partial q_i}
+\end{align}
+then 
+\begin{equation}
+    \frac{\partial \dot{q}}{\partial q} + \frac{\partial \dot{p}}{\partial p} 
+    = \frac{\partial^2 H}{\partial p \partial q} - \frac{\partial^2 H}{\partial q\partial p} = 0
+\end{equation}
+which shows that the enclosing volume of those phase space points do not change as the system evolve, and therefore, the phase space density
+in this volume do not change over time, giving the result:
+\begin{equation}
+    \frac{d\rho}{dt} = \frac{\partial \rho}{\partial t} + 
+        \sum_i \left( \frac{\partial \rho}{\partial q_i}\frac{\partial q_i}{\partial t} + \frac{\partial \rho}{\partial p_i}\frac{\partial p_i}{\partial t} \right)
+        = 0
+\end{equation}
+Where the first equality is given merely by the definition of total derivative.
+
+\textbf{Proof 2} In this proof, we compute the partial derivatives first and show that they result in the result of Liouville's theorem
+\footnote{Taken from \url{https://hepweb.ucsd.edu/ph110b/110b_notes/node93.html}}.
+
+We first compute $\partial \rho / \partial t$. Consider the flow the phase space points in and out of a cubic volume element 
+in the phase space arount $(q,p)$, The net flow of phase space points is given by:
+\begin{align}
+    \frac{\partial N}{\partial t} 
+    &= -\sum_i \left( \frac{\partial (\rho \dot{q_i})}{\partial q_i} + \frac{\partial (\rho \dot{p_i})}{\partial p_i} \right) dq \cdots dp \notag \\
+    \frac{\partial \rho}{\partial t} 
+    &= -\sum_i \left( \frac{\partial (\rho \dot{q_i})}{\partial q_i} + \frac{\partial (\rho \dot{p_i})}{\partial p_i} \right)
+\end{align}
+the total derivatve is then:
+\begin{align}
+    \frac{d\rho}{dt} &= \frac{\partial \rho}{\partial t}
+    + \sum_i \left( \frac{\partial \rho}{\partial q_i}\frac{\partial q_i}{\partial t} + \frac{\partial \rho}{\partial p_i}\frac{\partial p_i}{\partial t} \right) \notag \\
+    &= -\sum_i \left( \frac{\partial (\rho \dot{q_i})}{\partial q_i} + \frac{\partial (\rho \dot{p_i})}{\partial p_i} \right) 
+    + \sum_i \left( \frac{\partial \rho}{\partial q_i}\frac{\partial q_i}{\partial t} + \frac{\partial \rho}{\partial p_i}\frac{\partial p_i}{\partial t} \right) \notag \\
+    &= - \sum_i \left( \rho\frac{\partial \dot{q_i}}{\partial q_i} + \rho\frac{\partial \dot{p_i}}{\partial p_i}  \right) = 0
+\end{align}
+thus proving the Liouville's theorem.
+
+
+\section{Ensembles}
+We can define an ensemble as a collection of possible configurations that satisfy a given macroscopic 
+property\footnote{Blundell, p38}.
+We have already seen an ensemble containing possible configurations of \textbf{an isolated} system where energy
+is known and all configurations are of equal probability. 
+This ensemble is known as the \textbf{Microcanonical ensemble}. For a microcanonical ensemble, particle 
+number, volume and energy are specified at the same time, thus it is also called \textbf{NVE ensemble}.
+
+Now consider a system that can exchange energy through a contact with a temperature bath and eventually 
+come to an equilibrium. This ensemble is called \textbf{Canonical ensemble}. For canonical ensemble, 
+it's dynamic is still governed by its internal interaction but now its energy may vary. Since now 
+the energy of this system can change, it is more appropriate to describe it in terms of 
+temperature $T$, from which we can find its energy. 
+
+Now we want to find the probability distribution of its microstate (probability of finding the system 
+to be in a specific microstate), The system and reservior together is described by a microcanonical 
+ensemble, in which each state is described by $(q_1,\cdots, q_n, q_{n+1}, \cdots q_{N}, p_1,\cdots, p_n, p_{n+1}, \cdots p_{N})$
+where the first $n$ coordinates describe the system, and the rest coordinates describe the 
+microstate of the reservior. Every microstates of the combined system are equal likely, therefore,
+the probability to find the microstate of the canonical ensemble $(q_1',\cdots, q_n',p_1',\cdots, p_n')$ depend on the number 
+of possible configurations of the coordinates in the reservior, i.e. the number of the 
+microstate of the combined system in which $(q_1,\cdots, q_n,p_1,\cdots, p_n) = (q_1',\cdots, q_n',p_1',\cdots, p_n')$.
+
+We have, with $E^r_i$ denote the energy of the reservior for 
+the microstate $i$ of system, and $\Delta E = E_j - E_i$, the relative probability of two 
+distinct microstates of the system(which actually depend on the number of corresponding states in the reservior):
+\begin{equation}
+    \frac{P_j}{P_i} = \frac{\Omega_r(E^r_i - \Delta E)}{\Omega_r(E^r_i)} = \exp\left( \ln \Omega_r(E^r_i - \ln\Delta E)-\Omega_r(E^r_i) \right)
+    \approx \exp\left( -\frac{E_j-E_i}{k_BT} \right)
+\end{equation}
+Where we introduced the statistic definition of temperature
+\begin{equation}
+    \frac{\dnor \ln\Omega}{\dnor E} = \frac{1}{k_B T}
+\end{equation}
+This give the result, with $\beta = 1/k_BT$
+\begin{equation}
+    P_i \propto e^{-\beta E_i}
+\end{equation}
+Define the canonical partition function $Q_N$
+\begin{equation}
+    Q_N(T,V,N) = \sum_j e^{-\beta E_j}
+\end{equation}
+The free energy is defined by:
+\begin{gather}
+    A(T,V,N) = -k_BT\ln Q_N
+\end{gather}
+The probability of finding a given microstate of the system is then
+\begin{equation}
+    P_i = \frac{1}{Q_N} e^{-\beta E_i} = e^{\beta(A - E_i)}
+\end{equation}
+
+To specific a canconical potential, we need to specify $V, N, T$, therefore, canonical potential 
+is also known as the \textbf{NVT ensemble}
+
+%Finally, let's consider a system that can exchange both energy and particle with 
+%a reservior. The equilibrium will be given by equal $T$ and $\mu$ between the 
+%two part. This ensemble is named \textbf{Grand Canonical Ensemble}.
+%We can derive the probability of the microstate of the system similar to the 
+%case of the canconical ensemble, but now we need to consider the microstates with 
+%different number of particles. 
+%\begin{equation}
+%    \frac{P_j}{P_i} = \frac{\Omega_r(E^r_i - \Delta E, N^r_i - \Delta N)}{\Omega_r(E^r_i,N^r_i)} = \exp\left( \frac{S_r(E^r_i - \Delta E, N^r_i - \Delta N)-S_r(E^r_i,N^r_i)}{k_B} \right)
+%\end{equation}
+%with $\Delta E = E_j - E_i, \Delta N = N_j - N_i$, to linear in $\Delta N, \Delta E$, we have:
+%\begin{equation}
+%    \frac{P_j}{P_i} = \exp\left( -\frac{1}{k_B} \frac{\partial S}{\partial E} \Delta E - \frac{1}{k_B} \frac{\partial S}{\partial N} \Delta N \right)
+%    = \exp\left( -\frac{1}{k_BT} (E_j - E_i) + \frac{\mu}{k_BT} (N_j - N_i) \right)
+%\end{equation}
+%giving
+%\begin{equation}
+%    P_i \propto e^{-\beta (E_i - \mu N)}
+%\end{equation}
+%Define the grand canonical partition function 
+%\begin{equation}
+%    Q(\mu,T,V) = \sum_N\sum_j e^{-\beta (E_j - \mu N)}
+%\end{equation}
+%and the grand potential 
+%\begin{eqnarray}
+%    \Omega(\mu,T,V) = -k_BT\ln Q
+%\end{eqnarray}
+%we have the probability to find a microstate:
+%\begin{equation}
+%    P_{i,N} = \frac{1}{Q} e^{-\beta (E_i - \mu N)} = e^{\beta(\Omega - E_i + \mu N)}
+%\end{equation}
+%The grand canonical ensemble is known as the \textbf{$\mu$VT ensemble}
+
+
+\end{document}
+
+

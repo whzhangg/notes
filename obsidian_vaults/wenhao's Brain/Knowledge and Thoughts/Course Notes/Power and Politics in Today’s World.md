@@ -10,7 +10,7 @@ This course provides an examination of political dynamics and institutions over 
 
 Part I deals with the collapse of communism and its aftermath, both in former communist countries that adopted market-based economies and in the developed West where the absence of a competitor to capitalism recast relations among business, labor, and governments. Part II focuses on the early post-Cold War era, marked by the Washington Consensus on the benefits of free trade, privatization, and deregulation, and interventionist agendas to fight terrorism, prevent human rights abuses, and to spread democracy. In part III we turn to the backlash that set in after the financial crisis, as technocratic elites lost legitimacy, the global war on terror became mired in quagmires across the Middle East, and humanitarian intervention and democracy spreading agendas foundered. The new politics of insecurity is our subject in part IV, where we explore the sources of the populist explosions of 2016 and the politics to which they have given rise. This leads to a consideration of responses in part V, where we discuss the kinds of policies that are needed for a world in which congenital employment insecurity is going to be the norm, and the political reforms that would increase the chances of those policies being adopted.
 
-### Part 1. 0.  THE COLLAPSE OF COMMUNISM AND ITS AFTERMATH
+### Part 1. THE COLLAPSE OF COMMUNISM AND ITS AFTERMATH
 ##### From Soviet Communism to Russian Gangster Capitalism
 This session focus on three main topics:
 1. Why did the USSR collapse? 
@@ -28,10 +28,33 @@ Readings:
 2. Thane Gustafson, Wheel of Fortune: The Battle for Oil and Power in Russia (Belknap Press, 2012), Chapter 6.  
 
 ##### A Unipolar World? NATO, the EU, & the Washington Consensus
+Three lenses on Politics:
+1. People's interest: realistic interest based decisions
+2. Institutions: court, separation of power, institutional arrangement, may or may not align with people or countries' interest
+3. Ideals: culture, norms that affect what actually happens in politics
+To say which is the right one is the wrong question, we should focus on under which conditions which view is more important. 
+
+Gulf War, 1991 Operation Desert storm. George Bush, the first international security crisis after the cold war. But it is a path not taken. 
+
+Establish of UN: to find a way to end war, to facilitate the settlement of disputes among nations. Four year later, signing of the NATO treaty, 1949, as an alliance to aggression to USSR. "If the free nations do not stand together, they will fall one by one". US shifted from forming the union of nation to forming an alliance. Furthermore, UN become subordinate to the interest of NATO, for US and NATO countries. Country interest is above institutional scheme of UN.
+
+Disband NATO: a re-unified Germany need to be a part of NATO. NATO enlargement to east europe countries, 1999. And it continued further on. "NATO will keep its door open for new members". At current moment, NATO's motivation become unclear. 
+
+Washington Concensus: a global version of neo-liberalism. Deregulation, free trade and privatisation of nation owned asserts.
+
+Formation and expansion of the european union. why a european union? 
+1. Prevent war between France and German (commerical interchange create peace)
+2. Counterbalance to US
+3. Internal free trade with first mover advantages, externally protectionist trading block.
+4. As a constraint on domestic politics
+5. A federal European state (european identity)
+
+What do they share in common? they are elite project, top-down enterprise, conceived by elites. There is little grass-root support. Strengthening of NATO is a source of obstacle to pan-europan identity because they contract out the national security of europe
 
 Readings:  
-1. Tony Judt, Postwar: A History of Europe Since 1945 (Penguin, 2006), chapters 20-23 Mary Sarotte, “The contest over NATO’s future: The U.S., France and the concept of pan-Europeanism after the Fall of the Berlin Wall, 1989-90,” in Ian Shapiro and Adam Tooze, eds., Charter of the North Atlantic Treaty Organization, (Yale University Press, 2018) chapter 3.  
-2. John Williamson, “A short history of the Washington consensus,” in Narcis Serra and Joseph Stiglitz, eds., The Washington Consensus Reconsidered: Toward a New Global Governance (Oxford University Press, 2008), chapter 2.
+1. Tony Judt, Postwar: A History of Europe Since 1945 (Penguin, 2006), chapters 20-23 
+2. Mary Sarotte, “The contest over NATO’s future: The U.S., France and the concept of pan-Europeanism after the Fall of the Berlin Wall, 1989-90,” in Ian Shapiro and Adam Tooze, eds., Charter of the North Atlantic Treaty Organization, (Yale University Press, 2018) chapter 3.  
+3. John Williamson, “A short history of the Washington consensus,” in Narcis Serra and Joseph Stiglitz, eds., The Washington Consensus Reconsidered: Toward a New Global Governance (Oxford University Press, 2008), chapter 2.
 
 ##### Fusing Capitalist Economics with Communist Politics: China and Vietnam
 Readings:

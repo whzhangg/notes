@@ -1,0 +1,218 @@
+\documentclass{article}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=1in]{geometry}
+\usepackage{verbatim}
+\usepackage{graphicx}
+\usepackage{hyperref} % \url \href
+\usepackage{docmute}
+
+\newcommand{\pfrac}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\rms}{\text{rms}}
+% \newcommand{\braket}[1]{\langle #1 \rangle}
+% \renewcommand{\H}{\mathcal{H}}
+
+\begin{document}
+
+
+\section{Kinetic theory of ideal gas}
+We describe here the problem of motion of molecules in a gas, 
+ignoring its rotational and vibration degrees of freedom, with 
+energy: 
+\begin{equation}
+    E_k = \frac{1}{2}mv^2 = \frac{1}{2}m(v_x^2 + v_y^2 + v_z^2)
+\end{equation}
+we consider some assumption: 1) the molecules do not interact 
+with each other most of the time (only through collision) and 2) the collision is 
+not frequent. Through the collision, molecules exchange energy with each other,
+but every thing remain in equilibrium. We also assume the motion before and 
+after the collision is independent, thus their kinetic energies are 
+independent variables. With the above assumption, we can consider 
+each molecules as an independent system connected to the heat reservior at 
+temperature $T$, where heat reservior is "all other molecules in the gas"
+\footnote{Blundell, p48} and energy is exchanged with collisions
+\footnote{This point
+is not stated very clear in the book, but collision is the only way a gas molecule
+can interact with other molecules. The motion of the molecule after the collision is
+independent of their motion before the collision, therefore, the motion after the 
+collision is entirely determined by the heat bath.}.
+
+\subsection{Velocity distribution}
+The velocity distribution $g(\mathbf{v})$ is defined to the fraction of molecules with 
+velocity $\mathbf{v}$ 
+($\mathbf{v}$ is the vector velocity while $v$ is the absulote value). 
+\begin{align}
+    g(\mathbf{v}) &\propto e^{-mv^2/2k_BT} dv_xdv_ydv_z \\
+    &\propto e^{-m(v_x^2 + v_y^2 + v_z^2)/2k_BT} dv_xdv_ydv_z \\
+    &= g(v_x)g(v_y)g(v_z) \label{g_product}
+\end{align} 
+we find the normalization factor for $g(v_x)$:
+\begin{gather}
+    \int_{-\infty}^{\infty} e^{-mv_x^2/2k_BT} dv_x = \sqrt{\frac{2\pi k_BT}{m}} \\
+    g(v_x) = \sqrt{\frac{m}{2\pi k_BT}} e^{-mv_x^2/2k_BT}
+\end{gather}
+with $g(v_i)$ normalized to 1, $g(v)$ from Eq.\ref{g_product} is then also normalized to 1.
+we can calculate the following values:
+\begin{align}
+    \langle v_x \rangle &= \int_{-\infty}^{\infty} v_x g(v_x) dv_x = 0 \notag \\
+    \langle v_x^2 \rangle &= \int_{-\infty}^{\infty} v_x^2 g(v_x) dv_x = \frac{k_BT}{m} \notag 
+\end{align}
+
+To find the distribution with respect to speed $v$ instead of velocity $\mathbf{v}$, we 
+consider the volume in velocity phase space corresponding to velocity $v$:
+\begin{equation}
+    dV = 4\pi v^2 dv
+\end{equation}
+which correspond to a thin spherical shell at radius $v$. The speed distribution function is then:
+\begin{equation}
+    f(v) dv \propto v^2 dv e^{-mv^2/2k_BT}
+\end{equation}
+normalize $\int_0^{\infty}f(v)dv = 1$, we find the distribution function:
+\begin{equation}
+    f(v) = \frac{4}{\sqrt{\pi}}\left(\frac{m}{2k_BT}\right)^{3/2} v^2 e^{-mv^2/2k_BT}
+\end{equation}
+which is known as the \textbf{Maxwell-Boltzmann distribution}. 
+We can find the following expectation values:
+\begin{align}
+    \langle v \rangle &= \int_{0}^{\infty} v f(v) dv = \sqrt{\frac{8k_BT}{\pi m}} \notag \\
+    \langle v^2 \rangle &= \int_{0}^{\infty} v^2 g(v) dv_x = \frac{3k_BT}{m} \notag  \\
+    v_{rms} &= \sqrt{\langle v^2 \rangle} = \sqrt{\frac{3k_BT}{m}}
+\end{align}
+where $v_{rms}$ is the "root mean square" value. 
+The mean kinetic energy of a gas molecule is then:
+\begin{equation}
+    \langle E_k \rangle = \frac{1}{2}m \langle v^2 \rangle = \frac{3}{2}k_BT
+\end{equation}
+
+\subsection{Pressure}
+Since all molecules are equally likely to travel in any direction, the fraction of these 
+whose velocity lie in solid angle $d\Omega$ is therefore $d\Omega/4\pi$. We consider the 
+molecules traveling at angle between $\theta$ and $\theta + d\theta$ with some specific direction ($z$),
+the solid angle is given by:
+\begin{equation}
+    d\Omega = 2\pi \sin\theta d\theta
+\end{equation}
+So the fraction of molecules having speed between $v$ and $v_dv$ and angel between $\theta$ 
+and $\theta + d\theta$ with direction $z$ is then:
+\begin{equation}
+    f(v) dv \frac{2\pi \sin\theta d\theta}{4\pi} = \frac{1}{2} f(v) dv \sin\theta d\theta 
+\end{equation}
+
+In a time interval $dt$, 
+a molecules with speed $v$ travelling at an angle $\theta$ to the normal of the wall
+will hit the container wall if it is $vdt\cos \theta$ away from the wall. 
+the number of such molecules (speed $v$ at an angle $\theta$) 
+hitting the wall of area $A$ is thus 
+\begin{equation}
+    A vdt\cos \theta n \cdot \frac{1}{2} f(v) dv \sin\theta d\theta 
+\end{equation}
+where the first part gives the total number of molecules in the volume $A vdt\cos \theta$ and 
+the second part is the fraction of the molecule in the velocity and angle range.
+
+Pressure of a gas on its container can be calculated by $dP = F dt$ where $dP$ is the momentum 
+change of the particle reflecting from the wall: $dP = 2 mv \cos\theta$ (prependicular to wall). 
+Pressure is defined to be $p = F/A$, so that 
+We integrate over all possible velocity and angle $\theta$ to obtain the expression of $p$:
+\begin{align}
+    p &= \int_0^{\infty} dv \int_0^{\pi/2} d\theta  ( 2 mv \cos\theta ) 
+    \left( v \cos \theta n \frac{1}{2} f(v) \sin\theta \right) \\
+    &= \frac{1}{3} n m \langle v^2 \rangle
+\end{align}
+using the relationship $n = N/V$ and $\langle v^2 \rangle = 3k_BT / m$, we 
+can obtain the ideal gas law:
+\begin{equation}
+    pV = N k_B T
+\end{equation}
+
+\subsection*{Partial pressure}
+If we have a mixture of gases in equilibrium, the total pressure will be the 
+sum of pressures of each component:
+\begin{gather}
+    n = \sum_i n_i \\
+    p = \left( \sum_i n_i \right) k_B T = \sum_i p_i
+\end{gather}
+where $n_i = N_i / V$
+
+\subsection{Effusion}
+Effusion is the process in which gas escape from a small hole\footnote{Blundell, p64}. we define 
+the flux $\Phi$ as the number of molecules going through unit area per unit time,
+therefore, $\Phi$ has the unit of $m^{-2}s^{-1}$. we use the above result of particles 
+hitting the wall to find flux:
+\begin{align}
+    \Phi &= \int_0^{\infty} dv \int_0^{\pi/2} d\theta 
+            \left( v \cos \theta n \frac{1}{2} f(v) \sin\theta \right) \label{flux} \\
+        &= \frac{1}{4} n \langle v \rangle
+\end{align}
+with the result:
+\begin{align}
+    n &= p / k_B T \notag \\
+    \langle v \rangle &= \sqrt{\frac{8k_BT}{\pi m}} \notag \\
+    \Phi &= \frac{p}{\sqrt{2\pi m k_BT}}
+\end{align}
+
+Now, consider a we have a small hole (small enough that the gas escaping does not 
+change the equilibrium distribution of gas near the hole), the number of molecules
+escaping through the hole is given as:
+\begin{equation}
+    \Phi A = \frac{pA}{\sqrt{2\pi m k_BT}}
+\end{equation}
+which is linear to pressure, inversely proportion to $T$ and $m$. 
+
+It should be noted that the speed distribution of the gas through the hole is no longer the 
+Maxwell-Boltzmann distribution, since the amount of gas that effuse through the 
+hole depend on velocity $v$ (in Eq.\ref{flux}), therefore the speed distribution
+of those that go through the hole as an extra factor $v$, compare to the speed 
+distribution of gas molecules inside the box.
+
+\subsection{Average lifetime}
+We first considering a molecule moving at speed $v$ with other molecules in
+the gas stationary. Within a time $dt$, the molecule sweep through an area $\sigma v dt$,
+where $\sigma$ is the collision cross-section of the molecule. We denote $P(t)$ as 
+the probability of this molecule travel without any collision up to time $t$. We have:
+\begin{align}
+    P(t + dt) &= P(t) + \frac{dP}{dt}dt \\
+    P(t + dt) &= P(t) (1 - n\sigma v dt) 
+\end{align}
+with $n$ the number density of gas and therefore $(1 - n\sigma v dt)$ gives the 
+probability of having no other gas molecule in the volume the moving molecule is going 
+to sweep over from time $t$ to $t + dt$. 
+Withe the above two equation, we obtain the result:
+\begin{equation}
+    P(t) = e^{-n\sigma vt}
+\end{equation}
+We have the boundary condition $P(0) = 1$ and $P(\infty) = 0$
+
+The probability that the molecule collide in time interval from $t$ to $t+dt$ is given by
+the probability that molecule does not collide at time $t$ but do collide at time $t + dt$:
+$P(t) - P(t + dt)$ (since P(t) decay with time, $dP(t) < 0$), we have:
+\begin{equation}
+    - dP(t) = n\sigma v e^{-n\sigma vt} dt
+\end{equation}
+We can calculate the mean scattering time:
+\begin{align}
+    \tau &= \int_{0}^{\infty} t n \sigma v e^{-n\sigma vt} dt \notag \\
+         &= \frac{1}{n\sigma v} \int_{0}^{\infty} x e^{-x} dx \notag \\
+         &= \frac{1}{n\sigma v}
+\end{align}
+where $x = n\sigma v t$ represent a change of variable.
+
+In the case of hard sphere approximation in a gas consist of molecules with
+equal radius, the collision cross-section is given as:
+\begin{equation}
+    \sigma = \pi (r_1 + r_2) ^ 2 = 4 \pi a^2
+\end{equation}
+
+\subsection*{Mean free path of gas}
+With the previous result, we have, for the mean free path
+\begin{equation}
+    \lambda = \langle v \rangle \tau = \langle v \rangle \frac{1}{n\sigma \langle v_r\rangle }
+\end{equation}
+$\langle v \rangle$ is the average speed of gas molecules,
+where for the lifetime, instead of using $v$, we recognize that we should use 
+relative speed $v_r$ in a real system when all particles are in motion. It is not attempted to derive
+the value of $\langle v_r\rangle$ here (refer to Blundell, p73). But the final result
+is: 
+\begin{equation}
+    \lambda = \frac{1}{\sqrt{2}n\sigma}
+\end{equation}
+
+\end{document}

@@ -1,0 +1,38 @@
+\documentclass{article}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=1in]{geometry}
+\usepackage{verbatim}
+\usepackage{graphicx}
+\usepackage{hyperref} % \url \href
+\usepackage{docmute}
+
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\range}{range}
+\DeclareMathOperator{\spn}{span}
+\newcommand{\pfrac}[2]{\frac{\partial #1}{\partial #2}}
+\newtheorem*{theorem}{Theorem}
+\newtheorem*{definition}{Definition}
+% \renewcommand{\H}{\mathcal{H}}
+
+\begin{document}
+
+\title{Solution to Linear System of Equations}
+\author{Wenhao Zhang}
+\date{\today}
+\maketitle
+
+Practical solutions to linear equations are described with a focus on 
+iterative methods. The content mainly follow the book \emph{Numerical Mathematics} by 
+Alfio Quarteroni, Riccardo Sacco and Fausto Saleri, chapter 3 and 4, but only the 
+basics are introduced here. Another useful reference is \emph{Iterative Methods for Linear and Nonlinear Equations}
+by C.T.Kelley. In Kelley's book, chapter 1 gives a short and useful review of the basic 
+concepts. Furthermore, detailed algorithms are also provided that are suitable for 
+applications, such as for conjugate gradient method.
+
+\tableofcontents
+
+\include{M_introduction.tex}
+\include{M_direct_solution.tex}
+\include{M_iterative_solution.tex}
+
+\end{document}

@@ -6,6 +6,7 @@
 \usepackage{graphicx}
 \usepackage{hyperref} % \url \href
 \usepackage{docmute}
+\usepackage[title]{appendix}
 
 \newcommand{\pfrac}[2]{\frac{\partial #1}{\partial #2}}
 \newcommand{\dbar}{\mathbf{\tilde{d}}}
@@ -23,14 +24,21 @@
 
 \newpage
 
-\input{part1.tex}
-\input{part2.tex}
+\input{M01_postulation_liouville_ensemble.tex}
+\input{M02_laws_thermodynamics.tex}
+\input{M03_functions_of_states.tex}
+\input{M04_kinetic_theory_of_gas.tex}
+\input{M05_transport_properties_gas.tex}
+\input{M06_sound_velocity_gas.tex}
+\input{M07_brownian_motion_fluctuation.tex}
+\input{M08_nonequilibrium_thermodynamics.tex}
 
 \newpage
-\appendix
-
+\begin{appendices}
 \include{A_intensive_extensive_properties.tex}
 \include{A_thermodynamic_potentials.tex}
-\include{A_time_average_ensemble_average.tex}
+\include{A_time_average_ensemble_average.tex}    
+\end{appendices}
+
 
 \end{document}

@@ -1,0 +1,230 @@
+\documentclass{article}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=1in]{geometry}
+\usepackage{verbatim}
+\usepackage{graphicx}
+\usepackage{hyperref} % \url \href
+\usepackage{docmute}
+
+\newcommand{\pfrac}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\rms}{\text{rms}}
+% \newcommand{\braket}[1]{\langle #1 \rangle}
+% \renewcommand{\H}{\mathcal{H}}
+
+\begin{document}
+
+\section{Transport properties in Ideal gas}
+
+\subsection{Viscosity}
+Viscosity $\eta$ measures th resistance of a liquid (gas) to deform by shear stress. Suppose we sandwich fluid between 
+two infinitly large plate. We fix the bottom plate and apply some force $F$ to the top plate. The fraction between the fluid and 
+the top plate will accelerate the fluid near it, the the momentum is passed down inside the liquid through internal interaction (collision)
+
+Now, we wait for long enough time until the whole system is in equilibrium. The top plate will reach some final speed $u$ and 
+the fluid near the top plate will have the same macroscopic speed (condition of equilibrium). The bottom plate and the fluid near the bottom 
+will be stationary (An external force is necessary to keep the bottom plate stationary). 
+Therefore, a velocity gradient will be set up in the fluid between the two plates (in $z$ direction). We define 
+the viscosity by equation:
+\begin{equation}
+    \tau_{shear} = \frac{F}{A} = \eta \frac{d \langle u_x \rangle}{dz}
+\end{equation}
+
+With force $F$ constantly applied on the top plate, we are inputing momentum $Fdt$ per unit area in time $dt$. In equilibrium, 
+These momentum will be transported completely to the bottom plate. Therefore, we have momentum flux through $z$ direction 
+(note that the momentum itself is along the plate, $x$ dirction, but the flux is along $z$):
+\begin{equation}
+    \Pi_z = - F / A = - \eta \frac{d \langle u_x \rangle}{dz}
+\end{equation}
+We have a negative sign because the momentum flow from high velocity area to low velocity area, which is opposite the velocity gradient.
+
+We can calculate the momentum flux by considering the microscopic motion of gas molecules. We consider that the motion of free ideal gas superimposed 
+with the collective drifting motion with velocity $\langle u_z \rangle$. A molecules travelling along $z$ direction will
+change their momentum by collision with other molecules in the final positon $z_2$ ($z_1 \to z_2$). The number of particle with velocity $v$ travelling
+at an angle $\theta$ with $z$ direction is $ v\cos \theta n \cdot \frac{1}{2} f(v) dv \sin\theta d\theta $ per unit area $A$ and time $dt$. How far they 
+travel will be given by the mean free path $\lambda$. The momentum difference of a molecule just after collision at $z_1$ and just after collision at $z_2$ is 
+given by:
+\begin{equation}
+    - m \left( \frac{\partial \langle u_x \rangle}{\partial z} \right) \lambda \cos\theta
+\end{equation}
+which is the momentum flux created by this single molecule. Summing over all molecules with different speed and angle, we have:
+\begin{align}
+    \Pi_z &= \int_0^{\infty} dv \int_0^{\pi/2} d\theta 
+     v \cos \theta n \frac{1}{2} f(v) \sin\theta \cdot m \left( \frac{\partial \langle u_x \rangle}{\partial z} \right) \lambda \cos\theta \\
+     &= -\frac{1}{3} n m \lambda \langle v \rangle \frac{\partial \langle u_x \rangle}{\partial z} \label{momentum_transfer}
+\end{align}
+We obtain the viscosity:
+\begin{equation}
+    \eta = \frac{1}{3} n m \lambda \langle v \rangle
+\end{equation}
+Using the previous result $\lambda = (\sqrt{2}n\sigma)^{-1}$ and $\langle v \rangle = ()\frac{8k_BT}{\pi m})^{1/2}$, we can also write:
+\begin{equation}
+    \eta = \frac{2}{3\sigma}\left( \frac{mk_BT}{\pi} \right)^{1/2}
+\end{equation}
+We have the following observations:
+\begin{enumerate}
+    \item $\eta$ is independent of pressure.
+    \item $\eta \propto T^{1/2}$.
+    \item For the above approximation of momentum transfer to be correct, we require $ L \ll \lambda \ll d $, where $d$ is the size of the molecule and $L$ is the size scale of the container.
+\end{enumerate}
+
+\subsection{Thermal conductivity}
+We define the heat flux in the $z$ direction
+\begin{gather}
+    J_z = -\kappa \left( \frac{\partial T}{\partial z} \right) \\
+    \mathbf{J} = -\kappa \nabla T
+\end{gather}
+The gas molecules carrier heat through their kinetic energy, which depend on temperature $T$ via $\langle E_k \rangle = 3k_BT / 2$. Defining heat capacity of a 
+molecule as $C$, we can calculate the total heat flux:
+\begin{align}
+    J_z &= \int_0^{\infty} dv \int_0^{\pi/2} d\theta 
+    v \cos \theta n \frac{1}{2} f(v) \sin\theta \cdot - C \left( \frac{\partial T}{\partial z} \right) \lambda \cos\theta \\
+    &= -\frac{1}{3} n C \lambda \langle v \rangle \frac{\partial T}{\partial z} \label{heat_transfer}
+\end{align}
+Using $C_V = n C$, the thermal conductivity of gas is therefore
+\begin{equation}
+    \kappa = \frac{1}{3} C_V \lambda \langle v \rangle
+\end{equation}
+
+We observe that Eq.\ref{heat_transfer} is very similar to Eq.\ref{momentum_transfer}, and we have:
+\begin{equation}
+    \frac{\kappa}{\eta} = \frac{C}{m}
+\end{equation} 
+
+\subsection{Particle Diffusion}
+We consider a gas of molecules in which some of them is labelled, if those labelled molecules are initially confined in 
+certain area and the confinement is removed, they will start to diffuse (Self-diffuse). Suppose that the diffusion is 
+along $z$ direction and we use $n^*(z)$ to denote the density of those labelled particles, we can define the 
+diffusion coefficient: 
+\begin{equation}
+    \Phi_z = -D \left( \frac{\partial n^*}{\partial z} \right)
+\end{equation}
+Following the above microscopic picture, we have:
+\begin{align}
+    \Phi_z &= \int_0^{\infty} dv \int_0^{\pi/2} d\theta 
+    v \cos \theta \frac{1}{2} f(v) \sin\theta \cdot - \left( \frac{\partial n^*}{\partial z} \right) \lambda \cos\theta \\
+    &= -\frac{1}{3} \lambda \langle v \rangle \frac{\partial T}{\partial z} 
+\end{align}
+giving the self-diffusion coefficient
+\begin{equation}
+    D = \frac{1}{3} \langle v \rangle
+\end{equation}
+
+We have the following relationship:
+\begin{enumerate}
+    \item $ D \propto T^{3/2}$
+    \item $D \rho = \eta $, where $rho$ is the density $\rho = nm$
+\end{enumerate}
+
+\subsection{Heat diffusion equation}
+Given the heat flux $J = - \kappa \nabla T$, the total heat flow out of a closed surface $S$ is $\int_S J \cdot dS$.
+This value should equal to the loss of total thermal energy $\int_V CT dV$, where $C$ here is the volume heat capacity. 
+We have the Result:
+\begin{equation}
+    \int_S J \cdot dS = \int_V \nabla \cdot J dV = -\frac{\partial}{\partial t} \int_V CT dV
+\end{equation}
+where we obtain the first equality through divergence theorem. We have
+\begin{align}
+    \nabla \cdot J = -C \frac{\partial T}{\partial t} \\
+    \frac{\partial T}{\partial t} = D \nabla^2 T \label{thermaldiffusion}
+\end{align}
+with $D = \kappa/C$ is the thermal diffusivity.
+Eq.\ref{thermaldiffusion} is called \textbf{Thermal diffusion equation}.
+
+In a steady state, we have $\partial T / \partial t = 0 $ so that the 
+diffusion equation is reduced to 
+\begin{equation}
+    \nabla^2 T = 0
+\end{equation}
+
+Suppose we have a gas between two hot plates separate with a distance $L$, 
+one maintained at temperature $T_1$ and the other at $T_2 < T_1$. By integrating
+the equation $\partial^2 T / \partial x^2 = 0$ twice 
+(note that this equation imply a linear temperature distribution)
+and using the boundary condition,
+we have:
+\begin{equation}
+    T = \frac{(T_2-T_1)x}{L} + T_1 
+\end{equation}
+The heat flux is given by:
+\begin{equation}
+    J = - \kappa \left( \frac{\partial T}{\partial x} \right) = \frac{\kappa}{L} (T_1 - T_2)
+\end{equation}
+The value $\kappa / L$ is called \textbf{thermal conductance}.
+
+If heat is generated at a rate $H$ per unit volume, the divergence of $J$ will 
+be:
+\begin{equation}
+    \nabla \cdot J = -C \frac{\partial T}{\partial t} + H
+\end{equation}
+and the thermal diffusion equation will be modified to be:
+\begin{equation}
+    \frac{\partial T}{\partial t} = D \nabla^2 T + \frac{H}{C}
+\end{equation}
+
+\subsection*{Thermal diffusion equation in 1D}
+We want to solve the equation:
+\begin{equation}
+    \frac{\partial T}{\partial t} = D \frac{\partial^2T}{\partial x^2}
+\end{equation}
+to obtain the temperature profile.
+
+Since this equation is a second order linear partial equation, we can look for 
+wave-like solutions
+\begin{equation}
+    T(x,t) \propto \exp(i(kx - \omega t))
+\end{equation}
+with $k = 2\pi/\lambda $ and $\omega = 2\pi/f$ the wave vector and angular frquency. Solution is 
+given by:
+\begin{gather}
+    - i \omega = -D k^2 \\
+    k = \pm (1 + i) \sqrt{\frac{\omega}{2D}}
+\end{gather}
+Noting that with $ k = -(1 + i) \sqrt{\frac{\omega}{2D}}$, $T \to \infty$ as $x \to \infty$. 
+Therefore, the solution for the temperature profile can be written as a summation of frequency:
+\begin{equation}
+    T(x,t) = \sum_{\omega} A(\omega)\exp(-i\omega t) \exp((i-1)\sqrt{\frac{\omega}{2D}}x) \label{thermaldiffusionsolution}
+\end{equation}
+
+As an application, consider solving the 1D problem of heat diffusion into the earth ground. The 
+boundary profile is given by
+\begin{equation}
+    T(0,t) = T_0 + \Delta T \cos(\Omega t) = T_0 + \frac{\Delta T}{2} e^{i\Omega t} + \frac{\Delta T}{2} e^{-i\Omega t} \label{thermaldiffusionboundary}
+\end{equation}
+where the period is given by the alternation of day and night. 
+
+Requiring Eq.\ref{thermaldiffusionsolution} to give the boundary condition Eq.\ref{thermaldiffusionboundary}, we obtain
+the solution:
+\begin{equation}
+    T(x,t) = T_0 + \Delta T e^{-x/\delta} \cos(\Omega t - \frac{x}{\delta})
+\end{equation}
+where $\delta = \sqrt{2D/\Omega}$ is called the skin depth, and temperature fall off exponentially as $e^{-x/\delta}$.
+
+\subsection*{Newton's law of cooling}
+Newton's low of cooling states that the heat loss of a surface is proportional to the area of the surface
+multiplied by the temperature difference. The heat flux is given by:
+\begin{equation}
+    J = h \Delta T
+\end{equation}
+with $h$ the heat transfer coefficient of the surface. As an example, suppose a cup of tea at temperature $T_{hot}$ 
+is placed in a room at temperature $T_{air}$ and the heat loss is through the surface area $A$. Suppose the air temperature
+near the surface is maintained at $T_{air}$ with convection, we have:
+\begin{equation}
+    -C \frac{\partial T}{\partial t} = J A  = h A (T - T_{air})
+\end{equation}
+$T(t)$ is the temperature of the tea. We have the solution
+\begin{equation}
+    T(t) = T_{air} + (T_{hot} - T_{air})e^{-\lambda t}
+\end{equation}
+with $\lambda = A h / C $
+
+\subsection*{Prandtl number}
+Apart from thermal diffusion, convection also play a part in the heat transfer in solid and gas. Convection will
+dominate if momentum diffusion dominates. We can thus compare the magnititude of the two mechanism by
+\begin{equation}
+    \sigma_p = \frac{v}{D} = \frac{\eta c_p}{\kappa}
+\end{equation}
+where $v = \eta / \rho$ is the kinematic viscosity and $D$ is the thermal diffusivity $D = \kappa/(\rho c_p)$ ($c_p$ is the specific heat).
+This value of called \textbf{Prandtl number}. For $\sigma_p \gg 1$, the convection is the dominant mode of heat transport. 
+For gas, $\sigma_p$ can be found to be $2/3$ with the previous results. For liquid, $\sigma_p \gg 1$.
+
+\end{document}

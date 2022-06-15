@@ -1,0 +1,55 @@
+\documentclass{article}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=1in]{geometry}
+\usepackage{verbatim}
+\usepackage{graphicx}
+\usepackage{hyperref} % \url \href
+\usepackage{docmute}
+
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\range}{range}
+\DeclareMathOperator{\spn}{span}
+\newcommand{\pfrac}[2]{\frac{\partial #1}{\partial #2}}
+\newtheorem*{theorem}{Theorem}
+\newtheorem*{definition}{Definition}
+% \renewcommand{\H}{\mathcal{H}}
+
+\begin{document}
+
+\section{Introduction}
+\subsection{Basic concepts}
+A system of $m$ linear equations with $n$ unknowns consists of a set of alegbraic relations
+\begin{equation*}
+    \sum_{j=1}^n a_{ij}x_j = b_i,\qquad i = 1, \dots, m
+\end{equation*}
+or in matrix form:
+\begin{equation}
+    \label{matrixform}
+    \mathbf{A}\mathbf{x} = \mathbf{b}
+\end{equation}
+If $\mathbf{A}\in \mathbb{R}^{n\times n}$ and $\mathbf{b}\in \mathbb{R}^{n}$, the 
+existance and uniqueness of the solution is ensured if the any of the following equivalent 
+condition holds:
+\begin{enumerate}
+    \item $\mathbf{A}$ is invertible
+    \item $\rank(A) = n$
+    \item $\mathbf{A}\mathbf{x} =0$ only has null solution
+\end{enumerate}
+
+\subsection{Cramer's rule}
+The solution of the linear equation can be formally obtained using \emph{Cramer's rule}:
+\begin{equation}
+    \label{cramer_rule}
+    x_j = \frac{\Delta_j}{\det(A)},\qquad j = 1, \dots, m  
+\end{equation}
+where $\Delta_j$ is the determinant of the matrix obtained by substituting the $j$-th 
+column of $\mathbf{A}$ with the right hand side $\mathbf{b}$.
+\footnote{\url{https://www.math.purdue.edu/~shao92/documents/Proof_Cramer_rule.pdf} provide a short proof}
+
+However, the evaluation of the determinant is computational expensive (summing over all 
+permutations) and impractice for application. Numerical methods that are alternative to 
+Cramer's rule can be classified into two types:
+they are called \emph{direct} if they yield solution of the system in a finite number of 
+steps, and \emph{iterative} if they require, in principle, infinite number of steps.
+
+\end{document}

@@ -19,5 +19,3 @@
 - [[Point Group Identification]]
 ### Readings
 - [[Reading Lists]]
-
-[[group_theory.pdf]]

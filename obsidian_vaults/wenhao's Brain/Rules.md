@@ -23,3 +23,12 @@ Let's think about what should be placed here first: I don't want to store useles
 3. *Collections* Interesting things I read but I don't want to keep them in my mind all the times.
 For other types of things, notebooks application is perhaps more suitable.
 
+### Latex Rules
+##### File and Folder names
+Let's use one-level folder structure with each folder containing a self consistent topics. *Folder names contain space with capital letters* for clarity. *For each files, we use underscore*.
+
+##### Latex structure
+The main file should produced by gathering each components using `docmute` package, they consist of:
+1. Contents of the main body named as `M01_`, where numbers are used if sequence of content is important. 
+2. Appendix file named as `A_`
+3. Figures named as `F_`
