@@ -5,6 +5,7 @@ Records following the format: **Book title**, *author*, (status), finished date
 
 
 ##### Books
+- [ ] **The Emperor's New Mind**, *Roger Penrose*
 - [ ] **The Rebel**, *Albert Camus*
 - [ ] **Introduction to Quantum Computing**, *Phillip Kaye*, (ready to start)
 - [ ] **Cognitive Load Theory**, *John Sweller*, (ready to start)

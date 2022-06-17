@@ -93,10 +93,11 @@ If we have $N$ instead of $N+1$, then the last situation will not be correct.
 \subsection{Cyclic systems}
 Let's now consider the case of cyclic system with single $s$ orbitals on each site and nearest neighbor interaction. 
 This situation is close to that in solids with periodic boundary condition. The solution is now given by:
-\begin{align*}
+\begin{align}
+    \label{E:cyclic_system_energy}
     \varepsilon_j &= \alpha + 2 \beta \cos\frac{j\pi}{N} \\ 
     c_{\mu j} &= \frac{1}{\sqrt{N}} \exp \frac{2\pi i \cdot j (\mu-1)}{N} 
-\end{align*}
+\end{align}
 where we take the index of $j$ to start from 0. 
 The energy level obtained in such approach can be graphically shown as in figure \ref{F:cyclic_energy} 
 where we can always find a single degenerate state at energy $\alpha + 2 \beta$. If $N$ is even, we have 
@@ -120,6 +121,88 @@ $C_6$ in figure \ref{F_cyclic_group_table}
 \end{figure}
 
 \subsection{Solids}
+Let's consider as example, only the one dimension chain that extend infinitely in one direction but are joined 
+at the two end, so that the situation is similar to that of the cyclic system. 
+We use the interaction parameter similar to that of the cyclic system so that the energy can still be 
+expressed using equation \eqref{E:cyclic_system_energy}. However, we use the vector $k$:
+\begin{equation}
+    k = \frac{2\pi j}{Na}
+\end{equation}
+so that the energy and wavefunction can be expressed as:
+\begin{align}
+    \varepsilon_j &= \alpha + 2 \beta \cos ka \\ 
+    c_{\mu j} &= \frac{1}{\sqrt{N}} e^{ik(\mu-1) a} = \frac{1}{\sqrt{N}} e^{ikR_{\mu}}
+\end{align}
+where now each wavefunction $\chi_{\mu}$ is a considered to be in the $\mu$th cell. 
 
+Let's now take into account the overlap matrix $S$. The eigenstates in solids are given 
+by functions that satisfy the bloch condition: $\phi_k(r+l) = e^{ikl} \phi_k(r)$ where $l$ 
+is a lattice vector. 
+\begin{align}
+    \psi_j^k(r) &= \sum_{\mu}c^k_{\mu j}\phi_{\mu}^k(r) \\ 
+    \phi_{\mu}^k(r) &= \frac{1}{\sqrt{N}} \sum_p e^{ikR_p} \chi_{\mu}(r - R_p)
+\end{align}
+we can verify:
+\begin{align}
+    \psi_j^k(r+l) &= \frac{1}{\sqrt{N}} \sum_{\mu} c^k_{\mu j} \sum_p e^{ikR_p} \chi_{\mu}(r - (R_p - l)) \\ 
+    &= \frac{1}{\sqrt{N}} \sum_{\mu} c^k_{\mu j} \sum_{p'} e^{ik(R_{p'}+l)} \chi_{\mu}(r - R_{p'}) \\ 
+    &= e^{ikl} \phi_j^k(r)
+\end{align}
+Now, let's solve the eigenequation:
+\begin{align}
+    H \stateket{ \psi_j^k } &= \varepsilon_j^k \stateket{ \psi_j^k } \\ 
+    \frac{1}{N} \sum_{\mu} c^k_{\mu j} \sum_{pp'} e^{ik(R_p - R_{p'})} \statebra{\chi_{\nu,R_{p'}}} H \stateket{\chi_{\mu,R_p}}
+    &= \frac{1}{N}  \varepsilon_j^k \sum_{\mu} c^k_{\mu j} \sum_{pp'} e^{ik(R_p - R_{p'})} \statebra{\chi_{\nu,R_{p'}}} \chi_{\mu,R_p} \rangle \\ 
+    \sum_{\mu} c^k_{\mu j} H_{\nu\mu}^k &= \varepsilon_j^k \sum_{\mu} c^k_{\mu j} S_{\nu\mu}^k \\ 
+    \mathbf{H}^k \mathbf{C}_{j}^k &= \varepsilon_j^k \mathbf{H}^k \mathbf{S}_{j}^k
+\end{align}
+where we multiplied $\statebra{\phi_{\mu}^k}$ on the left for the second relationship. The final equation 
+is the tight binding secular equation in solids, where 
+\begin{align}
+    H_{\nu\mu}^k = \sum_p e^{ikR_p} \statebra{\chi_{\nu,R_0}} H \stateket{\chi_{\mu,R_p}} \\ 
+    S_{\nu\mu}^k = \sum_p e^{ikR_p} \statebra{\chi_{\nu,R_0}} \chi_{\mu,R_p} \rangle
+\end{align}
+
+\subsection{Interpretation of band dispersion with avoided crossing}
+In this section, we point out the complication introduced by avoided crossing in 
+Interpretation of band dispersion with a $sp$ one dimensional chain along $z$ direction 
+with total 4 bands.
+The case of $p_x$, $p_y$ and $s$ follows the above discussion. At the zone center, $k=0$ and we 
+have the lowest energy $\varepsilon_{k=0} = \alpha + 2\beta$ and at the zone edge where $k = \pi/a$ 
+we have the highest energy $\varepsilon_{k=\pi/a} = \alpha - 2\beta$. $\beta$ is defined to be a 
+negative value. Therefore, these bands \emph{run up} in band dispersion along $\Gamma-X$. 
+In terms of energy position, $p_x$ and $p_y$ bands are degenerate and located higher 
+in energy compared to the $s$ bands. For $p_z$ band, its dispersion $runs down$, as can be 
+seen from figure \ref{F:pz}. Furthermore, due to strong $\sigma$ interaction, the band is very dispersive. 
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=3in]{F_pz.png}
+    \caption{Wavefunction of the $p_z$ band at $k=0$ and $k=\pi/a$}
+    \label{F:pz}
+\end{figure}
+
+It is clear that at both $k=0$ and $k=\pi/a$, these four bands cannot interact with each other 
+because of the symmetry of the wavefunction: on each site the overlap integral vanish. However, 
+this is not so on the path between $\Gamma$ and $X$ points. Along the line, $p_x$ and $p_y$ 
+does not interact but $p_z$ and $s$ band does. Interaction created avoided crossing, as shown 
+by the figure \ref{F:avoid_interaction}.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=2in]{F_avoid_interaction_spz.png}
+    \includegraphics[width=3in]{F_avoid_interaction_dispersion.png}
+    \caption{Avoid interaction in band dispersion}
+    \label{F:avoid_interaction}
+\end{figure}
+
+It is now clear that although in the band dispersion, the $s$ band running up and $p_z$ band 
+running down seems to be formed purely by $s$ and $p_z$ themselves, they are actually mixed. 
+We use the lower $s$ band as an example for the consequence for the avoided crossing:
+\begin{enumerate}
+    \item Due to the mixing, the density of state of the upper part of the band is mainly $p_z$ character, and 
+    \item Both the top and bottum of the band are $bonding$. This is opposite to the isolated case (for example $p_x$) where 
+          the bottum of the band is bonding and the top are antibonding. 
+\end{enumerate}
 
 \end{document}
