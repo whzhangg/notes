@@ -1,0 +1,141 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage[margin=0.8in]{geometry}
+\usepackage{verbatim}
+\usepackage{graphicx}
+
+\begin{document}
+
+\section{Wick's theorem at finite temperature}
+Evaluating the perturbation expansion involves calculating the thermal average on $N$ operators with  
+non-perturbed Hamiltonian $H_0$, where
+$N$ must be a even number so that the result is non-zero:
+\begin{equation}
+    \text{Tr}\left[ \rho_o ABC \cdots XYZ  \right]
+\end{equation}
+with 
+\begin{equation}
+    \text{Tr}\left[ \rho_o \mathcal{A} \right] = \sum_i \langle i | e^{\beta(\Omega_0 - H_0 + \mu N)} \mathcal{A} |i \rangle
+\end{equation}
+
+\subsection*{Fermion}
+we first consider of case of fermions, we use the anticommunication relationship
+of fermion creation and annihilation operator: $\{ a_k^{\dagger} , a_{k'} \} = \delta_{kk'}$ to 
+exchange the order of operator in the average:
+\begin{align}
+    &\text{Tr}\left[ \rho_o ABC \cdots XYZ  \right] \notag \\
+    = &\text{Tr}\left[ \rho_o \{A,B\} C \cdots XYZ  \right] - \text{Tr}\left[ \rho_o BAC \cdots XYZ  \right] \notag \\
+    = &\text{Tr}\left[ \rho_o \{A,B\} C \cdots XYZ  \right] - \left( \text{Tr}\left[ \rho_o B\{A,C\} \cdots XYZ  \right] - \text{Tr}\left[ \rho_o BCA \cdots XYZ  \right] \right) \notag \\
+    = &\text{Tr}\left[ \rho_o \{A,B\} C \cdots XYZ  \right] - \text{Tr}\left[ \rho_o B\{A,C\} \cdots XYZ  \right] \notag \\
+    & + \cdots + \text{Tr}\left[ \rho_o BC \cdots XY\{A,Z\}  \right] - \text{Tr}\left[ \rho_o BC \cdots XYZA  \right] \label{contraction1}
+\end{align}
+As an example, 
+\begin{align}
+    \text{Tr}\left[ \rho_o ABCD  \right] = \text{Tr}\left[ \rho_o\{A,B\} CD \right] - \text{Tr}\left[ \rho_o B\{A,C\} D \right] + \text{Tr}\left[ \rho_o BC\{A,D\} \right] - \text{Tr}\left[ \rho_o BCDA \right]
+\end{align}
+The sign of each term containing an anticommunicator is given by $(-1)^{n-1}$, the number $n$ of exchange done. For the final term, its sign
+is given by the sign of last term that contain an anticommunicator multiplied by $-1$, which will always be negative because we perform maximum
+$N-1$ exchange and N is a even number. 
+
+Now, we can verify that:
+\begin{align}
+    \langle j | a_k^{\dagger} e^{\beta(\Omega_0 - H_0 + \mu N)} | i \rangle 
+            &= e^{\beta(\Omega_0 - E_i + \mu N_i)} \langle j |a_k^{\dagger} | i \rangle  \notag \\
+    \langle j | e^{\beta(\Omega_0 - H_0 + \mu N)} a_k^{\dagger}  | i \rangle 
+            &= e^{\beta(\Omega_0 - E_j + \mu N_j)} \langle j |a_k^{\dagger} | i \rangle  \notag \\
+            &= e^{\beta(\Omega_0 - (E_i+\varepsilon_k) + \mu (N_i+1))} \langle j |a_k^{\dagger} | i \rangle  \notag \\
+            &= e^{-\beta (\varepsilon_k - \mu)} \langle j | a_k^{\dagger} e^{\beta(\Omega_0 - H_0 + \mu N)} | i \rangle \label{rhoA}
+\end{align}
+so that 
+\begin{equation}
+    \rho_0 a_k^{\dagger} = e^{-\beta (\varepsilon_k - \mu)} a_k^{\dagger} \rho_0
+\end{equation}
+as well as the relation:
+\begin{equation}
+    \rho_0 a_k = e^{\beta (\varepsilon_k - \mu)} a_k \rho_0
+\end{equation}
+So that we can conclude
+\begin{equation}
+    A\rho_0 = e^{\lambda_A \beta (\varepsilon_k - \mu)} \rho_0 A\ \ \
+    \begin{cases}
+        \lambda_A = 1 , & A = a_k^{\dagger} \\
+        \lambda_A = -1 , & A = a_k \\
+    \end{cases}
+\end{equation}
+and 
+\begin{align}
+    \text{Tr}\left[ \rho_o BC \cdots XYZA  \right] &= \text{Tr}\left[ A \rho_o BC \cdots XYZ  \right] \notag \\
+                            &= e^{\lambda_A \beta (\varepsilon_k - \mu)} \text{Tr}\left[ \rho_o ABC \cdots XYZ  \right] \notag \\
+\end{align}
+Since for fermion operators, their anticommunicator is a C-number, 
+Eq.\ref{contraction1} becomes:
+\begin{align}
+    \text{Tr}\left[ \rho_o ABC \cdots XYZ  \right] &= \frac{\{A,B\}}{e^{\lambda_A \beta (\varepsilon_k - \mu)} + 1} \text{Tr}\left[ \rho_o C \cdots XYZ  \right] \notag \\
+                                                & - \frac{\{A,C\}}{e^{\lambda_A \beta (\varepsilon_k - \mu)} + 1} \text{Tr}\left[ \rho_o BD \cdots XYZ  \right] \notag \\
+                                                & + \cdots +  (-1)^{n-1} \frac{\{A,Z\}}{e^{\lambda_A \beta (\varepsilon_k - \mu)} + 1} \text{Tr}\left[ \rho_o BC \cdots XY  \right] \label{contraction2}
+\end{align}
+where $n$ is the number of exchanges of operator needed. 
+
+Next, we calculate the term:
+\begin{equation}
+    \frac{\{A,B\}}{e^{\lambda_A \beta (\varepsilon_k - \mu)} + 1}
+\end{equation}
+\textbf{case 1} we let $A = a_k^{\dagger}$, so that $B = a_k$. we have:
+\begin{align}
+    \frac{\{a_k^{\dagger},a_k\}}{e^{ \beta (\varepsilon_k - \mu)} + 1} = \frac{1}{e^{\beta (\varepsilon_k - \mu)} + 1} = \langle a_k^{\dagger} a_k \rangle = \langle AB \rangle
+\end{align}
+\textbf{case 2} we let $A = a_k$, so that $B = a_k^{\dagger}$. we have:
+\begin{align}
+    \frac{\{a_k,a_k^{\dagger}\}}{e^{-\beta (\varepsilon_k - \mu)} + 1} = \frac{1}{e^{ -\beta (\varepsilon_k - \mu)} + 1} = \langle a_k a_k^{\dagger} \rangle = \langle AB \rangle
+\end{align}
+So that in both case, we have the relationship:
+\begin{equation}
+    \frac{\{A,B\}}{e^{\lambda_A \beta (\varepsilon_k - \mu)} + 1} = \langle AB \rangle
+\end{equation}
+and Eq.\ref{contraction2} can now be written:
+\begin{align}
+    \langle ABC \cdots XYZ  \rangle = & \langle AB  \rangle \langle  C \cdots XYZ \rangle  - \langle AC\rangle  \langle BD \cdots XYZ  \rangle  \notag \\
+                                                & + \cdots + (-1)^{n-1} \langle AZ\rangle  \langle BC \cdots XY  \rangle \label{wick1}
+\end{align}
+
+Thus we have factorized out all the pairs of operators that contain $A$, the process can continue until the initial thermal average is completely written
+as the sum of product of averages of pairs, the sign of which is determined by the number of exchanges to arrive at the specific pairing.
+
+\subsection*{Boson}
+Instead of the anticommunicator, we use communicator of boson operators:
+\begin{gather}
+    [ b_q^{\dagger} , b_{q'} ] = - \delta_{qq'} \notag \\  
+    [ b_{q}, b_{q'}^{\dagger} ] = \delta_{qq'}  \notag
+\end{gather}
+so that Eq.\ref{contraction1} becomes:
+\begin{align}
+    &\text{Tr}\left[ \rho_o ABC \cdots XYZ  \right] \notag \\
+    = &\text{Tr}\left[ \rho_o [A,B] C \cdots XYZ  \right] + \text{Tr}\left[ \rho_o BAC \cdots XYZ  \right] = \cdots \notag \\
+    = &\text{Tr}\left[ \rho_o [A,B] C \cdots XYZ  \right] + \text{Tr}\left[ \rho_o B[A,C] \cdots XYZ  \right] \notag \\
+    & + \cdots + \text{Tr}\left[ \rho_o BC \cdots XY[A,Z]  \right] + \text{Tr}\left[ \rho_o BC \cdots XYZA  \right] \label{contractionq1}
+\end{align}
+The relation Eq.\ref{rhoA} still holds, so that:
+\begin{align}
+    \text{Tr}\left[ \rho_o ABC \cdots XYZ  \right] &= \frac{[A,B]}{1 - e^{\lambda_A \beta (\varepsilon_q - \mu)} } \text{Tr}\left[ \rho_o C \cdots XYZ  \right] \notag \\
+                                                & + \frac{[A,C]}{1 - e^{\lambda_A \beta (\varepsilon_q - \mu)} } \text{Tr}\left[ \rho_o BD \cdots XYZ  \right] \notag \\
+                                                & + \cdots + \frac{[A,Z]}{1 - e^{\lambda_A \beta (\varepsilon_q - \mu)} } \text{Tr}\left[ \rho_o BC \cdots XY  \right] \label{contractionq2}
+\end{align}
+For bosons, we can find:
+\begin{align}
+    \frac{[b_q^{\dagger},b_q]}{1 - e^{ \beta (\varepsilon_q - \mu)} } &= \frac{-1}{1 - e^{\beta (\varepsilon_q - \mu)} } 
+        = \langle n_q \rangle = \langle b_q^{\dagger} b_q \rangle  \notag \\
+    \frac{[b_q,b_q^{\dagger}]}{1 - e^{ -\beta (\varepsilon_q - \mu)} } &= \frac{1}{1 - e^{-\beta (\varepsilon_q - \mu)} } 
+        = \langle n_q + 1\rangle = \langle b_q b_q^{\dagger} \rangle  \notag \\
+\end{align}
+as a result 
+\begin{equation}
+    \frac{[A,B]}{1 - e^{ \beta (\varepsilon_q - \mu)} } = \langle AB \rangle 
+\end{equation}
+and the analogy of Eq.\ref{wick1} for bosons are therefore:
+\begin{align}
+    \langle ABC \cdots XYZ  \rangle = & \langle AB  \rangle \langle  C \cdots XYZ \rangle  + \langle AC\rangle  \langle BD \cdots XYZ  \rangle  \notag \\
+                                                & + \cdots + \langle AZ\rangle  \langle BC \cdots XY  \rangle \label{wick2}
+\end{align}
+
+
+\end{document}

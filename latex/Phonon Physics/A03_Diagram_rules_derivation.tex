@@ -1,0 +1,81 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage[margin=0.8in]{geometry}
+\usepackage{verbatim}
+\usepackage{graphicx}
+
+\begin{document}
+
+\section{Deriving the diagramatic rules}
+Our task is to evaluate the expression for $G(qvv';\tau)$ as:
+\begin{align}
+    G(qvv';\tau)= \sum_{n=0}^{\infty} \frac{1}{n!} \left( -\frac{1}{\hbar} \right)^{n} 
+    \int_0^{\beta\hbar} d\tau_1 \cdots \int_0^{\beta\hbar} d\tau_{n} \left\langle \mathcal{T}[ A_{qv}(\tau) A_{qv'}^{\dagger}(0) H_I(\tau_1) \cdots H_I(\tau_{n}) ] \right\rangle_{0,c} 
+\end{align}
+we consider the case of first order perturbation from four-phonon interaction, which correspond to Figure.\ref{diagram1}. Now the 
+expression is simply:
+\begin{align}
+    G(q;\tau)&= \left( -\frac{1}{\hbar} \right) 
+    \int_0^{\beta\hbar} d\tau_1 \left\langle \mathcal{T}\left[ A_{q}(\tau) A_{q}^{\dagger}(0) \sum_{q_{1\cdots 4}}V(q_1,q_2,q_3,q_4) A_{q_1}(\tau_1)A_{q_2}(\tau_1)A_{q_3}(\tau_1)A_{q_4}(\tau_1)\right] \right\rangle_{0,c} \notag \\
+    &= -\frac{12}{\hbar}  
+    \sum_{q_1} V(-q,q,-q_1,q_1) \int_0^{\beta\hbar} d\tau_1 \left\langle \mathcal{T}[ A_q(\tau_1)A_{q}^{\dagger}(0) ] \right\rangle
+    \left\langle \mathcal{T}[ A_{q}(\tau)A_{q}^{\dagger}(\tau_1) ] \right\rangle 
+    \left\langle \mathcal{T}[ A_{q_1}(\tau_1)A_{q_1}^{\dagger}(\tau_1) ] \right\rangle \notag \\
+    &= -\frac{12}{\hbar} \sum_{q_1} V(-q,q,-q_1,q_1) \int_0^{\beta\hbar} d\tau_1 G_0(q;\tau_1) G_0(q;\tau-\tau_1) G_0(q_1;0) \notag \\
+    &= -\frac{12}{\hbar} \sum_{q_1} V(-q,q,-q_1,q_1) \int_0^{\beta\hbar} d\tau_1 
+        \sum_{n_1}G_0(q;i\omega_{n_1}) e^{i\omega_{n_1}\tau_1} 
+        \sum_{n_2}G_0(q;i\omega_{n_2}) e^{i\omega_{n_2}(\tau-\tau_1)} 
+        \sum_{n_3}G_0(q_1;i\omega_{n_3}) \notag \\
+    &= -\frac{12}{\hbar} \sum_{q_1} V(-q,q,-q_1,q_1) \sum_{n_1,n_2} G_0(q;i\omega_{n_1}) G_0(q;i\omega_{n_2}) e^{i\omega_{n_2}\tau} 
+        \int_0^{\beta\hbar} d\tau_1 e^{i(\omega_{n_1}-\omega_{n_2})\tau_1} \sum_{n_3}G_0(q_1;i\omega_{n_3}) \notag \\
+    &= -12\beta \sum_{q_1} V(-q,q,-q_1,q_1) \sum_{n_1} G_0(q;i\omega_{n_1}) G_0(q;i\omega_{n_1}) e^{i\omega_{n_1}\tau} 
+        \sum_{n_3}G_0(q_1;i\omega_{n_3})
+\end{align}
+where the thermal average is contracted into pairs with Wick's theorem at finite temperature and we used the fact that
+\begin{equation}
+    \int_0^{\beta\hbar} d\tau_1 e^{i(\omega_{n_1}-\omega_{n_2})\tau_1} = \beta\hbar \delta_{n_1,n_2}
+\end{equation}.
+To see how it give raise to self-energy, we perform transformation into frequency space:
+\begin{align}
+    G(q;i\omega_n) &= \frac{1}{\beta\hbar} \int_{0}^{\beta\hbar} G(q;\tau) e^{-i\omega_n\tau} d\tau \notag \\
+        &= -\frac{12}{\hbar}\sum_{q_1} V(-q,q,-q_1,q_1) 
+        \int_{0}^{\beta\hbar} \sum_{n_1} G_0(q;i\omega_{n_1}) G_0(q;i\omega_{n_1}) e^{i(\omega_{n_1}-\omega_n)\tau}  d\tau
+        \sum_{n_3}G_0(q_1;i\omega_{n_3})  \notag \\
+        &= -12\beta \sum_{q_1} V(-q,q,-q_1,q_1) G_0(q;i\omega_{n}) G_0(q;i\omega_{n})
+        \sum_{n_3}G_0(q_1;i\omega_{n_3}) 
+\end{align}
+The self-energy is defined to be:
+\begin{equation}
+    G(q;i\omega_n) = G_0(q;i\omega_n) + \beta\hbar G_0(q;i\omega_n) \Sigma(q;i\omega_n) G(q;i\omega_n)
+\end{equation}
+or equivalently
+\begin{equation}
+    G(q;i\omega_n)^{-1} = G_0(q;i\omega_n)^{-1} - \beta\hbar \Sigma(q;i\omega_n) 
+\end{equation}
+so that we find the self-energy in the above expression:
+\begin{equation}
+    \Sigma^{(4)}(q;i\omega_n) = -\frac{12}{\hbar} \sum_{q_1} V(-q,q,-q_1,q_1) \sum_{n_1}G_0(q_1;i\omega_{n_1}) 
+\end{equation}
+\subsection*{General case}
+In the general case, we can establish the rules as follow for the expression of phonon Green's function:
+\begin{align}
+    G(qvv';\tau)= \sum_{n=0}^{\infty} \frac{1}{n!} \left( -\frac{1}{\hbar} \right)^{n} 
+    \int_0^{\beta\hbar} d\tau_1 \cdots \int_0^{\beta\hbar} d\tau_{n} \left\langle \mathcal{T}[ A_{qv}(\tau) A_{qv'}^{\dagger}(0) H_I(\tau_1) \cdots H_I(\tau_{n}) ] \right\rangle_{0,c} 
+\end{align}
+\begin{enumerate}
+    \item Factor $1/n!$ is cancelled with the $n!$ permutation of internal time coordinates.
+    \item Carry out all integral with respect to internal time give a factor $(\beta\hbar)^n$ .
+    \item Finding the number of pairing scheme in the Wick theorem expansion.
+\end{enumerate}
+Therefore, the remaining factor is only $(-\beta)^n$. There is an additional definition of 
+$\frac{1}{\beta\hbar}$ in the self-energy, Therefore, the rules for evaluating self-energy 
+is 
+\begin{enumerate}
+    \item Overall factor of $\frac{1}{\beta\hbar} (-\beta)^n$, where $n$ is the number of the vertexes.
+    \item Multiply the number of ways to pair the phonon modes.
+    \item Multiply appropriate $V$ for each vertex.
+    \item For each internal line, multiply $G_0(qvv';i\omega^i_n)$.
+    \item Sum over all internal coordinates $q^i;v^i$ and Matsubara frequency $\omega_n^i$
+\end{enumerate}
+
+\end{document}

@@ -1,0 +1,45 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage[margin=0.8in]{geometry}
+\usepackage{verbatim}
+\usepackage{graphicx}
+
+\begin{document}
+
+\section{Non-interacting Green's function}
+We write the bare Green's function as:
+\begin{align}
+    G_0(qv;\tau) = 
+    \begin{cases}
+        \frac{1}{Z} Tr\left\{ e^{-(\beta-\tau/\hbar)H_0} A_{qv} e^{-\tau/\hbar H_0} A_{qv}^{\dagger} \right\}, &\tau > 0 \\
+        \frac{1}{Z} Tr\left\{ e^{-\beta H_0} A_{qv}^{\dagger} e^{\tau/\hbar H_0} A_{qv} e^{- \tau/\hbar H_0} \right\}, &\tau < 0 \\
+    \end{cases}
+\end{align}
+We first consider the case when $\tau > 0$, by inserting the set of eigenstate $\sum_j |j\rangle \langle j | $, we have
+\begin{align}
+    G_0(qv;\tau) &= \frac{1}{Z} \sum_i \sum_j e^{-\beta \varepsilon_i} \langle i | e^{\tau H_0/\hbar} (a_{qv} + q_{-qv}^{\dagger}) e^{-\tau H_0/\hbar} | j \rangle 
+                        \langle j | (a_{qv}^{\dagger} + q_{-qv}) | i \rangle  \notag \\
+                &= \frac{1}{Z} \sum_i \sum_j e^{-\beta \varepsilon_i} e^{\tau(\varepsilon_i - \varepsilon_j)/\hbar} 
+                \langle i | (a_{qv} + q_{-qv}^{\dagger}) | j \rangle \langle j | (a_{qv}^{\dagger} + q_{-qv}) | i \rangle  \notag \\
+                &= e^{\tau \omega_q} \langle n_q \rangle + e^{- \tau \omega_q}  \langle n_q  + 1\rangle \notag \\
+                &= \frac{e^{\tau \omega_q}}{e^{\beta \hbar \omega_q} - 1} + \frac{e^{-\tau \omega_q}}{1 - e^{-\beta \hbar \omega_q} }
+\end{align}
+where we used:
+\begin{align}
+    a | n \rangle &= \sqrt{n} | n-1 \rangle  \notag \\
+    a^{\dagger} | n \rangle &= \sqrt{n+1} | n+1 \rangle \notag \\
+\end{align}
+for the case when $\tau > 0$, we follow the same procedure to obtain:
+\begin{align}
+    G_0(qv;\tau) &= \frac{1}{Z} \sum_i \sum_j e^{-\beta \varepsilon_i} \langle i | (a_{qv}^{\dagger} + q_{-qv}) | j \rangle
+                        \langle j | e^{\tau H_0/\hbar} (a_{qv} + q_{-qv}^{\dagger}) e^{-\tau H_0/\hbar} | i \rangle  \notag \\
+                &= e^{\tau \omega_q} \langle n_q + 1\rangle + e^{- \tau \omega_q} \langle n_q \rangle \notag \\
+                &= \frac{e^{- \tau \omega_q}}{e^{\beta \hbar \omega_q} - 1} + \frac{e^{\tau \omega_q}}{1 - e^{-\beta \hbar \omega_q} }
+\end{align}
+therefore, the phonon green's function can be written as:
+\begin{equation}
+    G_0(qv;\tau) = \frac{e^{|\tau| \omega_q}}{e^{\beta \hbar \omega_q} - 1} + \frac{e^{-|\tau| \omega_q}}{1 - e^{-\beta \hbar \omega_q} }
+\end{equation}
+which is an even function.
+
+\end{document}

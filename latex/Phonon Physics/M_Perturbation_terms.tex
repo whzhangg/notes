@@ -1,0 +1,53 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage[margin=0.8in]{geometry}
+\usepackage{verbatim}
+\usepackage{graphicx}
+
+\begin{document}
+
+\section{Perturbation term}
+Letting $A_{qv} = a_{qv} + a^{\dagger}_{-qv}$. The Hamiltonian that include anharmonic term can be extended as:
+\begin{align}
+    H = H_{har} + &\frac{1}{3!}\sum_{lbl'b'l''b''} G_{lbl'b'l''b''} \cdot \eta_{lb} \eta_{l'b'}\eta_{l''b''} \notag \\
+                + &\frac{1}{4!}\sum_{lbl'b'l''b''l'''b'''} G_{lbl'b'l''b''l'''b'''} \cdot \eta_{lb} \eta_{l'b'}\eta_{l''b''} \eta_{l'''b'''} \notag \\
+                + & \cdots + \frac{1}{n!}\sum_{lbl'b'\cdots l^nb^n} G_{lbl'b'\cdots l^nb^n} \cdot \eta_{lb} \eta_{l'b'}\cdots \eta_{l^nb'^n} 
+\end{align}
+where the product means, for third order case:
+\begin{equation}
+    \sum_{\alpha,\beta,\gamma} G_{lbl'b'l''b''}^{\alpha,\beta,\gamma} \eta_{lb}^{\alpha} \eta_{l'b'}^{\beta}\eta_{l''b''}^{\gamma}
+\end{equation}
+and the force constants $G$ is written as:
+\begin{equation}
+    G_{lbl'b'\cdots l^nb^n} = \frac{\partial E}{\partial \eta_{lb} \partial \eta_{l'b'} \cdots \partial \eta_{l^nb'^n} }
+\end{equation}
+Using Eq.\ref{displacement}, we can express the $n^{th}$ anharmonic term as:
+\begin{align}
+    H_{A}^{n} = \frac{1}{n!} \left( \frac{\hbar}{2N} \right)^{\frac{n}{2}} \sum_{qv \cdots q^nv^n} \sum_{lb\cdots l^nb^n} 
+    &\frac{e_{qv}^b \cdots e_{q^nv^n}^{b^n}}{\sqrt{m_b \cdots m_{b^n}}\sqrt{\omega_{qv} \cdots \omega_{q^nv^n}}} \notag \\
+    &G_{lbl'b'\cdots l^nb^n} e^{i(ql + \cdots + q^nl^n)}
+    A_{qv} \cdots A_{q^nv^n}
+\end{align}
+which can be simplified into:
+\begin{equation}
+    H_{A}^{n} = \sum_{qv \cdots q^nv^n} V^{(n)}(qv,q'v',\cdots,q^nv^n)
+    A_{qv} \cdots A_{q^nv^n}
+\end{equation}
+with the term $V^{(n)}(qv,q'v',\cdots,q^nv^n)$ expressed as:
+\begin{align}
+    V^{(n)}(qv,q'v',\cdots,q^nv^n) = &\frac{1}{n!} \left( \frac{\hbar}{2N} \right)^{\frac{n}{2}} N\delta(q + \cdots + q^n) \notag \\
+     &\sum_{l\cdots l^{n-1}} \sum_{b\cdots b^n} 
+    \frac{e_{qv}^b \cdots e_{q^nv^n}^{b^n}}{\sqrt{m_b \cdots m_{b^n}}\sqrt{\omega_{qv} \cdots \omega_{q^nv^n}}} G_{lbl'b'\cdots l^{n-1}b^{n-1}0b^n} e^{i(ql + \cdots + q^{n-1}l^{n-1})}
+\end{align}
+where we have set $l_n = 0$ as the position of the reference cell, and use $\sum_{l^n} e^{i(q+\cdots+q^n)l^n} = N \delta(q + \cdots + q^n) $. The matrix element 
+$V^{(n)}(qv,q'v',\cdots,q^nv^n)$ is invariable to the permutation of $qv$, for example, in the case of $V^{(3)}$ and ignoring the leading factor:
+\begin{align}
+    V^{(3)}(qv,q''v'',q'v') = & \sum_{ll'l''} \sum_{bb'b''} 
+    \frac{e_{qv}^b e_{q''v''}^{b'} e_{q'v'}^{b''} }{\sqrt{m_b m_{b'} m_{b''}} \sqrt{\omega_{qv}\omega_{q''v''}\omega_{q'v'}}} G_{lbl'b'l''b''} e^{i(ql + q''l' + q'l'')} \notag \\
+    = &\sum_{ll''l'} \sum_{bb''b'} 
+    \frac{e_{qv}^b e_{q''v''}^{b''} e_{q'v'}^{b'} }{\sqrt{m_b m_{b''} m_{b'}} \sqrt{\omega_{qv}\omega_{q''v''}\omega_{q'v'}}} G_{lbl''b''l'b'} e^{i(ql + q''l'' + q'l')} \notag \\
+    = &V^{(3)}(qv,q'v',q''v'')
+\end{align}
+where we exchanged the $l'b'$ and $l''b''$ in the second equality and use the fact that $G_{lbl'b'l''b''}$ is invariant under permutation of index.
+
+\end{document}

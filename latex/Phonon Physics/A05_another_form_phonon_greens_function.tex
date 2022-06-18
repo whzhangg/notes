@@ -1,0 +1,130 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage[margin=0.8in]{geometry}
+\usepackage{verbatim}
+\usepackage{graphicx}
+
+\begin{document}
+
+\section{Phonon green's function in terms of $a_{qv}$ and $a_{qv}^{\dagger}$}
+We previously defined the green's function as:
+\begin{align}
+    G(qvv';t) = \langle i | \mathcal{T}[A_{qv}(t)A_{qv'}^{\dagger}(0)]| i \rangle \notag
+\end{align}
+which is convenient to treat anharmonic interaction. 
+
+In this appendix let's consider 
+the green's function in terms of phonon creation and annihilation operator $a_{qv}$ and $a^{\dagger}_{qv}$:
+\begin{equation}
+    D(qvv';t) = -i \langle  \mathcal{T}[a_{qv}(t)a_{qv'}^{\dagger}(0)] \rangle \notag
+\end{equation}
+at finite temperature, taking real variable $\tau = it$, we define the temperature green's function as:
+\begin{equation}
+    D(qvv';\tau) = -\langle  \mathcal{T}[a_{qv}(\tau)a_{qv'}^{\dagger}(0)] \rangle \notag
+\end{equation}
+with the "imaginary time" Heisenburg operator:
+\begin{equation}
+    A(\tau) = e^{\tau/\hbar H} A e^{-\tau/\hbar H} \notag 
+\end{equation}
+we have:
+\begin{align}
+    D(qvv';\tau) = 
+    \begin{cases}
+        -\frac{1}{Z} Tr\left\{ e^{-(\beta-\tau/\hbar)H} a_{qv} e^{-\tau H/\hbar } a_{qv'}^{\dagger} \right\}, &\tau > 0 \\
+        -\frac{1}{Z} Tr\left\{ e^{-\beta H} a_{qv'}^{\dagger} e^{\tau H/\hbar } a_{qv} e^{- \tau H/\hbar } \right\}, &\tau < 0 \\
+    \end{cases}
+\end{align}
+with $-\beta\hbar < \tau < \beta \hbar$,
+$D{qvv';\tau}$ has a period of $\beta\hbar$, we calculate the free phonon green's function:
+\textbf{for $\tau > 0$:}
+\begin{align}
+    D_{qvv';\tau} &= -\frac{1}{Z} \sum_{ij} 
+                    \langle i | e^{-(\beta-\tau/\hbar)H} a_{qv} e^{-\tau/\hbar H} | j\rangle \langle j | a^{\dagger}_{qv'} | i \rangle \notag \\
+                  &= -\delta_{vv'} e^{-\tau\omega_{qv}} \frac{1}{Z} \sum_i e^{-\beta \varepsilon_i} \langle i | a_{qv} a^{\dagger}_{qv} | i\rangle \notag \\
+                  &= -\delta_{vv'} e^{-\tau\omega_{qv}} \langle n_{qv} + 1 \rangle 
+\end{align}
+\textbf{for $\tau < 0$:}
+\begin{align}
+    D_{qvv';\tau} &= -\frac{1}{Z} \sum_{ij} 
+                    \langle i | e^{-\beta H} a^{\dagger}_{qv} | j \rangle \langle j | e^{\tau/\hbar H}a_{qv'}e^{-\tau/\hbar H} | i \rangle \notag \\
+                  &= -\delta_{vv'} e^{-\tau\omega_{qv}} \frac{1}{Z} \sum_i e^{-\beta \varepsilon_i} \langle i | a^{\dagger}_{qv} a_{qv} | i\rangle \notag \\
+                  &= -\delta_{vv'} e^{-\tau\omega_{qv}} \langle n_{qv} \rangle 
+\end{align}
+So that 
+\begin{align}
+    D(qvv';\tau) = -\delta_{vv'}
+    \begin{cases}
+        e^{-\tau\omega_{qv}} \langle n_{qv} + 1 \rangle, &\tau > 0 \\
+        e^{-\tau\omega_{qv}} \langle n_{qv} \rangle , &\tau < 0 \\
+    \end{cases}
+\end{align}
+
+We can verify the periodicity as:
+\begin{align}
+    D(qv;\tau) &= -\frac{e^{-\tau\omega_{qv}}}{e^{\beta\hbar\omega_{qv}}- 1} \ \ (\tau < 0) \notag \\
+    D(qv;\tau+\beta\hbar) &= -\frac{e^{-(\tau+\beta\hbar)\omega_{qv}} e^{\beta\hbar\omega_{qv}}}{e^{\beta\hbar\omega_{qv}}- 1} 
+                         = -\frac{e^{-\tau\omega_{qv}}}{e^{\beta\hbar\omega_{qv}}- 1} \notag
+\end{align}
+
+The fourier transformation is given similar to the previous case:
+\begin{gather}
+        D(qvv';\tau) = \sum_{n = - \infty}^{\infty} D(qvv';i\omega_n) e^{i\omega_n\tau} \\
+        D(qvv';i\omega_n) = \frac{1}{\beta\hbar} \int_{0}^{\beta\hbar} D(qvv';\tau) e^{-i\omega_n\tau} d\tau
+\end{gather}
+and $\omega_n$ take discrete value $\omega_n = 2n\pi/\beta\hbar$, we have:
+\begin{align}
+    D(qvv';i\omega_n) &= -\frac{1}{\beta\hbar} \int_{0}^{\beta\hbar} e^{-\tau\omega_{qv}} \langle n_{qv} + 1 \rangle e^{-i\omega_n\tau} d\tau \notag \\
+                    &= -\frac{1}{\beta\hbar} \frac{e^{\beta\hbar\omega_{qv}}}{e^{\beta\hbar\omega_{qv}}- 1} \int_0^{\beta\hbar} e^{-(\omega_{qv} + i\omega_n)\tau} d\tau \notag \\
+                    &= \frac{1}{\beta\hbar} \frac{e^{\beta\hbar\omega_{qv}}}{e^{\beta\hbar\omega_{qv}}- 1} \frac{e^{-(\omega_{qv} + i\omega_n)\beta\hbar} - 1}{\omega_{qv} + i\omega_n} \notag \\
+                    &= -\frac{1}{\beta\hbar} \frac{1}{\omega_{qv} + i\omega_n}\frac{e^{\beta\hbar\omega_{qv}}- e^{-i\omega_n \beta\hbar}}{e^{\beta\hbar\omega_{qv}}- 1}  \notag \\
+                    &= -\frac{1}{\beta\hbar} \frac{1}{\omega_{qv} + i\omega_n}
+\end{align}
+where in the last equality, we use the fact that $\omega_n = 2n\pi/\beta\hbar$ and $e^{-i\omega_n \beta\hbar} = 1$
+
+\subsection*{Retarded green's function}
+The general \textbf{retarded green's function} is defined by:
+\begin{gather}
+    G^R_{mn}(t,t') = 
+    \begin{cases}
+        -i \theta(t-t') \langle [a_m(t), a_n^{\dagger}(t')] \rangle & \text{Boson} \notag \\
+        -i \theta(t-t') \langle \{a_m(t), a_n^{\dagger}(t')\} \rangle & \text{Fermion}
+    \end{cases}
+\end{gather}
+where $\theta(t) = 0$ if $t < 0$.
+Taking $t' = 0$ and focus on the phonon case, we have:
+\begin{equation}
+        G^R_{qvv'}(t) = 
+        \begin{cases}
+            -i \langle a_{qv}(t)a_{qv'}^{\dagger} - a_{qv'}^{\dagger} a_{qv}(t)\rangle & t > 0 \notag \\
+            0 & t < 0
+        \end{cases}
+\end{equation}
+We can follow the above method to calculate the retarded phonon green's function. The result is 
+as:
+\begin{align}
+    \langle a_{qv}(t)a_{qv'}^{\dagger}\rangle &= e^{-it\omega_qv} \langle n_{qv} + 1 \rangle \notag \\
+    \langle a_{qv'}^{\dagger}a_{qv}(t)\rangle &= e^{-it\omega_qv} \langle n_{qv} \rangle \notag
+\end{align}
+so that the retarded green's function is:
+\begin{equation}
+    G^R_{qvv'}(t) = -i \theta(t) \delta_{vv'} e^{-i\omega_{qv}t}
+\end{equation}
+To obtain the retarded green's function in the frequency domain:
+\begin{equation}
+    G^R_{qv}(\omega) = \int_{-\infty}^{\infty} G^R_{qvv'}(t) e^{-i\omega t} dt = \int_{0}^{\infty} G^R_{qvv'}(t) e^{-i\omega t} dt 
+\end{equation}
+since $G^R = 0$ for $t < 0$. 
+\begin{align}
+    G^R_{qv}(\omega) &= -i \int_{0}^{\infty} e^{-i(\omega + \omega_{qv})t} dt \notag \\
+                     &= -i \lim_{\eta \to 0^+} \int_{0}^{\infty} e^{-[\eta + i(\omega + \omega_{qv})]t} dt \notag \\
+                     &= -i \lim_{\eta \to 0^+} \frac{1}{\eta + i(\omega + \omega_{qv})} \\
+                     &= -\frac{1}{\omega + \omega_{qv}}
+\end{align}
+which agree with the temperature green's function by changing $\omega_n$ with $\omega + i\eta$ and multiply $\beta\hbar$, which comes from
+the definition of fourier transform.
+The inverse transform is given by:
+\begin{equation}
+    G^R(t) = \frac{1}{2\pi} \int_{-\infty}^{\infty} G^R(\omega) e^{i\omega t} d\omega
+\end{equation}
+
+\end{document}

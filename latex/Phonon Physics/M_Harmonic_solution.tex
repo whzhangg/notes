@@ -1,0 +1,149 @@
+\documentclass{article}
+
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=1in]{geometry}
+\usepackage{verbatim}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{docmute}
+
+\begin{document}
+
+\section{Solutin to lattice vibration}
+let $p_{lb}$ be the momentum vector of the ion of $b^{th}$ atomic site in the $l^{th}$ unit cell 
+and $\eta_{lb}$ be the displacement of that ion. The lattice Hamiltonian can be written as:
+\begin{equation}
+    H = \sum_{lb} \frac{1}{2m_b} p_{lb} p_{lb} + \frac{1}{2} \sum_{lbl'b'} G_{lbl'b'} \eta_{lb} \eta_{l'b'} + V_0 \label{eq1}
+\end{equation}
+where $V_0$ is the equilibrium potential energy and 
+we have vector product between vectors $p_{lb}$ and $G_{lbl'b'} \eta_{lb} \eta_{l'b'}$ is:
+\begin{equation}
+    G_{lbl'b'} \eta_{lb} \eta_{l'b'} = \sum_{\alpha,\beta} G_{lbl'b'}^{\alpha,\beta} \eta_{lb}^{\alpha} \eta_{l'b'} ^{\beta}
+\end{equation}
+Now we define:
+\begin{gather}
+    P_{qb} = \frac{1}{\sqrt{N}} \sum_{l} p_{lb} e^{-iql} \\
+    Q_{qb} = \frac{1}{\sqrt{N}} \sum_{l} \eta_{lb} e^{-iql}
+\end{gather}
+it is easy to verify that the reverse transformation is given by:
+\begin{gather}
+    p_{lb} = \frac{1}{\sqrt{N}} \sum_{q} P_{qb} e^{iql} \label{plb} \\
+    \eta_{lb} = \frac{1}{\sqrt{N}} \sum_{q} Q_{qb} e^{iql} \label{nlb}
+\end{gather}
+% proof:
+%\begin{align}
+%    \eta_{lb}   &= \frac{1}{\sqrt{N}} \sum_{q} Q_{qb} e^{iql} \notag \\
+%                &= \frac{1}{\sqrt{N}} \sum_{q} \frac{1}{\sqrt{N}} \sum_{l'} \eta_{l'b} e^{iq(l-l')}  \notag \\
+%                &= \frac{1}{N} \sum_{l'} \left(\sum_{q}e^{iq(l-l')}\right) \eta_{l'b} \notag \\
+%                &= \frac{1}{N} \sum_{l'} N \delta_{ll'} \eta_{l'b} = \eta_{lb}
+%\end{align}
+% end of proof
+substituting Eq.\ref{plb} and Eq.\ref{nlb} into Eq.\ref{eq1}, ignoring the $V_0$ term and we have:
+\begin{align}
+    H = \sum_{lb} \frac{1}{2m_b} \frac{1}{N} \sum_{q,q'} P_{qb} P_{q'b} e^{i(q+q')l} 
+       + \frac{1}{2} \sum_{lbl'b'} G_{lbl'b'} \frac{1}{N} \sum_{q,q'} Q_{qb} Q_{q'b'} e^{i(ql+q'l')}
+\end{align}
+using the relation:
+\begin{gather}
+    \sum_l e^{i(q+q')l} = N\delta(q+q') \\
+    \sum_{l'} e^{i(ql+q'l')} = \sum_{l'} e^{i(q+q')l'} e^{iq(l-l')} = N\delta(q+q') e^{iq(l-l')}
+\end{gather}
+we can simplify:
+\begin{align}
+    H = \sum_{q} \sum_{b} \frac{1}{2m_b} P_{qb} P_{-qb}  
+       + \frac{1}{2} \sum_{q} \sum_{bb'} \sum_{l} G_{lbl'b'} e^{iq(l-l')} Q_{qb} Q_{-qb'} 
+\end{align}
+where $l'$ is the position of the reference cell. Writing 
+\begin{equation}
+    \Phi_{q,bb'} = \sum_{l} G_{lbl'b'} e^{iq(l-l')}
+\end{equation}
+and using the fact that $P_{-qb}$ are simply the complex conjugate of $P_{qb}$ and so is for $Q_{qb}$, we can write
+\begin{equation}
+    H = \sum_{q} H_q = \sum_{q} \left\{ \sum_{b} \frac{1}{2m_b} P_{qb} P_{qb}^* + \frac{1}{2} \sum_{bb'} \Phi_{q,bb'} Q_{qb} Q_{qb'}^* \right\} \label{eq2}
+\end{equation}
+The equation of motion of the above Hamiltonian at a given $q$ is given by:
+\begin{eqnarray}
+    m_b \ddot{Q}_{qb} = - \sum_{b'} \Phi_{q,bb'} Q_{qb'}
+\end{eqnarray}
+we assume the form of $Q_{qb}$ is given by:
+\begin{align}
+    Q_{qb} &= {m_b}^{-\frac{1}{2}} \varepsilon_{qb} e^{-i\omega_{q}t} \\
+    P_{qb} &= m\dot{Q}_{qb} = -i\omega_{q} {m_b}^{\frac{1}{2}} \varepsilon_{qb} e^{-i\omega_{q}t} 
+\end{align}
+the equation of motion is solved by diagonalizing the eigen-equation:
+\begin{gather}
+    - {m_b}^{\frac{1}{2}} \omega_{q}^2 \varepsilon_{qb} e^{-i\omega_{q}t} 
+        = - \sum_{b'} \Phi_{q,bb'} {m_b'}^{-\frac{1}{2}} \varepsilon_{qb'} e^{-i\omega_{q}t} \\
+    \sum_{b'} \Phi_{q,bb'} (m_b m_b')^{-\frac{1}{2}} \varepsilon_{qb'} = \omega_{q}^2 \varepsilon_{qb}
+\end{gather}
+diagonalizing $\Phi_{q,bb'} (m_b m_b')^{-\frac{1}{2}}$, we obtain in total $3n$ eigen-vector and eigenvalue.
+We index the solution by $v$ and use $\omega_{qv}, e_{qv}^b$ to indicate the eigen-frequency and normalized eigen-vector:
+\begin{equation}
+    \sum_b e_{qv}^{*b} e_{qv'}^b = \delta_{v,v'}
+\end{equation}
+% note that $e_{qv}^b$ is different from $\varepsilon_{qb}$,
+% where $e_{qv}^b$ is only the eigen vector
+We further define $\mathcal{Q}_{qv}$ and $\mathcal{P}_{qv}$ by:
+\begin{align}
+    Q_{qb} &= \frac{1}{\sqrt{m_b}} \sum_v e_{qv}^b \mathcal{Q}_{qv} \\
+    P_{qb} &= \sqrt{m_b} \sum_v e_{qv}^b \mathcal{P}_{qv}
+\end{align}
+and the reverse transformation is given by:
+\begin{align}
+    \mathcal{Q}_{qv} &= \sum_b \sqrt{m_b} e_{qv}^{*b} Q_{qb} \\
+    \mathcal{P}_{qv} &= \sum_b \frac{1}{\sqrt{m_b}} e_{qv}^{*b} P_{qb}
+\end{align}
+%we can verify the reverse:
+%\begin{align}
+%    \mathcal{Q}_{qv} &= \sum_b \sqrt{m_b} e_{qv}^{*b} Q_{qb} \notag \\
+%                    &= \sum_b \sqrt{m_b} e_{qv}^{*b} \frac{1}{\sqrt{m_b}} \sum_{v'} e_{qv'}^b \mathcal{Q}_{qv'} \notag \\
+%                    &= \sum_b \sum_{v'} e_{qv}^{*b} e_{qv'}^b \mathcal{Q}_{qv'} \notag \\
+%                    &= \sum_{v'} \delta_{v,v'} \mathcal{Q}_{qv'} = \mathcal{Q}_{qv}
+%\end{align}
+The Eq.\ref{eq2} can be expressed by $\mathcal{Q}_{qv}$ and $\mathcal{P}_{qv}$:
+\begin{align}
+    H &= \sum_{q} \left\{ \sum_{b} \frac{1}{2m_b} P_{qb} P_{qb}^* + \frac{1}{2} \sum_{bb'} \Phi_{q,bb'} Q_{qb} Q_{qb'}^* \right\} \notag \\
+      &= \sum_{q} \frac{1}{2} 
+      \left\{ \sum_{vv'} \sum_{b}e_{qv}^b e_{qv'}^{*b} \mathcal{P}_{qv} \mathcal{P}^*_{qv'} + \sum_{vv'} \sum_{bb'} \Phi_{q,bb'} (m_b m_b')^{-\frac{1}{2}} e_{qv}^b e_{qv'}^{*b} \mathcal{Q}_{qv} \mathcal{Q}^*_{qv'}\right\} \notag \\
+      &= \sum_{q} \frac{1}{2} 
+      \left\{ \sum_{v} \mathcal{P}_{qv} \mathcal{P}^*_{qv} + \sum_{v} \omega^2_{qv} \mathcal{Q}_{qv} \mathcal{Q}^*_{qv}\right\} \label{hamil}
+\end{align}
+where we used the orthonormal properties of eigen-vector and:
+\begin{align}
+    \sum_{v'} \sum_{bb'} \Phi_{q,bb'} (m_b m_b')^{-\frac{1}{2}} e_{qv}^b e_{qv'}^{*b} = \omega^2_{qv}\delta_{vv'}
+\end{align}
+Finally, we define the phonon creation and annihilation operator:
+\begin{align}
+    a^{\dagger}_{qv} = \frac{1}{\sqrt{2\hbar}} \left( \sqrt{\omega_{qv}} \mathcal{Q}^*_{qv} - \frac{i}{\sqrt{\omega_{qv}}}\mathcal{P}^*_{qv} \right) \\
+    a_{qv} = \frac{1}{\sqrt{2\hbar}} \left( \sqrt{\omega_{qv}} \mathcal{Q}_{qv} + \frac{i}{\sqrt{\omega_{qv}}}\mathcal{P}_{qv} \right) \\
+\end{align}
+using the fact that $\mathcal{Q}^*_{qv} = \mathcal{Q}_{-qv}$ and $\mathcal{P}^*_{qv} = \mathcal{P}_{-qv}$, we can find the reverse transformation:
+\begin{align}
+    \mathcal{Q}_{qv} &= \sqrt{\frac{\hbar}{2\omega_{qv}}} \left( a_{qv} + a^{\dagger}_{-qv} \right) \\
+    \mathcal{P}_{qv} &= -i \sqrt{\frac{\hbar\omega_{qv}}{2}} \left( a_{qv} - a^{\dagger}_{-qv} \right) \\
+\end{align}
+The Harmonic Hamiltonian Eq.\ref{hamil} expressed with phonon creation and annihilation operator can be derived:
+\begin{align}
+    \mathcal{P}_{qv} \mathcal{P}^*_{qv} &= \frac{\hbar \omega_{qv}}{2} i (a_{qv}-q^{\dagger}_{-q,v})[-i(a^{\dagger}_{qv}-q_{-q,v})] \notag \\
+        &= \frac{\hbar \omega_{qv}}{2} (a_{qv}-q^{\dagger}_{-q,v})(a^{\dagger}_{qv}-q_{-q,v}) \\
+    \mathcal{Q}_{qv} \mathcal{Q}^*_{qv} &= \frac{\hbar}{2\omega_{qv}} (a_{qv}+q^{\dagger}_{-q,v})(a^{\dagger}_{qv}+q_{-q,v})
+\end{align}
+\begin{align}
+    H &= \frac{1}{2} \sum_{qv} \left\{ \mathcal{P}_{qv} \mathcal{P}^*_{qv} + \omega^2_{qv} \mathcal{Q}_{qv} \mathcal{Q}^*_{qv} \right\} \notag \\
+      &= \frac{1}{2} \sum_{qv} \frac{\hbar \omega_{qv}}{2} \left\{ 2a_{qv}a^{\dagger}_{qv} + 2a^{\dagger}_{-qv}a_{-qv} \right\} \notag \\
+      &= \frac{1}{2} \sum_{qv} \hbar \omega_{qv} \left\{ a_{qv}a^{\dagger}_{qv} + a^{\dagger}_{-qv}a_{-qv} \right\}
+\end{align}
+using the commutation relationship $[a_{qv}, a^{\dagger}_{qv}] = 1$, we will have:
+\begin{align}
+    H &= \frac{1}{2} \sum_{qv} \hbar \omega_{qv} \left\{ a^{\dagger}_{qv}a_{qv} + a^{\dagger}_{-qv}a_{-qv} + 1 \right\} \notag \\
+      &= \sum_{qv} \hbar \omega_{qv} \left(a^{\dagger}_{qv}a_{qv} + \frac{1}{2}\right)
+\end{align}
+The atomic displacement can be expressed using phonon creation and annihilation operator:
+\begin{align}
+    \eta_{lb} &= \frac{1}{\sqrt{N}} \sum_{q} Q_{qb} e^{iql} \notag \\
+             &= \sum_{qv} \frac{1}{\sqrt{Nm_b}} e_{qv}^b e^{iql} \sqrt{\frac{\hbar}{2\omega_{qv}}} \left( a_{qv} + a^{\dagger}_{-qv} \right) \notag \\
+             &= \sum_{qv} \left(\frac{\hbar}{2N\omega_{qv}m_b}\right)^{\frac{1}{2}} e_{qv}^b e^{iql} \left( a_{qv} + a^{\dagger}_{-qv} \right) \label{displacement}
+\end{align}
+where the time dependence is included in the phonon creation and annihilation operator.
+
+\end{document}

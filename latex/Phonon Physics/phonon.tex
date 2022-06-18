@@ -1,0 +1,34 @@
+\documentclass{article}
+
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=1in]{geometry}
+\usepackage{verbatim}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{docmute}
+\usepackage[title]{appendix}
+
+\begin{document}
+
+\title{Phonon Physics}
+\author{Wenhao Zhang}
+\date{\today}
+\maketitle
+
+\tableofcontents
+\newpage
+
+\input{M_Harmonic_solution.tex}
+\input{M_Perturbation_terms.tex}
+\input{M_Unified_transport.tex}
+
+\begin{appendices}
+\include{A01_Matsubara_sum.tex}
+\include{A02_Non-interacting_Greens_function.tex}
+\include{A03_Diagram_rules_derivation.tex}
+\include{A04_Wick_theorem_finiteT.tex}
+\include{A05_another_form_phonon_greens_function.tex}
+\include{A06_Wigner_function.tex}
+\end{appendices}
+
+\end{document}

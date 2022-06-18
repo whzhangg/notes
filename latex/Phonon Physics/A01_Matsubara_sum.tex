@@ -1,0 +1,36 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage[margin=0.8in]{geometry}
+\usepackage{verbatim}
+\usepackage{graphicx}
+
+\begin{document}
+
+\section{Evaluating the Matsubara Sum}
+Evaluating Matsubara sum involve calculating:
+\begin{equation}
+    \sum_n f(i\omega_n) \notag
+\end{equation}
+Suppose we have an integral,
+\begin{equation}
+    \int_c f(i\omega) n(i\omega) d(i\omega) \notag
+\end{equation}
+where curve $c$ cover all the singularity of the function $f(i\omega)$ and $n(i\omega)$.
+If $f(i\omega) \to 0$ at infinity, the integral will vanish:
+\begin{equation}
+    \int_c f(i\omega) n(i\omega) d(i\omega) = \sum_n Res[n(i\omega_n)] f(i\omega_n) + \sum_p Res[f(i\omega_p)] n(i\omega_p) = 0 \notag
+\end{equation}
+where the summation run through the poles of function $n(i\omega)$ and $f(i\omega)$. 
+If we take $n(i\omega)$ to be the Bose-Einstein distribution function, we have:
+\begin{gather}
+    n(\omega) = \frac{1}{e^{\beta\hbar\omega} - 1} \notag \\
+    n(i\omega) = \frac{1}{e^{i\beta\hbar\omega} - 1} \notag
+\end{gather}
+$n(i\omega)$ has poles at $\omega_n = \frac{2\pi n}{\beta\hbar}$, the residual of $n(i\omega)$ at those poles 
+are: $Res[n(i\omega_n)] = -i/\beta\hbar$. We have the result:
+\begin{equation}
+    \sum_n f(i\omega_n) = \frac{\beta\hbar}{i} \sum_{p} Res[f(i\omega_p)] n(i\omega_p)
+\end{equation}
+so that we need to sum over all the residuals in the function $f(i\omega)$.
+
+\end{document}
