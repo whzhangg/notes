@@ -57,6 +57,34 @@ Readings:
 3. John Williamson, “A short history of the Washington consensus,” in Narcis Serra and Joseph Stiglitz, eds., The Washington Consensus Reconsidered: Toward a New Global Governance (Oxford University Press, 2008), chapter 2.
 
 ##### Fusing Capitalist Economics with Communist Politics: China and Vietnam
+
+China and Vietnam are the most successful example of "capitalist authoritarian regimes" and "post communist systems". "You cannot overstate the exploration of economics in China" 
+World wide inequality have gone done while the inequality within countries increase. The price of reducing proverty is to tolerate increase in inequality. 
+Challenge the accepted knowledge between democracy and economy. 
+The path before June 4th. 
+Deng Xiaoping -> Beijing Spring and democracy wall -> attack on the current government -> Pushback from the regimes. 
+
+Why: Late development advantage?, Confuscian values?, Education? Less entrenched communist system? Gradual reform? Rule of law in the economy sector? Leadership?
+- Rule of law in china is required by the foreign investment, if the foreign investment become less important, then the demand for the rule of law would be deminish. 
+- Leadership that don't manage to renew itself drag their country down as they age. But some system provide some functionality to renew its leadership in some ways. Countries like China and Vietnam seems to find a way to solve the problems. 
+
+How sustainable is this success? can we have long term successful authoritarian systems?
+- state section seems to grow
+- smile curve of profitability: most profits come from the R&D and custom service sectors, the two end of the product life cycle. It's not clear if they are going to be profitable
+- Picking winners, in complex economies, it is more difficult to know where the next innovation of profit is going to be. So as economies grow and become complex, it is more difficult to make profit.
+- break down of the leadership renewal & corruption
+- break down of rule of law and increase in corruption and inefficiency
+- demand for higher wages: [flying geese model](https://www.grips.ac.jp/forum/module/prsp/FGeese.htm), where the low profit section always goes to late comers. 
+- Resurgence of political dissent
+
+Sequencing of economic and political reforms: 
+![[smile curve of profit.png]]
+where the $y$ axis are index for economy. The demand for reform would occur when the economy fall down the proverty line. It was believed that reform D1 will lead to economy to crush down further so reformed should occur only at a later time. But this is not necessary correct. There are successes in both path.
+
+Moderization theory's logic is not clear, because it is not clear where demand for change come from. Bourgeoisie? Working class pressure? Fighting and paying for war? 
+Upshot for the future: 
+Democracy is not inevitable, it depends on contingent historical struggles. Social maybe more repressive if facing modern challenges. 
+
 Readings:
 1. Edward Steinfeld, Playing our Game: Why China’s Rise Doesn’t Threaten the West (Oxford University Press, 2010), chapters 1 & 4.  
 2. John Kane, “Hobbes in China: The Political Logic of Xi Jinping,” mimeo.  
