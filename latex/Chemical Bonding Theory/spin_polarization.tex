@@ -1,0 +1,66 @@
+\documentclass{article}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=1in]{geometry}
+\usepackage{verbatim}
+\usepackage{graphicx}
+\usepackage{hyperref} % \url \href
+\usepackage{docmute}
+
+\newtheorem{definition}{Definition}
+\newtheorem{theorem}{Theorem}
+\newcommand{\heff}{\mathbb{H}^{\text{eff}}}
+\newcommand{\pfrac}[2]{\frac{\partial #1}{\partial #2}}
+
+\newcommand{\MO}{\textbf{MO}}
+\newcommand{\AO}{\textbf{AO}}
+
+\newcommand{\huptb}{\text{H}_0}
+\newcommand{\order}[2]{#1^{(#2)}}
+\newcommand{\statebra}[1]{\langle #1 |}
+\newcommand{\stateket}[1]{| #1 \rangle}
+
+\begin{document}
+
+\section{Spin Polarization}
+\subsection{Many body states}
+Multi-electron systems are fundamentally manybody problem, so single particle 
+solutions are often not enough to present the true electronic structure of the 
+system. We should have the following hierarchy:
+\begin{enumerate}
+    \item single particle states
+    \item many-body hartree fock state using slater determinant
+    \item mixture of hartree fock state
+\end{enumerate}
+Suppose that we have a set of orthogonal single particle states $\psi_i(r_{\mu})$, where $i$
+index the single particle states and $r_{\mu}$ is the position of the $\mu$th particle. 
+Spins are included in the wavefunction. Then a slater determinant is given as
+\begin{equation}
+    \Phi(r_1, \cdots, r_n) = \frac{1}{\sqrt{N!}} 
+    \left| \begin{matrix}
+        \psi_1(r_1) & \cdots & \psi_1(r_n) \\ 
+        \psi_2(r_1) & \cdots & \psi_2(r_n) \\
+        \vdots &  & \vdots \\ 
+        \psi_n(r_1) & \cdots & \psi_n(r_n)
+    \end{matrix} \right|
+\end{equation}
+which satisfy the antisymmetry under exchange of particle. 
+
+Using these slater states as the initial ``unperturbed'' states, we can find their 
+energy expectation values:
+\begin{equation}
+    E_{\Phi_a} = \statebra{\Phi_a(r_1, \cdots, r_n)} H \stateket{\Phi_a(r_1, \cdots, r_n)}
+\end{equation}
+Furthermore, the off-diagonal elements are also non-zero, leading to a treatment similar 
+to the perturbation treatment. The true eigenstates can thus be written as a linear combination:
+\begin{equation}
+    \Psi_g = \sum_{i} c_{ig} \Phi_i
+\end{equation}
+by solving the Hamiltonian matrix with element $H_{ij} = \statebra{\Phi_i} H \stateket{\Phi_j}$. 
+
+\subsection{Hartree Fock}
+
+
+\subsection{Exchange Interaction and Spin polarization}
+
+
+\end{document}
