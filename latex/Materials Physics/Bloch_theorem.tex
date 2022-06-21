@@ -1,0 +1,61 @@
+\documentclass{article}
+
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=1in]{geometry}
+\usepackage{verbatim}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{docmute}
+
+\newcommand{\bm}[1]{\mathbf{#1}}
+
+\begin{document}
+
+\part{Bloch Theorem}
+
+\section{Bloch Theorm}
+It is apparent that in the lattice, the Hamiltonian is periodic and commute with any 
+translation of lattice\footnote{ J\"{u}rgen K\"{u}bler, \emph{Theory of Itinerant Electronic Magnetism} page 79}:
+\begin{equation}
+    [T_j,H]=0
+\end{equation}
+Where operator $T_j$ translate the state by $\bm{R_j}$. Therefore, any eigenstate of the Hamiltonian should be also the eigenstate of translation:
+\begin{equation}
+    T_j \psi_i(\bm{r})=\psi_i(\bm{r}+\bm{R_j})=\lambda_j \psi_i(\bm{r})
+\end{equation}
+This is satisfied if the eigenvalue $\lambda_j$ is:
+\begin{equation}
+    \lambda_j=e^{i\bm{k} \cdot \bm{R_j}}
+\end{equation}
+And the state is indicated by the number k.
+Finally, Bloch Theorm states that eigenstate of the Hamiltonian in a periodic system need to satisfy such condition:
+\begin{equation}
+    \psi_{n\bm{k}}(\bm{r} + \bm{R_j})=e^{i\bm{k} \cdot \bm{R_j}} \psi_{n\bm{k}}(\bm{r})
+\end{equation}
+Function that satisfy such condition can be written as:
+\begin{equation}
+    \psi_{n\bm{k}}(r)=e^{i\bm{k} \cdot \bm{r}} u_{n\bm{k}}(\bm{r})
+\end{equation}
+where $u_{n\bm{k}}(\bm{r})$ has the periodicity of the lattice.
+now $\bm{k}$ is restricted only in the unit cell of the reciprocal lattice 
+if we define reciprocal lattice vector $\bm{K_s}$ by $\bm{K_s} \cdot \bm{R_j} = 2\pi n $: 
+\begin{equation}
+    \bm{k'}=\bm{k}+\bm{K_s}
+\end{equation}
+gives
+\begin{equation}
+    e^{i\bm{k} \cdot \bm{R_j}} = e^{i\bm{k'} \cdot \bm{R_j}} 
+\end{equation}
+Consequently, both wavefunctions $\psi_{n\bm{k}}(r)$ and $\psi_{n\bm{k'}}(r)$ prossess the same translation eigenvalue. 
+The wavevector $\bm{k}$ and $\bm{k'}$ are said to be equivalent and we have:
+\begin{align}
+    \psi_{n\bm{k}}(\bm{r}) = \psi_{n\bm{k}+\bm{K_s}}(r)
+    \varepsilon_{n\bm{k}}  = \varepsilon_{n\bm{k}+\bm{K_s}}
+\end{align}
+where eigenvalue $\varepsilon_{n\bm{k}}$ is for the Schr\"{o}dinger equation:
+\begin{equation}
+    H \psi_{n\bm{k}}(\bm{r}) = \varepsilon_{n\bm{k}} \psi_{n\bm{k}}(\bm{r})
+\end{equation}
+
+
+\end{document}

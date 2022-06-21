@@ -1,6 +1,7 @@
 \documentclass{article}
-\usepackage{amsmath}
-\usepackage[margin=0.8in]{geometry}
+
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=1in]{geometry}
 \usepackage{verbatim}
 
 \newcommand{\pfrac}[2]{\frac{\partial #1}{\partial #2}}
@@ -8,12 +9,9 @@
 
 \begin{document}
 
-\title{Equations for iterative solution to phonon BTE}
-\author{WH}
-\date{\today}
-\maketitle
+\section{Equations for iterative solution to phonon BTE}
 
-\section{The Boltzmann equation for Phonon}
+\subsection{The Boltzmann equation for Phonon}
 We write the Boltzmann equation for phonon as:
 \begin{equation}
     \pfrac{n_1}{t} = -\pfrac{H_1}{p} \pfrac{n_1}{r} + \left( \pfrac{n_1}{t} \right)_{coll} = 0 
@@ -26,7 +24,7 @@ the diffusion part can be written linear to temperature gradient $\nabla T$ as:
 \end{equation}
 for each of the phonon state indexed by $(k,s)$. 
 
-\section{three phonon scattering and iterative solution}
+\subsection{three phonon scattering and iterative solution}
 
 The collision term includes the scattering events that change the phonon distribution at state $(k,s)$.
 Below we use the notation so that $q_1 = (k_1, s_1); q_2 = (k_2, s_2); q_3 = (k_3, s_3)$. The collision term due to 
@@ -188,7 +186,7 @@ and is updated by:
     f_{q_1,i}^{(n+1)} = - ( \frac{1}{\beta} v_{q_1,i} \pfrac{n_{q_1}^0}{T} + W_{1,i}^{n} ) / Q_1'
 \end{equation}
 
-\section{Thermal conductivity}
+\subsection{Thermal conductivity}
 The lattice thermal conductivity is given by:
 \begin{equation}
     J_{phonon,i} = \frac{1}{N_k \Omega}\sum_q \hbar \omega_q v_{q,i} dn_{q,j} = -\sum_j \kappa_{i,j} \left( \nabla T \right)_j \label{jp} 
@@ -198,8 +196,8 @@ where $dn_q = \sum_i \beta n_q^0(n_q^0+1)f_{q,i} \left( \nabla T \right)_i $. We
     \kappa_{i,j} = -\frac{1}{N_k \Omega}\sum_q \hbar \omega_q v_{q,i} \beta n_q^0(n_q^0+1)f_{q,j}
 \end{equation}
 
-\pagebreak
-\section{Direct solution of phonon transport equation}
+
+\subsection{Direct solution of phonon transport equation}
 The direct solution of phonon BTE can be obtained by writing in matrix form. Starting from
 Eq.\ref{bte2}, we can write:
 \begin{equation}
@@ -296,7 +294,7 @@ and the term $B_{q_1,-q_2} + C_{q_1,q_2}$ can be written as:
 \end{align}
 now we can see that only a single matrix element need to be computed for each $q_1,q_2,q_3$ triplet.
 
-\section{Solving the Irreducible Brillouin zone}
+\subsection{Solving the Irreducible Brillouin zone}
 Using $k$ to refer to a point in the irreducible Brillouin zone and $q$ to a general point in reciprocal space, 
 we can write Eq.\ref{matrix1} to be:
 \begin{align}

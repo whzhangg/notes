@@ -1,16 +1,17 @@
 \documentclass{article}
-\usepackage{amsmath}
-\usepackage[margin=0.8in]{geometry}
+
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=1in]{geometry}
+\usepackage{verbatim}
+\usepackage{graphicx}
 \newcommand{\pfrac}[2]{\frac{\partial #1}{\partial #2}}
 
 \begin{document}
 
-\title{Adaptive Smearing Method}
-\author{WH}
-\date{\today}
-\maketitle
 
-\section{The case of three phonon interation}
+\section{Adaptive Smearing Method in Phonon}
+
+\subsection{The case of three phonon interation}
 we follow the derivation of the \emph{ShengBTE} paper. 
 \footnote{ShengBTE: a solver for boltzmann transport equation for phonon}
 To approximate a delta function $\delta(q_1 - q_2 -q_3)\delta(\omega_1 - \omega_2 - \omega_3)$, we 
@@ -65,7 +66,7 @@ so that
                  \frac{Q_{\alpha}^{\mu}}{ N_{\mu}}  \right]^2  } \label{final2}
 \end{equation}
 
-\section{The case of four phonon}
+\subsection{The case of four phonon}
 The delta function in the case of four phonon interaction is:
 \begin{gather}
     \delta(q_1 - q_2 - q_3 - q_4)\delta(\omega_1 - \omega_2 - \omega_3 - \omega_4) \notag \\

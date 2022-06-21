@@ -32,3 +32,4 @@ The main file should produced by gathering each components using `docmute` packa
 1. Contents of the main body named as `M01_`, where numbers are used if sequence of content is important. 
 2. Appendix file named as `A_`
 3. Figures named as `F_`
+4. Notes under work can be named as `U_`

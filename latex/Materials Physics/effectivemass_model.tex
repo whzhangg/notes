@@ -1,0 +1,196 @@
+\documentclass{article}
+
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=1in]{geometry}
+\usepackage{verbatim}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{docmute}
+
+\newcommand{\pfrac}[2]{\frac{\partial #1}{\partial #2}}
+\begin{document}
+
+\part{Derivation of band model effective mass}
+
+\section{Derivation of single parabolic band}
+In single parabolic band, the energy dispersion relation is:
+\begin{equation}
+    \varepsilon(k) = \hbar^2 k^2 / 2m^*
+\end{equation}
+and velocity is given by:
+\begin{equation}
+    v =\sqrt{2\varepsilon/m^* }
+\end{equation}
+
+The energy dependent density of state $g(\varepsilon)$ is calculated, for a single spin state,
+according to
+\begin{gather}
+    N_k(\varepsilon) = \frac{V}{8\pi^3} \frac{4}{3} \pi k^3 \notag \\
+    \frac{dN_k}{d\varepsilon} = \frac{dN_k}{dk} \frac{dk}{d\varepsilon} 
+            = \frac{V}{8\pi^3} 4\pi k^2 \frac{\sqrt{2m^*}}{\hbar} \frac{1}{2} \varepsilon^{-1/2} \\
+    \frac{dN_k}{d\varepsilon} = \frac{V}{2\pi^2} \frac{\sqrt{2}{m^*}^{3/2}}{\hbar^3} \sqrt{\varepsilon } \\
+    g(\varepsilon) = \frac{V}{4\pi^2} \left( \frac{2m^*}{\hbar^2} \right)^{3/2} \sqrt{\varepsilon }
+\end{gather}
+
+The relationship between $k$ points summation and energy integration is given by:
+\begin{equation}
+    \lim_{V \to \infty } \sum_k F(\varepsilon(k)) = \int_{BZ} \frac{Vdk}{8\pi^3}  F(\varepsilon(k)) 
+        =V \int_{-\infty}^{\infty} d\varepsilon g(\varepsilon)F(\varepsilon)
+\end{equation}
+
+The total number of carrier is therefore:
+\begin{align}
+    n &= \int_{-\infty}^{\infty} g(\varepsilon)f(\varepsilon) d\varepsilon \notag \\
+      &= \frac{1}{4\pi^2} \left( \frac{2m^*}{\hbar^2} \right)^{3/2} \int_{-\infty}^{\infty} \frac{\sqrt{\varepsilon}}{e^{(\varepsilon - \mu)/k_b T}+1} d\varepsilon
+\end{align}
+
+The Seebeck is given by:
+\begin{equation}
+    S = \zeta / \sigma
+\end{equation}
+with $\zeta$ and $\sigma$ given by, taking account of spin factor 2:
+\begin{align}
+    \sigma &= \frac{2e^2}{V} \int g(\varepsilon)\tau(\varepsilon)v^2(\varepsilon)\left(-\frac{\partial f}{\partial \varepsilon}\right) d\varepsilon \\
+    \zeta  &= \frac{2e}{VT} \int (\varepsilon - \mu) g(\varepsilon)\tau(\varepsilon)v^2(\varepsilon)\left(-\frac{\partial f}{\partial \varepsilon}\right) d\varepsilon \\
+\end{align}
+Assuming the form of $\tau$ to be:
+\begin{equation}
+    \tau = A\varepsilon^\eta
+\end{equation}
+In the case of simplest acoustic phonon scattering, the coefficient 
+is given by:
+\begin{equation}
+    \tau = \frac{\hbar C_1 N_v}{\pi k_b T \Xi^2} g(\varepsilon)^{-1} f(\varepsilon)
+\end{equation}
+
+We find the energy independent term in the integral can be moved out and get cancelled in the division. 
+So we are left with:
+\begin{equation}
+    S = \frac{1}{eT} \frac{\int \varepsilon^{3/2+\eta} (\varepsilon -\mu) \left(-\frac{\partial f}{\partial \varepsilon}\right) d\varepsilon} 
+                {\int \varepsilon^{3/2+\eta} \left(-\frac{\partial f}{\partial \varepsilon}\right) d\varepsilon}
+\end{equation}
+
+\section{Anisotropy of Effective mass}
+In the case of ellipsoid valleys, we can define anisotropic effective mass $m^*_{\perp}$ and $m^*_{\parallel}$. The
+DOS effective mass of such a valley can be averaged as:
+\begin{equation}
+    m^*_{DOS} = ({m^*_{\perp}}^2 m^*_{\parallel})^{1/3}
+\end{equation}
+
+But for the mobility, the inertial effective mass can be given 
+as 
+\begin{equation}
+    m^*_{I} = 3/(\frac{2}{m^*_{\perp}}+\frac{1}{m^*_{\parallel}})
+\end{equation}
+
+\section{In the case of multivalley}
+For multivalley, we take the degeneracy to be $N_v$ and the 
+total DOS effective mass can be written using the single 
+band value:
+\begin{equation}
+    m^*_{total} = N_v^{2/3}m^*
+\end{equation}.
+
+\section{Some reference}
+Below is a table of seebeck coefficients of simple metal, for collaboration purpose:
+\begin{table}[h]
+    \caption{Parameter in simple metals}
+    \centering
+    \begin{tabular}{lrrr}
+        \hline
+        Elements & $Z$ & $n(10^{22} cm^{-3})$ & Seebeck ($\mu V/K$) \\ \hline
+        Na       &  1  & 2.65                 & -7   \\
+        Ag       &  1  & 5.86                 & 1.5  \\
+        K        &  1  & 1.40                 & -14  \\
+        Al       &  3  & 18.1                 & -1.5 \\ \hline
+    \end{tabular}
+\end{table}
+
+\section{Multiband anisotropic transport coefficient}
+Here, we follow the W. E. Bies et. al.'s derivation of the 
+thermoelectric properties in an anisotropic semiconductor.
+\emph{PRB, 65, 085208}. 
+
+The result of the semiclassical transport theory in the Boltzmann 
+equation in the relaxation-time approximation gives
+\begin{gather}
+    \sigma_{ij} = e^2\int d\varepsilon \left( -\pfrac{f_0}{\varepsilon} \right) \Sigma_{ij}(\varepsilon) \\
+    T(\sigma \cdot S)_{ij} = e\int d\varepsilon \left(-\pfrac{f_0}{\varepsilon}\right) 
+                                \Sigma_{ij}(\varepsilon) (\varepsilon - \mu)     
+\end{gather}
+and the transport distribution tensor $\Sigma$ is given by:
+\begin{equation}
+    \Sigma_{ij}(\varepsilon) = \int \frac{2d^3k}{(2\pi)^3} v_i(k) \sum_l \tau_{jl}(k)v_l(k) \delta[\varepsilon - \varepsilon(k)]
+\end{equation}
+where $\varepsilon$ is the energy of the electronic states, $\mu$ is the chemical potential, 
+$v(k)$ is the electronic velocity and $\tau_{ij}(k) = \tau(\varepsilon)U_{ij}$ 
+is the relaxation time which is explicitly
+an anisotropic tensor. 
+Instead of considering $N$ degenerate parabolic valleys as in the derivation of Bies. 
+we consider N parabolic valleys with different energy $\varepsilon_n$ and effective mass 
+tensor $M_{ij}$ with the electronic dispersion relationship and 
+electronic group velocity is given by:
+\begin{gather}
+    \varepsilon^{(n)}(k) = \varepsilon_n + 
+        \frac{\hbar^2}{2} \sum_{ij} (k_i - k_i^{(n)}) M_{ij}^{(n)-1} (k_j - k_j^{(n)}) \\
+    v_i^{(n)}(k) = \hbar\sum_j M_{ij}^{(n)-1} (k_j - k_j^{(n)})
+\end{gather}
+where $\varepsilon_n$ is the energy at the bottom of the parabolic valley and 
+$k_{\alpha}^0$ with $\alpha = i,j,k$ is the position of the band maximum. 
+Putting the expression of the electronic velocity into the expression for $\Sigma$
+and summing over all $N$ transport valleys, we obtain:
+\begin{align}
+    \Sigma_{ij} (\varepsilon) & = \sum_{n=1}^N \tau(\varepsilon)
+        \int \frac{2d^3k}{(2\pi)^3} \hbar^2 
+        \sum_{i',j',l} M_{ii'}^{(n)-1} k_{i'} U_{jj'}^{(n)} M_{j'l}^{(n)-1} k_l 
+        \delta[\varepsilon - \varepsilon(k + k^{(n)})] \\
+        & = \sum_{n=1}^N  \frac{2^{3/2} \tau(\varepsilon - \varepsilon_n) (\varepsilon - \varepsilon_n)^{3/2} }{3\pi^2\hbar^3}
+        \sum_l \sqrt{\det \mathbf{M}^{(n)}} U_{jl}^{(n)} M_{li}^{(n)-1} \theta(\varepsilon - \varepsilon_n)
+\end{align}
+which correspond to Eq.(29) with a change of variable from $\varepsilon \to (\varepsilon - \varepsilon_n)$ 
+for different parabolic valleys and A step $\theta$ function is included for each band. 
+
+Following the notation of the paper, we further write:
+\begin{equation}
+    \Sigma_{ij} (\varepsilon) = \sum_{n=1}^N \mathcal{T}^{(n)}(\varepsilon) A_{ij}^{(n)}
+\end{equation}
+with a dimensionaless matrix $\mathbf{A}$:
+\begin{gather}
+    \mathbf{A}^{(n)} = \left( m_0^{-1/2} \sqrt{\det \mathbf{M}^{(n)}} \right) 
+        \left( \mathbf{U}^{(n)} \mathbf{M}^{(n)-1} \right)^T \\
+    \mathcal{T}^{(n)}(\varepsilon) = \frac{2^{3/2} m_0^{1/2}}{3\pi^2\hbar^3}
+    \tau(\varepsilon - \varepsilon_n) (\varepsilon - \varepsilon_n)^{3/2} \theta(\varepsilon - \varepsilon_n)
+\end{gather}
+In the simplest case, we consider $\mathcal{T} = \mathcal{I}$, a $3\times 3$ identity matrix
+correspond to isotropic scattering
+and $\mathbf{M}$ diagonal. Then $\mathbf{A}$ is also diagonal and
+ $A_{i} = A_{ii}$ will simply be:
+\begin{equation}
+    A^{(n)}_{i} = \left( m_0^{-1/2} \sqrt{M_1 M_2 M_3} \right) / M_i
+\end{equation}
+for $i = 1,2,3$, three eigen direction. We note that $\mathbf{A}$ encode all information 
+about the anisotropy of the electronic bands.
+
+We write the conductivity tensor as:
+\begin{align}
+    \mathbf{\sigma} &= e^2\int d\varepsilon \left( -\pfrac{f_0}{\varepsilon} \right) \mathbf{\Sigma}(\varepsilon) \\
+            &= e^2 \sum_{n=1}^N \int d\varepsilon \left( -\pfrac{f_0}{\varepsilon} \right) \mathcal{T}^{(n)}(\varepsilon) \mathbf{A}^{(n)} \\
+            &= \sum_{n=1}^N \sigma_0^{(n)} \mathbf{A}^{(n)}
+\end{align}
+The Seebeck tensor is related to $\sigma$ by:
+\begin{align}
+    \mathbf{(\sigma \cdot S)} &= (e/T) \sum_{n=1}^N \int d\varepsilon 
+            \left(-\pfrac{f_0}{\varepsilon}\right)(\varepsilon - \mu) \mathcal{T}^{(n)}(\varepsilon) \mathbf{A}^{(n)} \\
+        &= \sum_{n=1}^N \sigma_0^{(n)} S_0^{(n)} \mathbf{A}^{(n)}
+\end{align}
+This two equations follow Eq.(34) and Eq.(35) in the paper but now with different 
+bands have different value of $\mathcal{T}^{(n)}(\varepsilon)$. 
+
+In the case when $\mathbf{A}$ is diagonal, we obtain the Seebeck coefficient:
+\begin{equation}
+    S_i = \frac{\sum_{n=1}^N \sigma_0^{(n)} S_0^{(n)} A_i^{(n)}}{\sum_{n=1}^N \sigma_0^{(n)} A_i^{(n)}}
+\end{equation}
+
+
+
+\end{document}

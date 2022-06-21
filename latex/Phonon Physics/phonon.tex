@@ -4,9 +4,14 @@
 \usepackage[margin=1in]{geometry}
 \usepackage{verbatim}
 \usepackage{graphicx}
+\usepackage{amsmath}
 \usepackage{hyperref}
 \usepackage{docmute}
 \usepackage[title]{appendix}
+
+\newcommand{\pfrac}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\ql}{\lambda,q}
+
 
 \begin{document}
 
@@ -21,6 +26,8 @@
 \input{M_Harmonic_solution.tex}
 \input{M_Perturbation_terms.tex}
 \input{M_Unified_transport.tex}
+\input{M_iterative.phonon.tex}
+\input{M_GreenKubo.tex}
 
 \begin{appendices}
 \include{A01_Matsubara_sum.tex}
@@ -29,6 +36,7 @@
 \include{A04_Wick_theorem_finiteT.tex}
 \include{A05_another_form_phonon_greens_function.tex}
 \include{A06_Wigner_function.tex}
+\include{A07_adaptive_smearing.tex}
 \end{appendices}
 
 \end{document}

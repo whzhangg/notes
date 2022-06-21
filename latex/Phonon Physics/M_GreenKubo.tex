@@ -1,19 +1,17 @@
 \documentclass{article}
-\usepackage{amsmath}
-\usepackage[margin=0.8in]{geometry}
+
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=1in]{geometry}
+
 \newcommand{\pfrac}[2]{\frac{\partial #1}{\partial #2}}
 
 \begin{document}
 
-\title{Green Kubo formula for thermal conductivity}
-\author{WH}
-\date{\today}
-\maketitle
 
-\section{formulation}
+\section{Green Kubo formula for thermal conductivity}
 With the harmonic hamiltonian and periodic condition not assumed:
 \begin{equation}
-    H = \sum_{i} \frac{1}{2m_b} p_{i} p_{i} + \frac{1}{2} \sum_{ij} G_{ij} u_{i} u_{j} + V_0 \label{eq1}
+    H = \sum_{i} \frac{1}{2m_b} p_{i} p_{i} + \frac{1}{2} \sum_{ij} G_{ij} u_{i} u_{j} + V_0
 \end{equation}
 $G$ is the harmonic force constants. $i$ is the index of the atom in the whole sample that we concern. $p_i$ and $u_i$ are the 
 momentum and displacement of atom $i$. Summation of cartesian direction is implied. 

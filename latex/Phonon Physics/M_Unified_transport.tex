@@ -1,6 +1,7 @@
 \documentclass{article}
-\usepackage{amsmath}
-\usepackage[margin=0.8in]{geometry}
+
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=1in]{geometry}
 \usepackage{verbatim}
 \usepackage{graphicx}
 
@@ -129,7 +130,7 @@ $\Gamma_{qv}$ is the phonon linewidth $\Gamma_{qv} = 1 / \tau_{qv}$,
 $\bar{N}_{qv}$ is the equilibrium Bosen distribution. The scattering matrix A is given by:
 \begin{equation}
     A_{q,q'} = \frac{1}{\tau_{q}} \delta_{q,q'} 
-            - \sum_{q''} \left( \Lambda_{q,q''}^{q'} -  \Lambda_{q,q'}^{q''} + \Lambda^{q',q''}_{q} \right) \label{A}
+            - \sum_{q''} \left( \Lambda_{q,q''}^{q'} -  \Lambda_{q,q'}^{q''} + \Lambda^{q',q''}_{q} \right) \label{A_unified}
 \end{equation}
 with $\Lambda$ given by:
 \begin{align}
@@ -137,7 +138,7 @@ with $\Lambda$ given by:
     \Lambda^{q',q''}_{q} &= \frac{\bar{N}_{q} (\bar{N}_{q'}+1) (\bar{N}_{q''} + 1)}{\bar{N}_{q} (\bar{N}_{q} + 1)} L^{q',q''}_{q} 
 \end{align}
 and $L$ is the standard scattering probability of phonon absorption and emission events.
-We focus on the case of RTA and ignore the second term in Eq.\ref{A}. Eq.\ref{derived3} is then:
+We focus on the case of RTA and ignore the second term in Eq.\ref{A_unified}. Eq.\ref{derived3} is then:
 \begin{align}
     &\left[ \frac{\partial N(R,q,t)}{\partial t} + i \left[ \Omega_{q},N(R,q,t) \right] + \right.
       \left.  \frac{1}{2} \left\{ V_{q}, \nabla_R N(R,q,t) \right\} \right]_{vv'} \notag \\
