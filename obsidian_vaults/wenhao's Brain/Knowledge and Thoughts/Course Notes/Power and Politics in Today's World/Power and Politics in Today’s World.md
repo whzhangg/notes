@@ -93,6 +93,39 @@ Readings:
 5. Quan Hoang Vuong, “Vietnam's Political Economy in Transition: 1986-2016,” Stratfor, May 27, 2014. https://www.stratfor.com/the-hub/vietnams-political-economy-transition- 1986-2016
 
 ##### The Resurgent Right in the West
+Post war consensus: social democracy, creation of media care and walfare state
+- stronge welfare and protections
+- large redistributions
+- substantially bipartisan
+
+Later conservative attack, Ronald Regean (1970)
+- against union
+- against large redistribution
+- "government is the problem"!
+
+Imerging conservative and right wing politican
+Source of the resurgence of the right.
+1. collapse of communism
+1. the logic of distributive politices
+2. power relations in the economy
+
+Collapse of communism: 
+*power does not shift back to the left*. many of the factor favor left dimenish as the cold war ended, such as demography and population change. Alternative bogeyman such as terrorism and support from capitalists at the same time. (Welfare is capitalists best friend because it suppress the discontent of the working class)
+
+distributive politics:
+Median income always below the mean because rich peaple pull up the average. Politicans want to win the median income voters, instead of the average income. Median voter theorem: politican want to win the support of the median or low income voter by distributing downwards. But this exception in fact not happen, because there are more dimenison in politics than just economy motivates, such as race, women's rights. Therefore, the left does not necessary win with redistribution policies.
+Major rule divide a dollar game: major rule create instability, economy interest along does not produce effective demand for downward redistribution. The interest itself will not be sufficient to sustain a particular distribution. 
+
+To sustain the redistrubtion, ideals are important: fairness? But it is complicated. What is fair? relative and absolute valuation. People make relatively local comparsion in their social order. How about self-referential comparision? 
+Relative conception of fairness vs solidarity based conception of fairness
+Reagon and Thatcher's focus in this argument is the absolute improvement improvment and prospects for upward mobility. 
+It is much harder to hold the solidarity based coalition if you can break apart the coalition. Anyway, it is harder to sustain redistributive policy on the left, even though it benefit to the average worker (progressive change instead of regressive change). 
+
+Insistutions component to create solidarity: Unions? Union membership continue to decrease and as unions get smaller and smaller, inequality increase. 
+![[inequality.png]]
+Inequalities has decreased during the social democratic movement during the post war period but increase with the resurgence on the right after the cold war, especially in two party systems. Multi-party systems are supposed to be more reactive to the median voters.
+
+
 Readings:  
 1. James Patterson, Restless Giant: The United States from Watergate to Bush v. Gore (Oxford University Press, 2005), chs. 4-5.  
 2. Vernon Bogdanor YouTube Lecture, “Britain in the 20th Century: Thatcherism, 1979- 90”. https://www.youtube.com/watch?v=lOiJnNN8bmc
