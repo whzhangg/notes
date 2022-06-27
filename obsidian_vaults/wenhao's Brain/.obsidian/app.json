@@ -9,5 +9,7 @@
   "smartIndentList": true,
   "alwaysUpdateLinks": true,
   "promptDelete": false,
-  "vimMode": false
+  "vimMode": false,
+  "legacyEditor": true,
+  "livePreview": false
 }

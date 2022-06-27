@@ -1,14 +1,4 @@
 # Power and Politics in Today’s World  
-Ian Shapiro, Fall, 2019, Yale University
-The framework is taken from [here](https://communications.yale.edu/sites/default/files/files/Devane-syllabus-with-dates(2).pdf)
-Lecture [homepage](https://communications.yale.edu/2019-devane-lectures-power-and-politics-todays-world)
-
-### Introduction of the Course
-The collapse of Soviet communism ushered in an era of widespread confidence in capitalist prosperity and democracy. Francis Fukuyama’s declaration, in 1992, that a benign end of history had finally arrived garnered widespread attention across much of the developed and developing world. Confidence in this new order endured through the terrorist attacks of September 11, 2001 and even the financial crisis of 2008, but then it began to falter. Anemic economic recoveries in the West, revived authoritarianism in Russia and other new democracies, military stalemates in Afghanistan and Iraq, and stillborn Arab spring revolutions after 2012 took their toll. 2016 was a watershed, marked most dramatically by Britain’s vote to leave the European Union and Donald Trump’s populist stampede to the U.S. presidency, but also by the resurgence of extreme right- wing parties in many European countries the like of which had not been seen since the 1930s.
-
-This course provides an examination of political dynamics and institutions over this tumultuous quarter century, and the implications of these changes for what comes next. Among the topics covered are the decline of trade unions and enlarged role of business as political forces, changing attitudes towards parties and other political institutions amidst the growth of inequality and middle-class insecurity, the emergence of new forms of authoritarianism, and the character and durability of the unipolar international order that replaced the Cold War.
-
-Part I deals with the collapse of communism and its aftermath, both in former communist countries that adopted market-based economies and in the developed West where the absence of a competitor to capitalism recast relations among business, labor, and governments. Part II focuses on the early post-Cold War era, marked by the Washington Consensus on the benefits of free trade, privatization, and deregulation, and interventionist agendas to fight terrorism, prevent human rights abuses, and to spread democracy. In part III we turn to the backlash that set in after the financial crisis, as technocratic elites lost legitimacy, the global war on terror became mired in quagmires across the Middle East, and humanitarian intervention and democracy spreading agendas foundered. The new politics of insecurity is our subject in part IV, where we explore the sources of the populist explosions of 2016 and the politics to which they have given rise. This leads to a consideration of responses in part V, where we discuss the kinds of policies that are needed for a world in which congenital employment insecurity is going to be the norm, and the political reforms that would increase the chances of those policies being adopted.
 
 ### Part 1. THE COLLAPSE OF COMMUNISM AND ITS AFTERMATH
 ##### From Soviet Communism to Russian Gangster Capitalism
@@ -131,6 +121,34 @@ Readings:
 2. Vernon Bogdanor YouTube Lecture, “Britain in the 20th Century: Thatcherism, 1979- 90”. https://www.youtube.com/watch?v=lOiJnNN8bmc
 
 ##### Reorienting the Left: New Democrats, New Labour, and Europe’s Social Democrats
+Tony Ben
+"Right of trade union decrease, entrepreneur rise, we will see many victim of market forces. She measure the price of everything, but value in nothing. Thatcher's market policy remove the best part of us and only the bad remain."
+
+New labour in Britain, Tony Blair, 1995; Bill clinton
+**Psychology of distributive politics**
+- Absolute gains: am I better off than I was
+- Relative gains: am I better off than the others
+Most economy theory considers absolute gain in most cases, because with absolute gain, there can be win-win, but with relative gain, one only side can win. Relative gains are more potent in politics, but local referrence groups matter more than distant ones.
+
+thought experiment: Steve is told he has won the lottery and the prize is $2m. The next day he is told a second ticket is found and thus has only won $1m. Art is told he has one of two winning tickets and will win $500k. The next day he learns there was no second winner and he has won $1m. Both of them won $1m doller, but who is happier? Steve somehow thnk he lost something. 
+If you have something taken away from you, it bothers you more than you be happy when you gain equivalently in someway. 
+![[value of losses and gains.png]]
+
+**Unions, left of center parties and median voters**
+Unions as insitutions that reinforce solidaristic ideals for below median voters. are becoming less effective and weaker. On the other hand, if the union are strong power in poltical parties, union is going to pull the power from the Government, because union is for the benefit of its members only. 
+
+Clinton move to the center. [Politics of triangulation](https://en.wikipedia.org/wiki/Triangulation_(politics)). But as clinton move to the center, the exterme side of your party is no longer satisfied. But the solidarity is no longer there to bond the whole left. 
+
+Distributive politics in two party & multi-party system
+Multiparty system:
+- more representative (but may not be more representative at a governing stage)
+
+But unions are also decreasing in these systems. Two implications:
+left-of-center parties will be less effective in protecting employed workers. Protecting unionized workers may impose costs on others below the median income. 
+Fragmentation of the left parties: the number of parties on the left increase dramatically. But the right does not fragment as much. This make solidaristic ideologies among voters more difficult to sustain and a decline the central left party
+Proliferation of far right parties is not surprising, driven by the shifting of left parties to the center
+
+
 Readings:  
 1. Judt, Postwar: A History of Europe since 1945 (Penguin, 2005) chapter 12.
 2. Lucio Baccaro and Chris Howell, Trajectories of Neoliberal Transformation: European Industrial Relations since the 1970s (Cambridge University Press, 2017), chapter 6. Christian Salas, Frances Rosenbluth and Shapiro, “Political parties and public policy” mimeo.

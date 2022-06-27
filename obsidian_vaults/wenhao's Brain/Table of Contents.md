@@ -19,3 +19,4 @@
 - [[Point Group Identification]]
 ### Readings
 - [[Reading Lists]]
+- [[Power and Politics TOC|Power and Politics course]]
