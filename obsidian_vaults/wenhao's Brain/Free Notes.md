@@ -12,3 +12,5 @@ fortran interface with python
 https://numpy.org/doc/stable/f2py/index.html
 see this also 
 https://qiita.com/eriho/items/2e39504363b4287c1035
+
+https://github.com/pwaller/pyfiglet
