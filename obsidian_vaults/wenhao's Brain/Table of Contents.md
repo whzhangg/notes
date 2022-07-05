@@ -13,6 +13,7 @@
 - [[Robust Python]]
 - [[Python Table of Content]]
 - [[Regular Expression]]
+- [[Building Python Packages|Python Packaging]]
 ##### Materials Chemistry
 - [[Chemistry Table of Contents]]
 - [[Cell parameters restrictions]], [[Symmetry direction]]

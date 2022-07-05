@@ -22,7 +22,6 @@ Lecture [homepage](https://communications.yale.edu/2019-devane-lectures-power-an
 [[politics in the west|Note]]
 
 ##### Unattended
-1. Shifting Goalposts: The Anti-Tax Movement
 2. Privatizing Government I: Utilities, Eminent Domain, and Local Government
 3. Privatizing Government II: Prisons and the Military
 4. Money in Politics

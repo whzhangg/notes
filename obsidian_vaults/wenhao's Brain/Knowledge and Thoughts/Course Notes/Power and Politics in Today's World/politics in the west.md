@@ -65,3 +65,26 @@ Unions as insitutions that reinforce solidaristic ideals for below median voters
 But unions are also decreasing in these systems. Two implications:
 1. left-of-center parties will be less effective in protecting employed workers. 
 2. Protecting unionized workers may impose costs on others below the median income. 
+
+### Shifting Goalposts: The Anti-Tax Movement
+anti-tax movement and civil right movement transforms our society significantly
+##### Anti-tax movement
+Origin: 
+1. post-watergate republicans invest in activist think tank on the right to re-think the policy for the median right: small government, shrinking welfare state. 
+2. California's proposition 13 (1978): huge tax cut for california residence. "Government is the problem"
+
+##### Referendum Politics
+Brexit paradox: both political party are overwhelming pro-remain but the referendum result are opposite. In a political vote, many issues are bundled, but in a referendum with one issue, the result is more straightforward. The key point is that in a compound issue, preferences are "discounted" by other consequences. Therefore, single issue voting encourage choosing things without considering the cost. 
+How to frame an issue is important. Tax cuts is described as a *single issue politics*
+
+##### Estate Tax Repeal
+George W Bush abolish the estate tax, 2000 and shrink the size of the government. A coalition is constructured who support it or at least don't against it. 
+https://en.wikipedia.org/wiki/Economic_Growth_and_Tax_Relief_Reconciliation_Act_of_2001
+
+##### Republican coalition
+Effect of Tax cuts
+1. Tax cuts is the one issue that unite the entire republican party. 
+2. Tax cut and race issue: The tax cutting agenda is linked to the racial agenda
+3. Prevent the divide dollar game: anybody got a benefit
+
+How effect is the shrink of government? Tax cut does not decrease the government spending in republican government, only increased public debt. Tax cut movement transfer the funding of government through tax to funding the government through debt
