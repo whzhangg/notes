@@ -1,8 +1,14 @@
-\documentclass{IEEEtran}
+\documentclass{article}
+
 \usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=1in]{geometry}
 \usepackage{verbatim}
 \usepackage{graphicx}
-\usepackage{hyperref} % \url \href
+\usepackage{hyperref}
+\usepackage{docmute}
+\usepackage[backend=bibtex, sorting=none]{biblatex}
+
+\addbibresource{main.bib}
 
 \newcommand{\pfrac}[2]{\frac{\partial #1}{\partial #2}}
 \newcommand{\calx}{\mathcal{X}}

@@ -1,9 +1,14 @@
 \documentclass{article}
+
 \usepackage{amssymb, amsmath, amsthm}
 \usepackage[margin=1in]{geometry}
 \usepackage{verbatim}
 \usepackage{graphicx}
-\usepackage{hyperref} % \url \href
+\usepackage{hyperref}
+\usepackage{docmute}
+\usepackage[backend=bibtex, sorting=none]{biblatex}
+
+\addbibresource{main.bib}
 
 \newcommand{\pfrac}[2]{\frac{\partial #1}{\partial #2}}
 % \renewcommand{\H}{\mathcal{H}}
@@ -13,12 +18,8 @@
 
 \begin{document}
 
-\title{Summary for Steerable CNN}
-\author{Wenhao Zhang\\National Institute of Materials Science}
-\date{\today}
-\maketitle
-
-\section{Introduction}
+\section{Steerable CNNs}
+\subsection{Introduction}
 We describe the steerable CNNs that is purposed by Cohen and Welling 2016\cite{CW2016} and Weiler et al. 2018\cite{W2018_3D, W2018_Learning}. 
 Basically, the so called steerable CNN is an extension of the standard CNN that are designed to contain extra (rotational) transformation properties through the filters.
 Recall that the group equivariant CNNs contain those transformation properties by defining the feature map domain to be that of the group action. 
@@ -32,8 +33,8 @@ One specifically nice property about steerable CNNs is that, since the channels 
 to consider the channels as vectors to be transformed by the group action. This properties is suitable for application in physics. 
 However, one of the draw back of the steerable CNNs as purposed is that it applies to data on grids, or volumetric data.
 
-\section{Formulation on images}
-\subsection*{Equivariance}
+\subsection{Formulation on images}
+\subsubsection*{Equivariance}
 We define an 2D-image: $f_l\colon \bbz^2 \to \bbr^{N_l}$ with $N_l$ channels at layer $l$. For $x\in \bbz^2$, we call $f_l(x)$ a \emph{fiber}
 of the image, which we consider as a vector in $F_x^l$ vector space. 
 The action of group element $g=tr \in G$ on the input image $f$ is written:
@@ -96,7 +97,7 @@ we take care to distinguish the effect of $\pi$ and $\Pi$. $\pi$ operation on th
 which trans-rotate the feature map, 
 while $\Pi$ trans-rotate the feature map, as well as rotating the fibers.
 
-\subsection*{Choosing the filters}
+\subsubsection*{Choosing the filters}
 Recall from the previous section that 
 applying the filters on the feature map generate a vector (fiber) in the vector space. 
 The filters take a patch of input of the image with all its channels $N_l\times s^2$ and output a single vector $N_{l+1}$, in respective vector space of the 
@@ -124,7 +125,7 @@ the induced representation $\Pi$ equation \eqref{induced_transformation}. Again,
 contain the process until we arrive at the desired output.
 
 
-\section{Formulation for 3-dimensional space}
+\subsection{Formulation for 3-dimensional space}
 In Weiler et al. 2018, a steerable CNN for SE(3) is purposed. 
 The starting point of the formulation is the induced representation equation \eqref{induced_transformation}, which gives the transformation 
 properties for a group action $g$ on a feature map $f$:
@@ -175,7 +176,7 @@ reduce to a standard correlation (taking $g=y^{-1}$ gives convolution):
 \end{equation}
 where the kernel $\kappa$ is a function $\kappa \colon \bbr^3 \to \bbr^{N_{l+1}\times N_{l}}$
 
-\subsection*{Finding the kernel $\kappa$}
+\subsubsection*{Finding the kernel $\kappa$}
 To find the form of the kernel, it need to satisfy equation \ref{E:kernel_require}. For $r \in \text{SO(3)}$, 
 it is natural that the representation $\rho$ is given by direct sum of the irreducible representation of rotation,
 given by block diagonal form consisting the wigner matrix (with a suitable change of basis). 
@@ -187,7 +188,7 @@ can be written as:
 We can find the kernel can be written as a linear combination of basis kernel function that satisfy this requirement. 
 For detail, we can refer to section 4.2 in Weiler et al. 2018.
 
-\section*{Rotation equivariant}
+\subsection*{Rotation equivariant}
 In Weiler et al. 2018, rotational equivariant version of the steerable CNN is applied to image data and achieve good accuracy. 
 This is named steerable CNN but in concept, this work is closer to the group equivariant CNNs rather than the above mention steerable CNNs. 
 The key point in their work is that, just like in standard CNN where image is convoluted with weight sharing translated filters, 

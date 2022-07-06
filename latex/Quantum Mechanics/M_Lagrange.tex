@@ -1,10 +1,11 @@
 \documentclass{article}
+
 \usepackage{amssymb, amsmath, amsthm}
-\usepackage[margin=0.8in]{geometry}
+\usepackage[margin=1in]{geometry}
 \usepackage{verbatim}
 \usepackage{graphicx}
-
-% renewcommand override the already defined command
+\usepackage{hyperref}
+\usepackage{docmute}
 
 \newcommand{\pfrac}[2]{\frac{\partial #1}{\partial #2}}
 \newcommand{\ddt}[1]{\frac{d}{dt}\left( #1 \right)}
@@ -15,14 +16,14 @@
 \newcommand{\dotq}{\dot{q}}
 \newcommand{\dotp}{\dot{p}}
 
+\newtheorem{theorem}{Theorem}
+\newtheorem{example}{Example}
+
 \begin{document}
 
-\title{Title}
-\author{Wenhao}
-\date{\today}
-\maketitle
 
 \section{Lagrange method}
+
 \subsection{Equation of motion}
 We define the Lagrangian\footnote{From David Morin's chapter in \emph{Introduction to Classical Mechanics}} from the kinetic energy $T$ and potential energy $V$ as:
 \begin{equation}
@@ -89,10 +90,9 @@ we show that $\ddt{\pfrac{x_i}{q_m}} = \pfrac{\dotx_i}{q_m}$ is true:
     &= \sum_{k=i}^N \pfrac{\ }{q_m} \left( \pfrac{x_i}{q_k} \right) \dotq_k + \pfrac{}{q_m} \left( \pfrac{x_i}{t} \right) \notag \\
     &= \pfrac{\ }{q_m} \left[ \sum_{k=i}^N  \left( \pfrac{x_i}{q_k} \right) \dotq_k + \left( \pfrac{x_i}{t} \right) \right] = \pfrac{\dotx_i}{q_m}\notag \\
 \end{align}
-}.
+}
 
 \subsection{Conservation law}
-\textbf{Conserved quantity}
 If $\L$ does not explicitly depend on coordinate $q_k$, then
 \begin{equation}
     \ddt{\pfrac{ \L}{\dotq_k}} = \pfrac{\L}{q_k} = 0
@@ -116,17 +116,19 @@ so that if $\L$ does not explicitly depend on time $t$ as $(\partial \L / \parti
 The quantity $E$ is a constant of motion if $\L$ does not explicitly depend on time, but $E$ is not 
 necessarily the total energy of the system.
 
-\textbf{Theorem} A necessary and sufficient condition for $E$ to the the 
+\begin{theorem}
+A necessary and sufficient condition for $E$ to the the 
 total energy of a system whose $\L$ is written in terms of a set of coordinates
 $q_i$ is that these $q_i$ are related to a cartesian set of coordinates $x_i$ by:
 \begin{equation}
     x_i = \mathbf{x}_i (q_1, q_2, \cdots, q_N)
 \end{equation}
 which does not include $t$ or $\dotq$ dependence.
+\end{theorem}
 
 We use three example as argument to see this is indeed correct:
 
-\textbf{Example 1.} 
+\begin{example}
 consider a particle in a horizontal plane connected to the origin by a spring. the potential 
 energy is $V = k(x^2+y^2) / 2$ and the kinetic energy is $T = m(\dotx^2 + \dot{y}^2)/2$. 
 \begin{align}
@@ -135,8 +137,9 @@ energy is $V = k(x^2+y^2) / 2$ and the kinetic energy is $T = m(\dotx^2 + \dot{y
 \end{align}
 with $x = r\cos\theta,\ y = r\sin\theta$. 
 In the coordinate $(r,\theta)$, we have $E = m(\dot{r}^2 + r^2\dot{\theta}^2) + kr^2/2$ is the total energy.
+\end{example}
 
-\textbf{Example 2.}
+\begin{example}
 consider similar to the above case, but now we have the coordinate transformation 
 $x = r\cos(\omega t),\ y = r\sin(\omega t)$ depend on time $t$. The quantity
 $E$ is still conserved but is no longer the total energy:
@@ -144,8 +147,9 @@ $E$ is still conserved but is no longer the total energy:
     \L = m(\dot{r}^2 + r^2\omega^2) - kr^2/2 \notag \\
     E = m(\dot{r}^2 - r^2\omega^2) + kr^2/2 \notag
 \end{align}
+\end{example}
 
-\textbf{Example 3.}
+\begin{example}
 A particle is fixed on a rod accelerating in $y$ direction: $y = at^2 / 2$. The 
 Lagrangian and $E$ is:
 \begin{equation}
@@ -154,6 +158,7 @@ Lagrangian and $E$ is:
 \end{equation}
 Still, $E$ is conserved but $E$ is not total energy since coordinate $y$ depend on 
 time $t$: $(x = x;\ y = a t)$
+\end{example}
 
 We note that the for the later two examples, we have an accelerating frame of reference (rotating, accelerating) and 
 $E$ is not the total energy of the system.
@@ -176,48 +181,6 @@ So that if $\partial \L / \partial \varepsilon = 0$, the quantity $\sum_{i=1}^{N
 
 As an example, suppose for $\L$ depend on coordinates $x$ that is invariant under translation $x \to x + \varepsilon$,
 then the quantity $\partial \L / \partial \dotx$ is conserved, which is momentum if $\L = m\dotx^2 / 2 - V(x)$
-
-\section{Hamiltanion method}
-\subsection{Hamiltonian}
-The quantity $E$ is given:
-\begin{equation}
-    E(q,\dotq) = \sum_{i=1}^N \pfrac{\L(q,\dotq)}{\dotq_i} \dotq_i - \L(q,\dotq) 
-\end{equation}
-Define the conjugate momentum and Hamiltonian:
-\begin{gather}
-    p_i = \pfrac{\L(q,\dotq)}{\dotq_i} \\
-    \H = \sum_{i=1}^N p_i \dotq_i - \L(q,\dotq)
-\end{gather}
-where $\dotq$ are implicit function of $(q,p)$
-we can find:
-\begin{equation}
-    \begin{cases}
-        \pfrac{\H}{p_i} = \dotq_i - \pfrac{\L}{p_i} = \dotq_i \notag \\
-        \pfrac{\H}{q_i} = 0 - \pfrac{\L}{q_i} = - \dotp_i \notag \\
-    \end{cases}
-\end{equation}
-and thus the Hamiltanion equation:
-\begin{align}
-        \dotq_i &= \pfrac{\H}{p_i} \\
-        \dotp_i &= - \pfrac{\H}{q_i}
-\end{align}
-
-The cyclic coordinates are still the ones which $\H$ does not explicitly depend on.
-
-\subsection{Legendre transformation}
-Legendre transformation states that if $Z(x) = Y(X) - xX$, then we should have the 
-relationship:
-\begin{equation}
-    \pfrac{Z}{x} = -X
-\end{equation}
-Using the relationship for Lagrangian and Hamiltanion, we can identify, for one specific coordinate i:
-\begin{gather}
-    \H(p_i) = p_i \dotq_i - \L(\dotq_i) \notag \\
-    Z(x) = -H(p_i) \notag \\
-    Y(X) = L(\dotq_i) \notag \\
-    \text{leading to}\ \ \pfrac{H(p_i)}{p_i} = \dotq_i
-\end{gather}
-
 
 
 \end{document}

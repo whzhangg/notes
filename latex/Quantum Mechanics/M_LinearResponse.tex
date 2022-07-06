@@ -1,17 +1,17 @@
 \documentclass{article}
+
 \usepackage{amssymb, amsmath, amsthm}
-\usepackage[margin=0.8in]{geometry}
+\usepackage[margin=1in]{geometry}
 \usepackage{verbatim}
 \usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{docmute}
 
 \begin{document}
 
-\title{Linear Response Theory}
-\author{Wenhao}
-\date{\today}
-\maketitle
 
 \section{Response functions}
+\subsection{Linear response}
 we wish to find the change of observable $B$ with a perturbation term in addition to the equilibrium Hamiltonian 
 that is turned on at 
 \begin{equation}
@@ -114,8 +114,7 @@ and
 \end{equation}
 is called the relaxation function.
 
-\pagebreak
-\section{Linear response formula of electrical conductivity}
+\subsection{Linear response formula of electrical conductivity}
 We consider an uniform external electric field (potential zero is arbitrary) ($V(x) = E(t)x $):
 \begin{gather}
     H'(t) = -e \sum_i x_i E(t) = - A E(t) \\
@@ -139,7 +138,7 @@ and the conductivity is given by:
     \sigma_{\mu\nu} = \frac{1}{V} \int_0^{\beta} d\lambda \int_{0}^{\infty} dt \langle J_{\nu}(-i\hbar\lambda) J_{\mu}(t) \rangle_0
 \end{equation}
 
-\section{Linear response formula of thermal conductivity}
+\subsection{Linear response formula of thermal conductivity}
 Derivation of the expression of thermal conductivity is provided by \emph{Allen and Feldman, 1993}. 
 The total current operator is given by:
 \begin{equation}
@@ -204,6 +203,5 @@ If I just directly apply Kubo's form with $H'$, we have an negative sign of cond
 %    \kappa_{\mu\nu} (t) & = \frac{1}{VT} \int_0^{\beta} \langle J_{\nu}(-i\hbar\lambda) J_{\mu}(t) \rangle d\lambda \\
 %    \kappa_{\mu\nu} (\omega) & = \frac{1}{VT} \int_0^{\beta} d\lambda \int_{0}^{\infty} e^{-i\omega t} dt \langle J_{\nu}(-i\hbar\lambda) J_{\mu}(t) \rangle 
 %\end{align}
-
 
 \end{document}

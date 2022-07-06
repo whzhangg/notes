@@ -2,6 +2,7 @@
 Records following the format: **Book title**, *author*, (status), finished date
 ##### Currently reading
 - [ ] **History of the Jews**, *Paul Johnnson*, [[History of the Jews]]
+- [ ] **Python Distilled**, *Davud M. Beazley*
 
 
 ##### Books
@@ -14,6 +15,11 @@ Records following the format: **Book title**, *author*, (status), finished date
 - [ ] **Operating System, Design and Implementation**, *Andrew S. Tanenbaum*
 
 ##### Essays
+- [ ] **Tying the autocrats hands, Chapter 1 and 2**, *Yuhua Wang*
+- [ ] **Creating a Virtuous Leviathan: The Party, Law, and Socialist Core Values**, *Delia LIN and Susan TREVASKES*
+- [ ] **War and Democratization: Legality, Legitimacy and Effectiveness**, *Sonja Grimm & Wolfgang Merkel*
+- [ ] **Limited War and the constitution: Iraq and the crisis of presidential legality**, *Bruce Ackerman and Oona Hathaway*
+- [ ] **Justification for humanitarian intervention: will the continent matter?**, *Yvonne C. Lodico*
 
 ##### Finished books
 - [x] **Eichmann in Jerusalem**, *Hannah Arendt*, May, 2022, [[Eichmann in Jerusalem|Notes]]

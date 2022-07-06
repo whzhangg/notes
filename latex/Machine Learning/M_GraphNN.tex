@@ -1,9 +1,14 @@
 \documentclass{article}
+
 \usepackage{amssymb, amsmath, amsthm}
 \usepackage[margin=1in]{geometry}
 \usepackage{verbatim}
 \usepackage{graphicx}
-\usepackage{hyperref} % \url \href
+\usepackage{hyperref}
+\usepackage{docmute}
+\usepackage[backend=bibtex, sorting=none]{biblatex}
+
+\addbibresource{main.bib}
 
 \newcommand{\bbz}{\mathbb{Z}}
 \newcommand{\bbr}{\mathbb{R}}
@@ -12,12 +17,9 @@
 
 \begin{document}
 
-\title{Summary for graph neural network in chemistry}
-\author{Wenhao Zhang\\National Institute of Materials Science}
-\date{\today}
-\maketitle
 
-\section{Introduction}
+\section{Graph Neural Network In Chemistry}
+\subsection{Introduction}
 A graph is represented as $G = (V,E)$ where $V$ is a set of nodes and $E$ is the set of edges\cite{wu_2021}, we can
 write a node as $v_i$ with node index $i$ and edge $e_{ij}$ between node $i$ and $j$. 
 We can put features vectors (attributes) $x_i$ and $x^e_{ij}$ on nodes and edges. 
@@ -39,7 +41,7 @@ We describe some of the most cited graph network used in material chemistry. Som
 'message passing network', where informations of nodes are passed throught edges. But in general, graph network 
 have more flavors, such as graph convolutions that envolve pooling, or recurrent ones. 
 
-\section{Review of related works}
+\subsection{Review of related works}
 The difference between different message passing networks are mainly described by:
 a) how the graph is constructed, 
 b) how the nodes and edges' feature are created,
@@ -47,7 +49,7 @@ c) how the hidden layers are updated, and
 d) how the result is output
 We review some of the works using message passing networks:
 
-\subsection{Jargon used and basic structures}
+\subsubsection{Jargon used and basic structures}
 As noted above, the input to message passing network is a molecular graph with nodes as atoms and edges as 
 connection between atoms, that usually is interpreted as bonds. 
 Following Gilmer et al. \cite{Gilmer}, 
@@ -71,7 +73,7 @@ such as band gap and formation energies, we define a \emph{readout function} tha
     y = R(\{h_v^T\mid v\in G\})
 \end{equation}
 
-\subsection{Gilmer's message passing network}
+\subsubsection{Gilmer's message passing network}
 Gilmer et al. built MPNN (Gilmer-MPNN) upon the previous work and achieve state of the art performance in all predicting all properties 
 in QM9 dataset. 
 
@@ -89,7 +91,7 @@ Finally, the readout function used is a set to set operation (Vinyals et al. 201
 
 They achieved accuracy of prediction on the chemical accuracy level (supplementary table)
 
-\subsection{Sch\"{u}tt's deep tensor neural network and related networks}
+\subsubsection{Sch\"{u}tt's deep tensor neural network and related networks}
 In Sch\"{u}tt's work\cite{DTNN}, the input atomic feature are simply one-hot-encoding of their
 respective atomic numbers and edge features are binned distances. 
 As in Gilmer's work, the initial hidden states are the same as node features.
@@ -152,7 +154,7 @@ Furthermore, their work also defined an atomic interation
 \end{equation}
 that operate on atoms. The weight and bias $w^t$ and $b^t$ are shared across atoms.
 
-\subsection{Xie and Grossman's CGCNN}
+\subsubsection{Xie and Grossman's CGCNN}
 Xie and Grossman purposed crystal graph convolution neural network\cite{CGCNN} that operate with 
 crystal structure input. A crystal graph is undirected and contain one edge between 
 atom $i$ and $j$ in the unit cell if any of their periodic image is connected. 
@@ -184,7 +186,7 @@ A pooling operation is used to produce the overall feature vector for the whole 
 This feature vector is passed to a MLP to output the target property. In Xie and Grossman's work,
 the pooling function is a weighted sum. 
 
-\subsection{Directional message passing}
+\subsubsection{Directional message passing}
 All the previous network use only distance between two atoms as edge feature, 
 but directional feature are unutilized. 
 Here we shortly mention the work by Klicpera et al.\cite{directional_klicpera} (DimeNet) 

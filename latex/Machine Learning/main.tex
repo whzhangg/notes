@@ -1,0 +1,26 @@
+\documentclass{article}
+
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=1in]{geometry}
+\usepackage{verbatim}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{docmute}
+\usepackage[backend=bibtex, sorting=none]{biblatex}
+
+\addbibresource{main.bib}
+
+\begin{document}
+
+\title{Title}
+\author{Wenhao Zhang}
+\date{\today}
+\maketitle
+
+\input{M_GraphNN.tex}
+\input{M_SteerableCNN.tex}
+\input{M_DTNN.tex}
+
+\printbibliography[title={Reference}]
+
+\end{document}

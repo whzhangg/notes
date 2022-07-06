@@ -1,0 +1,36 @@
+\documentclass{article}
+
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=1in]{geometry}
+\usepackage{verbatim}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{docmute}
+
+\newcommand{\pfrac}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\ddt}[1]{\frac{d}{dt}\left( #1 \right)}
+\renewcommand{\L}{\mathcal{L}}
+\renewcommand{\S}{\mathcal{S}}
+\renewcommand{\H}{\mathcal{H}}
+\newcommand{\dotx}{\dot{x}}
+\newcommand{\dotq}{\dot{q}}
+\newcommand{\dotp}{\dot{p}}
+\newtheorem{theorem}{Theorem}
+\newtheorem{example}{Example}
+
+
+\begin{document}
+
+\title{Quantum Mechanics}
+\author{Wenhao Zhang}
+\date{\today}
+\maketitle
+
+\tableofcontents
+\newpage
+
+\input{M_Lagrange.tex}
+\input{M_Hamiltonian.tex}
+\input{M_QuantumCondition.tex}
+\input{M_LinearResponse.tex}
+\end{document}

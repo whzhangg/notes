@@ -8,3 +8,4 @@
 
 # obsidian ignore:
 obsidian_vaults/*/.obsidian/workspace*
+obsidian_vaults/*/.obsidian/graph.json
