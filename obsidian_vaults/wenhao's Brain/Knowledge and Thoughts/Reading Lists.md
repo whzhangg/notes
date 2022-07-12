@@ -15,7 +15,7 @@ Records following the format: **Book title**, *author*, (status), finished date
 - [ ] **Operating System, Design and Implementation**, *Andrew S. Tanenbaum*
 
 ##### Essays
-- [ ] **Tying the autocrats hands, Chapter 1 and 2**, *Yuhua Wang*
+- [ ] **Tying the autocrats hands, Chapter 1 and 2**, *Yuhua Wang* [[Tying the autocrat's hand|Note]]
 - [ ] **Creating a Virtuous Leviathan: The Party, Law, and Socialist Core Values**, *Delia LIN and Susan TREVASKES*
 - [ ] **War and Democratization: Legality, Legitimacy and Effectiveness**, *Sonja Grimm & Wolfgang Merkel*
 - [ ] **Limited War and the constitution: Iraq and the crisis of presidential legality**, *Bruce Ackerman and Oona Hathaway*

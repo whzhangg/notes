@@ -88,3 +88,76 @@ Effect of Tax cuts
 3. Prevent the divide dollar game: anybody got a benefit
 
 How effect is the shrink of government? Tax cut does not decrease the government spending in republican government, only increased public debt. Tax cut movement transfer the funding of government through tax to funding the government through debt
+
+### Privatizing Government I
+eminent domain
+##### Privatization
+1990s, Post-Communist Privatization: creating a private economy, especially in communist countries.
+1980s, Neo-liberal privatizations: 
+1. privatizing previously nationalized companies like railway or mail system, utilities and local governments.
+2. Privation of public authority: Eminent domain, lobbyist writting
+3. Core government function: militrary, prison
+
+![[mapping varieties of privatization.png|500]]
+
+Neoliberism at home and Washington concensus aboard. 
+main components: deregulation, privatization and free trade. They are hegemonic before 2008, after which starts to break. After 2008, significant amount of regulation become in place, but privatization process remain. Free trade is still populate until 2016. 
+
+One of the backlash of privatization is the privatization of natural resources (Water in Bolivia 1999-2000)
+>The people of Bolivia did not choose to privatize their public water systems.That choice was forced on them, as it has been in many poor nations around the world, when the World Bank made privatization an explicit condition of aid in the mid-1990s.Poor countries such as Bolivia, which rely heavily on foreign assistance for survival, are not in much of a position to say no to such pressures.
+>
+>World Bank water officials claim all the best intentions when they make the push for water privatization.The bank has argued that poor governments are often too plagued by local corruption and too ill equipped to run public water systems efficiently. Handing water over to foreign corporations, the bank has said, opens the door to needed investment and skilled management.
+>source: https://www.thenation.com/article/archive/politics-water-bolivia/, https://en.wikipedia.org/wiki/Water_privatization_in_Bolivia
+
+The Bolivia government backdown and renationalized 
+
+##### Eminent Domain
+The right of the government to take a private properties for common good. For example, privatization using government power, India amendment to land acquistion act of 1894, 2007 and 70% rule: If a private developer can buy up 70% of the land, then the local government will accquire the rest 30% and sell it to the companies. Initially, government use eminent power to build special economy zone. Tata Nano in Singur, West Bengal. 
+In the case of Bolivia and Bengal, Eminent Domain privatization backfire and destabilize the current government.
+
+Privatizing eminent domain in US: Taking Clause, 5th Amendment: ...nor shall private property be taken for public use, without just compensation.
+
+What is a public use? Economist public good: 1) not excludable, if you provide it, everybody will get benefit from it. 2) non-rivialrous: my having it does not stop you from using it. But it still going to be politically charged. For example, building a road is a public good, but there are always alternative courses of action, more than one way to provide it so there will be winners and losers. Secondly, even if on net, the public good is desirable, it will still have externalities. Finally, the problem of value derivation, for example, the price of land and its value. [Kelo vs the city of new london](https://en.wikipedia.org/wiki/Kelo_v._City_of_New_London) where the private own opposed the transfer of land to the New London Development Corporation.
+
+Upshots of eminent domain: neither efficiency or just compensation might suffice to ease privatization, as well as externalities effective opposition. 
+
+There is no technique answer to the question, it is a political question and project
+
+##### Privatizing local government
+Tax cut movement reduce local government revenue, One way the local government response is privatizing "Common interest development", for example, garbage pickup, local police. 
+
+What are the consequences?
+- Undemoractic board
+- Effects on homelessness and poor, people who cannot play will not be served
+- segmented democracy with privatized common interest development and people become more extreme and polarization
+- They are here to stay
+
+### Privatization of Core Government functions: Prison and Military
+Things have to do with people's servival
+slim down of the government by removing functions that government don't do very well: From 1980s Reagon to 2000s, Including out-sourcing in the military (contracting)
+
+##### Privatization of military
+![[us military contractors.png]]
+What are the private military contract with the following functions. A example [BlackWater](https://en.wikipedia.org/wiki/Blackwater_(company))
+- not frontline fighting
+- routine security and heavily armed security, mine clearance and intelligence
+- security of key officials
+
+Using the contractor reduce the political cost related to casualities in war. Consequences: It save momey and gain potential efficiency, it also enable US to fight otherwise unpopular wars, Is it a good thing?
+- It provide incentive to find new wars (Republican theory of US in Federalist papers)
+- [Democratic peace theory](https://en.wikipedia.org/wiki/Democratic_peace_theory): Democracies tend not to find each other since it is difficult for people to support to find wars
+
+##### Prisons
+The numbers of americans in prison increase significantly: War on Drugs and Sentencing reform act are two factors that lead to the increase. But the violent crime has been declining overall, although most people don't feel that way. 
+
+Private sector prison is flourishing (10%)
+Assume they are more efficient, is there reason to against it? 
+
+##### Problems
+Core state function need to be a monopoly but the privatization of these functions is contracting out the government monopoly and these functionality cannot be fully private. Central challenge is a series of principal-agent problem: principle contract out to agent to do thing but it become the problem that the agent have more information than the principle to deal with the situation. 
+Monitoring chain: voter -> politican -> regulator -> contractor
+
+Solution to principal-agent problem: 
+- competitions (but these functionality has huge cost for entry and thus less competition)
+- alignment of interests (but as in the case of prison industry, the interest does not align, and therefore lobbying problem)
+- monitoring (but is difficult)
