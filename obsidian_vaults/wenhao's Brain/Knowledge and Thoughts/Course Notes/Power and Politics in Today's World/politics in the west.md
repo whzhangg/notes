@@ -161,3 +161,30 @@ Solution to principal-agent problem:
 - competitions (but these functionality has huge cost for entry and thus less competition)
 - alignment of interests (but as in the case of prison industry, the interest does not align, and therefore lobbying problem)
 - monitoring (but is difficult)
+
+### Money in Politics
+[Citizen united](https://en.wikipedia.org/wiki/Citizens_United_v._FEC)
+##### Courts in american politics
+The Warren court is the most progressive (liberal) court.
+##### The first amendment since Buckley v. Valeo
+The supply side.
+"Congress shall make no law ... abridging the freedom of speech, or of the press; or the right of the people peaceably to assemble and to petition the government for a redress of grievances"
+How the court has interpreted it:
+1974, changes to the federal election campaign to reduce the use of momey in election campaigns
+1976, Buckley struct down most of the changes: it is OK to limit contributions, but not OK to limit expenditure (spending money to express views), it's not OK to limit a candidate to use their own money. The leveling the playing field is not OK because it is a interference. The self funded candidate can spend as much as he want as a consititution right. Implication: Money is speech, no interest to level the playing group.
+1990, Austin v. Michigan: cooperations are not protected in the same way as individuals by the first amendment.
+2010, Citizens United: the court overruled Austin by saying that the congress maynot limit independent corporate expenditures, assume that the first amendment rule corporation the same as individuals. Corporations have the same free speech rights as individuals
+https://en.wikipedia.org/wiki/Dark_money
+SuperPacs
+
+The only corruption worth worrying about is "quid pro quo" and massive increase in inequality in contribution and influence in candidates. 
+
+##### The changing media context
+More channels for communting information, no reason to have fairness doctrine because there is no scarcity of channels. The political consequences is that the new channels are separated and segragated. It is difficult to have a channel where different thoughts and views are competed against each other (like for example in UK parliment). Now political action not about argument over policy but is about mobilizing the people who already support you which tend to make people more extreme. 
+
+##### The demand for money in an era of weak parties
+Why politicans need money: 
+- frequent electrons & staggered cycles
+- primaries and other features of weak parties
+
+A weak party is very decentralized in its control, in UK for example, a strong party can appoint candidate and politicans try to win as a team. In US, the party is weak. The candidates are on their own and can influence the decision of the party. Therefore, in US the politics are very expensive because of the arm race in campaigning between different candidates and it is difficult to limit the rule of money in politics. But the arms race is difficult to stop once started. 

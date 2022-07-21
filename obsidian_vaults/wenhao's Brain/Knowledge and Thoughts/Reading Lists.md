@@ -2,8 +2,7 @@
 Records following the format: **Book title**, *author*, (status), finished date
 ##### Currently reading
 - [ ] **History of the Jews**, *Paul Johnnson*, [[History of the Jews]]
-- [ ] **Python Distilled**, *Davud M. Beazley*
-
+- [ ] **Social media and Democracy**
 
 ##### Books
 - [ ] **The Emperor's New Mind**, *Roger Penrose*
@@ -15,13 +14,13 @@ Records following the format: **Book title**, *author*, (status), finished date
 - [ ] **Operating System, Design and Implementation**, *Andrew S. Tanenbaum*
 
 ##### Essays
-- [ ] **Tying the autocrats hands, Chapter 1 and 2**, *Yuhua Wang* [[Tying the autocrat's hand|Note]]
-- [ ] **Creating a Virtuous Leviathan: The Party, Law, and Socialist Core Values**, *Delia LIN and Susan TREVASKES*
 - [ ] **War and Democratization: Legality, Legitimacy and Effectiveness**, *Sonja Grimm & Wolfgang Merkel*
 - [ ] **Limited War and the constitution: Iraq and the crisis of presidential legality**, *Bruce Ackerman and Oona Hathaway*
 - [ ] **Justification for humanitarian intervention: will the continent matter?**, *Yvonne C. Lodico*
 
 ##### Finished books
+- [x] **Tying the autocrats hands, Chapter 1, 2, 3, 8**, *Yuhua Wang*, July, 2022 [[Tying the autocrat's hand|Note]]
+- [x] **Python Distilled**, *Davud M. Beazley*, June, 2022
 - [x] **Eichmann in Jerusalem**, *Hannah Arendt*, May, 2022, [[Eichmann in Jerusalem|Notes]]
 - [x] **Practices of the Python Pro**, *Dane Hillard*, 2021
 - [x] **Fluent Python**, *Luciano Ramalho*, 2021
@@ -39,6 +38,7 @@ Records following the format: **Book title**, *author*, (status), finished date
 - [x] **Beginner's Guide to Flux Crystal Growth**, *Makoto Tachibana*, May, 2022 [[Guide to flux growth|Notes]]
 
 ##### Finished Essays
+- [x] **Creating a Virtuous Leviathan: The Party, Law, and Socialist Core Values**, *Delia LIN and Susan TREVASKES* [[Virtuous Leviathan|Note]], July, 2022
 - [x] **Myth of Sisyphus**, *Albert Camus*, [[Myth Of Sisyphus|Notes]]
 - [x] **The Doctrine of Fascism**, *Benito Mussolini* [[Doctrine of Fascism]]
 - [x] **The Cathedral and the Bazaar**, *Eric S. Raymond*, 2022, [[The Cathedral and the Bazaar|Notes]]
